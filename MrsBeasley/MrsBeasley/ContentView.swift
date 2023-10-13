@@ -21,9 +21,9 @@ struct ContentView: View {
             List {
                 ForEach(notes) { note in
                     NavigationLink {
-                        Text("Note at \(note.timestamp!, formatter: noteFormatter)")
+                        NoteDetail(note: note)
                     } label: {
-                        Text(note.timestamp!, formatter: noteFormatter)
+                        NoteRow(note: note)
                     }
                 }
                 .onDelete(perform: deleteNotes)
@@ -74,12 +74,6 @@ struct ContentView: View {
     }
 }
 
-private let noteFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C01409A2AD97F7A00A6147F /* NoteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0140992AD97F7A00A6147F /* NoteRow.swift */; };
+		5C01409C2AD9819C00A6147F /* NoteDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C01409B2AD9819C00A6147F /* NoteDetail.swift */; };
 		5CC528772AD97D32002A30C9 /* MrsBeasleyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC528762AD97D32002A30C9 /* MrsBeasleyApp.swift */; };
 		5CC528792AD97D32002A30C9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC528782AD97D32002A30C9 /* ContentView.swift */; };
 		5CC5287B2AD97D34002A30C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CC5287A2AD97D34002A30C9 /* Assets.xcassets */; };
 		5CC5287E2AD97D34002A30C9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CC5287D2AD97D34002A30C9 /* Preview Assets.xcassets */; };
 		5CC528802AD97D34002A30C9 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5287F2AD97D34002A30C9 /* Persistence.swift */; };
-		5CC528832AD97D34002A30C9 /* MrsBeasley.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5CC528812AD97D34002A30C9 /* MrsBeasley.xcdatamodeld */; };
+		5CC528832AD97D34002A30C9 /* MrsBeasleySeven.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5CC528812AD97D34002A30C9 /* MrsBeasleySeven.xcdatamodeld */; };
 		5CC5288E2AD97D34002A30C9 /* MrsBeasleyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5288D2AD97D34002A30C9 /* MrsBeasleyTests.swift */; };
 		5CC528982AD97D34002A30C9 /* MrsBeasleyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC528972AD97D34002A30C9 /* MrsBeasleyUITests.swift */; };
 		5CC5289A2AD97D34002A30C9 /* MrsBeasleyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC528992AD97D34002A30C9 /* MrsBeasleyUITestsLaunchTests.swift */; };
@@ -36,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5C0140992AD97F7A00A6147F /* NoteRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRow.swift; sourceTree = "<group>"; };
+		5C01409B2AD9819C00A6147F /* NoteDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetail.swift; sourceTree = "<group>"; };
 		5CC528732AD97D32002A30C9 /* MrsBeasley.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MrsBeasley.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CC528762AD97D32002A30C9 /* MrsBeasleyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MrsBeasleyApp.swift; sourceTree = "<group>"; };
 		5CC528782AD97D32002A30C9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -79,6 +83,7 @@
 		5CC5286A2AD97D32002A30C9 = {
 			isa = PBXGroup;
 			children = (
+				5C01409B2AD9819C00A6147F /* NoteDetail.swift */,
 				5CC528752AD97D32002A30C9 /* MrsBeasley */,
 				5CC5288C2AD97D34002A30C9 /* MrsBeasleyTests */,
 				5CC528962AD97D34002A30C9 /* MrsBeasleyUITests */,
@@ -101,10 +106,11 @@
 			children = (
 				5CC528762AD97D32002A30C9 /* MrsBeasleyApp.swift */,
 				5CC528782AD97D32002A30C9 /* ContentView.swift */,
+				5C0140992AD97F7A00A6147F /* NoteRow.swift */,
 				5CC5287A2AD97D34002A30C9 /* Assets.xcassets */,
 				5CC5287F2AD97D34002A30C9 /* Persistence.swift */,
 				5CC528842AD97D34002A30C9 /* Info.plist */,
-				5CC528812AD97D34002A30C9 /* MrsBeasley.xcdatamodeld */,
+				5CC528812AD97D34002A30C9 /* MrsBeasleySeven.xcdatamodeld */,
 				5CC5287C2AD97D34002A30C9 /* Preview Content */,
 			);
 			path = MrsBeasley;
@@ -265,9 +271,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C01409A2AD97F7A00A6147F /* NoteRow.swift in Sources */,
 				5CC528802AD97D34002A30C9 /* Persistence.swift in Sources */,
 				5CC528792AD97D32002A30C9 /* ContentView.swift in Sources */,
-				5CC528832AD97D34002A30C9 /* MrsBeasley.xcdatamodeld in Sources */,
+				5CC528832AD97D34002A30C9 /* MrsBeasleySeven.xcdatamodeld in Sources */,
+				5C01409C2AD9819C00A6147F /* NoteDetail.swift in Sources */,
 				5CC528772AD97D32002A30C9 /* MrsBeasleyApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -595,13 +603,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		5CC528812AD97D34002A30C9 /* MrsBeasley.xcdatamodeld */ = {
+		5CC528812AD97D34002A30C9 /* MrsBeasleySeven.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				5CC528822AD97D34002A30C9 /* MrsBeasley.xcdatamodel */,
 			);
 			currentVersion = 5CC528822AD97D34002A30C9 /* MrsBeasley.xcdatamodel */;
-			path = MrsBeasley.xcdatamodeld;
+			path = MrsBeasleySeven.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

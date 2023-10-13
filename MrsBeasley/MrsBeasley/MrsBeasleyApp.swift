@@ -18,3 +18,11 @@ struct MrsBeasleyApp: App {
         }
     }
 }
+
+let noteDateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .short
+    formatter.timeStyle = .medium
+    return formatter
+}()
+
