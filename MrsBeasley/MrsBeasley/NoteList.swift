@@ -20,19 +20,17 @@ struct NoteList: View {
             sortDescriptors: [NSSortDescriptor(keyPath: \Note.timestamp, ascending: true)],
             animation: .default)
         private var notes: FetchedResults<Note>
+    @State private var noteId: Note?
 
         var body: some View {
-            NavigationView {
-                List {
-                    ForEach(notes, id: \.self) { aNote in
-                        NavigationLink {
-                            NoteDetail(note: aNote)
-                        } label: {
-                            NoteRow(note: aNote)
-                        }
+            NavigationSplitView {
+                List(selection: $noteId) {
+                    ForEach(notes,  id: \.self) { aNote in
+                        NoteRow(note: aNote)
                     }
                     .onDelete(perform: deleteNotes)
                 }
+                .navigationTitle("Notes")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         EditButton()
@@ -43,7 +41,12 @@ struct NoteList: View {
                         }
                     }
                 }
-                Text("Select an note")
+            } detail: {
+                if noteId != nil {
+                    NoteDetail(note: noteId!)
+                } else {
+                    Text("Choose a note")
+                }
             }
         }
 
@@ -51,7 +54,11 @@ struct NoteList: View {
             withAnimation {
                 let newNote = Note(context: viewContext)
                 newNote.timestamp = Date()
-
+                newNote.uuid = UUID()
+                newNote.body = ""
+                newNote.title = ""
+                newNote.mimetype = "text/plain"
+                
                 do {
                     try viewContext.save()
                 } catch {
