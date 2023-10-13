@@ -54,8 +54,8 @@ struct PersistenceController {
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
     
-    func save() {
-        let context = container.viewContext
-        context.flushChanges()
-    }
+//    func save() {
+//        let context = container.viewContext
+//        context.flushChanges()
+//    }
 }

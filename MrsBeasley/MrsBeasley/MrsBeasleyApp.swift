@@ -17,7 +17,6 @@ struct MrsBeasleyApp: App {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                //.environmentObject(persistenceController)
         }
         .onChange(of: scenePhase) { phase in
             switch phase {
@@ -27,7 +26,7 @@ struct MrsBeasleyApp: App {
                  print("inactive")
              case .background:
                  print("background")
-                 persistenceController.save()
+                persistenceController.container.viewContext.flushChanges()
              @unknown default:
                  print("unknown ScenePhase error")
              }
