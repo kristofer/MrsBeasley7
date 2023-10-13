@@ -8,12 +8,10 @@
 import SwiftUI
 
 struct NoteRow: View {
-    var note: Note
-    
+    @ObservedObject var note: Note
+
     var body: some View {
         HStack {
-            Text("Note at \(note.timestamp!, formatter: noteDateFormatter)")
-            Spacer()
             if let title = note.title {
                 Text(title)
             } else {
