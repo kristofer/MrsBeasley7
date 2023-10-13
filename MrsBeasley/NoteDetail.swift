@@ -11,7 +11,11 @@ struct NoteDetail: View {
     var note: Note
     
     var body: some View {
-        Text("Hello, World!")
+        VStack {
+            NoteDetailHeader(note: note)
+            Divider()
+            NoteBody(content: $note.body)
+        }
     }
 }
 
