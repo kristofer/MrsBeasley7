@@ -6,10 +6,25 @@
 //
 
 import SwiftUI
+import CoreData
 
 extension Binding {
     func toUnwrapped<T>(defaultValue: T) -> Binding<T> where Value == Optional<T>  {
         Binding<T>(get: { self.wrappedValue ?? defaultValue }, set: { self.wrappedValue = $0 })
+    }
+}
+
+extension NSManagedObjectContext {
+    func flushChanges() {
+        if self.hasChanges {
+            do {
+                try self.save()
+            } catch {
+                let nserror = error as NSError
+                print("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+
     }
 }
 
@@ -69,30 +84,14 @@ struct NoteList: View {
             newNote.body = ""
             newNote.title = ""
             newNote.mimetype = "text/plain"
-            
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+            viewContext.flushChanges()
         }
     }
     
     private func deleteNotes(offsets: IndexSet) {
         withAnimation {
             offsets.map { notes[$0] }.forEach(viewContext.delete)
-            
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+            viewContext.flushChanges()
         }
     }
 }

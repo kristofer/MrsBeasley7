@@ -20,8 +20,10 @@ struct NoteDetail: View {
                 .shadow(radius: 10)
 
             
-            VStack {
-                NoteDetailHeader(note: note)
+            VStack(alignment: .leading) {
+                HStack{
+                    NoteDetailHeader(note: note)
+                }
                 Divider()
                 TextEditor(text: $note.body.toUnwrapped(defaultValue: ""))
                     .padding(5)
@@ -44,21 +46,23 @@ struct NoteDetail: View {
                 }
                 if note.title == nil || note.title == "" {
                     let s = note.body!.prefix(20)
-                    note.title = String(s)
+                    note.title = String(s) + "..."
                 }
             })
             .padding(10)
             .onDisappear(){
-                if moc.hasChanges {
-                    do {
-                        try moc.save()
-                    } catch {
-                        let nserror = error as NSError
-                        print("Unresolved error \(nserror), \(nserror.userInfo)")
-                    }
+                save()
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .bottomBar) {
+                Button("Save Note") {
+                    save()
                 }
             }
         }
+
+        
     }
     
     private func countWords(_ s: String) -> Int {
@@ -70,6 +74,9 @@ struct NoteDetail: View {
         c = words.count
 
         return c
+    }
+    private func save() {
+        moc.flushChanges()
     }
 }
 

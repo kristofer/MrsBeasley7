@@ -49,3 +49,23 @@ then down in the list,
 ```
 
 This will simplify things a great deal in _Folios_
+
+### viewContext changes sync
+
+why not do this everywhere it's needed? usually on the "moc" variable
+
+```swift
+extension NSManagedObjectContext {
+    func flushChanges() {
+        if self.hasChanges {
+            do {
+                try self.save()
+            } catch {
+                let nserror = error as NSError
+                print("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+
+    }
+}
+```

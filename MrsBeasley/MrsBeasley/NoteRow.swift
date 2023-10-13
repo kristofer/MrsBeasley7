@@ -12,11 +12,7 @@ struct NoteRow: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            if let title = note.title {
-                Text(title)
-            } else {
-                Text("untitled")
-            }
+            Text(note.title ?? "")
             Text(note.uuid?.uuidString ?? "??")
                 .font(.caption2)
                 .foregroundColor(.gray)

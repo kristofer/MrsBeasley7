@@ -13,7 +13,7 @@ struct NoteDetailHeader: View {
     var body: some View {
         TextField("title", text: $note.title.toUnwrapped(defaultValue: ""))
             .font(.title)
-        Text(note.mimetype ?? "no mimetype")
+        Text(note.mimetype ?? "text/plain")
             .font(.caption).italic()
         Text("Created at \(note.timestamp!, formatter: noteDateFormatter)")
             .font(.caption).italic()
