@@ -22,6 +22,7 @@ struct NoteList: View {
     private var notes: FetchedResults<Note>
     
     @State private var noteId: Note?
+    @State private var searchText: String = ""
     
     var body: some View {
         NavigationSplitView {
@@ -29,6 +30,14 @@ struct NoteList: View {
                 ForEach(notes,  id: \.self) { aNote in
                     NoteRow(note: aNote)
                 }
+//                .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "")
+//                .onChange(of: $searchText, perform: { _ in
+//                    if (searchText != ""){
+//                        notes.nsPredicate=NSPredicate(format: "body CONTAINS[c] %@", searchText)
+//                    } else {
+//                        notes.nsPredicate=nil
+//                    }
+//                })
                 .onDelete(perform: deleteNotes)
             }
             .navigationTitle("Notes")
@@ -49,6 +58,7 @@ struct NoteList: View {
                 Text("Choose a note")
             }
         }
+
     }
     
     private func addNote() {
