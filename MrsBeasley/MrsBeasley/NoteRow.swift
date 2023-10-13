@@ -11,12 +11,15 @@ struct NoteRow: View {
     @ObservedObject var note: Note
 
     var body: some View {
-        HStack {
+        VStack(alignment: .leading) {
             if let title = note.title {
                 Text(title)
             } else {
                 Text("untitled")
             }
+            Text(note.uuid?.uuidString ?? "??")
+                .font(.caption2)
+                .foregroundColor(.gray)
         }
     }
 }

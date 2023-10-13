@@ -42,6 +42,10 @@ struct NoteDetail: View {
                 } else {
                     self.wordCount = 0
                 }
+                if note.title == nil || note.title == "" {
+                    let s = note.body!.prefix(20)
+                    note.title = String(s)
+                }
             })
             .padding(10)
             .onDisappear(){
