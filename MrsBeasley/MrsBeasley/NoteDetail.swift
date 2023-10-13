@@ -72,30 +72,6 @@ struct NoteDetail: View {
         return c
     }
 }
-//
-//struct CardView: View {
-//    //let card: Card
-//
-//    var body: some View {
-//        ZStack {
-//            RoundedRectangle(cornerRadius: 25, style: .continuous)
-//                .fill(.white)
-//
-//            VStack {
-//                Text(card.prompt)
-//                    .font(.largeTitle)
-//                    .foregroundColor(.black)
-//
-//                Text(card.answer)
-//                    .font(.title)
-//                    .foregroundColor(.gray)
-//            }
-//            .padding(20)
-//            .multilineTextAlignment(.center)
-//        }
-//        .frame(width: 450, height: 250)
-//    }
-//}
 
 struct NoteDetail_Previews: PreviewProvider {
     static var previews: some View {

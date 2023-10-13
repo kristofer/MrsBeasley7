@@ -8,83 +8,84 @@
 import SwiftUI
 
 extension Binding {
-     func toUnwrapped<T>(defaultValue: T) -> Binding<T> where Value == Optional<T>  {
+    func toUnwrapped<T>(defaultValue: T) -> Binding<T> where Value == Optional<T>  {
         Binding<T>(get: { self.wrappedValue ?? defaultValue }, set: { self.wrappedValue = $0 })
     }
 }
 
 struct NoteList: View {
-        @Environment(\.managedObjectContext) private var viewContext
-
-        @FetchRequest(
-            sortDescriptors: [NSSortDescriptor(keyPath: \Note.timestamp, ascending: true)],
-            animation: .default)
-        private var notes: FetchedResults<Note>
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Note.timestamp, ascending: true)],
+        animation: .default)
+    private var notes: FetchedResults<Note>
+    
     @State private var noteId: Note?
-
-        var body: some View {
-            NavigationSplitView {
-                List(selection: $noteId) {
-                    ForEach(notes,  id: \.self) { aNote in
-                        NoteRow(note: aNote)
-                    }
-                    .onDelete(perform: deleteNotes)
+    
+    var body: some View {
+        NavigationSplitView {
+            List(selection: $noteId) {
+                ForEach(notes,  id: \.self) { aNote in
+                    NoteRow(note: aNote)
                 }
-                .navigationTitle("Notes")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        EditButton()
-                    }
-                    ToolbarItem {
-                        Button(action: addNote) {
-                            Label("Add Note", systemImage: "plus")
-                        }
-                    }
+                .onDelete(perform: deleteNotes)
+            }
+            .navigationTitle("Notes")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    EditButton()
                 }
-            } detail: {
-                if noteId != nil {
-                    NoteDetail(note: noteId!)
-                } else {
-                    Text("Choose a note")
+                ToolbarItem {
+                    Button(action: addNote) {
+                        Label("Add Note", systemImage: "plus")
+                    }
                 }
             }
-        }
-
-        private func addNote() {
-            withAnimation {
-                let newNote = Note(context: viewContext)
-                newNote.timestamp = Date()
-                newNote.uuid = UUID()
-                newNote.body = ""
-                newNote.title = ""
-                newNote.mimetype = "text/plain"
-                
-                do {
-                    try viewContext.save()
-                } catch {
-                    // Replace this implementation with code to handle the error appropriately.
-                    // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                    let nsError = error as NSError
-                    fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                }
-            }
-        }
-
-        private func deleteNotes(offsets: IndexSet) {
-            withAnimation {
-                offsets.map { notes[$0] }.forEach(viewContext.delete)
-
-                do {
-                    try viewContext.save()
-                } catch {
-                    // Replace this implementation with code to handle the error appropriately.
-                    // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                    let nsError = error as NSError
-                    fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                }
+        } detail: {
+            if noteId != nil {
+                NoteDetail(note: noteId!)
+            } else {
+                Text("Choose a note")
             }
         }
     }
+    
+    private func addNote() {
+        withAnimation {
+            let newNote = Note(context: viewContext)
+            newNote.timestamp = Date()
+            newNote.uuid = UUID()
+            newNote.body = ""
+            newNote.title = ""
+            newNote.mimetype = "text/plain"
+            
+            do {
+                try viewContext.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        }
+    }
+    
+    private func deleteNotes(offsets: IndexSet) {
+        withAnimation {
+            offsets.map { notes[$0] }.forEach(viewContext.delete)
+            
+            do {
+                try viewContext.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        }
+    }
+}
 
 struct NoteList_Previews: PreviewProvider {
     static var previews: some View {
