@@ -94,6 +94,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C0140AB2ADB397C00A6147F /* PDFGen */ = {
+			isa = PBXGroup;
+			children = (
+				5C0140A32ADADA0E00A6147F /* PDFCreator.swift */,
+				5C0140A52ADADAA000A6147F /* PDFViewModel.swift */,
+				5C0140A92ADAE22900A6147F /* PDFViewUI.swift */,
+				5C0140A72ADADB3B00A6147F /* PDFPreviewView.swift */,
+			);
+			path = PDFGen;
+			sourceTree = "<group>";
+		};
 		5CC5286A2AD97D32002A30C9 = {
 			isa = PBXGroup;
 			children = (
@@ -129,10 +140,7 @@
 				5CC528842AD97D34002A30C9 /* Info.plist */,
 				5CC528812AD97D34002A30C9 /* MrsBeasleySeven.xcdatamodeld */,
 				5CC5287C2AD97D34002A30C9 /* Preview Content */,
-				5C0140A32ADADA0E00A6147F /* PDFCreator.swift */,
-				5C0140A52ADADAA000A6147F /* PDFViewModel.swift */,
-				5C0140A92ADAE22900A6147F /* PDFViewUI.swift */,
-				5C0140A72ADADB3B00A6147F /* PDFPreviewView.swift */,
+				5C0140AB2ADB397C00A6147F /* PDFGen */,
 			);
 			path = MrsBeasley;
 			sourceTree = "<group>";
