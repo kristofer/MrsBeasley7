@@ -42,34 +42,71 @@ extension PdfCreator {
               withAttributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 24)])
     }
     
-    private func addBody (body : String) {
+    private func addBody (body : AttributedString) {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .justified
-        
+
         let attributes = [
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16),
+//            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16),
             NSAttributedString.Key.paragraphStyle: paragraphStyle,
-            NSAttributedString.Key.foregroundColor : UIColor.gray
+//            NSAttributedString.Key.foregroundColor : UIColor.gray
         ]
-        
+        let nsAttributedString = NSAttributedString(body)
+
         let bodyRect = CGRect(x: 20, y: 70,
                               width: pageRect.width - 40 ,height: pageRect.height - 80)
-        body.draw(in: bodyRect, withAttributes: attributes)
+        nsAttributedString.draw(in: bodyRect) //, withAttributes: attributes)
+        //body.draw(in: bodyRect)
     }
 }
 
 extension PdfCreator {
-    func pdfData( title : String, body: String ) -> Data? {
-        if let renderer = self.renderer {
+    func pdfData( title : String, body: AttributedString ) -> Data? {
+        let attributedString = NSAttributedString(body)
 
-            let data = renderer.pdfData  { ctx in
-                ctx.beginPage()
-                addTitle(title: title)
-                addBody(body: body)
-            }
-            return data
+        let printFormatter = UISimpleTextPrintFormatter(attributedText: attributedString)
+
+        let renderer = UIPrintPageRenderer()
+        renderer.addPrintFormatter(printFormatter, startingAtPageAt: 0)
+        let pageSize = CGSize(width: 595.2, height: 841.8)
+        // create some sensible margins
+        let pageMargins = UIEdgeInsets(top: 72, left: 72, bottom: 72, right: 72)
+
+        // calculate the printable rect from the above two
+        let printableRect = CGRect(x: pageMargins.left, y: pageMargins.top, width: pageSize.width - pageMargins.left - pageMargins.right, height: pageSize.height - pageMargins.top - pageMargins.bottom)
+
+        // and here's the overall paper rectangle
+        let paperRect = CGRect(x: 0, y: 0, width: pageSize.width, height: pageSize.height)
+
+        renderer.setValue(NSValue(cgRect: paperRect), forKey: "paperRect")
+        renderer.setValue(NSValue(cgRect: printableRect), forKey: "printableRect")
+        
+        let pdfData = NSMutableData()
+
+        UIGraphicsBeginPDFContextToData(pdfData, paperRect, nil)
+        renderer.prepare(forDrawingPages: NSMakeRange(0, renderer.numberOfPages))
+        
+        let bounds = UIGraphicsGetPDFContextBounds()
+
+        for i in 0  ..< renderer.numberOfPages {
+            UIGraphicsBeginPDFPage()
+
+            renderer.drawPage(at: i, in: bounds)
         }
-        return nil
+
+        UIGraphicsEndPDFContext()
+        
+//        if let renderer = self.renderer {
+//
+//            let data = renderer.pdfData  { ctx in
+//                ctx.beginPage()
+//                addTitle(title: title)
+//                addBody(body: body)
+//            }
+//            return data
+//        }
+//        return nil
+        return pdfData as Data
     }
 }
 

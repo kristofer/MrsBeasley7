@@ -60,15 +60,16 @@ struct NoteDetail: View {
         }
         .toolbar {
             ToolbarItem(placement: .bottomBar) {
-                Button("Save Note") {
-                    save()
-                }}
-            ToolbarItem(placement: .bottomBar) {
-                Button("Create PDF") {
-                    showPDFPanel = true
-                }}
+                Button("Save Note", action: {save()})
+                    .buttonStyle(.borderedProminent)
             }
-        
+            ToolbarItem(placement: .bottomBar) {
+                Button("Create PDF", action: {
+                    showPDFPanel = true
+                })
+                .buttonStyle(.borderedProminent)
+            }
+        }
     }
     
     

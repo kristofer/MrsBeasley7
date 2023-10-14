@@ -21,7 +21,9 @@ struct PDFPreviewView  : View {
                 shareButton()
                 Spacer()
                 Button("Dismiss", action: { dismiss() })
+                    .buttonStyle(.borderedProminent)
             }
+            .padding(5)
             Spacer()
         }
         .navigationTitle(Text(pdfViewModel.title))
@@ -39,13 +41,8 @@ struct PDFPreviewView  : View {
             self.showShareSheet.toggle()
         }, label: {
             Text("Share")
-                .font(.subheadline)
-            .padding(10)
-            .frame(width: 100)
-            .background(Color.blue)
-            .foregroundColor(.white)
-            .cornerRadius(20)
         })
+        .buttonStyle(.borderedProminent)
     }
 }
 
