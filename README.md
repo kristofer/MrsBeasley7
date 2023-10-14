@@ -4,7 +4,6 @@ a writing app
 
 ### Features to add
 
-- search of notes
 - display by reverse date
 - tags/categories
 
@@ -12,6 +11,7 @@ a writing app
 #### Features Done
 
 - export (action?) and PDF(!)
+- search of notes
 
 
 # Learnings
