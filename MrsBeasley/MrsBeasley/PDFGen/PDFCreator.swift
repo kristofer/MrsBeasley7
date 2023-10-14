@@ -46,11 +46,11 @@ extension PdfCreator {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .justified
 
-        let attributes = [
+//        let attributes = [
 //            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16),
-            NSAttributedString.Key.paragraphStyle: paragraphStyle,
+//            NSAttributedString.Key.paragraphStyle: paragraphStyle,
 //            NSAttributedString.Key.foregroundColor : UIColor.gray
-        ]
+//        ]
         let nsAttributedString = NSAttributedString(body)
 
         let bodyRect = CGRect(x: 20, y: 70,

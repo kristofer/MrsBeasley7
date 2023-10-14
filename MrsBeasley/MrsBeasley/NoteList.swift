@@ -24,7 +24,7 @@ extension NSManagedObjectContext {
                 print("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
-
+        
     }
 }
 
@@ -33,6 +33,7 @@ struct NoteList: View {
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Note.timestamp, ascending: true)],
+        //        predicate: nil,
         animation: .default)
     private var notes: FetchedResults<Note>
     
@@ -41,21 +42,28 @@ struct NoteList: View {
     
     var body: some View {
         NavigationSplitView {
-            List(selection: $noteId) {
-                ForEach(notes,  id: \.self) { aNote in
-                    NoteRow(note: aNote)
+            Group {
+                List(selection: $noteId) {
+                    ForEach(notes,  id: \.self) { aNote in
+                        NoteRow(note: aNote)
+                    }
+                    .onDelete(perform: deleteNotes)
                 }
-//                .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "")
-//                .onChange(of: $searchText, perform: { _ in
-//                    if (searchText != ""){
-//                        notes.nsPredicate=NSPredicate(format: "body CONTAINS[c] %@", searchText)
-//                    } else {
-//                        notes.nsPredicate=nil
-//                    }
-//                })
-                .onDelete(perform: deleteNotes)
             }
+            .onChange(of: $searchText.wrappedValue, perform: { stext in
+                if (stext != ""){
+                    let titlePred = NSPredicate(format: "title CONTAINS[c] %@", stext)
+                    let bodyPred = NSPredicate(format: "body CONTAINS[c] %@", stext)
+                    let predicate = NSCompoundPredicate(type: .or, subpredicates: [titlePred, bodyPred])
+                    notes.nsPredicate = predicate
+                } else {
+                    notes.nsPredicate = nil
+                }
+            })
             .navigationTitle("Notes")
+            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "")
+            .disableAutocorrection(true)
+            .autocapitalization(.none)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
@@ -73,7 +81,7 @@ struct NoteList: View {
                 Text("Choose a note")
             }
         }
-
+        
     }
     
     private func addNote() {
