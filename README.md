@@ -6,10 +6,19 @@ a writing app
 
 - search of notes
 - display by reverse date
-- export (action?)
+- tags/categories
+
+
+#### Features Done
+
+- export (action?) and PDF(!)
 
 
 # Learnings
+
+## passing CoreData objects to Swiftui
+
+_it turns out, that it was/is __much__ easier than I had ever figured_
 
 in swiftui, to edit the fields from a core data object, you need to merely
 
