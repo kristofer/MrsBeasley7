@@ -12,13 +12,14 @@ struct NoteDetail: View {
     
     @ObservedObject var note: Note
     @State private var wordCount: Int = 0
-    
+    @State private var showPDFPanel = false
+
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 20, style: .continuous)
                 .fill(.white)
                 .shadow(radius: 10)
-
+            
             
             VStack(alignment: .leading) {
                 HStack{
@@ -53,17 +54,23 @@ struct NoteDetail: View {
             .onDisappear(){
                 save()
             }
+            .sheet(isPresented: $showPDFPanel) {
+                PDFPreviewView()            .environmentObject(PDFViewModel(note: note))
+            }
         }
         .toolbar {
             ToolbarItem(placement: .bottomBar) {
                 Button("Save Note") {
                     save()
-                }
+                }}
+            ToolbarItem(placement: .bottomBar) {
+                Button("Create PDF") {
+                    showPDFPanel = true
+                }}
             }
-        }
-
         
     }
+    
     
     private func countWords(_ s: String) -> Int {
         var c: Int = 0
@@ -72,7 +79,7 @@ struct NoteDetail: View {
             $0.isNewline
         }
         c = words.count
-
+        
         return c
     }
     private func save() {
