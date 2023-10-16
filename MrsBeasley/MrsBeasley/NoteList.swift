@@ -39,16 +39,14 @@ struct NoteList: View {
     
     @State private var noteId: Note?
     @State private var searchText: String = ""
-    
+
     var body: some View {
         NavigationSplitView {
-            Group {
-                List(selection: $noteId) {
-                    ForEach(notes,  id: \.self) { aNote in
-                        NoteRow(note: aNote)
-                    }
-                    .onDelete(perform: deleteNotes)
+            List(selection: $noteId) {
+                ForEach(notes,  id: \.self) { aNote in
+                    NoteRow(note: aNote)
                 }
+                .onDelete(perform: deleteNotes)
             }
             .onChange(of: $searchText.wrappedValue, perform: { stext in
                 if (stext != ""){
@@ -81,7 +79,6 @@ struct NoteList: View {
                 Text("Choose a note")
             }
         }
-        
     }
     
     private func addNote() {

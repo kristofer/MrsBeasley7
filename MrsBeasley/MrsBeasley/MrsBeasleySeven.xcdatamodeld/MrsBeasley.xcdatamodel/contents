@@ -6,5 +6,11 @@
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO" spotlightIndexingEnabled="YES"/>
         <attribute name="title" optional="YES" attributeType="String" spotlightIndexingEnabled="YES"/>
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="tags" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tag" inverseName="notes" inverseEntity="Tag"/>
+    </entity>
+    <entity name="Tag" representedClassName="Tag" syncable="YES" codeGenerationType="class">
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="notes" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Note" inverseName="tags" inverseEntity="Note"/>
     </entity>
 </model>

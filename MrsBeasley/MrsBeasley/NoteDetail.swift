@@ -13,6 +13,7 @@ struct NoteDetail: View {
     @ObservedObject var note: Note
     @State private var wordCount: Int = 0
     @State private var showPDFPanel = false
+    @State var showTags = false
 
     var body: some View {
         ZStack {
@@ -57,13 +58,28 @@ struct NoteDetail: View {
             .sheet(isPresented: $showPDFPanel) {
                 PDFPreviewView()            .environmentObject(PDFViewModel(note: note))
             }
+            .sheet(isPresented: $showTags) {
+                Form {
+                    TagPickerView(note: note, showModal: $showTags)
+                }
+            }
         }
         .toolbar {
-            ToolbarItem(placement: .bottomBar) {
+            Button("Category") {
+                print("category to be assigned")
+                showTags.toggle()
+            }
+            .buttonStyle(.borderedProminent)
+            Button("Help") {
+                print("Help tapped!")
+            }
+            .buttonStyle(.borderedProminent)
+        }
+
+        .toolbar {
+            ToolbarItemGroup(placement: .bottomBar) {
                 Button("Save Note", action: {save()})
                     .buttonStyle(.borderedProminent)
-            }
-            ToolbarItem(placement: .bottomBar) {
                 Button("Create PDF", action: {
                     showPDFPanel = true
                 })
