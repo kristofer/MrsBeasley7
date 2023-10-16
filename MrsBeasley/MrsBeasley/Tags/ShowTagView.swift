@@ -12,10 +12,10 @@ struct ShowTagView: View {
     
     var body: some View {
         ScrollView (.horizontal, showsIndicators: false) {
-            Text("[")
+            //Text("[")
             LazyHStack {
-                //Label(" ", systemImage: "tag")
-                ForEach(Array(note.tags as? Set<Tag> ?? []), id: \.self) { tag in
+                Label("", systemImage: "tag")
+                ForEach(Array(note.tags as! Set<Tag> ), id: \.self) { tag in
                     Text(tag.title ?? "??")
                         .font(.caption)
                         .foregroundColor(Color.accentColor)

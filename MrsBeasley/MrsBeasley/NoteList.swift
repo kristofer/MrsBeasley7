@@ -45,24 +45,26 @@ struct NoteList: View {
     
     @State private var noteId: Note?
     @State private var searchText: String = ""
-
+    @State private var selectedTag: Tag?
+    
+    
     var body: some View {
         NavigationSplitView {
+            HStack{
+                Text("Categories:").font(.body)
+                PickerView(tags: Array(tags), selectedTag: $selectedTag)
+            }
             List(selection: $noteId) {
                 ForEach(notes,  id: \.self) { aNote in
                     NoteRow(note: aNote)
                 }
                 .onDelete(perform: deleteNotes)
             }
-            .onChange(of: $searchText.wrappedValue, perform: { stext in
-                if (stext != ""){
-                    let titlePred = NSPredicate(format: "title CONTAINS[c] %@", stext)
-                    let bodyPred = NSPredicate(format: "body CONTAINS[c] %@", stext)
-                    let predicate = NSCompoundPredicate(type: .or, subpredicates: [titlePred, bodyPred])
-                    notes.nsPredicate = predicate
-                } else {
-                    notes.nsPredicate = nil
-                }
+            .onChange(of: $searchText.wrappedValue, perform: { _ in
+                setupPredicate()
+            })
+            .onChange(of: $selectedTag.wrappedValue, perform: { _ in
+                setupPredicate()
             })
             .navigationTitle("Notes")
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "")
@@ -87,6 +89,27 @@ struct NoteList: View {
         }
     }
     
+    private func setupPredicate() {
+        let stext = $searchText.wrappedValue
+        let tag = $selectedTag.wrappedValue
+        var titlePred = NSPredicate(value: true)
+        var bodyPred = NSPredicate(value: true)
+        
+        if stext != "" {
+            titlePred = NSPredicate(format: "title CONTAINS[c] %@", stext)
+            bodyPred = NSPredicate(format: "body CONTAINS[c] %@", stext)
+        }
+        
+        var catPred = NSPredicate(value: true)
+        if let tag = tag, tag.title != "<All>" {
+            catPred = NSPredicate(format: "tags.title CONTAINS[c] %@", tag.title!)
+        }
+        
+        let orPred = NSCompoundPredicate(type: .or, subpredicates: [titlePred, bodyPred])
+        let predicate = NSCompoundPredicate(type: .and, subpredicates: [orPred, catPred])
+        notes.nsPredicate = predicate
+    }
+    
     private func addNote() {
         withAnimation {
             let newNote = Note(context: viewContext)
@@ -95,6 +118,14 @@ struct NoteList: View {
             newNote.body = ""
             newNote.title = ""
             newNote.mimetype = "text/plain"
+            
+            if let tag = $selectedTag.wrappedValue {
+            //if let tag = selectedTag {
+                if tag.title != "<All>" {
+                    print("adding to category \(tag.title!)")
+                    newNote.addToTags(tag)
+                }
+            }
             viewContext.flushChanges()
         }
     }
@@ -110,5 +141,25 @@ struct NoteList: View {
 struct NoteList_Previews: PreviewProvider {
     static var previews: some View {
         NoteList()
+    }
+}
+
+struct PickerView : View {
+
+    var tags : [Tag]
+    @Binding var selectedTag : Tag?
+    
+//    init(tags: [Tag]) {
+//        self.tags = tags
+//        self._selectedTag = tags.first
+//    }
+    
+    var body : some View {
+        Picker(selection: $selectedTag, label: Text("Categories")) {
+            ForEach(tags) { tag in
+                Text(tag.title ?? "").tag(tag as Tag?)
+            }
+        }
+
     }
 }
