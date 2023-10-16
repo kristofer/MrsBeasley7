@@ -12,6 +12,7 @@ struct ShowTagView: View {
     
     var body: some View {
         ScrollView (.horizontal, showsIndicators: false) {
+            Text("[")
             LazyHStack {
                 //Label(" ", systemImage: "tag")
                 ForEach(Array(note.tags as? Set<Tag> ?? []), id: \.self) { tag in

@@ -60,7 +60,8 @@ struct NoteDetail: View {
             }
             .sheet(isPresented: $showTags) {
                 Form {
-                    TagPickerView(note: note, showModal: $showTags)
+                    TagList(note: note)
+                    //TagPickerView(note: note, showModal: $showTags)
                 }
             }
         }

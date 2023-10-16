@@ -37,6 +37,12 @@ struct NoteList: View {
         animation: .default)
     private var notes: FetchedResults<Note>
     
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Tag.title, ascending: true)],
+        //        predicate: nil,
+        animation: .default)
+    private var tags: FetchedResults<Tag>
+    
     @State private var noteId: Note?
     @State private var searchText: String = ""
 
