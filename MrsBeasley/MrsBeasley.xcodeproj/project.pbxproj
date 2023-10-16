@@ -23,7 +23,7 @@
 		5CC5287B2AD97D34002A30C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CC5287A2AD97D34002A30C9 /* Assets.xcassets */; };
 		5CC5287E2AD97D34002A30C9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CC5287D2AD97D34002A30C9 /* Preview Assets.xcassets */; };
 		5CC528802AD97D34002A30C9 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5287F2AD97D34002A30C9 /* Persistence.swift */; };
-		5CC528832AD97D34002A30C9 /* MrsBeasleySeven.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5CC528812AD97D34002A30C9 /* MrsBeasleySeven.xcdatamodeld */; };
+		5CC528832AD97D34002A30C9 /* MrsBeasley.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5CC528812AD97D34002A30C9 /* MrsBeasley.xcdatamodeld */; };
 		5CC5288E2AD97D34002A30C9 /* MrsBeasleyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5288D2AD97D34002A30C9 /* MrsBeasleyTests.swift */; };
 		5CC528982AD97D34002A30C9 /* MrsBeasleyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC528972AD97D34002A30C9 /* MrsBeasleyUITests.swift */; };
 		5CC5289A2AD97D34002A30C9 /* MrsBeasleyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC528992AD97D34002A30C9 /* MrsBeasleyUITestsLaunchTests.swift */; };
@@ -72,6 +72,7 @@
 		5CC528932AD97D34002A30C9 /* MrsBeasleyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MrsBeasleyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CC528972AD97D34002A30C9 /* MrsBeasleyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MrsBeasleyUITests.swift; sourceTree = "<group>"; };
 		5CC528992AD97D34002A30C9 /* MrsBeasleyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MrsBeasleyUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5CCD1CDD2ADDBF5400238939 /* MrsBeasley.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MrsBeasley.entitlements; sourceTree = "<group>"; };
 		5CD2CCB22ADD98CB00B0B90F /* NoteUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -143,6 +144,7 @@
 		5CC528752AD97D32002A30C9 /* MrsBeasley */ = {
 			isa = PBXGroup;
 			children = (
+				5CCD1CDD2ADDBF5400238939 /* MrsBeasley.entitlements */,
 				5C01409F2AD9952700A6147F /* NoteDetailHeader.swift */,
 				5C0140A12AD996BA00A6147F /* NoteList.swift */,
 				5C0140AC2ADC41CB00A6147F /* Tags */,
@@ -155,7 +157,7 @@
 				5CC5287A2AD97D34002A30C9 /* Assets.xcassets */,
 				5CC5287F2AD97D34002A30C9 /* Persistence.swift */,
 				5CC528842AD97D34002A30C9 /* Info.plist */,
-				5CC528812AD97D34002A30C9 /* MrsBeasleySeven.xcdatamodeld */,
+				5CC528812AD97D34002A30C9 /* MrsBeasley.xcdatamodeld */,
 				5CC5287C2AD97D34002A30C9 /* Preview Content */,
 				5C0140AB2ADB397C00A6147F /* PDFGen */,
 			);
@@ -328,7 +330,7 @@
 				5CC528792AD97D32002A30C9 /* ContentView.swift in Sources */,
 				5C0140AE2ADC41E100A6147F /* TagList.swift in Sources */,
 				5C373D922ADD6E3C0066B0D7 /* ShowTagView.swift in Sources */,
-				5CC528832AD97D34002A30C9 /* MrsBeasleySeven.xcdatamodeld in Sources */,
+				5CC528832AD97D34002A30C9 /* MrsBeasley.xcdatamodeld in Sources */,
 				5C01409C2AD9819C00A6147F /* NoteDetail.swift in Sources */,
 				5CC528772AD97D32002A30C9 /* MrsBeasleyApp.swift in Sources */,
 				5C0140A82ADADB3B00A6147F /* PDFPreviewView.swift in Sources */,
@@ -488,6 +490,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MrsBeasley/MrsBeasley.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MrsBeasley/Preview Content\"";
@@ -517,6 +520,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MrsBeasley/MrsBeasley.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MrsBeasley/Preview Content\"";
@@ -659,13 +663,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		5CC528812AD97D34002A30C9 /* MrsBeasleySeven.xcdatamodeld */ = {
+		5CC528812AD97D34002A30C9 /* MrsBeasley.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				5CC528822AD97D34002A30C9 /* MrsBeasley.xcdatamodel */,
 			);
 			currentVersion = 5CC528822AD97D34002A30C9 /* MrsBeasley.xcdatamodel */;
-			path = MrsBeasleySeven.xcdatamodeld;
+			path = MrsBeasley.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

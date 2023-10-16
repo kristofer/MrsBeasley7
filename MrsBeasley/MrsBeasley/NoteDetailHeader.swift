@@ -16,8 +16,10 @@ struct NoteDetailHeader: View {
         ShowTagView(note: note)
         Text(note.mimetype ?? "text/plain")
             .font(.caption).italic()
-        Text("Created at \(note.timestamp!, formatter: noteDateFormatter)")
-            .font(.caption).italic()
+        if let ts = note.timestamp {
+            Text("Created at \(note.timestamp!, formatter: noteDateFormatter)")
+                .font(.caption).italic()
+        }
     }
 }
 

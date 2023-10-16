@@ -15,7 +15,7 @@ struct ShowTagView: View {
             //Text("[")
             LazyHStack {
                 Label("", systemImage: "tag")
-                ForEach(Array(note.tags as! Set<Tag> ), id: \.self) { tag in
+                ForEach(Array(note.tags as? Set<Tag> ?? [] ), id: \.self) { tag in
                     Text(tag.title ?? "??")
                         .font(.caption)
                         .foregroundColor(Color.accentColor)

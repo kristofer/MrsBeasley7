@@ -31,7 +31,8 @@ struct PersistenceController {
     let container: NSPersistentCloudKitContainer
 
     init(inMemory: Bool = false) {
-        container = NSPersistentCloudKitContainer(name: "MrsBeasleySeven")
+        container = NSPersistentCloudKitContainer(name: "MrsBeasley")
+        try? container.viewContext.setQueryGenerationFrom(.current)
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
@@ -48,14 +49,10 @@ struct PersistenceController {
                  * The store could not be migrated to the current model version.
                  Check the error message to determine what the actual problem was.
                  */
-                fatalError("Unresolved error \(error), \(error.userInfo)")
+                print("Unresolved error persistence issue \(error), \(error.userInfo)")
             }
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
     
-//    func save() {
-//        let context = container.viewContext
-//        context.flushChanges()
-//    }
 }

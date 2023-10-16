@@ -17,10 +17,11 @@ struct NoteRow: View {
             }else {
                 Text("*no title*")
             }
-            Text("\(note.timestamp!, formatter: noteDateFormatter)")
-            //Text(note.uuid?.uuidString ?? "??")
-                .font(.caption2)
-                .foregroundColor(.gray)
+            if let ts = note.timestamp {
+                Text("\(ts, formatter: noteDateFormatter)")
+                    .font(.caption2)
+                    .foregroundColor(.gray)
+            }
         }
     }
 }
