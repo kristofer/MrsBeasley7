@@ -8,6 +8,12 @@
 import SwiftUI
 import CoreData
 
+//class Note: NSManagedObject {
+//}
+//
+//class Tag: NSManagedObject {
+//}
+
 extension Binding {
     func toUnwrapped<T>(defaultValue: T) -> Binding<T> where Value == Optional<T>  {
         Binding<T>(get: { self.wrappedValue ?? defaultValue }, set: { self.wrappedValue = $0 })
@@ -98,6 +104,10 @@ struct NoteList: View {
                 }
             }
             SortByView(selectedOption: $selectedSort)
+            Button("printjson") {
+                let notearray = Array(notes)
+                print(Note.encodeToJSONString(notearray))
+            }
         } detail: {
             if noteId != nil {
                 NoteDetail(note: noteId!)

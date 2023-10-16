@@ -93,37 +93,37 @@ struct TagList_Previews: PreviewProvider {
     }
 }
 
-struct TagPickerView : View {
-    @Environment(\.managedObjectContext) private var viewContext
-    @ObservedObject var note: Note
-    @Binding var showModal: Bool
-    
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Tag.title, ascending: true)],
-        animation: .default)
-    private var tags: FetchedResults<Tag>
-    
-    func save() {
-        try! viewContext.save()
-        showModal = false
-    }
-    
-    var body: some View {
-        VStack {
-            Button(action: {showModal = false}) {
-                Text("Close")
-            }
-            Picker(selection: $note.tags, label: Text("Categories")) {
-                ForEach(tags, id: \.self) { tag in
-                    Text("\(tag.title!)")
-                        .tag(note as Note?)
-                }
-            }
-            //Text("Selected: \(.title!)")
-            Button(action: {save()}) {
-                Text("Save")
-            }
-        }
-        
-    }
-}
+//struct TagPickerView : View {
+//    @Environment(\.managedObjectContext) private var viewContext
+//    @ObservedObject var note: Note
+//    @Binding var showModal: Bool
+//    
+//    @FetchRequest(
+//        sortDescriptors: [NSSortDescriptor(keyPath: \Tag.title, ascending: true)],
+//        animation: .default)
+//    private var tags: FetchedResults<Tag>
+//    
+//    func save() {
+//        try! viewContext.save()
+//        showModal = false
+//    }
+//    
+//    var body: some View {
+//        VStack {
+//            Button(action: {showModal = false}) {
+//                Text("Close")
+//            }
+//            Picker(selection: $note.tags, label: Text("Categories")) {
+//                ForEach(tags, id: \.self) { tag in
+//                    Text("\(tag.title!)")
+//                        .tag(note as Note?)
+//                }
+//            }
+//            //Text("Selected: \(.title!)")
+//            Button(action: {save()}) {
+//                Text("Save")
+//            }
+//        }
+//        
+//    }
+//}

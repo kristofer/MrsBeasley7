@@ -1,0 +1,73 @@
+//
+//  NoteUtils.swift
+//  MrsBeasley
+//
+//  Created by Kristofer Younger on 10/16/23.
+//
+
+import Foundation
+import SwiftUI
+import CoreData
+
+class Tag: NSManagedObject  {
+}
+
+
+class Note: NSManagedObject, Codable  {
+    enum CodingKeys: CodingKey {
+      case body, mimetype, timestamp, title, uuid
+    }
+
+    static func encodeToJSONString(_ values: [Note]) -> String {
+        //        let saveToURL = URL.userDocumentsURL.appendingPathComponent("OutFileName.json")
+        let encoder = JSONEncoder()
+        do {
+            let data = try encoder.encode(values)
+            //            try data.write(to: saveToURL)""
+            return String(decoding: data, as: UTF8.self)
+        } catch {
+            print(error)
+        }
+        return "[]"
+    }
+    
+    static func fromJSON(s: String) -> [Note] {
+        //        let jsonURL = URL.userDocumentsURL.appendingPathComponent("Filename.json")
+        do {
+            //            let inData = try Data(contentsOf: jsonURL)
+            return try JSONDecoder().decode([Note].self, from: s.data(using: .utf8) ?? Data())
+        } catch {
+            print("Error!\n\(error)")
+            return [Note]()
+            // return an empty array on failure after printing the error}
+        }
+    }
+    
+    
+    required convenience init(from decoder: Decoder) throws {
+        let context = PersistenceController.shared.container.viewContext
+
+        self.init(context: context)
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+
+        //body, mimetype, timestamp, title, uuid
+        self.body = try values.decode(String.self, forKey: .body)
+        self.title = try values.decode(String.self, forKey: .title)
+        self.mimetype = try values.decode(String.self, forKey: .mimetype)
+        self.uuid = try values.decode(UUID.self,
+                                 forKey: .uuid)
+        self.timestamp = try values.decode(Date.self,
+                                     forKey: .timestamp)
+
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(body, forKey: .body)
+        try container.encode(title, forKey: .title)
+        try container.encode(mimetype, forKey: .mimetype)
+        try container.encode(timestamp, forKey: .timestamp)
+        try container.encode(uuid, forKey: .uuid)
+    }
+    
+}

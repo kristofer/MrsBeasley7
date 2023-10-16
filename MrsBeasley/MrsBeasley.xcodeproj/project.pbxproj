@@ -27,6 +27,7 @@
 		5CC5288E2AD97D34002A30C9 /* MrsBeasleyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5288D2AD97D34002A30C9 /* MrsBeasleyTests.swift */; };
 		5CC528982AD97D34002A30C9 /* MrsBeasleyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC528972AD97D34002A30C9 /* MrsBeasleyUITests.swift */; };
 		5CC5289A2AD97D34002A30C9 /* MrsBeasleyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC528992AD97D34002A30C9 /* MrsBeasleyUITestsLaunchTests.swift */; };
+		5CD2CCB32ADD98CB00B0B90F /* NoteUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2CCB22ADD98CB00B0B90F /* NoteUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		5CC528932AD97D34002A30C9 /* MrsBeasleyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MrsBeasleyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CC528972AD97D34002A30C9 /* MrsBeasleyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MrsBeasleyUITests.swift; sourceTree = "<group>"; };
 		5CC528992AD97D34002A30C9 /* MrsBeasleyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MrsBeasleyUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5CD2CCB22ADD98CB00B0B90F /* NoteUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				5CC528762AD97D32002A30C9 /* MrsBeasleyApp.swift */,
 				5CC528782AD97D32002A30C9 /* ContentView.swift */,
 				5C0140992AD97F7A00A6147F /* NoteRow.swift */,
+				5CD2CCB22ADD98CB00B0B90F /* NoteUtils.swift */,
 				5CC5287A2AD97D34002A30C9 /* Assets.xcassets */,
 				5CC5287F2AD97D34002A30C9 /* Persistence.swift */,
 				5CC528842AD97D34002A30C9 /* Info.plist */,
@@ -315,6 +318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C0140A62ADADAA000A6147F /* PDFViewModel.swift in Sources */,
+				5CD2CCB32ADD98CB00B0B90F /* NoteUtils.swift in Sources */,
 				5C01409A2AD97F7A00A6147F /* NoteRow.swift in Sources */,
 				5C01409E2AD9826C00A6147F /* NoteBody.swift in Sources */,
 				5C0140AA2ADAE22900A6147F /* PDFViewUI.swift in Sources */,
