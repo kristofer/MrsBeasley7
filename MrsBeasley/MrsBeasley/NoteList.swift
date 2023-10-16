@@ -28,11 +28,27 @@ extension NSManagedObjectContext {
     }
 }
 
+enum SortBy: CaseIterable, Identifiable, CustomStringConvertible {
+    case normal
+    case alpha
+    
+    var id: Self { self }
+    
+    var description: String {
+        switch self {
+        case .normal:
+            return "Date Created"
+        case .alpha:
+            return "Title (n/a)"
+        }
+    }
+}
+
 struct NoteList: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Note.timestamp, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Note.timestamp, ascending: false)],
         //        predicate: nil,
         animation: .default)
     private var notes: FetchedResults<Note>
@@ -46,7 +62,8 @@ struct NoteList: View {
     @State private var noteId: Note?
     @State private var searchText: String = ""
     @State private var selectedTag: Tag?
-    
+    @State private var selectedSort: SortBy = .normal
+
     
     var body: some View {
         NavigationSplitView {
@@ -80,6 +97,7 @@ struct NoteList: View {
                     }
                 }
             }
+            SortByView(selectedOption: $selectedSort)
         } detail: {
             if noteId != nil {
                 NoteDetail(note: noteId!)
@@ -101,7 +119,7 @@ struct NoteList: View {
         }
         
         var catPred = NSPredicate(value: true)
-        if let tag = tag, tag.title != "<All>" {
+        if let tag = tag, tag.title != nil, tag.title != "<All>" {
             catPred = NSPredicate(format: "tags.title CONTAINS[c] %@", tag.title!)
         }
         
@@ -120,7 +138,7 @@ struct NoteList: View {
             newNote.mimetype = "text/plain"
             
             if let tag = $selectedTag.wrappedValue {
-            //if let tag = selectedTag {
+                //if let tag = selectedTag {
                 if tag.title != "<All>" {
                     print("adding to category \(tag.title!)")
                     newNote.addToTags(tag)
@@ -145,14 +163,14 @@ struct NoteList_Previews: PreviewProvider {
 }
 
 struct PickerView : View {
-
+    
     var tags : [Tag]
     @Binding var selectedTag : Tag?
     
-//    init(tags: [Tag]) {
-//        self.tags = tags
-//        self._selectedTag = tags.first
-//    }
+    //    init(tags: [Tag]) {
+    //        self.tags = tags
+    //        self._selectedTag = tags.first
+    //    }
     
     var body : some View {
         Picker(selection: $selectedTag, label: Text("Categories")) {
@@ -160,6 +178,19 @@ struct PickerView : View {
                 Text(tag.title ?? "").tag(tag as Tag?)
             }
         }
+        
+    }
+}
+struct SortByView: View {
+    @Binding var selectedOption: SortBy
+    
+    var body: some View {
+        Picker("Sort By", selection: $selectedOption) {
+            ForEach(SortBy.allCases) { option in
+                Text(String(describing: option))
 
+            }
+        }
+        //.pickerStyle(.wheel)
     }
 }

@@ -12,8 +12,13 @@ struct NoteRow: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(note.title ?? "")
-            Text(note.uuid?.uuidString ?? "??")
+            if let actualTitle = note.title, actualTitle != "" {
+                Text(actualTitle)
+            }else {
+                Text("*no title*")
+            }
+            Text("\(note.timestamp!, formatter: noteDateFormatter)")
+            //Text(note.uuid?.uuidString ?? "??")
                 .font(.caption2)
                 .foregroundColor(.gray)
         }

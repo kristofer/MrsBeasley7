@@ -1,17 +1,31 @@
 # MrsBeasley7
 a writing app
 
+__Caution__ there is a weird bug related to adding for a note. App crashes when a category is selected, and a new note is added, and then you immediately select it.
+the crash goes right back to the __@main__
+
+So, i suspect it is related to one of the Predicates in the filtering of the notes. I'll have to look into it.
+If one of the predicate's interpolated text is nil, I'd bet that's the problem.
+
+And it occured to me that maybe the tag.title is nil?
+
+```swift
+        var catPred = NSPredicate(value: true)
+        if let tag = tag, tag.title != nil, tag.title != "<All>" {
+            catPred = NSPredicate(format: "tags.title CONTAINS[c] %@", tag.title!)
+        }
+// added that `tag.title != nil` and will see if I get it again.
+```
 
 ### Features to add
 
-- display by reverse date
-- tags/categories
-
+- sort by alpha title? _but do I need it? I have a searchbar_
 
 #### Features Done
 
 - export (action?) and PDF(!)
 - search of notes
+- tags/categories
 
 
 # Learnings

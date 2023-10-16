@@ -14,7 +14,7 @@ struct NoteDetail: View {
     @State private var wordCount: Int = 0
     @State private var showPDFPanel = false
     @State var showTags = false
-
+    
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 20, style: .continuous)
@@ -27,7 +27,7 @@ struct NoteDetail: View {
                     NoteDetailHeader(note: note)
                 }
                 Divider()
-                TextEditor(text: $note.body.toUnwrapped(defaultValue: ""))
+                TextEditor(text: $note.body.toUnwrapped(defaultValue: "no body"))
                     .padding(5)
                 Divider()
                 if wordCount == 0 && note.body != nil {
@@ -76,7 +76,7 @@ struct NoteDetail: View {
             }
             .buttonStyle(.borderedProminent)
         }
-
+        
         .toolbar {
             ToolbarItemGroup(placement: .bottomBar) {
                 Button("Save Note", action: {save()})
