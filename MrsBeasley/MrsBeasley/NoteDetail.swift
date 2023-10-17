@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct NoteDetail: View {
     @Environment(\.managedObjectContext) var moc
@@ -14,6 +15,15 @@ struct NoteDetail: View {
     @State private var wordCount: Int = 0
     @State private var showPDFPanel = false
     @State var showTags = false
+    
+    let detector = PassthroughSubject<Void, Never>()
+    let publisher: AnyPublisher<Void, Never>
+    init(note: Note) {
+        self.note = note
+        self.publisher = detector
+            .debounce(for: .seconds(3), scheduler: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
     
     var body: some View {
         ZStack {
@@ -28,6 +38,7 @@ struct NoteDetail: View {
                 }
                 Divider()
                 TextEditor(text: $note.body.toUnwrapped(defaultValue: "no body"))
+                    .font(.custom("Inconsolata", size: 22.0))
                     .padding(5)
                 Divider()
                 if wordCount == 0 && note.body != nil {
@@ -40,24 +51,28 @@ struct NoteDetail: View {
             }
             .disableAutocorrection(true)
             .autocapitalization(.none)
+            .onReceive(publisher) { save() }
             .onChange(of: note.body, perform: { newValue in
+                detector.send()
                 if let s = newValue {
                     self.wordCount = countWords(s)
                 } else {
                     self.wordCount = 0
                 }
-                if (note.title == nil || note.title == "") {
-                    if let s = note.body {
-                        note.title = String(s.prefix(20)) + "..."
-                    }
-                }
+//                if (note.title == nil || note.title == "") {
+//                    if let s = note.body {
+//                        note.title = String(s.prefix(20)) + "..."
+//                    }
+//                }
             })
             .padding(10)
             .onDisappear(){
                 save()
             }
+            .onAppear() {
+            }
             .sheet(isPresented: $showPDFPanel) {
-                PDFPreviewView()            .environmentObject(PDFViewModel(note: note))
+                PDFPreviewView().environmentObject(PDFViewModel(note: note))
             }
             .sheet(isPresented: $showTags) {
                 Form {
@@ -67,6 +82,7 @@ struct NoteDetail: View {
             }
         }
         .toolbar {
+            Text("Ruit Oceano Nox").font(.subheadline).italic()
             Button("Category") {
                 print("category to be assigned")
                 showTags.toggle()
@@ -82,7 +98,10 @@ struct NoteDetail: View {
             ToolbarItemGroup(placement: .bottomBar) {
                 Button("Save Note", action: {save()})
                     .buttonStyle(.borderedProminent)
+                    .disabled(!moc.hasChanges)
                 Button("Create PDF", action: {
+                    save()
+                    
                     showPDFPanel = true
                 })
                 .buttonStyle(.borderedProminent)
@@ -102,7 +121,12 @@ struct NoteDetail: View {
         return c
     }
     private func save() {
-        moc.flushChanges()
+        if moc.hasChanges {
+            print("saving...")
+            moc.flushChanges()
+        } else {
+            print("nothing to save.")
+        }
     }
 }
 

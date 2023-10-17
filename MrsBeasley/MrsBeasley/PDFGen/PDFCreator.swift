@@ -24,7 +24,7 @@ class PdfCreator : NSObject {
        
         let format = UIGraphicsPDFRendererFormat()
         let metaData = [kCGPDFContextTitle: "untitled PDF",
-            kCGPDFContextAuthor: "MrsBeasely"]
+            kCGPDFContextAuthor: "MrsBeasley"]
 
         format.documentInfo = metaData as [String: Any]
         self.pageRect = pageRect
@@ -39,18 +39,13 @@ extension PdfCreator {
         let textRect = CGRect(x: 20, y: 20,
                          width: pageRect.width - 40 ,height: 40)
         title.draw(in: textRect,
-              withAttributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 24)])
+              withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)])
     }
     
     private func addBody (body : AttributedString) {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .justified
 
-//        let attributes = [
-//            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16),
-//            NSAttributedString.Key.paragraphStyle: paragraphStyle,
-//            NSAttributedString.Key.foregroundColor : UIColor.gray
-//        ]
         let nsAttributedString = NSAttributedString(body)
 
         let bodyRect = CGRect(x: 20, y: 70,
@@ -87,9 +82,14 @@ extension PdfCreator {
         renderer.prepare(forDrawingPages: NSMakeRange(0, renderer.numberOfPages))
         
         let bounds = UIGraphicsGetPDFContextBounds()
-
+        let textRect = CGRect(x: 30, y: pageSize.height - pageMargins.bottom + 30,
+                         width: pageRect.width - 40 ,height: 40)
+        let personalizedTitle = title + " - kyounger - ruit oceano nox."
+        
         for i in 0  ..< renderer.numberOfPages {
             UIGraphicsBeginPDFPage()
+            personalizedTitle.draw(in: textRect,
+                  withAttributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 10)])
 
             renderer.drawPage(at: i, in: bounds)
         }

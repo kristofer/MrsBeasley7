@@ -89,6 +89,8 @@ struct NoteList: View {
             .onChange(of: $selectedTag.wrappedValue, perform: { _ in
                 setupPredicate()
             })
+            .refreshable {
+            }
             .navigationTitle("Notes")
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "")
             .disableAutocorrection(true)
@@ -103,10 +105,12 @@ struct NoteList: View {
                     }
                 }
             }
-            SortByView(selectedOption: $selectedSort)
-            Button("printjson") {
-                let notearray = Array(notes)
-                print(Note.encodeToJSONString(notearray))
+            HStack{
+                SortByView(selectedOption: $selectedSort)
+                Spacer()
+                Button("[Do Backup]") {
+                    makeBackup()
+                }
             }
         } detail: {
             if noteId != nil {
@@ -155,7 +159,22 @@ struct NoteList: View {
                 }
             }
             viewContext.flushChanges()
+            self.searchText = ""
+            self.noteId = newNote.self
         }
+    }
+    
+    private func makeBackup() {
+        let notearray = Array(notes)
+        let newNote = Note(context: viewContext)
+        newNote.body = Note.encodeToJSONString(notearray)
+        newNote.timestamp = .distantPast //Calendar.current.date(byAdding: .year, value: -23, to: Date())!
+        newNote.uuid = UUID()
+        newNote.title = "Backup of Notes"
+        newNote.mimetype = "text/plain"
+        viewContext.flushChanges()
+        self.searchText = ""
+        self.noteId = newNote.self
     }
     
     private func deleteNotes(offsets: IndexSet) {

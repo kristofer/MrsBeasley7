@@ -27,6 +27,8 @@
 		5CC5288E2AD97D34002A30C9 /* MrsBeasleyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5288D2AD97D34002A30C9 /* MrsBeasleyTests.swift */; };
 		5CC528982AD97D34002A30C9 /* MrsBeasleyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC528972AD97D34002A30C9 /* MrsBeasleyUITests.swift */; };
 		5CC5289A2AD97D34002A30C9 /* MrsBeasleyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC528992AD97D34002A30C9 /* MrsBeasleyUITestsLaunchTests.swift */; };
+		5CCD1CDF2ADEBF0300238939 /* Inconsolata-VariableFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5CCD1CDE2ADEBF0300238939 /* Inconsolata-VariableFont.ttf */; };
+		5CCD1CE12ADED0A100238939 /* AttributedString+StyledMarkdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCD1CE02ADED0A100238939 /* AttributedString+StyledMarkdown.swift */; };
 		5CD2CCB32ADD98CB00B0B90F /* NoteUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2CCB22ADD98CB00B0B90F /* NoteUtils.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +75,8 @@
 		5CC528972AD97D34002A30C9 /* MrsBeasleyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MrsBeasleyUITests.swift; sourceTree = "<group>"; };
 		5CC528992AD97D34002A30C9 /* MrsBeasleyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MrsBeasleyUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		5CCD1CDD2ADDBF5400238939 /* MrsBeasley.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MrsBeasley.entitlements; sourceTree = "<group>"; };
+		5CCD1CDE2ADEBF0300238939 /* Inconsolata-VariableFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inconsolata-VariableFont.ttf"; sourceTree = "<group>"; };
+		5CCD1CE02ADED0A100238939 /* AttributedString+StyledMarkdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttributedString+StyledMarkdown.swift"; sourceTree = "<group>"; };
 		5CD2CCB22ADD98CB00B0B90F /* NoteUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -108,6 +112,7 @@
 				5C0140A52ADADAA000A6147F /* PDFViewModel.swift */,
 				5C0140A92ADAE22900A6147F /* PDFViewUI.swift */,
 				5C0140A72ADADB3B00A6147F /* PDFPreviewView.swift */,
+				5CCD1CE02ADED0A100238939 /* AttributedString+StyledMarkdown.swift */,
 			);
 			path = PDFGen;
 			sourceTree = "<group>";
@@ -145,10 +150,11 @@
 			isa = PBXGroup;
 			children = (
 				5CCD1CDD2ADDBF5400238939 /* MrsBeasley.entitlements */,
-				5C01409F2AD9952700A6147F /* NoteDetailHeader.swift */,
-				5C0140A12AD996BA00A6147F /* NoteList.swift */,
+				5CCD1CDE2ADEBF0300238939 /* Inconsolata-VariableFont.ttf */,
 				5C0140AC2ADC41CB00A6147F /* Tags */,
+				5C0140A12AD996BA00A6147F /* NoteList.swift */,
 				5C01409D2AD9826C00A6147F /* NoteBody.swift */,
+				5C01409F2AD9952700A6147F /* NoteDetailHeader.swift */,
 				5C01409B2AD9819C00A6147F /* NoteDetail.swift */,
 				5CC528762AD97D32002A30C9 /* MrsBeasleyApp.swift */,
 				5CC528782AD97D32002A30C9 /* ContentView.swift */,
@@ -295,6 +301,7 @@
 			files = (
 				5CC5287E2AD97D34002A30C9 /* Preview Assets.xcassets in Resources */,
 				5CC5287B2AD97D34002A30C9 /* Assets.xcassets in Resources */,
+				5CCD1CDF2ADEBF0300238939 /* Inconsolata-VariableFont.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +337,7 @@
 				5CC528792AD97D32002A30C9 /* ContentView.swift in Sources */,
 				5C0140AE2ADC41E100A6147F /* TagList.swift in Sources */,
 				5C373D922ADD6E3C0066B0D7 /* ShowTagView.swift in Sources */,
+				5CCD1CE12ADED0A100238939 /* AttributedString+StyledMarkdown.swift in Sources */,
 				5CC528832AD97D34002A30C9 /* MrsBeasley.xcdatamodeld in Sources */,
 				5C01409C2AD9819C00A6147F /* NoteDetail.swift in Sources */,
 				5CC528772AD97D32002A30C9 /* MrsBeasleyApp.swift in Sources */,
@@ -497,6 +505,7 @@
 				DEVELOPMENT_TEAM = S7ZKK95T9U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MrsBeasley/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -527,6 +536,7 @@
 				DEVELOPMENT_TEAM = S7ZKK95T9U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MrsBeasley/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

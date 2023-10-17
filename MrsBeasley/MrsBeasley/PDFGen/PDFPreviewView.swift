@@ -9,10 +9,13 @@ import SwiftUI
 
 struct PDFPreviewView  : View {
     @EnvironmentObject private var pdfViewModel : PDFViewModel
+    //@Environment(\.exportFiles) var exportAction
     
     @State private var showShareSheet : Bool = false
     @Environment(\.dismiss) var dismiss
-
+    @State private var moving = false
+    @State var url: URL? = nil
+    
     var body: some View {
         
         VStack {
@@ -36,34 +39,86 @@ struct PDFPreviewView  : View {
     }
     
     private func shareButton() -> some View {
-    
-        Button(action: {
-            self.showShareSheet.toggle()
-        }, label: {
-            Text("Share")
-        })
-        .buttonStyle(.borderedProminent)
+        
+        HStack {
+            Button(action: {
+                self.showShareSheet.toggle()
+            }, label: {
+                Text("Share")
+            })
+            .buttonStyle(.borderedProminent)
+//            Button("Copy File", action: {
+//                let tn = (pdfViewModel.title.convertedToSlug() ?? "untitled") + ".pdf" //UUID().uuidString + ".pdf"
+//                let url = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(tn)
+//                if let data = pdfViewModel.pdfData() {
+//                    (try? data.write(to: url))
+//                }
+//                if let provider = NSItemProvider(contentsOf: url) {
+//                    //provider.suggestedName = tn+".pdf"
+//                    UIPasteboard.general.url = url
+//                    UIPasteboard.general.itemProviders = [provider]
+//                }
+//            })
+            Button("Export") {
+                let tn = (pdfViewModel.title.convertedToSlug() ?? "untitled") + ".pdf" //UUID().uuidString + ".pdf"
+                url = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(tn)
+                if let data = pdfViewModel.pdfData(), let url = url {
+                    (try? data.write(to: url))
+                    moving = true
+                }
+            }
+            .fileMover(isPresented: $moving, file: url) { result in
+                switch result {
+                case .success(let url):
+                    print("exported \(url.absoluteString)")
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+                dismiss()
+            }
+            .buttonStyle(.borderedProminent)
+
+        }
     }
 }
 
+
 struct PDFPreviewView_Previews: PreviewProvider {
     static var previews: some View {
-        PDFPreviewView()
+        EmptyView()
     }
 }
 
 struct ShareView: UIViewControllerRepresentable {
     let activityItems: [Any]
     let applicationActivities: [UIActivity]? = nil
-
+    
     func makeUIViewController(context: UIViewControllerRepresentableContext<ShareView>) ->
-        UIActivityViewController {
+    UIActivityViewController {
         return UIActivityViewController(activityItems: activityItems,
-               applicationActivities: applicationActivities)
+                                        applicationActivities: applicationActivities)
     }
-
+    
     func updateUIViewController(_ uiViewController: UIActivityViewController,
-               context: UIViewControllerRepresentableContext<ShareView>) {
+                                context: UIViewControllerRepresentableContext<ShareView>) {
         // empty
+    }
+}
+
+// to slugify the doc title to a string
+extension String {
+    private static let slugSafeCharacters = CharacterSet(charactersIn: "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-")
+    
+    public func convertedToSlug() -> String? {
+        if let latin = self.applyingTransform(StringTransform("Any-Latin; Latin-ASCII; Lower;"), reverse: false) {
+            let urlComponents = latin.components(separatedBy: String.slugSafeCharacters.inverted)
+            let result = urlComponents.filter { $0 != "" }.joined(separator: "-")
+            
+            if result.count > 0 {
+                return result
+            }
+        }
+        
+        return nil
     }
 }

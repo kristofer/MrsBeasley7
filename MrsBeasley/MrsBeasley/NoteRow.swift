@@ -20,7 +20,6 @@ struct NoteRow: View {
             if let ts = note.timestamp {
                 Text("\(ts, formatter: noteDateFormatter)")
                     .font(.caption2)
-                    .foregroundColor(.gray)
             }
         }
     }
