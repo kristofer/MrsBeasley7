@@ -1,6 +1,8 @@
 # MrsBeasley7
 a writing app
 
+As of 10/17/2023, v2 is _complete_
+
 __Caution__ there is a weird bug related to adding for a note. App crashes when a category is selected, and a new note is added, and then you immediately select it.
 the crash goes right back to the __@main__
 
