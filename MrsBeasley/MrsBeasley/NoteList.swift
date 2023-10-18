@@ -116,7 +116,7 @@ struct NoteList: View {
             if noteId != nil {
                 NoteDetail(note: noteId!)
             } else {
-                Text("Choose a note")
+                Text("Click the blue icon, in the upper left corner.")
             }
         }
     }
