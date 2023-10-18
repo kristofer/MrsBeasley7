@@ -11,7 +11,7 @@ import CoreData
 struct TagList: View {
     @Environment(\.managedObjectContext) private var viewContext
     
-    @ObservedObject var note: Note
+//    @ObservedObject var note: Note
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Tag.title, ascending: true)],
@@ -25,7 +25,7 @@ struct TagList: View {
     
     var body: some View {
         ZStack {
-            VStack {
+            VStack(alignment: .leading) {
                 Text("Categories")
                     .font(.headline)
                 Divider()
@@ -34,22 +34,26 @@ struct TagList: View {
                 } else {
                     List(selection: $selectedTag) {
                         ForEach(tags,  id: \.self) { tag in
-                            Text(tag.title ?? "noname")
+                            Text(tag.title ?? "noname").font(.title2)
                         }
                         .onDelete(perform: deleteTags)
                     }
                 }
                 Spacer()
                 Button("+ \(Image(systemName: "tag"))") {
+                    nt = ""
                     showAddTag.toggle()
                 }
+                .buttonStyle(.borderedProminent)
             }
         }
-        .sheet(isPresented: $showAddTag) {
+        if (showAddTag) {
             VStack(alignment: .leading) {
-                Text("new catgory")
-                    .presentationDetents([.medium, .large])
-                TextField("Category:", text: $nt)
+                Text("Add Category")
+                    .font(.headline)
+                Divider()
+                TextField("new category?", text: $nt)
+                    .font(.title2)
                     .autocorrectionDisabled(true)
                     .autocapitalization(.none)
                     .onSubmit {
@@ -92,38 +96,3 @@ struct TagList_Previews: PreviewProvider {
         EmptyView()
     }
 }
-
-//struct TagPickerView : View {
-//    @Environment(\.managedObjectContext) private var viewContext
-//    @ObservedObject var note: Note
-//    @Binding var showModal: Bool
-//    
-//    @FetchRequest(
-//        sortDescriptors: [NSSortDescriptor(keyPath: \Tag.title, ascending: true)],
-//        animation: .default)
-//    private var tags: FetchedResults<Tag>
-//    
-//    func save() {
-//        try! viewContext.save()
-//        showModal = false
-//    }
-//    
-//    var body: some View {
-//        VStack {
-//            Button(action: {showModal = false}) {
-//                Text("Close")
-//            }
-//            Picker(selection: $note.tags, label: Text("Categories")) {
-//                ForEach(tags, id: \.self) { tag in
-//                    Text("\(tag.title!)")
-//                        .tag(note as Note?)
-//                }
-//            }
-//            //Text("Selected: \(.title!)")
-//            Button(action: {save()}) {
-//                Text("Save")
-//            }
-//        }
-//        
-//    }
-//}

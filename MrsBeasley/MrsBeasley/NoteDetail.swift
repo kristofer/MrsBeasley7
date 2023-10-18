@@ -14,16 +14,16 @@ struct NoteDetail: View {
     @ObservedObject var note: Note
     @State private var wordCount: Int = 0
     @State private var showPDFPanel = false
-    @State var showTags = false
     
-    let detector = PassthroughSubject<Void, Never>()
-    let publisher: AnyPublisher<Void, Never>
-    init(note: Note) {
-        self.note = note
-        self.publisher = detector
-            .debounce(for: .seconds(3), scheduler: DispatchQueue.main)
-            .eraseToAnyPublisher()
-    }
+    @State var publisher = PassthroughSubject<String?, Never>()
+    @State var delaySeconds = 2.0
+
+//    init(note: Note) {
+//        self.note = note
+//        self.publisher = detector
+//            .debounce(for: .seconds(3), scheduler: DispatchQueue.main)
+//            .eraseToAnyPublisher()
+//    }
     
     var body: some View {
         ZStack {
@@ -51,13 +51,21 @@ struct NoteDetail: View {
             }
             .disableAutocorrection(true)
             .autocapitalization(.none)
-            .onReceive(publisher) { save() }
-            .onChange(of: note.body, perform: { newValue in
-                detector.send()
-                if let s = newValue {
+            .onReceive(
+                publisher.debounce(
+                    for: .seconds(delaySeconds),
+                    scheduler: DispatchQueue.main)) { value in
+                if let s = value {
                     self.wordCount = countWords(s)
                 } else {
                     self.wordCount = 0
+                }
+                save()
+                
+            }
+            .onChange(of: note.body, perform: { value in
+                if let value = value {
+                    publisher.send(value)
                 }
 //                if (note.title == nil || note.title == "") {
 //                    if let s = note.body {
@@ -74,37 +82,30 @@ struct NoteDetail: View {
             .sheet(isPresented: $showPDFPanel) {
                 PDFPreviewView().environmentObject(PDFViewModel(note: note))
             }
-            .sheet(isPresented: $showTags) {
-                Form {
-                    TagList(note: note)
-                    //TagPickerView(note: note, showModal: $showTags)
-                }
-            }
         }
         .toolbar {
-            Text("Ruit Oceano Nox").font(.subheadline).italic()
-            Button("Category") {
-                print("category to be assigned")
-                showTags.toggle()
-            }
+            Text("Ruit Oceano Nox")
+                .font(.subheadline).italic()
+            Button("Save", action: {save()})
+                .controlSize(.small)
+                .buttonStyle(.borderedProminent)
+                .disabled(!moc.hasChanges)
+            Button("PDF", action: {
+                save()
+                
+                showPDFPanel = true
+            })
+            .controlSize(.small)
             .buttonStyle(.borderedProminent)
-            Button("Help") {
-                print("Help tapped!")
-            }
-            .buttonStyle(.borderedProminent)
+
+//            Button("Help") {
+//                print("Help tapped!")
+//            }
+//            .buttonStyle(.borderedProminent)
         }
         
         .toolbar {
             ToolbarItemGroup(placement: .bottomBar) {
-                Button("Save Note", action: {save()})
-                    .buttonStyle(.borderedProminent)
-                    .disabled(!moc.hasChanges)
-                Button("Create PDF", action: {
-                    save()
-                    
-                    showPDFPanel = true
-                })
-                .buttonStyle(.borderedProminent)
             }
         }
     }

@@ -69,6 +69,7 @@ struct NoteList: View {
     @State private var searchText: String = ""
     @State private var selectedTag: Tag?
     @State private var selectedSort: SortBy = .normal
+    @State var showTags = false
 
     
     var body: some View {
@@ -76,7 +77,21 @@ struct NoteList: View {
             HStack{
                 Text("Categories:").font(.body)
                 PickerView(tags: Array(tags), selectedTag: $selectedTag)
+                Spacer()
+                Button("+ \(Image(systemName: "tag"))") {
+                    showTags.toggle()
+                }
+                .controlSize(.small)
+                .buttonStyle(.borderedProminent)
             }
+            .padding()
+            .sheet(isPresented: $showTags) {
+                Form {
+                    TagList()
+                    //TagPickerView(note: note, showModal: $showTags)
+                }
+            }
+// Main List
             List(selection: $noteId) {
                 ForEach(notes,  id: \.self) { aNote in
                     NoteRow(note: aNote)
