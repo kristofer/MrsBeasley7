@@ -16,6 +16,8 @@ class PdfCreator : NSObject {
     @AppStorage("showAuthor") private var showAuthor = false
     @AppStorage("showTitle") private var showTitle = false
     @AppStorage("showDate") private var showDate = false
+    @AppStorage("yourTagline") private var tagline: String = ""
+    @AppStorage("yourAuthor") private var author: String = ""
 
     private var pageRect : CGRect
     private var renderer : UIGraphicsPDFRenderer?
@@ -96,13 +98,13 @@ extension PdfCreator {
             personalizedTitle = personalizedTitle + title
         }
         if showDate {
-            personalizedTitle = personalizedTitle + noteDateFormatter.string(from: Date.now)
+            personalizedTitle = personalizedTitle + " " + noteDateFormatter.string(from: Date.now)
         }
         if showAuthor {
-            personalizedTitle = personalizedTitle + " - " + "kyounger"
+            personalizedTitle = personalizedTitle + " - " + author
         }
         if showTagline {
-            personalizedTitle = personalizedTitle + " - " + "ruit oceano nox"
+            personalizedTitle = personalizedTitle + " - " + tagline
 
         }
         
