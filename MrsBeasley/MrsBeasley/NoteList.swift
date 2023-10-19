@@ -70,13 +70,15 @@ struct NoteList: View {
     @State private var selectedTag: Tag?
     @State private var selectedSort: SortBy = .normal
     @State var showTags = false
-
+    @State var showSettings = false
+    
     
     var body: some View {
         NavigationSplitView {
             HStack{
                 Text("Categories:").font(.body)
                 PickerView(tags: Array(tags), selectedTag: $selectedTag)
+                    .buttonStyle(.borderedProminent)
                 Spacer()
                 Button("+ \(Image(systemName: "tag"))") {
                     showTags.toggle()
@@ -88,10 +90,14 @@ struct NoteList: View {
             .sheet(isPresented: $showTags) {
                 Form {
                     TagList()
-                    //TagPickerView(note: note, showModal: $showTags)
                 }
             }
-// Main List
+            .sheet(isPresented: $showSettings) {
+                Form {
+                    SettingsView()
+                }
+            }
+            // Main List
             List(selection: $noteId) {
                 ForEach(notes,  id: \.self) { aNote in
                     NoteRow(note: aNote)
@@ -113,6 +119,13 @@ struct NoteList: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("\(Image(systemName: "gear"))") {
+                        showSettings.toggle()
+                    }
+                    .controlSize(.small)
+                    .buttonStyle(.borderedProminent)
                 }
                 ToolbarItem {
                     Button(action: addNote) {
@@ -232,7 +245,7 @@ struct SortByView: View {
         Picker("Sort By", selection: $selectedOption) {
             ForEach(SortBy.allCases) { option in
                 Text(String(describing: option))
-
+                
             }
         }
         //.pickerStyle(.wheel)

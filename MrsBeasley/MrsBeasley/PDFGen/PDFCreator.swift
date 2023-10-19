@@ -8,9 +8,15 @@
 import Foundation
 import PDFKit
 import CoreGraphics
-
+import SwiftUI
 
 class PdfCreator : NSObject {
+    @AppStorage("showFooter") private var showFooter = false
+    @AppStorage("showTagline") private var showTagline = false
+    @AppStorage("showAuthor") private var showAuthor = false
+    @AppStorage("showTitle") private var showTitle = false
+    @AppStorage("showDate") private var showDate = false
+
     private var pageRect : CGRect
     private var renderer : UIGraphicsPDFRenderer?
 
@@ -84,12 +90,28 @@ extension PdfCreator {
         let bounds = UIGraphicsGetPDFContextBounds()
         let textRect = CGRect(x: 30, y: pageSize.height - pageMargins.bottom + 30,
                          width: pageRect.width - 40 ,height: 40)
-        let personalizedTitle = title + " - kyounger - ruit oceano nox."
+        
+        var personalizedTitle = "" //title + " - kyounger - ruit oceano nox."
+        if showTitle {
+            personalizedTitle = personalizedTitle + title
+        }
+        if showDate {
+            personalizedTitle = personalizedTitle + noteDateFormatter.string(from: Date.now)
+        }
+        if showAuthor {
+            personalizedTitle = personalizedTitle + " - " + "kyounger"
+        }
+        if showTagline {
+            personalizedTitle = personalizedTitle + " - " + "ruit oceano nox"
+
+        }
         
         for i in 0  ..< renderer.numberOfPages {
             UIGraphicsBeginPDFPage()
-            personalizedTitle.draw(in: textRect,
-                  withAttributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 10)])
+            if showFooter {
+                personalizedTitle.draw(in: textRect,
+                                       withAttributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 10)])
+            }
 
             renderer.drawPage(at: i, in: bounds)
         }

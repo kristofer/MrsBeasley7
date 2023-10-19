@@ -16,7 +16,7 @@ struct NoteDetail: View {
     @State private var showPDFPanel = false
     
     @State var publisher = PassthroughSubject<String?, Never>()
-    @State var delaySeconds = 2.0
+    @State var delaySeconds = 5.0
 
 //    init(note: Note) {
 //        self.note = note
