@@ -71,10 +71,10 @@ struct NoteList: View {
     @State private var selectedSort: SortBy = .normal
     @State var showTags = false
     @State var showSettings = false
-    
-    
+    @State private var columnVisibility = NavigationSplitViewVisibility.detailOnly
+
     var body: some View {
-        NavigationSplitView {
+        NavigationSplitView(columnVisibility: $columnVisibility) {
             HStack{
                 Text("Categories:").font(.body)
                 PickerView(tags: Array(tags), selectedTag: $selectedTag)
@@ -112,6 +112,12 @@ struct NoteList: View {
             })
             .refreshable {
             }
+            .onAppear() {
+                if noteId == nil {
+                    //print("NO SELECTION")
+                    columnVisibility = .all
+                }
+            }
             .navigationTitle("Notes")
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "")
             .disableAutocorrection(true)
@@ -144,7 +150,7 @@ struct NoteList: View {
             if noteId != nil {
                 NoteDetail(note: noteId!)
             } else {
-                Text("Click the blue icon, in the upper left corner.")
+                Text("Select a Note")
             }
         }
     }
