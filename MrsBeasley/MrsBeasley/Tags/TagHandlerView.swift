@@ -17,10 +17,13 @@ struct TagHandlerView: View {
     var body: some View {
         Group {
             VStack {
+                Text("Select Tags")
+                    .padding(20)
                 TagCloudView(data: Tag.allTags(vc: viewContext)) { tag in
                     SelectTag(isSelected: note.containsTag(tag: tag), tag: tag, note: note)
                 }
                 .padding()
+                Divider()
                 Button("Done") {
                     viewContext.flushChanges()
                     dismiss()

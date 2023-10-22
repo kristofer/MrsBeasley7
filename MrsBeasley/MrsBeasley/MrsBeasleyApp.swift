@@ -17,6 +17,7 @@ struct MrsBeasleyApp: App {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                //.environment(\.font, Font.custom("Inconsolata", size: 22))
         }
         .onChange(of: scenePhase) { phase in
             switch phase {

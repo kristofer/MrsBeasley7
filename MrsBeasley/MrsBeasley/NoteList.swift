@@ -233,14 +233,24 @@ struct PickerView : View {
     var tags : [Tag]
     @Binding var selectedTag : Tag?
     
+//    init(tags: [Tag], selectedTag: Binding<Tag?>) {
+//        self.tags = tags
+//        
+//        if !tags.isEmpty && selectedTag.wrappedValue == nil {
+//            self.selectedTag = tags.first!
+//        } else {
+//            self._selectedTag = selectedTag
+//        }
+//    }
+
     var body : some View {
         Picker(selection: $selectedTag, label: Text("Categories")) {
             if selectedTag == nil { // this will work, since there is no initialization to the optional value in your example
-                Text("_everything_").tag(Optional<String>(nil)) // is only shown until a selection is made
+                    Text("no tags").tag(Optional<String>(nil)) // is only shown until a selection is made
             }
-            ForEach(tags) { tag in
-                Text(tag.title ?? "").tag(tag as Tag?)
-            }
+                ForEach(tags) { tag in
+                    Text(tag.title ?? "").tag(tag as Tag?)
+                }
         }
         
     }
