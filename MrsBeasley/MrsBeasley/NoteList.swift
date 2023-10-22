@@ -65,9 +65,9 @@ struct NoteList: View {
         animation: .default)
     private var tags: FetchedResults<Tag>
     
-    @State private var noteId: Note?
+    @State private var noteId: Note? = nil
     @State private var searchText: String = ""
-    @State private var selectedTag: Tag?
+    @State private var selectedTag: Tag? = nil
     @State private var selectedSort: SortBy = .normal
     @State var showTags = false
     @State var showSettings = false
@@ -83,14 +83,16 @@ struct NoteList: View {
                 Button("+ \(Image(systemName: "tag"))") {
                     showTags.toggle()
                 }
+                .disabled(noteId == nil)
                 .controlSize(.small)
                 .buttonStyle(.borderedProminent)
             }
             .padding()
             .sheet(isPresented: $showTags) {
-                Form {
-                    TagList()
-                }
+                    //TagList()
+                    if let note = noteId {
+                        TagHandlerView(note: note)
+                    }
             }
             .sheet(isPresented: $showSettings) {
                 Form {
@@ -168,6 +170,7 @@ struct NoteList: View {
         
         var catPred = NSPredicate(value: true)
         if let tag = tag, tag.title != nil, tag.title != "<All>" {
+            print("setting catPred")
             catPred = NSPredicate(format: "tags.title CONTAINS[c] %@", tag.title!)
         }
         
@@ -230,13 +233,11 @@ struct PickerView : View {
     var tags : [Tag]
     @Binding var selectedTag : Tag?
     
-    //    init(tags: [Tag]) {
-    //        self.tags = tags
-    //        self._selectedTag = tags.first
-    //    }
-    
     var body : some View {
         Picker(selection: $selectedTag, label: Text("Categories")) {
+            if selectedTag == nil { // this will work, since there is no initialization to the optional value in your example
+                Text("_everything_").tag(Optional<String>(nil)) // is only shown until a selection is made
+            }
             ForEach(tags) { tag in
                 Text(tag.title ?? "").tag(tag as Tag?)
             }
@@ -254,6 +255,5 @@ struct SortByView: View {
                 
             }
         }
-        //.pickerStyle(.wheel)
     }
 }

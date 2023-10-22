@@ -79,18 +79,6 @@ struct TagList: View {
     }
 }
 
-extension Tag {
-    convenience init(
-      context moc: NSManagedObjectContext,
-      title: String
-    ) {
-        self.init(context: moc)
-        self.uuid = UUID()
-        self.title = title
-    }
-    
-}
-
 struct TagList_Previews: PreviewProvider {
     static var previews: some View {
         EmptyView()

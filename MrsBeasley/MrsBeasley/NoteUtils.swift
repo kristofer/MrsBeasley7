@@ -9,10 +9,6 @@ import Foundation
 import SwiftUI
 import CoreData
 
-class Tag: NSManagedObject  {
-}
-
-
 class Note: NSManagedObject, Codable  {
     enum CodingKeys: CodingKey {
       case body, mimetype, timestamp, title, uuid
@@ -70,4 +66,21 @@ class Note: NSManagedObject, Codable  {
         try container.encode(uuid, forKey: .uuid)
     }
     
+    func containsTag(tag: Tag) -> Bool {
+        if let tags = self.tags {
+            return tags.contains(tag)
+        }
+        return false
+    }
+    
+}
+
+extension Note: Taggable {
+    func attachTag(_ tag: Tag) {
+        self.addToTags(tag)
+    }
+    
+    func removeTag(_ tag: Tag) {
+        self.removeFromTags(tag)
+    }
 }
