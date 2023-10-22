@@ -75,7 +75,7 @@ class Note: NSManagedObject, Codable  {
     
 }
 
-extension Note: Taggable {
+extension Note {
     func attachTag(_ tag: Tag) {
         self.addToTags(tag)
     }

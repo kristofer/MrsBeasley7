@@ -26,11 +26,11 @@ extension Tag {
 
 
 extension Tag {
-    static func allTagsSelectable(vc: NSManagedObjectContext) -> [SelectableTagModel] {
-        let ttags = allTags(vc: vc)
-        let tt = Array(ttags).map { SelectableTagModel(displayedTag: $0) }
-        return tt
-    }
+//    static func allTagsSelectable(vc: NSManagedObjectContext) -> [SelectableTagModel] {
+//        let ttags = allTags(vc: vc)
+//        let tt = Array(ttags).map { SelectableTagModel(displayedTag: $0) }
+//        return tt
+//    }
 
     static func allTags(vc: NSManagedObjectContext) -> [Tag] {
         //tfDebug("running fetch on all tags")
