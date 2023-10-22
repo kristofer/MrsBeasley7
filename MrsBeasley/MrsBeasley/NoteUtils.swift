@@ -11,9 +11,20 @@ import CoreData
 
 class Note: NSManagedObject, Codable  {
     enum CodingKeys: CodingKey {
-      case body, mimetype, timestamp, title, uuid
+        case body, mimetype, timestamp, title, uuid
     }
-
+    
+    convenience init(
+        context moc: NSManagedObjectContext,
+        title: String
+    ) {
+        self.init(context: moc)
+        self.uuid = UUID()
+        self.title = title
+        self.timestamp = Date()
+        self.mimetype = "text/plain"
+    }
+    
     static func encodeToJSONString(_ values: [Note]) -> String {
         //        let saveToURL = URL.userDocumentsURL.appendingPathComponent("OutFileName.json")
         let encoder = JSONEncoder()
@@ -42,21 +53,21 @@ class Note: NSManagedObject, Codable  {
     
     required convenience init(from decoder: Decoder) throws {
         let context = PersistenceController.shared.container.viewContext
-
+        
         self.init(context: context)
         let values = try decoder.container(keyedBy: CodingKeys.self)
-
+        
         //body, mimetype, timestamp, title, uuid
         self.body = try values.decode(String.self, forKey: .body)
         self.title = try values.decode(String.self, forKey: .title)
         self.mimetype = try values.decode(String.self, forKey: .mimetype)
         self.uuid = try values.decode(UUID.self,
-                                 forKey: .uuid)
+                                      forKey: .uuid)
         self.timestamp = try values.decode(Date.self,
-                                     forKey: .timestamp)
-
+                                           forKey: .timestamp)
+        
     }
-
+    
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(body, forKey: .body)

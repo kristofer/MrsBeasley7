@@ -49,6 +49,8 @@ struct SettingsView: View {
             }
             Text("_preview of footer_")
         }
+        Divider()
+        NewURLView()
     }
 }
 
