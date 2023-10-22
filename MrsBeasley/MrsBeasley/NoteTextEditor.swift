@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-struct NoteDetail: View {
+struct NoteTextEditor: View {
     @Environment(\.managedObjectContext) var moc
     
     @ObservedObject var note: Note
@@ -17,14 +17,7 @@ struct NoteDetail: View {
     
     @State var publisher = PassthroughSubject<String?, Never>()
     @State var delaySeconds = 5.0
-
-//    init(note: Note) {
-//        self.note = note
-//        self.publisher = detector
-//            .debounce(for: .seconds(3), scheduler: DispatchQueue.main)
-//            .eraseToAnyPublisher()
-//    }
-    
+        
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 20, style: .continuous)
@@ -33,9 +26,6 @@ struct NoteDetail: View {
             
             
             VStack(alignment: .leading) {
-                HStack{
-                    NoteDetailHeader(note: note)
-                }
                 Divider()
                 TextEditor(text: $note.body.toUnwrapped(defaultValue: "no body"))
                     .font(.custom("Inconsolata", size: 22.0))
@@ -55,33 +45,33 @@ struct NoteDetail: View {
                 publisher.debounce(
                     for: .seconds(delaySeconds),
                     scheduler: DispatchQueue.main)) { value in
-                if let s = value {
-                    self.wordCount = countWords(s)
-                } else {
-                    self.wordCount = 0
-                }
-                save()
-                
-            }
-            .onChange(of: note.body, perform: { value in
-                if let value = value {
-                    publisher.send(value)
-                }
-//                if (note.title == nil || note.title == "") {
-//                    if let s = note.body {
-//                        note.title = String(s.prefix(20)) + "..."
-//                    }
-//                }
-            })
-            .padding(10)
-            .onDisappear(){
-                save()
-            }
-            .onAppear() {
-            }
-            .sheet(isPresented: $showPDFPanel) {
-                PDFPreviewView().environmentObject(PDFViewModel(note: note))
-            }
+                        if let s = value {
+                            self.wordCount = countWords(s)
+                        } else {
+                            self.wordCount = 0
+                        }
+                        save()
+                        
+                    }
+                    .onChange(of: note.body, perform: { value in
+                        if let value = value {
+                            publisher.send(value)
+                        }
+                        //                if (note.title == nil || note.title == "") {
+                        //                    if let s = note.body {
+                        //                        note.title = String(s.prefix(20)) + "..."
+                        //                    }
+                        //                }
+                    })
+                    .padding(10)
+                    .onDisappear(){
+                        save()
+                    }
+                    .onAppear() {
+                    }
+                    .sheet(isPresented: $showPDFPanel) {
+                        PDFPreviewView().environmentObject(PDFViewModel(note: note))
+                    }
         }
         .toolbar {
             Text("Ruit Oceano Nox")
@@ -97,11 +87,11 @@ struct NoteDetail: View {
             })
             .controlSize(.small)
             .buttonStyle(.borderedProminent)
-
-//            Button("Help") {
-//                print("Help tapped!")
-//            }
-//            .buttonStyle(.borderedProminent)
+            
+            //            Button("Help") {
+            //                print("Help tapped!")
+            //            }
+            //            .buttonStyle(.borderedProminent)
         }
         
         .toolbar {

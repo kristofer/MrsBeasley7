@@ -11,14 +11,16 @@ struct NoteDetailHeader: View {
     @ObservedObject var note: Note
 
     var body: some View {
-        TextField("title", text: $note.title.toUnwrapped(defaultValue: ""))
-            .font(.title)
-        ShowTagView(note: note)
-        Text(note.mimetype ?? "text/plain")
-            .font(.caption).italic()
-        if let ts = note.timestamp {
-            Text("Created at \(note.timestamp!, formatter: noteDateFormatter)")
+        HStack {
+            TextField("title", text: $note.title.toUnwrapped(defaultValue: ""))
+                .font(.title)
+            ShowTagView(note: note)
+            Text(note.mimetype ?? "text/plain")
                 .font(.caption).italic()
+            if note.timestamp != nil {
+                Text("Created at \(note.timestamp!, formatter: noteDateFormatter)")
+                    .font(.caption).italic()
+            }
         }
     }
 }

@@ -150,7 +150,7 @@ struct NoteList: View {
             }
         } detail: {
             if noteId != nil {
-                NoteDetail(note: noteId!)
+                NoteMainView(note: noteId!)
             } else {
                 Text("Select a Note")
             }
