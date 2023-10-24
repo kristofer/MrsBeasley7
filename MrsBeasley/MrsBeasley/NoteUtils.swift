@@ -113,5 +113,18 @@ extension Note {
 extension Note {
     //var fetchedNotes = [Note]()
     
+    func downloadFile(fileURL: URL, note: Note) {
+        let request = URLRequest(url:  URL(string: fileURL.absoluteString)!)
+        let config = URLSessionConfiguration.default
+        let session =  URLSession(configuration: config)
+        let task = session.dataTask(with: request, completionHandler: {(data, response, error) in
+            if error == nil{
+                if let pdfData = data {
+                }
+            }else{
+                print(error?.localizedDescription ?? "")
+            }
+        }); task.resume()
+    }
     
 }

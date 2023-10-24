@@ -103,6 +103,17 @@ struct NoteList: View {
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "")
             .disableAutocorrection(true)
             .autocapitalization(.none)
+            .onDrop(of: [.fileURL], isTargeted: nil) { providers in
+                if let provider = providers.first(where: { $0.canLoadObject(ofClass: URL.self) } ) {
+                    let _ = provider.loadObject(ofClass: URL.self) { object, error in
+                        if let url = object {
+                            print("DROP a url: \(url)")
+                        }
+                    }
+                    return true
+                }
+                return false
+            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()

@@ -22,6 +22,7 @@ struct NoteDetailHeader: View {
                     .font(.caption).italic()
             }
         }
+        .padding()
     }
 }
 

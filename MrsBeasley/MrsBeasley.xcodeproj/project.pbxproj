@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		5C01409A2AD97F7A00A6147F /* NoteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0140992AD97F7A00A6147F /* NoteRow.swift */; };
 		5C01409C2AD9819C00A6147F /* NoteTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C01409B2AD9819C00A6147F /* NoteTextEditor.swift */; };
-		5C01409E2AD9826C00A6147F /* NoteBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C01409D2AD9826C00A6147F /* NoteBody.swift */; };
+		5C01409E2AD9826C00A6147F /* EmptyNoteBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C01409D2AD9826C00A6147F /* EmptyNoteBody.swift */; };
 		5C0140A02AD9952700A6147F /* NoteDetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C01409F2AD9952700A6147F /* NoteDetailHeader.swift */; };
 		5C0140A22AD996BA00A6147F /* NoteList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0140A12AD996BA00A6147F /* NoteList.swift */; };
 		5C0140A42ADADA0E00A6147F /* PDFCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0140A32ADADA0E00A6147F /* PDFCreator.swift */; };
@@ -29,6 +29,8 @@
 		5C2894D32AE6EC5F00C07CCE /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5287F2AD97D34002A30C9 /* Persistence.swift */; };
 		5C2894D62AE6ED7700C07CCE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2894D52AE6ED7700C07CCE /* Extensions.swift */; };
 		5C2894D72AE6ED9F00C07CCE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2894D52AE6ED7700C07CCE /* Extensions.swift */; };
+		5C2894D92AE81A4B00C07CCE /* QueryFile in Resources */ = {isa = PBXBuildFile; fileRef = 5C2894D82AE81A4B00C07CCE /* QueryFile */; };
+		5C2894DB2AE83CF000C07CCE /* PDFKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2894DA2AE83CF000C07CCE /* PDFKitView.swift */; };
 		5C373D922ADD6E3C0066B0D7 /* ShowTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C373D912ADD6E3C0066B0D7 /* ShowTagView.swift */; };
 		5C92C8B72AE18F3500F593BD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C92C8B62AE18F3500F593BD /* SettingsView.swift */; };
 		5C92C8CB2AE40D1600F593BD /* TagUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C92C8CA2AE40D1600F593BD /* TagUtils.swift */; };
@@ -92,7 +94,7 @@
 /* Begin PBXFileReference section */
 		5C0140992AD97F7A00A6147F /* NoteRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRow.swift; sourceTree = "<group>"; };
 		5C01409B2AD9819C00A6147F /* NoteTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTextEditor.swift; sourceTree = "<group>"; };
-		5C01409D2AD9826C00A6147F /* NoteBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteBody.swift; sourceTree = "<group>"; };
+		5C01409D2AD9826C00A6147F /* EmptyNoteBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyNoteBody.swift; sourceTree = "<group>"; };
 		5C01409F2AD9952700A6147F /* NoteDetailHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailHeader.swift; sourceTree = "<group>"; };
 		5C0140A12AD996BA00A6147F /* NoteList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteList.swift; sourceTree = "<group>"; };
 		5C0140A32ADADA0E00A6147F /* PDFCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFCreator.swift; sourceTree = "<group>"; };
@@ -109,6 +111,8 @@
 		5C2894C82AE6E8AD00C07CCE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C2894CF2AE6E90000C07CCE /* ArchiveTo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ArchiveTo.entitlements; sourceTree = "<group>"; };
 		5C2894D52AE6ED7700C07CCE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		5C2894D82AE81A4B00C07CCE /* QueryFile */ = {isa = PBXFileReference; lastKnownFileType = text; path = QueryFile; sourceTree = "<group>"; };
+		5C2894DA2AE83CF000C07CCE /* PDFKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFKitView.swift; sourceTree = "<group>"; };
 		5C373D912ADD6E3C0066B0D7 /* ShowTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTagView.swift; sourceTree = "<group>"; };
 		5C92C8B62AE18F3500F593BD /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		5C92C8CA2AE40D1600F593BD /* TagUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagUtils.swift; sourceTree = "<group>"; };
@@ -200,6 +204,7 @@
 			children = (
 				5C2894CF2AE6E90000C07CCE /* ArchiveTo.entitlements */,
 				5C2894C32AE6E8AD00C07CCE /* ShareViewController.swift */,
+				5C2894D82AE81A4B00C07CCE /* QueryFile */,
 				5C2894C52AE6E8AD00C07CCE /* MainInterface.storyboard */,
 				5C2894C82AE6E8AD00C07CCE /* Info.plist */,
 			);
@@ -235,10 +240,11 @@
 				5CCD1CDE2ADEBF0300238939 /* Inconsolata-VariableFont.ttf */,
 				5C0140AC2ADC41CB00A6147F /* Tags */,
 				5C0140A12AD996BA00A6147F /* NoteList.swift */,
-				5C01409D2AD9826C00A6147F /* NoteBody.swift */,
+				5C01409D2AD9826C00A6147F /* EmptyNoteBody.swift */,
 				5C01409F2AD9952700A6147F /* NoteDetailHeader.swift */,
 				5C01409B2AD9819C00A6147F /* NoteTextEditor.swift */,
 				5C2894922AE5C43400C07CCE /* NoteMainView.swift */,
+				5C2894DA2AE83CF000C07CCE /* PDFKitView.swift */,
 				5CC528762AD97D32002A30C9 /* MrsBeasleyApp.swift */,
 				5CC528782AD97D32002A30C9 /* ContentView.swift */,
 				5C0140992AD97F7A00A6147F /* NoteRow.swift */,
@@ -410,6 +416,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C2894C72AE6E8AD00C07CCE /* MainInterface.storyboard in Resources */,
+				5C2894D92AE81A4B00C07CCE /* QueryFile in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,7 +471,7 @@
 				5C01409A2AD97F7A00A6147F /* NoteRow.swift in Sources */,
 				5C92C8CF2AE44DC200F593BD /* TagCloudView.swift in Sources */,
 				5C92C8B72AE18F3500F593BD /* SettingsView.swift in Sources */,
-				5C01409E2AD9826C00A6147F /* NoteBody.swift in Sources */,
+				5C01409E2AD9826C00A6147F /* EmptyNoteBody.swift in Sources */,
 				5C92C8D02AE44DC200F593BD /* TagView.swift in Sources */,
 				5C0140AA2ADAE22900A6147F /* PDFViewUI.swift in Sources */,
 				5C0140A22AD996BA00A6147F /* NoteList.swift in Sources */,
@@ -480,6 +487,7 @@
 				5CC528832AD97D34002A30C9 /* MrsBeasley.xcdatamodeld in Sources */,
 				5C2894BC2AE6E83000C07CCE /* foo.swift in Sources */,
 				5C92C8D32AE5447B00F593BD /* TagHandlerView.swift in Sources */,
+				5C2894DB2AE83CF000C07CCE /* PDFKitView.swift in Sources */,
 				5C01409C2AD9819C00A6147F /* NoteTextEditor.swift in Sources */,
 				5CC528772AD97D32002A30C9 /* MrsBeasleyApp.swift in Sources */,
 				5C0140A82ADADB3B00A6147F /* PDFPreviewView.swift in Sources */,

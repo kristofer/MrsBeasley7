@@ -64,6 +64,7 @@ struct PersistenceController {
     func storeNote(withTitle title: String,
                    onDate date: Date,
                    body: String,
+                   blob: Data?,
                    mimetype: String) { // need mimetype from attachment
         let context = self.container.viewContext
         let note = Note(context: context)
@@ -71,6 +72,7 @@ struct PersistenceController {
         note.timestamp = date
         note.mimetype = mimetype
         note.body = body
+        note.blob = blob
         context.flushChanges()
         print("storing notes - before fetch")
         //fetchNotes()

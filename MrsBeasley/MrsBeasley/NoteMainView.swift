@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct NoteMainView: View {
     @ObservedObject var note: Note
@@ -19,6 +20,15 @@ struct NoteMainView: View {
             if let mt = note.mimetype, mt == "text/html" {
                 WebView(url: URL(string:note.body!)!)
             }
+            if let mt = note.mimetype, mt == UTType.pdf.preferredMIMEType {
+                if let newurl = note.loadBlobToData() {
+                    PDFKitView(url: newurl)
+                        .scaledToFill()
+                } else {
+                    Text("Unable to load PDF")
+                }
+            }
+            
         }
     }
 }
@@ -42,3 +52,27 @@ struct WebView: UIViewRepresentable {
         webView.load(request)
     }
 }
+
+
+extension Note {
+    func loadBlobToData() -> URL? {
+        if let pdfData = self.blob {
+            let pathURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("test.pdf")
+            do {
+                try pdfData.write(to: pathURL, options: .atomic)
+            } catch {
+                print("Error while writing blob to local file for display")
+            }
+            return pathURL
+        }
+        return nil
+    }
+
+}
+
+//DispatchQueue.main.async {
+//    self.webView.delegate = self
+//    self.webView.scalesPageToFit = true
+//    self.webView.loadRequest(URLRequest(url: pathURL))
+//}
+//
