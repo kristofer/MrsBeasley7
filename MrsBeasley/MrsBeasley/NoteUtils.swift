@@ -25,6 +25,20 @@ class Note: NSManagedObject, Codable  {
         self.mimetype = "text/plain"
     }
     
+    static func allNotes(vc: NSManagedObjectContext) -> [Note] {
+        //tfDebug("running fetch on all tags")
+        var fetchedNotes = [Note]()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
+        let dateSort = NSSortDescriptor(key:"title", ascending:true)
+        fetchRequest.sortDescriptors = [dateSort]
+        fetchedNotes = try! vc.fetch(fetchRequest) as! [Note]
+//        for t in fetchedTags {
+//            tfDebug("\(t.title!), [\(t.kind!)]")
+//        }
+        return fetchedNotes
+    }
+
+    
     static func encodeToJSONString(_ values: [Note]) -> String {
         //        let saveToURL = URL.userDocumentsURL.appendingPathComponent("OutFileName.json")
         let encoder = JSONEncoder()
@@ -94,4 +108,10 @@ extension Note {
     func removeTag(_ tag: Tag) {
         self.removeFromTags(tag)
     }
+}
+
+extension Note {
+    //var fetchedNotes = [Note]()
+    
+    
 }

@@ -30,9 +30,19 @@ struct PersistenceController {
 
     init(inMemory: Bool = false) {
         container = NSPersistentCloudKitContainer(name: "MrsBeasley")
+        
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
+        
+        let description = container.persistentStoreDescriptions.first
+        description?.setOption(true as NSNumber,
+                               forKey: NSPersistentHistoryTrackingKey)
+        // turn on remote change notifications
+        let remoteChangeKey = "NSPersistentStoreRemoteChangeNotificationOptionKey"
+        description?.setOption(true as NSNumber,
+                                   forKey: remoteChangeKey)
+
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 /*
@@ -51,4 +61,32 @@ struct PersistenceController {
         try? container.viewContext.setQueryGenerationFrom(.current)
     }
     
+    func storeNote(withTitle title: String,
+                   onDate date: Date,
+                   body: String,
+                   mimetype: String) { // need mimetype from attachment
+        let context = self.container.viewContext
+        let note = Note(context: context)
+        note.title = title
+        note.timestamp = date
+        note.mimetype = mimetype
+        note.body = body
+        context.flushChanges()
+        print("storing notes - before fetch")
+        //fetchNotes()
+    }
+    
+    //    func fetchNotes() {
+    //      let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
+    //      let dateSort = NSSortDescriptor(key:"date", ascending:false)
+    //      fetchRequest.sortDescriptors = [dateSort]
+    //      self.fetchedNotes = try! context.fetch(fetchRequest) as! [Note]
+    //    }
+    
+    func delete(context: NSManagedObjectContext, note: Note) {
+        let context = self.container.viewContext
+        context.delete(note)
+        context.flushChanges()
+    }
+
 }

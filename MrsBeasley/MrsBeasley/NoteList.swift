@@ -13,27 +13,6 @@ import CoreData
 //
 //class Tag: NSManagedObject {
 //}
-
-extension Binding {
-    func toUnwrapped<T>(defaultValue: T) -> Binding<T> where Value == Optional<T>  {
-        Binding<T>(get: { self.wrappedValue ?? defaultValue }, set: { self.wrappedValue = $0 })
-    }
-}
-
-extension NSManagedObjectContext {
-    func flushChanges() {
-        if self.hasChanges {
-            do {
-                try self.save()
-            } catch {
-                let nserror = error as NSError
-                print("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        }
-        
-    }
-}
-
 enum SortBy: CaseIterable, Identifiable, CustomStringConvertible {
     case normal
     case alpha
