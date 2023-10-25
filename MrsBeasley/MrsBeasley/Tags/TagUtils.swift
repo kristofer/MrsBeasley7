@@ -33,6 +33,8 @@ extension Tag {
 //        return tt
 //    }
 
+// need tagsByKind() 
+
     static func allTags(vc: NSManagedObjectContext) -> [Tag] {
         //tfDebug("running fetch on all tags")
         var fetchedTags = [Tag]()
