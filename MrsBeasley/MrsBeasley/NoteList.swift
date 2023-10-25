@@ -71,6 +71,9 @@ struct NoteList: View {
                     NoteRow(note: aNote)
                 }
                 .onDelete(perform: deleteNotes)
+//                    Section(header: Text(aTag.title!)) {
+//                        NoteSubList(tag: aTag, noteId: $noteId)
+//                }
             }
             .onChange(of: $searchText.wrappedValue, perform: { _ in
                 setupPredicate()
@@ -90,17 +93,17 @@ struct NoteList: View {
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "")
             .disableAutocorrection(true)
             .autocapitalization(.none)
-            .onDrop(of: [.fileURL], isTargeted: nil) { providers in
-                if let provider = providers.first(where: { $0.canLoadObject(ofClass: URL.self) } ) {
-                    let _ = provider.loadObject(ofClass: URL.self) { object, error in
-                        if let url = object {
-                            print("DROP a url: \(url)")
-                        }
-                    }
-                    return true
-                }
-                return false
-            }
+//            .onDrop(of: [.fileURL], isTargeted: nil) { providers in
+//                if let provider = providers.first(where: { $0.canLoadObject(ofClass: URL.self) } ) {
+//                    let _ = provider.loadObject(ofClass: URL.self) { object, error in
+//                        if let url = object {
+//                            print("DROP a url: \(url)")
+//                        }
+//                    }
+//                    return true
+//                }
+//                return false
+//            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
@@ -128,7 +131,6 @@ struct NoteList: View {
         } detail: {
             if noteId != nil {
                 NoteMainView(note: noteId!)
-                    
             } else {
                 Text("Select a Note")
             }
@@ -224,7 +226,7 @@ struct PickerView : View {
     var body : some View {
         Picker(selection: $selectedTag, label: Text("Categories")) {
             if selectedTag == nil { // this will work, since there is no initialization to the optional value in your example
-                    Text("no tags").tag(Optional<String>(nil)) // is only shown until a selection is made
+                    Text("<All>").tag(Optional<String>(nil)) // is only shown until a selection is made
             }
                 ForEach(tags) { tag in
                     Text(tag.title ?? "").tag(tag as Tag?)

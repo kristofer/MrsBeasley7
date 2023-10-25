@@ -32,6 +32,7 @@
 		5C2894D92AE81A4B00C07CCE /* QueryFile in Resources */ = {isa = PBXBuildFile; fileRef = 5C2894D82AE81A4B00C07CCE /* QueryFile */; };
 		5C2894DB2AE83CF000C07CCE /* PDFKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2894DA2AE83CF000C07CCE /* PDFKitView.swift */; };
 		5C2894DD2AE960AF00C07CCE /* NewTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2894DC2AE960AF00C07CCE /* NewTagView.swift */; };
+		5C2894DF2AE97F6000C07CCE /* NoteSubList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2894DE2AE97F6000C07CCE /* NoteSubList.swift */; };
 		5C373D922ADD6E3C0066B0D7 /* ShowTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C373D912ADD6E3C0066B0D7 /* ShowTagView.swift */; };
 		5C92C8B72AE18F3500F593BD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C92C8B62AE18F3500F593BD /* SettingsView.swift */; };
 		5C92C8CB2AE40D1600F593BD /* TagUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C92C8CA2AE40D1600F593BD /* TagUtils.swift */; };
@@ -115,6 +116,7 @@
 		5C2894D82AE81A4B00C07CCE /* QueryFile */ = {isa = PBXFileReference; lastKnownFileType = text; path = QueryFile; sourceTree = "<group>"; };
 		5C2894DA2AE83CF000C07CCE /* PDFKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFKitView.swift; sourceTree = "<group>"; };
 		5C2894DC2AE960AF00C07CCE /* NewTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTagView.swift; sourceTree = "<group>"; };
+		5C2894DE2AE97F6000C07CCE /* NoteSubList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteSubList.swift; sourceTree = "<group>"; };
 		5C373D912ADD6E3C0066B0D7 /* ShowTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTagView.swift; sourceTree = "<group>"; };
 		5C92C8B62AE18F3500F593BD /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		5C92C8CA2AE40D1600F593BD /* TagUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagUtils.swift; sourceTree = "<group>"; };
@@ -202,6 +204,14 @@
 			path = Tags;
 			sourceTree = "<group>";
 		};
+		5C1BEFE02AE9B0670017E564 /* SegmentListTry */ = {
+			isa = PBXGroup;
+			children = (
+				5C2894DE2AE97F6000C07CCE /* NoteSubList.swift */,
+			);
+			path = SegmentListTry;
+			sourceTree = "<group>";
+		};
 		5C2894C22AE6E8AD00C07CCE /* ArchiveTo */ = {
 			isa = PBXGroup;
 			children = (
@@ -254,6 +264,7 @@
 				5CD2CCB22ADD98CB00B0B90F /* NoteUtils.swift */,
 				5C92C8B62AE18F3500F593BD /* SettingsView.swift */,
 				5C2894942AE5C99800C07CCE /* NewURLView.swift */,
+				5C1BEFE02AE9B0670017E564 /* SegmentListTry */,
 				5CC5287A2AD97D34002A30C9 /* Assets.xcassets */,
 				5CC5287F2AD97D34002A30C9 /* Persistence.swift */,
 				5C2894D52AE6ED7700C07CCE /* Extensions.swift */,
@@ -494,6 +505,7 @@
 				5C2894DD2AE960AF00C07CCE /* NewTagView.swift in Sources */,
 				5C01409C2AD9819C00A6147F /* NoteTextEditor.swift in Sources */,
 				5CC528772AD97D32002A30C9 /* MrsBeasleyApp.swift in Sources */,
+				5C2894DF2AE97F6000C07CCE /* NoteSubList.swift in Sources */,
 				5C0140A82ADADB3B00A6147F /* PDFPreviewView.swift in Sources */,
 				5C0140A42ADADA0E00A6147F /* PDFCreator.swift in Sources */,
 				5C2894D62AE6ED7700C07CCE /* Extensions.swift in Sources */,
