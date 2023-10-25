@@ -20,6 +20,7 @@ extension Tag {
         self.init(context: moc)
         self.uuid = UUID()
         self.title = title
+        self.kind = 0
     }
     
 }

@@ -9,25 +9,38 @@ import SwiftUI
 
 struct ShowTagView: View {
     @ObservedObject var note: Note
+    @State var showTags = false
     
     var body: some View {
-        ScrollView (.horizontal, showsIndicators: false) {
-            //Text("[")
-            LazyHStack {
-                Label("", systemImage: "tag")
-                ForEach(Array(note.tags as? Set<Tag> ?? [] ), id: \.self) { tag in
-                    Text(tag.title ?? "??")
-                        .font(.caption)
-                        .foregroundColor(Color.accentColor)
-                        .padding(2)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 5)
-                                .stroke(Color.accentColor, lineWidth: 1)
-                        )
-                        .padding(1)
+        Button(" \(Image(systemName: "tag")) ") {
+            print("tag button")
+            showTags.toggle()
+        }
+        .buttonStyle(.borderedProminent)
+        HStack {
+            ScrollView (.horizontal, showsIndicators: false) {
+                //Text("[")
+                LazyHStack {
+                    ForEach(Array(note.tags as? Set<Tag> ?? [] ), id: \.self) { tag in
+                        Text(tag.title ?? "??")
+                            .font(.caption)
+                            .foregroundColor(Color.accentColor)
+                            .padding(2)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(Color.accentColor, lineWidth: 1)
+                            )
+                            .padding(1)
+                    }
                 }
             }
-        }.frame(height: 28)
+            .frame(height: 28)
+        }
+        .sheet(isPresented: $showTags) {
+                TagHandlerView(note: note)
+                .presentationDetents([.medium])
+        }
+        
     }
 }
 

@@ -68,6 +68,7 @@ struct PersistenceController {
                    mimetype: String) { // need mimetype from attachment
         let context = self.container.viewContext
         let note = Note(context: context)
+        note.uuid = UUID()
         note.title = title
         note.timestamp = date
         note.mimetype = mimetype

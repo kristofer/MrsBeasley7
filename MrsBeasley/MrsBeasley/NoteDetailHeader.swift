@@ -10,19 +10,24 @@ import SwiftUI
 struct NoteDetailHeader: View {
     @ObservedObject var note: Note
 
+
     var body: some View {
-        HStack {
-            TextField("title", text: $note.title.toUnwrapped(defaultValue: ""))
-                .font(.title)
-            ShowTagView(note: note)
-            Text(note.mimetype ?? "text/plain")
-                .font(.caption).italic()
-            if note.timestamp != nil {
-                Text("Created at \(note.timestamp!, formatter: noteDateFormatter)")
-                    .font(.caption).italic()
+        VStack() {
+            HStack {
+                TextField("", text: $note.title.toUnwrapped(defaultValue: ""))
+                Spacer()
+                ShowTagView(note: note)
+                if UIDevice.current.localizedModel == "iPad" {
+                    Text(note.mimetype ?? "text/plain")
+                        .font(.caption).italic()
+                    if note.timestamp != nil {
+                        Text("Created at \(note.timestamp!, formatter: noteDateFormatter)")
+                            .font(.caption).italic()
+                    }
+                }
             }
+            .padding()
         }
-        .padding()
     }
 }
 

@@ -17,12 +17,6 @@ struct SelectTag: View {
         self.isSelected = isSelected
         self.tag = tag
         self.note = note
-//        if let tags = note.tags {
-//            //print("relationship \(tag.title!) \(tags.contains(tag))")
-//            self.isSelected = tags.contains(tag)
-//        }else {
-//            self.isSelected = false
-//        }
     }
     
     var body: some View {

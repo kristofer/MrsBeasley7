@@ -10,9 +10,12 @@ import UniformTypeIdentifiers
 
 struct NoteMainView: View {
     @ObservedObject var note: Note
-
+    
+    @State private var moving = false
+    @State var url: URL? = nil
+    
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             NoteDetailHeader(note: note)
             if let mt = note.mimetype, mt == "text/plain" {
                 NoteTextEditor(note: note)
@@ -23,13 +26,33 @@ struct NoteMainView: View {
             if let mt = note.mimetype, mt == UTType.pdf.preferredMIMEType {
                 if let newurl = note.loadBlobToData() {
                     PDFKitView(url: newurl)
-                        .scaledToFill()
+                        .toolbar {
+                            ToolbarItemGroup(placement: .bottomBar) {
+                                Button("Export") {
+                                    if let newurl = note.loadBlobToData() {
+                                        self.url = newurl
+                                        self.moving = true
+                                    }
+                                }
+                                .controlSize(.small)
+                                .fileMover(isPresented: $moving, file: url) { result in
+                                    switch result {
+                                    case .success(let url):
+                                        print("exported \(url.absoluteString)")
+                                    case .failure(let error):
+                                        print(error.localizedDescription)
+                                    }
+                                }
+                                .buttonStyle(.borderedProminent)
+                            }
+                        }
                 } else {
                     Text("Unable to load PDF")
                 }
             }
-            
         }
+        .navigationBarTitleDisplayMode(.inline)
+        
     }
 }
 
@@ -42,7 +65,7 @@ import WebKit
 
 struct WebView: UIViewRepresentable {
     let url: URL
-
+    
     func makeUIView(context: Context) -> WKWebView {
         return WKWebView()
     }
@@ -56,8 +79,11 @@ struct WebView: UIViewRepresentable {
 
 extension Note {
     func loadBlobToData() -> URL? {
-        if let pdfData = self.blob {
-            let pathURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("test.pdf")
+        if self.uuid == nil {
+            self.uuid = UUID()
+        }
+        if let pdfData = self.blob, let fname = self.title!.convertedToSlug() {
+            let pathURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("\(fname).pdf")
             do {
                 try pdfData.write(to: pathURL, options: .atomic)
             } catch {
@@ -67,12 +93,5 @@ extension Note {
         }
         return nil
     }
-
+    
 }
-
-//DispatchQueue.main.async {
-//    self.webView.delegate = self
-//    self.webView.scalesPageToFit = true
-//    self.webView.loadRequest(URLRequest(url: pathURL))
-//}
-//

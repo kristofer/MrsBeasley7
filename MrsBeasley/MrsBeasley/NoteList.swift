@@ -48,7 +48,6 @@ struct NoteList: View {
     @State private var searchText: String = ""
     @State private var selectedTag: Tag? = nil
     @State private var selectedSort: SortBy = .normal
-    @State var showTags = false
     @State var showSettings = false
     @State private var columnVisibility = NavigationSplitViewVisibility.detailOnly
 
@@ -59,20 +58,8 @@ struct NoteList: View {
                 PickerView(tags: Array(tags), selectedTag: $selectedTag)
                     .buttonStyle(.borderedProminent)
                 Spacer()
-                Button("+ \(Image(systemName: "tag"))") {
-                    showTags.toggle()
-                }
-                .disabled(noteId == nil)
-                .controlSize(.small)
-                .buttonStyle(.borderedProminent)
             }
             .padding()
-            .sheet(isPresented: $showTags) {
-                    //TagList()
-                    if let note = noteId {
-                        TagHandlerView(note: note)
-                    }
-            }
             .sheet(isPresented: $showSettings) {
                 Form {
                     SettingsView()
@@ -141,6 +128,7 @@ struct NoteList: View {
         } detail: {
             if noteId != nil {
                 NoteMainView(note: noteId!)
+                    
             } else {
                 Text("Select a Note")
             }

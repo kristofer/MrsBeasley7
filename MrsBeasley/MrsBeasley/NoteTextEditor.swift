@@ -14,21 +14,21 @@ struct NoteTextEditor: View {
     @ObservedObject var note: Note
     @State private var wordCount: Int = 0
     @State private var showPDFPanel = false
+    @State private var editFontsize = 22.0
     
     @State var publisher = PassthroughSubject<String?, Never>()
     @State var delaySeconds = 5.0
         
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 20, style: .continuous)
+            RoundedRectangle(cornerRadius: 15, style: .continuous)
                 .fill(.white)
                 .shadow(radius: 10)
             
-            
             VStack(alignment: .leading) {
                 Divider()
-                TextEditor(text: $note.body.toUnwrapped(defaultValue: "no body"))
-                    .font(.custom("Inconsolata", size: 22.0))
+                 TextEditor(text: $note.body.toUnwrapped(defaultValue: "no body"))
+                    .font(.custom("Inconsolata", size: editFontsize))
                     .padding(5)
                 Divider()
                 if wordCount == 0 && note.body != nil {
@@ -57,17 +57,19 @@ struct NoteTextEditor: View {
                         if let value = value {
                             publisher.send(value)
                         }
-                        //                if (note.title == nil || note.title == "") {
-                        //                    if let s = note.body {
-                        //                        note.title = String(s.prefix(20)) + "..."
-                        //                    }
-                        //                }
                     })
                     .padding(10)
                     .onDisappear(){
                         save()
                     }
                     .onAppear() {
+                        if UIDevice.current.localizedModel == "iPhone" {
+                            self.editFontsize = 16.0
+                             print("This is an iPhone")
+                        } else if UIDevice.current.localizedModel == "iPad" {
+                            self.editFontsize = 22.0
+                             print("This is an iPad")
+                        }
                     }
                     .sheet(isPresented: $showPDFPanel) {
                         PDFPreviewView().environmentObject(PDFViewModel(note: note))

@@ -24,6 +24,10 @@ struct TagHandlerView: View {
                 }
                 .padding()
                 Divider()
+                Text("Add Tag")
+                    .padding(20)
+                NewTagView()
+                Divider()
                 Button("Done") {
                     viewContext.flushChanges()
                     dismiss()
@@ -31,6 +35,7 @@ struct TagHandlerView: View {
             }
         }
         .padding()
+
     }
 }
 
