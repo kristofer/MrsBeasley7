@@ -13,9 +13,9 @@ struct NoteRow: View {
 
     var body: some View {
         HStack {
-            Image(note.iconForMimetype())
+            Image(systemName: note.iconForMimetype())
                     .resizable()
-                    .frame(width: 30, height: 30)
+                    .frame(width: 25, height: 25)
             VStack(alignment: .leading) {
                 if let actualTitle = note.title, actualTitle != "" {
                     Text(actualTitle)
