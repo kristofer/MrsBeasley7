@@ -38,7 +38,3 @@ struct NewURLView: View {
         newName = ""
     }
 }
-
-#Preview {
-    NewURLView()
-}

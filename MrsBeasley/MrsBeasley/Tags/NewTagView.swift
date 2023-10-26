@@ -39,6 +39,3 @@ struct NewTagView: View {
     }
 }
 
-#Preview {
-    NewTagView()
-}

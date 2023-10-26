@@ -25,7 +25,3 @@ struct NoteSubList: View {
             //.onDelete(perform: deleteNotes)
     }
 }
-
-#Preview {
-    EmptyView()
-}

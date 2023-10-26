@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import CoreData
+import UniformTypeIdentifiers
 
 class Note: NSManagedObject, Codable  {
     enum CodingKeys: CodingKey {
@@ -127,4 +128,19 @@ extension Note {
         }); task.resume()
     }
     
+    func iconForMimetype() -> String {
+        switch self.mimetype {
+        case  UTType.pdf.preferredMIMEType :
+            return "doc.richtext"
+        case  UTType.url.preferredMIMEType :
+            return "link.icloud"
+        case  UTType.fileURL.preferredMIMEType :
+            return "externaldrive"
+        case  UTType.plainText.preferredMIMEType :
+            return "note.text"
+
+        default:
+           return "doc"
+        }
+    }
 }

@@ -59,9 +59,6 @@ struct NoteMainView: View {
     }
 }
 
-#Preview {
-    EmptyView()
-}
 
 import SwiftUI
 import WebKit
