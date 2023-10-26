@@ -21,7 +21,10 @@ struct NoteMainView: View {
                 NoteTextEditor(note: note)
             }
             if let mt = note.mimetype, mt == "text/html" {
-                WebView(url: URL(string:note.body!)!)
+                if let thisUrl = URL(string:note.body!){
+                    WebView(url: thisUrl)
+                    ShareLink("Share", item: thisUrl)
+                }
             }
             if let mt = note.mimetype, mt == UTType.pdf.preferredMIMEType {
                 if let newurl = note.loadBlobToData() {

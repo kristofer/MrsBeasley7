@@ -73,12 +73,17 @@ class ShareViewController: SLComposeServiceViewController {
         
         let extensionItem = extensionContext?.inputItems[0] as! NSExtensionItem
         let contentTypeURL = UTType.url.identifier
+        let contentTypeFileURL = UTType.fileURL.identifier
         let contentTypeText = UTType.utf8PlainText.identifier
         let contentPDF = UTType.pdf.identifier
         
         for attachment in extensionItem.attachments! {
             if attachment.hasItemConformingToTypeIdentifier(contentPDF) {
                 attachment.loadItem(forTypeIdentifier: contentPDF, options: nil, completionHandler: { (results, error) in
+                    guard (error == nil) else {
+                        print("ERROR in loadItem \(String(describing: error))")
+                        return
+                    }
                     let url = results as! URL?
                     self.pdfString = url!.absoluteString
                     print("ShareEx PDF URL is \(url!.absoluteString)")
@@ -107,8 +112,8 @@ class ShareViewController: SLComposeServiceViewController {
                 })
                 return
             }
-            if attachment.hasItemConformingToTypeIdentifier("public.file-url") { // was kind
-                attachment.loadItem(forTypeIdentifier: "public.file-url",
+            if attachment.hasItemConformingToTypeIdentifier(contentTypeFileURL) { // was kind
+                attachment.loadItem(forTypeIdentifier: contentTypeFileURL,
                                     options: nil) { //[unowned self]
                     (data, error) in
                     // Handle the error here if you want
