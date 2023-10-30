@@ -12,6 +12,13 @@ import CoreData
 class Tag: NSManagedObject  {
 }
 
+enum TagKinds: Int {
+    case plain = 0
+    case folder
+    case bookmark
+    case file
+}
+
 extension Tag {
     convenience init(
       context moc: NSManagedObjectContext,
