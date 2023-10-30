@@ -31,8 +31,7 @@ struct NewTagView: View {
     }
     
     func newTag() {
-        let nn = Tag(context: moc, title: newName)
-        nn.kind = 0
+        let _ = Tag.createIfNoExist(context: moc, title: newName)
         moc.flushChanges()
         newKind = 0
         newName = ""

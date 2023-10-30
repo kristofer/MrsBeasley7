@@ -16,6 +16,7 @@ struct ShowTagView: View {
             print("tag button")
             showTags.toggle()
         }
+        .controlSize(.small)
         .buttonStyle(.borderedProminent)
         HStack {
             ScrollView (.horizontal, showsIndicators: false) {
@@ -49,3 +50,4 @@ struct ShowTagView_Previews: PreviewProvider {
         EmptyView()
     }
 }
+

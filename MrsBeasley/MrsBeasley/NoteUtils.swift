@@ -120,8 +120,8 @@ extension Note {
         let session =  URLSession(configuration: config)
         let task = session.dataTask(with: request, completionHandler: {(data, response, error) in
             if error == nil{
-                if let pdfData = data {
-                }
+//                if let pdfData = data {
+//                }
             }else{
                 print(error?.localizedDescription ?? "")
             }
@@ -134,12 +134,15 @@ extension Note {
             return "doc.richtext"
         case  UTType.url.preferredMIMEType :
             return "link.icloud"
+        case  UTType.html.preferredMIMEType :
+            return "bookmark"
         case  UTType.fileURL.preferredMIMEType :
             return "externaldrive"
         case  UTType.plainText.preferredMIMEType :
             return "note.text"
 
         default:
+//print("weird \(self.mimetype)")
            return "doc"
         }
     }

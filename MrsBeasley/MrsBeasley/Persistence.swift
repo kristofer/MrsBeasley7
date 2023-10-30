@@ -74,8 +74,9 @@ struct PersistenceController {
         note.mimetype = mimetype
         note.body = body
         note.blob = blob
+        
         context.flushChanges()
-        print("storing notes - before fetch")
+        //print("storing notes - before fetch")
         //fetchNotes()
     }
     

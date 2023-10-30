@@ -47,24 +47,21 @@ struct NoteList: View {
     @State private var noteId: Note? = nil
     @State private var searchText: String = ""
     @State private var selectedTag: Tag? = nil
+    @State private var selectedTags: [Tag] = []
     @State private var selectedSort: SortBy = .normal
     @State var showSettings = false
     @State private var columnVisibility = NavigationSplitViewVisibility.detailOnly
 
     var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
-            HStack{
-                Text("Categories:").font(.body)
-                PickerView(tags: Array(tags), selectedTag: $selectedTag)
-                    .buttonStyle(.borderedProminent)
-                Spacer()
-            }
-            .padding()
-            .sheet(isPresented: $showSettings) {
-                Form {
-                    SettingsView()
+            ShowTagArrayView(tags: $selectedTags)
+                .padding()
+                .sheet(isPresented: $showSettings) {
+                    Form {
+                        SettingsView()
+                    }
                 }
-            }
+
             // Main List
             List(selection: $noteId) {
                 ForEach(notes,  id: \.self) { aNote in
@@ -78,7 +75,7 @@ struct NoteList: View {
             .onChange(of: $searchText.wrappedValue, perform: { _ in
                 setupPredicate()
             })
-            .onChange(of: $selectedTag.wrappedValue, perform: { _ in
+            .onChange(of: $selectedTags.wrappedValue, perform: { _ in
                 setupPredicate()
             })
             .refreshable {
@@ -89,7 +86,7 @@ struct NoteList: View {
                     columnVisibility = .all
                 }
             }
-            .navigationTitle("Notes")
+            //.navigationTitle("Notes")
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "")
             .disableAutocorrection(true)
             .autocapitalization(.none)
@@ -139,7 +136,7 @@ struct NoteList: View {
     
     private func setupPredicate() {
         let stext = $searchText.wrappedValue
-        let tag = $selectedTag.wrappedValue
+        let stags = $selectedTags.wrappedValue
         var titlePred = NSPredicate(value: true)
         var bodyPred = NSPredicate(value: true)
         
@@ -148,14 +145,19 @@ struct NoteList: View {
             bodyPred = NSPredicate(format: "body CONTAINS[c] %@", stext)
         }
         
-        var catPred = NSPredicate(value: true)
-        if let tag = tag, tag.title != nil, tag.title != "<All>" {
+        let catPred = NSPredicate(value: true)
+        var buildPred: [NSPredicate] = [catPred]
+        if !stags.isEmpty {
             print("setting catPred")
-            catPred = NSPredicate(format: "tags.title CONTAINS[c] %@", tag.title!)
+            for t in stags {
+                print("catPred \(t.title!)")
+                let tPred = NSPredicate(format: "tags.title CONTAINS[c] %@", t.title!)
+                buildPred.append(tPred)
+            }
         }
-        
         let orPred = NSCompoundPredicate(type: .or, subpredicates: [titlePred, bodyPred])
-        let predicate = NSCompoundPredicate(type: .and, subpredicates: [orPred, catPred])
+        buildPred.append(orPred)
+        let predicate = NSCompoundPredicate(type: .and, subpredicates: buildPred)
         notes.nsPredicate = predicate
     }
     
@@ -168,11 +170,11 @@ struct NoteList: View {
             newNote.title = ""
             newNote.mimetype = "text/plain"
             
-            if let tag = $selectedTag.wrappedValue {
-                //if let tag = selectedTag {
-                if tag.title != "<All>" {
-                    print("adding to category \(tag.title!)")
-                    newNote.addToTags(tag)
+            let stags = $selectedTags.wrappedValue
+
+            if !stags.isEmpty {
+                for t in stags {
+                    newNote.addToTags(t)
                 }
             }
             viewContext.flushChanges()
@@ -208,33 +210,6 @@ struct NoteList_Previews: PreviewProvider {
     }
 }
 
-struct PickerView : View {
-    
-    var tags : [Tag]
-    @Binding var selectedTag : Tag?
-    
-//    init(tags: [Tag], selectedTag: Binding<Tag?>) {
-//        self.tags = tags
-//        
-//        if !tags.isEmpty && selectedTag.wrappedValue == nil {
-//            self.selectedTag = tags.first!
-//        } else {
-//            self._selectedTag = selectedTag
-//        }
-//    }
-
-    var body : some View {
-        Picker(selection: $selectedTag, label: Text("Categories")) {
-            if selectedTag == nil { // this will work, since there is no initialization to the optional value in your example
-                    Text("<All>").tag(Optional<String>(nil)) // is only shown until a selection is made
-            }
-                ForEach(tags) { tag in
-                    Text(tag.title ?? "").tag(tag as Tag?)
-                }
-        }
-        
-    }
-}
 struct SortByView: View {
     @Binding var selectedOption: SortBy
     
@@ -246,4 +221,18 @@ struct SortByView: View {
             }
         }
     }
+}
+
+struct SelectedTagsView : View {
+    @Binding var selectedOption: SortBy
+    
+    var body: some View {
+        Picker("Sort By", selection: $selectedOption) {
+            ForEach(SortBy.allCases) { option in
+                Text(String(describing: option))
+                
+            }
+        }
+    }
+
 }

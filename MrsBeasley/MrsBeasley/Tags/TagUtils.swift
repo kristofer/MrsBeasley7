@@ -25,6 +25,32 @@ extension Tag {
     
 }
 
+extension Tag {
+    static func getTag(context: NSManagedObjectContext, title: String) -> Tag? {
+        //tfDebug("running fetch on all tags")
+        var fetchedTags = [Tag]()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Tag")
+        let dateSort = NSSortDescriptor(key:"title", ascending:true)
+        fetchRequest.sortDescriptors = [dateSort]
+        fetchRequest.predicate = NSPredicate(
+            format: "title = %@", title
+        )
+        fetchedTags = try! context.fetch(fetchRequest) as! [Tag]
+        if let f = fetchedTags.first {
+            return f
+        }
+        return nil
+    }
+
+    static func createIfNoExist(context: NSManagedObjectContext, title: String) -> Tag {
+        var ex = Tag.getTag(context: context, title: title)
+        if ex == nil {
+            ex = Tag(context: context, title: title)
+            ex?.kind = 0
+        }
+        return ex!
+    }
+}
 
 extension Tag {
 //    static func allTagsSelectable(vc: NSManagedObjectContext) -> [SelectableTagModel] {
