@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		5C01409A2AD97F7A00A6147F /* NoteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0140992AD97F7A00A6147F /* NoteRow.swift */; };
 		5C01409C2AD9819C00A6147F /* NoteTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C01409B2AD9819C00A6147F /* NoteTextEditor.swift */; };
-		5C01409E2AD9826C00A6147F /* EmptyNoteBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C01409D2AD9826C00A6147F /* EmptyNoteBody.swift */; };
 		5C0140A02AD9952700A6147F /* NoteDetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C01409F2AD9952700A6147F /* NoteDetailHeader.swift */; };
 		5C0140A22AD996BA00A6147F /* NoteList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0140A12AD996BA00A6147F /* NoteList.swift */; };
 		5C0140A42ADADA0E00A6147F /* PDFCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0140A32ADADA0E00A6147F /* PDFCreator.swift */; };
@@ -97,7 +96,6 @@
 /* Begin PBXFileReference section */
 		5C0140992AD97F7A00A6147F /* NoteRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRow.swift; sourceTree = "<group>"; };
 		5C01409B2AD9819C00A6147F /* NoteTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTextEditor.swift; sourceTree = "<group>"; };
-		5C01409D2AD9826C00A6147F /* EmptyNoteBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyNoteBody.swift; sourceTree = "<group>"; };
 		5C01409F2AD9952700A6147F /* NoteDetailHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailHeader.swift; sourceTree = "<group>"; };
 		5C0140A12AD996BA00A6147F /* NoteList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteList.swift; sourceTree = "<group>"; };
 		5C0140A32ADADA0E00A6147F /* PDFCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFCreator.swift; sourceTree = "<group>"; };
@@ -256,7 +254,6 @@
 				5CCD1CDE2ADEBF0300238939 /* Inconsolata-VariableFont.ttf */,
 				5C0140AC2ADC41CB00A6147F /* Tags */,
 				5C0140A12AD996BA00A6147F /* NoteList.swift */,
-				5C01409D2AD9826C00A6147F /* EmptyNoteBody.swift */,
 				5C01409F2AD9952700A6147F /* NoteDetailHeader.swift */,
 				5C01409B2AD9819C00A6147F /* NoteTextEditor.swift */,
 				5C2894922AE5C43400C07CCE /* NoteMainView.swift */,
@@ -488,7 +485,6 @@
 				5C01409A2AD97F7A00A6147F /* NoteRow.swift in Sources */,
 				5C92C8CF2AE44DC200F593BD /* TagCloudView.swift in Sources */,
 				5C92C8B72AE18F3500F593BD /* SettingsView.swift in Sources */,
-				5C01409E2AD9826C00A6147F /* EmptyNoteBody.swift in Sources */,
 				5C92C8D02AE44DC200F593BD /* TagView.swift in Sources */,
 				5C0140AA2ADAE22900A6147F /* PDFViewUI.swift in Sources */,
 				5C0140A22AD996BA00A6147F /* NoteList.swift in Sources */,

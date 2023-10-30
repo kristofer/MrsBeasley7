@@ -115,6 +115,7 @@ struct NoteTextEditor: View {
     }
     private func save() {
         if moc.hasChanges {
+            note.lastmodified = Date()
             print("saving...")
             moc.flushChanges()
         } else {

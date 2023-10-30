@@ -23,6 +23,7 @@ class Note: NSManagedObject, Codable  {
         self.uuid = UUID()
         self.title = title
         self.timestamp = Date()
+        self.lastmodified = Date()
         self.mimetype = "text/plain"
     }
     
