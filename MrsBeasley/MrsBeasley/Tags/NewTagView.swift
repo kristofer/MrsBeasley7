@@ -20,10 +20,17 @@ struct NewTagView: View {
                 TextField("", text: $newName)
                     .border(.gray)
             }
-            HStack {
-                Label("Tag Kind", systemImage: "t.square")
-                TextField("", value: $newKind, format: .number)
+            VStack {
+                Picker("Tag Kind", selection: $newKind) {
+                    ForEach(TagKinds.allCases, id: \.self) { option in
+                        Text(String(describing: option))
+                    }
+                }
+                .pickerStyle(.segmented)
+
+                Text("Value: \(newKind)")
             }
+
             Button("Save") {
                 newTag()
             }

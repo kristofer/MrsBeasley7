@@ -10,9 +10,7 @@ import CoreData
 
 struct TagList: View {
     @Environment(\.managedObjectContext) private var viewContext
-    
-//    @ObservedObject var note: Note
-    
+        
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Tag.title, ascending: true)],
         //        predicate: nil,
@@ -75,7 +73,6 @@ struct TagList: View {
         }
     }
     private func addTag(_ t: String) {
-        //let _ = Tag(context: viewContext, title: t)
         let _ = Tag.createIfNoExist(context: viewContext, title: t)
         viewContext.flushChanges()
     }

@@ -12,7 +12,9 @@ import CoreData
 class Tag: NSManagedObject  {
 }
 
-enum TagKinds: Int {
+enum TagKinds: Int, CaseIterable { //, Identifiable {
+    //var id: ObjectIdentifier
+    
     case plain = 0
     case folder
     case bookmark
@@ -60,11 +62,6 @@ extension Tag {
 }
 
 extension Tag {
-//    static func allTagsSelectable(vc: NSManagedObjectContext) -> [SelectableTagModel] {
-//        let ttags = allTags(vc: vc)
-//        let tt = Array(ttags).map { SelectableTagModel(displayedTag: $0) }
-//        return tt
-//    }
 
 // need tagsByKind() 
 
