@@ -28,6 +28,8 @@ struct TagHandlerView: View {
                     .padding(20)
                 NewTagView()
                 Divider()
+                TagList()
+                Divider()
                 Button("Done") {
                     viewContext.flushChanges()
                     dismiss()
