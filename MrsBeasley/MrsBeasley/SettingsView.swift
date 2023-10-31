@@ -20,37 +20,47 @@ struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
+        VStack {
         HStack {
             Text("Settings").font(.title2)
             Spacer()
             Button("Done", action: { dismiss() })
                 .buttonStyle(.borderedProminent)
         }
-        GroupBox {
-            VStack(alignment: .leading) {
-                Text("PDF Footer Options").font(.title2)
-                Toggle("Show footer on PDF", isOn: $showFooter)
-                Toggle("Show Tagline on footer", isOn: $showTagline)
-                HStack {
-                    Text("Tagline: ")
-                    TextField("Tagline", text: $tagline)
-                        .padding()
-                        .border(.foreground)
+        .padding()
+        //VStack(alignment: .leading) {
+            List {
+                DisclosureGroup("PDF Footer Options") {
+                    Toggle("Show footer on PDF", isOn: $showFooter)
+                    Toggle("Show Tagline on footer", isOn: $showTagline)
+                    HStack {
+                        Text("Tagline: ")
+                        TextField("Tagline", text: $tagline)
+                            .padding()
+                            .border(.foreground)
+                    }
+                    Toggle("Show Author on footer", isOn: $showAuthor)
+                    HStack {
+                        Text("Author: ")
+                        TextField("Author", text: $author)
+                            .padding()
+                            .border(.foreground)
+                    }
+                    Toggle("Show Note Title on footer", isOn: $showTitle)
+                    Toggle("Show Today Date on footer", isOn: $showDate)
+                    Text("_preview of footer_")
                 }
-                Toggle("Show Author on footer", isOn: $showAuthor)
-                HStack {
-                    Text("Author: ")
-                    TextField("Author", text: $author)
-                        .padding()
-                        .border(.foreground)
+                DisclosureGroup("Add a Tag") {
+                    NewTagView()
                 }
-                Toggle("Show Note Title on footer", isOn: $showTitle)
-                Toggle("Show Today Date on footer", isOn: $showDate)
+                DisclosureGroup("Edit a Tag") {
+                    TagList()
+                }
+                DisclosureGroup("Add a URL") {
+                    NewURLView()
+                }
             }
-            Text("_preview of footer_")
         }
-        Divider()
-        NewURLView()
     }
 }
 

@@ -53,6 +53,7 @@
 		5CCD1CDF2ADEBF0300238939 /* Inconsolata-VariableFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5CCD1CDE2ADEBF0300238939 /* Inconsolata-VariableFont.ttf */; };
 		5CCD1CE12ADED0A100238939 /* AttributedString+StyledMarkdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCD1CE02ADED0A100238939 /* AttributedString+StyledMarkdown.swift */; };
 		5CD2CCB32ADD98CB00B0B90F /* NoteUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2CCB22ADD98CB00B0B90F /* NoteUtils.swift */; };
+		5CFEFA282AF12EB700A5EA00 /* EditTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFEFA272AF12EB700A5EA00 /* EditTagView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +143,7 @@
 		5CCD1CDE2ADEBF0300238939 /* Inconsolata-VariableFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inconsolata-VariableFont.ttf"; sourceTree = "<group>"; };
 		5CCD1CE02ADED0A100238939 /* AttributedString+StyledMarkdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttributedString+StyledMarkdown.swift"; sourceTree = "<group>"; };
 		5CD2CCB22ADD98CB00B0B90F /* NoteUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteUtils.swift; sourceTree = "<group>"; };
+		5CFEFA272AF12EB700A5EA00 /* EditTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTagView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +202,7 @@
 				5C92C8D42AE5451A00F593BD /* SelectTag.swift */,
 				5C92C8D22AE5447B00F593BD /* TagHandlerView.swift */,
 				5C2894DC2AE960AF00C07CCE /* NewTagView.swift */,
+				5CFEFA272AF12EB700A5EA00 /* EditTagView.swift */,
 			);
 			path = Tags;
 			sourceTree = "<group>";
@@ -495,6 +498,7 @@
 				5C92C8B72AE18F3500F593BD /* SettingsView.swift in Sources */,
 				5C92C8D02AE44DC200F593BD /* TagView.swift in Sources */,
 				5C0140AA2ADAE22900A6147F /* PDFViewUI.swift in Sources */,
+				5CFEFA282AF12EB700A5EA00 /* EditTagView.swift in Sources */,
 				5C0140A22AD996BA00A6147F /* NoteList.swift in Sources */,
 				5CC528802AD97D34002A30C9 /* Persistence.swift in Sources */,
 				5C0140A02AD9952700A6147F /* NoteDetailHeader.swift in Sources */,

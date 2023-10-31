@@ -57,9 +57,7 @@ struct NoteList: View {
             ShowTagArrayView(tags: $selectedTags)
                 .padding()
                 .sheet(isPresented: $showSettings) {
-                    Form {
-                        SettingsView()
-                    }
+                    SettingsView()
                 }
 
             // Main List

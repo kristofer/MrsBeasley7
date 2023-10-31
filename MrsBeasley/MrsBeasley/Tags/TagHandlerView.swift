@@ -17,23 +17,23 @@ struct TagHandlerView: View {
     var body: some View {
         Group {
             VStack {
+                HStack {
+                    Spacer()
+                    Button("Done") {
+                        viewContext.flushChanges()
+                        dismiss()
+                    }
+                    .bold()
+                    .buttonStyle(.borderedProminent)
+
+                }
+                Divider()
                 Text("Select Tags")
                     .padding(20)
                 TagCloudView(data: Tag.allTags(vc: viewContext)) { tag in
                     SelectTag(isSelected: note.containsTag(tag: tag), tag: tag, note: note)
                 }
                 .padding()
-                Divider()
-                Text("Add Tag")
-                    .padding(20)
-                NewTagView()
-                Divider()
-                TagList()
-                Divider()
-                Button("Done") {
-                    viewContext.flushChanges()
-                    dismiss()
-                }
             }
         }
         .padding()
