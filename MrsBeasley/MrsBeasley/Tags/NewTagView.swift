@@ -17,7 +17,7 @@ struct NewTagView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Label("Name:", systemImage: "tag")
+                Label("Tag Name:", systemImage: "tag")
                 TextField("", text: $newName)
                     .border(.gray)
             }
@@ -29,8 +29,11 @@ struct NewTagView: View {
                 }
                 .pickerStyle(.segmented)
             }
-            Button("Save") {
-                newTag()
+            HStack {
+                Spacer()
+                Button("Save") {
+                    newTag()
+                }
             }
         }
     }

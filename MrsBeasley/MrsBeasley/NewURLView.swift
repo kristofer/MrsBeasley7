@@ -16,11 +16,11 @@ struct NewURLView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Label("NewURL", systemImage: "link.icloud")
+                Label("URL", systemImage: "link.icloud")
                 TextField("", text: $newURL)
             }
             HStack {
-                Label("NewName", systemImage: "t.square")
+                Label("Title", systemImage: "t.square")
                 TextField("", text: $newName)
             }
             Button("Save") {
