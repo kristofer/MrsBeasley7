@@ -21,8 +21,12 @@ struct NoteDetailHeader: View {
                     Text(note.mimetype ?? "text/plain")
                         .font(.caption).italic()
                     if note.timestamp != nil {
-                        Text("Created at \(note.timestamp!, formatter: noteDateFormatter)")
-                            .font(.caption).italic()
+                        VStack {
+                            Text("Saved at \(note.lastmodified ?? .distantPast, formatter: noteDateFormatter)")
+                                .font(.caption).italic()
+                            Text("Created at \(note.timestamp!, formatter: noteDateFormatter)")
+                                .font(.caption).italic()
+                        }
                     }
                 }
             }

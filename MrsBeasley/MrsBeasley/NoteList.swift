@@ -15,6 +15,7 @@ import CoreData
 //}
 enum SortBy: CaseIterable, Identifiable, CustomStringConvertible {
     case normal
+    case saved
     case alpha
     
     var id: Self { self }
@@ -23,8 +24,10 @@ enum SortBy: CaseIterable, Identifiable, CustomStringConvertible {
         switch self {
         case .normal:
             return "Date Created"
+        case .saved:
+            return "Date Modified"
         case .alpha:
-            return "Title (n/a)"
+            return "Title"
         }
     }
 }
@@ -118,6 +121,10 @@ struct NoteList: View {
             }
             HStack{
                 SortByView(selectedOption: $selectedSort)
+                    .onChange(of: $selectedSort.wrappedValue, perform: { _ in
+                        setupNoteSort()
+                    })
+
                 Spacer()
                 Button("[Do Backup]") {
                     makeBackup()
@@ -161,9 +168,7 @@ struct NoteList: View {
         let catPred = NSPredicate(value: true)
         var buildPred: [NSPredicate] = [catPred]
         if !stags.isEmpty {
-            print("setting catPred")
             for t in stags {
-                print("catPred \(t.title!)")
                 let tPred = NSPredicate(format: "tags.title CONTAINS[c] %@", t.title!)
                 buildPred.append(tPred)
             }
@@ -172,6 +177,21 @@ struct NoteList: View {
         buildPred.append(orPred)
         let predicate = NSCompoundPredicate(type: .and, subpredicates: buildPred)
         notes.nsPredicate = predicate
+    }
+    
+    private func setupNoteSort() {
+        if self.selectedSort == .normal {
+            notes.sortDescriptors = [SortDescriptor(\Note.timestamp, order: .reverse)]
+            return
+        }
+        if self.selectedSort == .saved {
+            notes.sortDescriptors = [SortDescriptor(\Note.lastmodified, order: .reverse)]
+            return
+        }
+        if self.selectedSort == .alpha {
+            notes.sortDescriptors = [SortDescriptor(\Note.title, order: .forward)]
+            return
+        }
     }
     
     private func addNote() {
