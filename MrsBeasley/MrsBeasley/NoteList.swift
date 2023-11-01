@@ -120,11 +120,10 @@ struct NoteList: View {
                         Label("Add Note", systemImage: "plus")
                     }
                     .onDrop(of: ["public.url","public.file-url", "public.text"], isTargeted: nil) { providers -> Bool in
-                        print("dropped")
-                        print(providers)
+                        //print("dropped")
+                        //print(providers)
                         providers.forEach { item in
                             guard item.hasItemConformingToTypeIdentifier("public.text") else { return }
-                            //                                print(item)
                             item.loadDataRepresentation(forTypeIdentifier: "public.text") { data, error in
                                 guard error == nil else {
                                     print("loading prob \(String(describing: error))")
