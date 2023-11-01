@@ -132,6 +132,21 @@ struct NoteList: View {
         }
     }
     
+    func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
+        session.items.forEach { item in
+            guard item.itemProvider.hasItemConformingToTypeIdentifier("public.text") else { return }
+            item.itemProvider.loadDataRepresentation(forTypeIdentifier: "public.text") { data, error in
+                if let data = data {
+                    self.importText(from: data)
+                }
+            }
+        }
+    }
+
+    private func importText(from data: Data) {
+        print("Decode JSON from \(data.description).")
+    }
+    
     private func setupPredicate() {
         let stext = $searchText.wrappedValue
         let stags = $selectedTags.wrappedValue
