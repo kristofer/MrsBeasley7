@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import UniformTypeIdentifiers
 
 //class Note: NSManagedObject {
 //}
@@ -51,7 +52,7 @@ struct NoteList: View {
     @State private var selectedSort: SortBy = .normal
     @State var showSettings = false
     @State private var columnVisibility = NavigationSplitViewVisibility.detailOnly
-
+    
     var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
             ShowTagArrayView(tags: $selectedTags)
@@ -59,16 +60,16 @@ struct NoteList: View {
                 .sheet(isPresented: $showSettings) {
                     SettingsView()
                 }
-
+            
             // Main List
             List(selection: $noteId) {
                 ForEach(notes,  id: \.self) { aNote in
                     NoteRow(note: aNote)
                 }
                 .onDelete(perform: deleteNotes)
-//                    Section(header: Text(aTag.title!)) {
-//                        NoteSubList(tag: aTag, noteId: $noteId)
-//                }
+                //                    Section(header: Text(aTag.title!)) {
+                //                        NoteSubList(tag: aTag, noteId: $noteId)
+                //                }
             }
             .onChange(of: $searchText.wrappedValue, perform: { _ in
                 setupPredicate()
@@ -88,17 +89,18 @@ struct NoteList: View {
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "")
             .disableAutocorrection(true)
             .autocapitalization(.none)
-//            .onDrop(of: [.fileURL], isTargeted: nil) { providers in
-//                if let provider = providers.first(where: { $0.canLoadObject(ofClass: URL.self) } ) {
-//                    let _ = provider.loadObject(ofClass: URL.self) { object, error in
-//                        if let url = object {
-//                            print("DROP a url: \(url)")
-//                        }
-//                    }
-//                    return true
-//                }
-//                return false
-//            }
+            
+            //            .onDrop(of: [.fileURL], isTargeted: nil) { providers in
+            //                if let provider = providers.first(where: { $0.canLoadObject(ofClass: URL.self) } ) {
+            //                    let _ = provider.loadObject(ofClass: URL.self) { object, error in
+            //                        if let url = object {
+            //                            print("DROP a url: \(url)")
+            //                        }
+            //                    }
+            //                    return true
+            //                }
+            //                return false
+            //            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
@@ -114,7 +116,28 @@ struct NoteList: View {
                     Button(action: addNote) {
                         Label("Add Note", systemImage: "plus")
                     }
+                    .onDrop(of: ["public.url","public.file-url", "public.text"], isTargeted: nil) { providers -> Bool in
+                        print("dropped")
+                        print(providers)
+                        providers.forEach { item in
+                            guard item.hasItemConformingToTypeIdentifier("public.text") else { return }
+                            //                                print(item)
+                            item.loadDataRepresentation(forTypeIdentifier: "public.text") { data, error in
+                                guard error == nil else {
+                                    print("loading prob \(String(describing: error))")
+                                    return
+                                }
+                                let fname = item.suggestedName?.split(separator: ".").map(String.init).first ?? "unknown"
+                                if let data = data {
+                                    self.importText(from: data, to: fname)
+                                }
+                            }
+                        }
+                        return true
+                    }
+                    
                 }
+                
             }
             HStack{
                 SortByView(selectedOption: $selectedSort)
@@ -137,14 +160,14 @@ struct NoteList: View {
             guard item.itemProvider.hasItemConformingToTypeIdentifier("public.text") else { return }
             item.itemProvider.loadDataRepresentation(forTypeIdentifier: "public.text") { data, error in
                 if let data = data {
-                    self.importText(from: data)
+                    self.importText(from: data, to: "")
                 }
             }
         }
     }
-
-    private func importText(from data: Data) {
-        print("Decode JSON from \(data.description).")
+    
+    private func importText(from data: Data, to fname: String) {
+        addNoteWith(title: fname, body: String(decoding: data, as: UTF8.self))
     }
     
     private func setupPredicate() {
@@ -176,24 +199,28 @@ struct NoteList: View {
     
     private func addNote() {
         withAnimation {
-            let newNote = Note(context: viewContext)
-            newNote.timestamp = Date()
-            newNote.uuid = UUID()
-            newNote.body = ""
-            newNote.title = ""
-            newNote.mimetype = "text/plain"
-            
-            let stags = $selectedTags.wrappedValue
-
-            if !stags.isEmpty {
-                for t in stags {
-                    newNote.addToTags(t)
-                }
-            }
-            viewContext.flushChanges()
-            self.searchText = ""
-            self.noteId = newNote.self
+            addNoteWith(title: "", body: "")
         }
+    }
+    
+    private func addNoteWith(title: String, body: String) {
+        let newNote = Note(context: viewContext)
+        newNote.timestamp = Date()
+        newNote.uuid = UUID()
+        newNote.body = body
+        newNote.title = title
+        newNote.mimetype = "text/plain"
+        
+        let stags = $selectedTags.wrappedValue
+        
+        if !stags.isEmpty {
+            for t in stags {
+                newNote.addToTags(t)
+            }
+        }
+        viewContext.flushChanges()
+        self.searchText = ""
+        self.noteId = newNote.self
     }
     
     private func makeBackup() {
@@ -247,5 +274,5 @@ struct SelectedTagsView : View {
             }
         }
     }
-
+    
 }
