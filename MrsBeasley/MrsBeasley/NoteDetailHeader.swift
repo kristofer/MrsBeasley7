@@ -30,13 +30,7 @@ struct NoteDetailHeader: View {
                     }
                 }
             }
-            .padding()
+            .padding(5)
         }
-    }
-}
-
-struct NoteDetailHeader_Previews: PreviewProvider {
-    static var previews: some View {
-        EmptyView()
     }
 }

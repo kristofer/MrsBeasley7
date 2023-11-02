@@ -16,9 +16,10 @@ struct NoteMainView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            NoteDetailHeader(note: note)
             if let mt = note.mimetype, mt == "text/plain" {
                 NoteTextEditor(note: note)
+            } else {
+                NoteDetailHeader(note: note)
             }
             if let mt = note.mimetype, mt == "text/html" {
                 if let thisUrl = URL(string:note.body!){

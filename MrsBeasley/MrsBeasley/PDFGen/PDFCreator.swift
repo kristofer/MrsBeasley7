@@ -11,13 +11,14 @@ import CoreGraphics
 import SwiftUI
 
 class PdfCreator : NSObject {
-    @AppStorage("showFooter") private var showFooter = false
-    @AppStorage("showTagline") private var showTagline = false
-    @AppStorage("showAuthor") private var showAuthor = false
-    @AppStorage("showTitle") private var showTitle = false
-    @AppStorage("showDate") private var showDate = false
-    @AppStorage("yourTagline") private var tagline: String = ""
-    @AppStorage("yourAuthor") private var author: String = ""
+
+    @Default(\.showFooter) var showFooter
+    @Default(\.showTagline) var showTagline
+    @Default(\.showAuthor) var showAuthor
+    @Default(\.showTitle) var showTitle
+    @Default(\.showDate) var showDate
+    @Default(\.tagline) var tagline
+    @Default(\.author) var author
 
     private var pageRect : CGRect
     private var renderer : UIGraphicsPDFRenderer?
@@ -119,17 +120,6 @@ extension PdfCreator {
         }
 
         UIGraphicsEndPDFContext()
-        
-//        if let renderer = self.renderer {
-//
-//            let data = renderer.pdfData  { ctx in
-//                ctx.beginPage()
-//                addTitle(title: title)
-//                addBody(body: body)
-//            }
-//            return data
-//        }
-//        return nil
         return pdfData as Data
     }
 }

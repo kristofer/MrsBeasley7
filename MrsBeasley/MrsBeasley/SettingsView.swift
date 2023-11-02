@@ -7,16 +7,51 @@
 
 import SwiftUI
 
+public class Defaults: ObservableObject {
+    @AppStorage("showFooter") public var showFooter = false
+    @AppStorage("showTagline") public var showTagline = false
+    @AppStorage("showAuthor") public var showAuthor = false
+    @AppStorage("showTitle") public var showTitle = false
+    @AppStorage("showDate") public var showDate = false
+    @AppStorage("yourTagline") public var tagline = "ruit oceano nox"
+    @AppStorage("yourAuthor") public var author = "kyounger"
+    public static let shared = Defaults()
+}
+
+@propertyWrapper
+public struct Default<T>: DynamicProperty {
+    @ObservedObject private var defaults: Defaults
+    private let keyPath: ReferenceWritableKeyPath<Defaults, T>
+    public init(_ keyPath: ReferenceWritableKeyPath<Defaults, T>, defaults: Defaults = .shared) {
+        self.keyPath = keyPath
+        self.defaults = defaults
+    }
+
+    public var wrappedValue: T {
+        get { defaults[keyPath: keyPath] }
+        nonmutating set { defaults[keyPath: keyPath] = newValue }
+    }
+
+    public var projectedValue: Binding<T> {
+        Binding(
+            get: { defaults[keyPath: keyPath] },
+            set: { value in
+                defaults[keyPath: keyPath] = value
+            }
+        )
+    }
+}
+
 struct SettingsView: View {
     
-    @AppStorage("showFooter") private var showFooter = false
-    @AppStorage("showTagline") private var showTagline = false
-    @AppStorage("showAuthor") private var showAuthor = false
-    @AppStorage("showTitle") private var showTitle = false
-    @AppStorage("showDate") private var showDate = false
-    @AppStorage("yourTagline") private var tagline = "ruit oceano nox"
-    @AppStorage("yourAuthor") private var author = "kyounger"
-    
+    @Default(\.showFooter) var showFooter
+    @Default(\.showTagline) var showTagline
+    @Default(\.showAuthor) var showAuthor
+    @Default(\.showTitle) var showTitle
+    @Default(\.showDate) var showDate
+    @Default(\.tagline) var tagline
+    @Default(\.author) var author
+
     @Environment(\.dismiss) var dismiss
     
     var body: some View {

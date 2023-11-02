@@ -18,16 +18,21 @@ struct NoteTextEditor: View {
     
     @State var publisher = PassthroughSubject<String?, Never>()
     @State var delaySeconds = 5.0
+    @State private var isShowingFindNavigator = false
+
         
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 15, style: .continuous)
                 .fill(.white)
                 .shadow(radius: 10)
+                .padding(5)
             
             VStack(alignment: .leading) {
+                NoteDetailHeader(note: note)
                 Divider()
                  TextEditor(text: $note.body.toUnwrapped(defaultValue: "no body"))
+                    .findNavigator(isPresented: $isShowingFindNavigator)
                     .font(.custom("Inconsolata", size: editFontsize))
                     .padding(5)
                 Divider()
@@ -65,10 +70,8 @@ struct NoteTextEditor: View {
                     .onAppear() {
                         if UIDevice.current.localizedModel == "iPhone" {
                             self.editFontsize = 16.0
-                             print("This is an iPhone")
                         } else if UIDevice.current.localizedModel == "iPad" {
                             self.editFontsize = 22.0
-                             print("This is an iPad")
                         }
                     }
                     .sheet(isPresented: $showPDFPanel) {
@@ -78,6 +81,9 @@ struct NoteTextEditor: View {
         .toolbar {
             Text("Ruit Oceano Nox")
                 .font(.subheadline).italic()
+            Button("Find") {
+                isShowingFindNavigator.toggle()
+            }
             Button("Save", action: {save()})
                 .controlSize(.small)
                 .buttonStyle(.borderedProminent)
