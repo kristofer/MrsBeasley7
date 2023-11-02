@@ -28,7 +28,11 @@ struct SelectTag: View {
                 note.removeTag(self.tag)
             }
         } label: {
-            Text(tag.title ?? "bogus tag")
+            HStack{
+                Image(systemName: tag.iconForTag())
+                    .imageScale(.medium)
+                Text(tag.title ?? "bogus tag")
+            }
                 .foregroundColor(isSelected ? .white : .accentColor)
                 .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
                 .background(

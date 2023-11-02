@@ -10,6 +10,12 @@ import SwiftUI
 import CoreData
 
 class Tag: NSManagedObject  {
+    
+    public var tagkind: TagKinds {
+        get {
+            return TagKinds(rawValue: Int(self.kind)) ?? .plain
+        }
+    }
 }
 
 enum TagKinds: Int, CaseIterable { //, Identifiable {
@@ -19,6 +25,7 @@ enum TagKinds: Int, CaseIterable { //, Identifiable {
     case folder
     case bookmark
     case file
+    
 }
 
 extension Tag {
@@ -32,6 +39,21 @@ extension Tag {
         self.kind = 0
     }
     
+    func iconForTag() -> String {
+        switch self.tagkind {
+        case  .plain :
+            return "tag"
+        case  .folder :
+            return "folder"
+        case  .bookmark :
+            return "bookmark"
+        case  .file :
+            return "doc"
+//        default:
+//            //print("weird \(self.mimetype)")
+//            return "bookmark"
+        }
+    }
 }
 
 extension Tag {

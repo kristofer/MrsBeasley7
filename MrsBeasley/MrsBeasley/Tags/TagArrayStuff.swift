@@ -23,15 +23,19 @@ struct ShowTagArrayView: View {
                     //Text("[")
                     LazyHStack {
                         ForEach(Array(tags), id: \.self) { tag in
-                            Text(tag.title ?? "??")
-                                .font(.caption)
-                                .foregroundColor(Color.accentColor)
-                                .padding(2)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .stroke(Color.accentColor, lineWidth: 1)
-                                )
-                                .padding(1)
+                            HStack {
+                                Image(systemName: tag.iconForTag())
+                                    .imageScale(.medium)
+                                Text(tag.title ?? "bogus tag")
+                            }
+                            .font(.caption)
+                            .foregroundColor(Color.accentColor)
+                            .padding(2)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(Color.accentColor, lineWidth: 1)
+                            )
+                            .padding(1)
                         }
                     }
                 }
@@ -66,17 +70,21 @@ struct SelectArrayTag: View {
                 tags.remove(at: (tags.firstIndex(of: tag)!))
             }
         } label: {
-            Text(tag.title ?? "bogus tag")
-                .foregroundColor(isSelected ? .white : .accentColor)
-                .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
-                .background(
-                    RoundedRectangle(cornerRadius: 10)
-                        .foregroundColor(isSelected ? .accentColor : .white)
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(isSelected ? .white : .accentColor, lineWidth: 1)
-                )
+            HStack {
+                Image(systemName: tag.iconForTag())
+                    .imageScale(.medium)
+                Text(tag.title ?? "bogus tag")
+            }
+            .foregroundColor(isSelected ? .white : .accentColor)
+            .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
+            .background(
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundColor(isSelected ? .accentColor : .white)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(isSelected ? .white : .accentColor, lineWidth: 1)
+            )
         }
     }
 }
@@ -85,10 +93,10 @@ struct SelectArrayTag: View {
 struct TagArrayHandlerView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.dismiss) var dismiss
-
+    
     //var tag: Tag
     @Binding var tags: [Tag]
-
+    
     var body: some View {
         Group {
             VStack {
@@ -99,10 +107,6 @@ struct TagArrayHandlerView: View {
                 }
                 .padding()
                 Divider()
-//                Text("Add Tag")
-//                    .padding(20)
-//                NewTagView()
-//                Divider()
                 Button("Done") {
                     viewContext.flushChanges()
                     dismiss()
@@ -110,6 +114,6 @@ struct TagArrayHandlerView: View {
             }
         }
         .padding()
-
+        
     }
 }

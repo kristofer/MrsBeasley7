@@ -23,7 +23,11 @@ struct ShowTagView: View {
                 //Text("[")
                 LazyHStack {
                     ForEach(Array(note.tags as? Set<Tag> ?? [] ), id: \.self) { tag in
-                        Text(tag.title ?? "??")
+                        HStack{
+                            Image(systemName: tag.iconForTag())
+                                .imageScale(.medium)
+                            Text(tag.title ?? "??")
+                        }
                             .font(.caption)
                             .foregroundColor(Color.accentColor)
                             .padding(2)
