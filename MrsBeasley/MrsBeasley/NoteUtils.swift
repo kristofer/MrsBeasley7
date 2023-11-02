@@ -27,6 +27,18 @@ class Note: NSManagedObject, Codable  {
         self.mimetype = "text/plain"
     }
     
+    static func createNote(vc: NSManagedObjectContext,
+                           title: String, body: String, type: String) -> Note {
+        let newNote = Note(context: vc)
+        newNote.timestamp = Date()
+        newNote.lastmodified = Date()
+        newNote.uuid = UUID()
+        newNote.body = body
+        newNote.title = title
+        newNote.mimetype = type
+        return newNote
+    }
+    
     static func allNotes(vc: NSManagedObjectContext) -> [Note] {
         //tfDebug("running fetch on all tags")
         var fetchedNotes = [Note]()

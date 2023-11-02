@@ -123,17 +123,31 @@ struct NoteList: View {
                         //print("dropped")
                         //print(providers)
                         providers.forEach { item in
-                            guard item.hasItemConformingToTypeIdentifier("public.text") else { return }
-                            item.loadDataRepresentation(forTypeIdentifier: "public.text") { data, error in
-                                guard error == nil else {
-                                    print("loading prob \(String(describing: error))")
-                                    return
-                                }
-                                let fname = item.suggestedName?.split(separator: ".").map(String.init).first ?? "unknown"
-                                if let data = data {
-                                    self.importText(from: data, to: fname)
+                            if item.hasItemConformingToTypeIdentifier("public.text") {
+                                item.loadDataRepresentation(forTypeIdentifier: "public.text") { data, error in
+                                    guard error == nil else {
+                                        print("loading prob \(String(describing: error))")
+                                        return
+                                    }
+                                    let fname = item.suggestedName?.split(separator: ".").map(String.init).first ?? "unknown"
+                                    if let data = data {
+                                        self.importText(from: data, to: fname)
+                                    }
                                 }
                             }
+                            if item.hasItemConformingToTypeIdentifier("public.url") {
+                                item.loadDataRepresentation(forTypeIdentifier: "public.url") { data, error in
+                                    guard error == nil else {
+                                        print("loading prob \(String(describing: error))")
+                                        return
+                                    }
+                                    let fname = item.suggestedName ?? "unknown"
+                                    if let data = data {
+                                        self.addListWith(title: fname, url: String(decoding: data, as: UTF8.self))
+                                    }
+                                }
+                            }
+
                         }
                         return true
                     }
@@ -222,16 +236,22 @@ struct NoteList: View {
         }
     }
     
-    private func addNoteWith(title: String, body: String) {
-        let newNote = Note(context: viewContext)
-        newNote.timestamp = Date()
-        newNote.uuid = UUID()
-        newNote.body = body
-        newNote.title = title
-        newNote.mimetype = "text/plain"
-        
+    private func addListWith(title: String, url: String) {
         let stags = $selectedTags.wrappedValue
-        
+        let newNote = Note.createNote(vc: viewContext, title: title, body: url, type: "text/html")
+        if !stags.isEmpty {
+            for t in stags {
+                newNote.addToTags(t)
+            }
+        }
+        viewContext.flushChanges()
+        self.searchText = ""
+        self.noteId = newNote.self
+    }
+
+    private func addNoteWith(title: String, body: String) {
+        let stags = $selectedTags.wrappedValue
+        let newNote = Note.createNote(vc: viewContext, title: title, body: body, type: "text/plain")
         if !stags.isEmpty {
             for t in stags {
                 newNote.addToTags(t)

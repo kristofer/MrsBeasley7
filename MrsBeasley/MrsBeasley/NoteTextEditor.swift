@@ -81,9 +81,9 @@ struct NoteTextEditor: View {
         .toolbar {
             Text("Ruit Oceano Nox")
                 .font(.subheadline).italic()
-            Button("Find") {
-                isShowingFindNavigator.toggle()
-            }
+//            Button("Find") {
+//                isShowingFindNavigator.toggle()
+//            }
             Button("Save", action: {save()})
                 .controlSize(.small)
                 .buttonStyle(.borderedProminent)
@@ -122,11 +122,12 @@ struct NoteTextEditor: View {
     private func save() {
         if moc.hasChanges {
             note.lastmodified = Date()
-            print("saving...")
+//            print("saving...")
             moc.flushChanges()
-        } else {
-            print("nothing to save.")
         }
+//        else {
+//            print("nothing to save.")
+//        }
     }
 }
 
