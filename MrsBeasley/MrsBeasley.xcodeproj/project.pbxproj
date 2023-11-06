@@ -16,6 +16,13 @@
 		5C0140A82ADADB3B00A6147F /* PDFPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0140A72ADADB3B00A6147F /* PDFPreviewView.swift */; };
 		5C0140AA2ADAE22900A6147F /* PDFViewUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0140A92ADAE22900A6147F /* PDFViewUI.swift */; };
 		5C0140AE2ADC41E100A6147F /* TagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0140AD2ADC41E100A6147F /* TagList.swift */; };
+		5C0E616C2AF94C7C00799F32 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0E616B2AF94C7C00799F32 /* Task.swift */; };
+		5C0E616E2AF94CCC00799F32 /* CheckboxStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0E616D2AF94CCC00799F32 /* CheckboxStyle.swift */; };
+		5C0E61702AF94CD600799F32 /* PriorityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0E616F2AF94CD600799F32 /* PriorityView.swift */; };
+		5C0E61722AF94CDB00799F32 /* TaskListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0E61712AF94CDB00799F32 /* TaskListRow.swift */; };
+		5C0E61762AF94D0100799F32 /* BlankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0E61732AF94D0100799F32 /* BlankView.swift */; };
+		5C0E61772AF94D0100799F32 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0E61742AF94D0100799F32 /* TaskListView.swift */; };
+		5C0E61782AF94D0100799F32 /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0E61752AF94D0100799F32 /* NewTaskView.swift */; };
 		5C2894932AE5C43400C07CCE /* NoteMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2894922AE5C43400C07CCE /* NoteMainView.swift */; };
 		5C2894952AE5C99800C07CCE /* NewURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2894942AE5C99800C07CCE /* NewURLView.swift */; };
 		5C2894BC2AE6E83000C07CCE /* foo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2894BB2AE6E83000C07CCE /* foo.swift */; };
@@ -104,6 +111,13 @@
 		5C0140A72ADADB3B00A6147F /* PDFPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFPreviewView.swift; sourceTree = "<group>"; };
 		5C0140A92ADAE22900A6147F /* PDFViewUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewUI.swift; sourceTree = "<group>"; };
 		5C0140AD2ADC41E100A6147F /* TagList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagList.swift; sourceTree = "<group>"; };
+		5C0E616B2AF94C7C00799F32 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		5C0E616D2AF94CCC00799F32 /* CheckboxStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckboxStyle.swift; sourceTree = "<group>"; };
+		5C0E616F2AF94CD600799F32 /* PriorityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PriorityView.swift; sourceTree = "<group>"; };
+		5C0E61712AF94CDB00799F32 /* TaskListRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListRow.swift; sourceTree = "<group>"; };
+		5C0E61732AF94D0100799F32 /* BlankView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlankView.swift; sourceTree = "<group>"; };
+		5C0E61742AF94D0100799F32 /* TaskListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
+		5C0E61752AF94D0100799F32 /* NewTaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
 		5C2894922AE5C43400C07CCE /* NoteMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteMainView.swift; sourceTree = "<group>"; };
 		5C2894942AE5C99800C07CCE /* NewURLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewURLView.swift; sourceTree = "<group>"; };
 		5C2894BB2AE6E83000C07CCE /* foo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = foo.swift; sourceTree = "<group>"; };
@@ -207,6 +221,20 @@
 			path = Tags;
 			sourceTree = "<group>";
 		};
+		5C0E616A2AF94C5300799F32 /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				5C0E61732AF94D0100799F32 /* BlankView.swift */,
+				5C0E61742AF94D0100799F32 /* TaskListView.swift */,
+				5C0E61752AF94D0100799F32 /* NewTaskView.swift */,
+				5C0E616F2AF94CD600799F32 /* PriorityView.swift */,
+				5C0E616D2AF94CCC00799F32 /* CheckboxStyle.swift */,
+				5C0E616B2AF94C7C00799F32 /* Task.swift */,
+				5C0E61712AF94CDB00799F32 /* TaskListRow.swift */,
+			);
+			path = Tasks;
+			sourceTree = "<group>";
+		};
 		5C1BEFE02AE9B0670017E564 /* SegmentListTry */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,6 +283,7 @@
 				5CFEFA262AF01E3500A5EA00 /* Unused */,
 				5CCD1CDD2ADDBF5400238939 /* MrsBeasley.entitlements */,
 				5CCD1CDE2ADEBF0300238939 /* Inconsolata-VariableFont.ttf */,
+				5C0E616A2AF94C5300799F32 /* Tasks */,
 				5C0140AC2ADC41CB00A6147F /* Tags */,
 				5C0140A12AD996BA00A6147F /* NoteList.swift */,
 				5CD2CCB22ADD98CB00B0B90F /* NoteUtils.swift */,
@@ -491,10 +520,14 @@
 			files = (
 				5C0140A62ADADAA000A6147F /* PDFViewModel.swift in Sources */,
 				5C2894952AE5C99800C07CCE /* NewURLView.swift in Sources */,
+				5C0E61702AF94CD600799F32 /* PriorityView.swift in Sources */,
 				5CD2CCB32ADD98CB00B0B90F /* NoteUtils.swift in Sources */,
 				5C2894932AE5C43400C07CCE /* NoteMainView.swift in Sources */,
+				5C0E616C2AF94C7C00799F32 /* Task.swift in Sources */,
 				5C01409A2AD97F7A00A6147F /* NoteRow.swift in Sources */,
 				5C92C8CF2AE44DC200F593BD /* TagCloudView.swift in Sources */,
+				5C0E61782AF94D0100799F32 /* NewTaskView.swift in Sources */,
+				5C0E61772AF94D0100799F32 /* TaskListView.swift in Sources */,
 				5C92C8B72AE18F3500F593BD /* SettingsView.swift in Sources */,
 				5C92C8D02AE44DC200F593BD /* TagView.swift in Sources */,
 				5C0140AA2ADAE22900A6147F /* PDFViewUI.swift in Sources */,
@@ -502,6 +535,7 @@
 				5C0140A22AD996BA00A6147F /* NoteList.swift in Sources */,
 				5CC528802AD97D34002A30C9 /* Persistence.swift in Sources */,
 				5C0140A02AD9952700A6147F /* NoteDetailHeader.swift in Sources */,
+				5C0E61722AF94CDB00799F32 /* TaskListRow.swift in Sources */,
 				5C92C8D52AE5451A00F593BD /* SelectTag.swift in Sources */,
 				5CC528792AD97D32002A30C9 /* ContentView.swift in Sources */,
 				5C92C8CB2AE40D1600F593BD /* TagUtils.swift in Sources */,
@@ -520,7 +554,9 @@
 				5C2894DF2AE97F6000C07CCE /* NoteSubList.swift in Sources */,
 				5C0140A82ADADB3B00A6147F /* PDFPreviewView.swift in Sources */,
 				5C0140A42ADADA0E00A6147F /* PDFCreator.swift in Sources */,
+				5C0E616E2AF94CCC00799F32 /* CheckboxStyle.swift in Sources */,
 				5C2894D62AE6ED7700C07CCE /* Extensions.swift in Sources */,
+				5C0E61762AF94D0100799F32 /* BlankView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

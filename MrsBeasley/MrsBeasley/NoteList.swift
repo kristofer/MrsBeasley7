@@ -54,6 +54,7 @@ struct NoteList: View {
     @State private var selectedTags: [Tag] = []
     @State private var selectedSort: SortBy = .normal
     @State var showSettings = false
+    @State var showTasks = false
     @State private var columnVisibility = NavigationSplitViewVisibility.detailOnly
     
     var body: some View {
@@ -63,7 +64,10 @@ struct NoteList: View {
                 .sheet(isPresented: $showSettings) {
                     SettingsView()
                 }
-            
+                .sheet(isPresented: $showTasks) {
+                    TaskListView()
+                }
+
             // Main List
             List(selection: $noteId) {
                 ForEach(notes,  id: \.self) { aNote in
@@ -162,9 +166,11 @@ struct NoteList: View {
                     })
 
                 Spacer()
-                Button("[Do Backup]") {
-                    makeBackup()
+                Button("\(Image(systemName: "list.bullet.clipboard")) Tasks") {
+                    showTasks.toggle()
                 }
+                .buttonStyle(.borderedProminent)
+
             }
         } detail: {
             if noteId != nil {
@@ -257,19 +263,6 @@ struct NoteList: View {
                 newNote.addToTags(t)
             }
         }
-        viewContext.flushChanges()
-        self.searchText = ""
-        self.noteId = newNote.self
-    }
-    
-    private func makeBackup() {
-        let notearray = Array(notes)
-        let newNote = Note(context: viewContext)
-        newNote.body = Note.encodeToJSONString(notearray)
-        newNote.timestamp = .distantPast //Calendar.current.date(byAdding: .year, value: -23, to: Date())!
-        newNote.uuid = UUID()
-        newNote.title = "Backup of Notes"
-        newNote.mimetype = "text/plain"
         viewContext.flushChanges()
         self.searchText = ""
         self.noteId = newNote.self

@@ -94,9 +94,28 @@ struct SettingsView: View {
                 DisclosureGroup("Add a URL") {
                     NewURLView()
                 }
+                Button("[Do Backup]") {
+                    makeBackup()
+                }
+
             }
         }
     }
+    
+    private func makeBackup() {
+//        let notearray = Array(notes)
+//        let newNote = Note(context: viewContext)
+//        newNote.body = Note.encodeToJSONString(notearray)
+//        newNote.timestamp = .distantPast //Calendar.current.date(byAdding: .year, value: -23, to: Date())!
+//        newNote.uuid = UUID()
+//        newNote.title = "Backup of Notes"
+//        newNote.mimetype = "text/plain"
+//        viewContext.flushChanges()
+//        self.searchText = ""
+//        self.noteId = newNote.self
+    }
+    
+
 }
 
 struct SettingsView_Previews: PreviewProvider {
