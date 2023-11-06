@@ -123,7 +123,7 @@ struct NoteList: View {
                     Button(action: addNote) {
                         Label("Add Note", systemImage: "plus")
                     }
-                    .onDrop(of: ["public.url","public.file-url", "public.text"], isTargeted: nil) { providers -> Bool in
+                    .onDrop(of: ["public.url","public.file-url", "public.text", UTType.pdf.identifier], isTargeted: nil) { providers -> Bool in
                         //print("dropped")
                         //print(providers)
                         providers.forEach { item in
@@ -136,6 +136,18 @@ struct NoteList: View {
                                     let fname = item.suggestedName?.split(separator: ".").map(String.init).first ?? "unknown"
                                     if let data = data {
                                         self.importText(from: data, to: fname)
+                                    }
+                                }
+                            }
+                            if item.hasItemConformingToTypeIdentifier(UTType.pdf.identifier) {
+                                item.loadDataRepresentation(forTypeIdentifier: UTType.pdf.identifier) { data, error in
+                                    guard error == nil else {
+                                        print("loading prob \(String(describing: error))")
+                                        return
+                                    }
+                                    let fname = item.suggestedName ?? "untitled pdf"//?.split(separator: ".").map(String.init).first ?? "unknown"
+                                    if let data = data {
+                                        self.importPDF(from: data, to: fname)
                                     }
                                 }
                             }
@@ -195,7 +207,10 @@ struct NoteList: View {
     private func importText(from data: Data, to fname: String) {
         addNoteWith(title: fname, body: String(decoding: data, as: UTF8.self))
     }
-    
+    private func importPDF(from data: Data, to fname: String) {
+        addPDFWith(title: fname, blob: data)
+    }
+
     private func setupPredicate() {
         let stext = $searchText.wrappedValue
         let stags = $selectedTags.wrappedValue
@@ -245,6 +260,20 @@ struct NoteList: View {
     private func addListWith(title: String, url: String) {
         let stags = $selectedTags.wrappedValue
         let newNote = Note.createNote(vc: viewContext, title: title, body: url, type: "text/html")
+        if !stags.isEmpty {
+            for t in stags {
+                newNote.addToTags(t)
+            }
+        }
+        viewContext.flushChanges()
+        self.searchText = ""
+        self.noteId = newNote.self
+    }
+
+    private func addPDFWith(title: String, blob: Data) {
+        let stags = $selectedTags.wrappedValue
+        let newNote = Note.createNote(vc: viewContext, title: title, body: "", type: UTType.pdf.preferredMIMEType!)
+        newNote.blob = blob
         if !stags.isEmpty {
             for t in stags {
                 newNote.addToTags(t)
