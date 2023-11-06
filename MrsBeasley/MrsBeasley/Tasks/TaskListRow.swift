@@ -1,3 +1,7 @@
+// https://github.com/abdelrahmanTD/TaskToDo
+// very cool and easy to inject.
+// had to make changes to the Data Model in the xcdatamodel
+
 import SwiftUI
 
 struct TaskListRow: View {
