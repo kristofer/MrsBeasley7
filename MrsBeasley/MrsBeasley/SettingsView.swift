@@ -57,7 +57,7 @@ struct SettingsView: View {
     var body: some View {
         VStack {
         HStack {
-            Text("Settings").font(.title2)
+            Text("Settings").font(.title2).foregroundStyle(.accent)
             Spacer()
             Button("Done", action: { dismiss() })
                 .buttonStyle(.borderedProminent)
@@ -85,15 +85,20 @@ struct SettingsView: View {
                     Toggle("Show Today Date on footer", isOn: $showDate)
                     Text("_preview of footer_")
                 }
+                .foregroundStyle(.accent)
+
                 DisclosureGroup("Add a Tag") {
                     NewTagView()
                 }
+                .foregroundStyle(.accent)
                 DisclosureGroup("Edit a Tag") {
                     TagList()
                 }
+                .foregroundStyle(.accent)
                 DisclosureGroup("Add a URL") {
                     NewURLView()
                 }
+                .foregroundStyle(.accent)
                 Button("[Do Backup]") {
                     makeBackup()
                 }

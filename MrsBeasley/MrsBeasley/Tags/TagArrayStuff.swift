@@ -42,8 +42,11 @@ struct ShowTagArrayView: View {
                 .frame(height: 28)
             }
             .sheet(isPresented: $showTags) {
-                TagArrayHandlerView(tags: $tags)
-                    .presentationDetents([.medium])
+                GeometryReader { proxy in
+                    TagArrayHandlerView(tags: $tags)
+                        .frame(width: proxy.size.width)
+                        //.frame(width: proxy.size.width, height: proxy.size.height)
+                }
             }
             Button("\(Image(systemName: "tag"))") {
                 showTags.toggle()
@@ -101,6 +104,8 @@ struct TagArrayHandlerView: View {
         Group {
             VStack {
                 Text("Select Tags")
+                    .foregroundStyle(.accent)
+                    .font(.headline)
                     .padding(20)
                 TagCloudView(data: Tag.allTags(vc: viewContext)) { tag in
                     SelectArrayTag(isSelected: tags.contains(tag), tag: tag, tags: $tags)
@@ -111,6 +116,8 @@ struct TagArrayHandlerView: View {
                     viewContext.flushChanges()
                     dismiss()
                 }
+                .buttonStyle(.borderedProminent)
+
             }
         }
         .padding()
