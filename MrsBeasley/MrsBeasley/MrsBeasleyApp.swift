@@ -10,28 +10,28 @@ import SwiftUI
 @main
 struct MrsBeasleyApp: App {
     let persistenceController = PersistenceController.shared
-
+    
     @Environment(\.scenePhase) private var scenePhase
-
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NoteList()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                //.environment(\.font, Font.custom("Inconsolata", size: 22))
+            //.environment(\.font, Font.custom("Inconsolata", size: 22))
         }
         .onChange(of: scenePhase) { phase in
             switch phase {
-             case .active:
-                 print("active")
-             case .inactive:
-                 print("inactive")
-             case .background:
-                 print("background")
+            case .active:
+                print("active")
+            case .inactive:
+                print("inactive")
+            case .background:
+                print("background")
                 persistenceController.container.viewContext.flushChanges()
-             @unknown default:
-                 print("unknown ScenePhase error")
-             }
-         }
+            @unknown default:
+                print("unknown ScenePhase error")
+            }
+        }
     }
 }
 

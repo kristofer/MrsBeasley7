@@ -1,5 +1,7 @@
 //
 //  NoteList.swift
+// This is the Beast of the app.
+// Too much here.
 //  MrsBeasley
 //
 //  Created by Kristofer Younger on 10/13/23.
@@ -9,14 +11,9 @@ import SwiftUI
 import CoreData
 import UniformTypeIdentifiers
 
-//class Note: NSManagedObject {
-//}
-//
-//class Tag: NSManagedObject {
-//}
 enum SortBy: CaseIterable, Identifiable, CustomStringConvertible {
-    case normal
     case saved
+    case normal
     case alpha
     
     var id: Self { self }
@@ -37,14 +34,13 @@ struct NoteList: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Note.timestamp, ascending: false)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Note.lastmodified, ascending: false)],
         //        predicate: nil,
         animation: .default)
     private var notes: FetchedResults<Note>
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Tag.title, ascending: true)],
-        //        predicate: nil,
         animation: .default)
     private var tags: FetchedResults<Tag>
     
@@ -52,7 +48,7 @@ struct NoteList: View {
     @State private var searchText: String = ""
     @State private var selectedTag: Tag? = nil
     @State private var selectedTags: [Tag] = []
-    @State private var selectedSort: SortBy = .normal
+    @State private var selectedSort: SortBy = .saved
     @State var showSettings = false
     @State var showTasks = false
     @State private var columnVisibility = NavigationSplitViewVisibility.detailOnly
@@ -74,9 +70,6 @@ struct NoteList: View {
                     NoteRow(note: aNote)
                 }
                 .onDelete(perform: deleteNotes)
-                //                    Section(header: Text(aTag.title!)) {
-                //                        NoteSubList(tag: aTag, noteId: $noteId)
-                //                }
             }
             .onChange(of: $searchText.wrappedValue, perform: { _ in
                 setupPredicate()
@@ -88,27 +81,13 @@ struct NoteList: View {
             }
             .onAppear() {
                 if noteId == nil {
-                    //print("NO SELECTION")
                     columnVisibility = .all
                 }
             }
-            //.navigationTitle("Notes")
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "")
             .disableAutocorrection(true)
             .autocapitalization(.none)
-            
-            //            .onDrop(of: [.fileURL], isTargeted: nil) { providers in
-            //                if let provider = providers.first(where: { $0.canLoadObject(ofClass: URL.self) } ) {
-            //                    let _ = provider.loadObject(ofClass: URL.self) { object, error in
-            //                        if let url = object {
-            //                            print("DROP a url: \(url)")
-            //                        }
-            //                    }
-            //                    return true
-            //                }
-            //                return false
-            //            }
-            .toolbar {
+                        .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
                 }
@@ -125,7 +104,7 @@ struct NoteList: View {
                     }
                     .onDrop(of: ["public.url","public.file-url", "public.text", UTType.pdf.identifier], isTargeted: nil) { providers -> Bool in
                         //print("dropped")
-                        //print(providers)
+                        print(providers)
                         providers.forEach { item in
                             if item.hasItemConformingToTypeIdentifier("public.text") {
                                 item.loadDataRepresentation(forTypeIdentifier: "public.text") { data, error in
@@ -135,7 +114,7 @@ struct NoteList: View {
                                     }
                                     let fname = item.suggestedName?.split(separator: ".").map(String.init).first ?? "unknown"
                                     if let data = data {
-                                        self.importText(from: data, to: fname)
+                                        self.addNoteWith(title: fname, body: String(decoding: data, as: UTF8.self))
                                     }
                                 }
                             }
@@ -147,7 +126,8 @@ struct NoteList: View {
                                     }
                                     let fname = item.suggestedName ?? "untitled pdf"//?.split(separator: ".").map(String.init).first ?? "unknown"
                                     if let data = data {
-                                        self.importPDF(from: data, to: fname)
+                                        self.addPDFWith(title: fname, blob: data)
+
                                     }
                                 }
                             }
@@ -163,13 +143,10 @@ struct NoteList: View {
                                     }
                                 }
                             }
-
                         }
                         return true
                     }
-                    
                 }
-                
             }
             HStack{
                 SortByView(selectedOption: $selectedSort)
@@ -193,23 +170,6 @@ struct NoteList: View {
         }
     }
     
-    func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
-        session.items.forEach { item in
-            guard item.itemProvider.hasItemConformingToTypeIdentifier("public.text") else { return }
-            item.itemProvider.loadDataRepresentation(forTypeIdentifier: "public.text") { data, error in
-                if let data = data {
-                    self.importText(from: data, to: "")
-                }
-            }
-        }
-    }
-    
-    private func importText(from data: Data, to fname: String) {
-        addNoteWith(title: fname, body: String(decoding: data, as: UTF8.self))
-    }
-    private func importPDF(from data: Data, to fname: String) {
-        addPDFWith(title: fname, blob: data)
-    }
 
     private func setupPredicate() {
         let stext = $searchText.wrappedValue

@@ -40,15 +40,11 @@ class Note: NSManagedObject, Codable  {
     }
     
     static func allNotes(vc: NSManagedObjectContext) -> [Note] {
-        //tfDebug("running fetch on all tags")
         var fetchedNotes = [Note]()
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
         let dateSort = NSSortDescriptor(key:"title", ascending:true)
         fetchRequest.sortDescriptors = [dateSort]
         fetchedNotes = try! vc.fetch(fetchRequest) as! [Note]
-//        for t in fetchedTags {
-//            tfDebug("\(t.title!), [\(t.kind!)]")
-//        }
         return fetchedNotes
     }
 
@@ -125,7 +121,6 @@ extension Note {
 }
 
 extension Note {
-    //var fetchedNotes = [Note]()
     
     func downloadFile(fileURL: URL, note: Note) {
         let request = URLRequest(url:  URL(string: fileURL.absoluteString)!)

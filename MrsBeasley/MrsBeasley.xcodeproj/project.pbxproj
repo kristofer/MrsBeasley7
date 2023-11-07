@@ -25,7 +25,6 @@
 		5C0E61782AF94D0100799F32 /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0E61752AF94D0100799F32 /* NewTaskView.swift */; };
 		5C2894932AE5C43400C07CCE /* NoteMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2894922AE5C43400C07CCE /* NoteMainView.swift */; };
 		5C2894952AE5C99800C07CCE /* NewURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2894942AE5C99800C07CCE /* NewURLView.swift */; };
-		5C2894BC2AE6E83000C07CCE /* foo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2894BB2AE6E83000C07CCE /* foo.swift */; };
 		5C2894C42AE6E8AD00C07CCE /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2894C32AE6E8AD00C07CCE /* ShareViewController.swift */; };
 		5C2894C72AE6E8AD00C07CCE /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C2894C52AE6E8AD00C07CCE /* MainInterface.storyboard */; };
 		5C2894CB2AE6E8AD00C07CCE /* ArchiveTo.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 5C2894C12AE6E8AD00C07CCE /* ArchiveTo.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -49,7 +48,6 @@
 		5C92C8D52AE5451A00F593BD /* SelectTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C92C8D42AE5451A00F593BD /* SelectTag.swift */; };
 		5CA2CB452AEFF0E80002314D /* TagArrayStuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA2CB442AEFF0E80002314D /* TagArrayStuff.swift */; };
 		5CC528772AD97D32002A30C9 /* MrsBeasleyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC528762AD97D32002A30C9 /* MrsBeasleyApp.swift */; };
-		5CC528792AD97D32002A30C9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC528782AD97D32002A30C9 /* ContentView.swift */; };
 		5CC5287B2AD97D34002A30C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CC5287A2AD97D34002A30C9 /* Assets.xcassets */; };
 		5CC5287E2AD97D34002A30C9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CC5287D2AD97D34002A30C9 /* Preview Assets.xcassets */; };
 		5CC528802AD97D34002A30C9 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5287F2AD97D34002A30C9 /* Persistence.swift */; };
@@ -120,7 +118,6 @@
 		5C0E61752AF94D0100799F32 /* NewTaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
 		5C2894922AE5C43400C07CCE /* NoteMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteMainView.swift; sourceTree = "<group>"; };
 		5C2894942AE5C99800C07CCE /* NewURLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewURLView.swift; sourceTree = "<group>"; };
-		5C2894BB2AE6E83000C07CCE /* foo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = foo.swift; sourceTree = "<group>"; };
 		5C2894C12AE6E8AD00C07CCE /* ArchiveTo.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ArchiveTo.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C2894C32AE6E8AD00C07CCE /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		5C2894C62AE6E8AD00C07CCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
@@ -142,7 +139,6 @@
 		5CA2CB442AEFF0E80002314D /* TagArrayStuff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagArrayStuff.swift; sourceTree = "<group>"; };
 		5CC528732AD97D32002A30C9 /* MrsBeasley.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MrsBeasley.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CC528762AD97D32002A30C9 /* MrsBeasleyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MrsBeasleyApp.swift; sourceTree = "<group>"; };
-		5CC528782AD97D32002A30C9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5CC5287A2AD97D34002A30C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5CC5287D2AD97D34002A30C9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5CC5287F2AD97D34002A30C9 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -195,6 +191,7 @@
 		5C0140AB2ADB397C00A6147F /* PDFGen */ = {
 			isa = PBXGroup;
 			children = (
+				5C2894DA2AE83CF000C07CCE /* PDFKitView.swift */,
 				5C0140A32ADADA0E00A6147F /* PDFCreator.swift */,
 				5C0140A52ADADAA000A6147F /* PDFViewModel.swift */,
 				5C0140A92ADAE22900A6147F /* PDFViewUI.swift */,
@@ -290,10 +287,8 @@
 				5C01409F2AD9952700A6147F /* NoteDetailHeader.swift */,
 				5C01409B2AD9819C00A6147F /* NoteTextEditor.swift */,
 				5C2894922AE5C43400C07CCE /* NoteMainView.swift */,
-				5C2894DA2AE83CF000C07CCE /* PDFKitView.swift */,
-				5CC528762AD97D32002A30C9 /* MrsBeasleyApp.swift */,
-				5CC528782AD97D32002A30C9 /* ContentView.swift */,
 				5C0140992AD97F7A00A6147F /* NoteRow.swift */,
+				5CC528762AD97D32002A30C9 /* MrsBeasleyApp.swift */,
 				5C92C8B62AE18F3500F593BD /* SettingsView.swift */,
 				5C2894942AE5C99800C07CCE /* NewURLView.swift */,
 				5C1BEFE02AE9B0670017E564 /* SegmentListTry */,
@@ -304,7 +299,6 @@
 				5CC528812AD97D34002A30C9 /* MrsBeasley.xcdatamodeld */,
 				5CC5287C2AD97D34002A30C9 /* Preview Content */,
 				5C0140AB2ADB397C00A6147F /* PDFGen */,
-				5C2894BB2AE6E83000C07CCE /* foo.swift */,
 			);
 			path = MrsBeasley;
 			sourceTree = "<group>";
@@ -537,7 +531,6 @@
 				5C0140A02AD9952700A6147F /* NoteDetailHeader.swift in Sources */,
 				5C0E61722AF94CDB00799F32 /* TaskListRow.swift in Sources */,
 				5C92C8D52AE5451A00F593BD /* SelectTag.swift in Sources */,
-				5CC528792AD97D32002A30C9 /* ContentView.swift in Sources */,
 				5C92C8CB2AE40D1600F593BD /* TagUtils.swift in Sources */,
 				5C92C8D12AE44DC200F593BD /* FlowLayoutView.swift in Sources */,
 				5CA2CB452AEFF0E80002314D /* TagArrayStuff.swift in Sources */,
@@ -545,7 +538,6 @@
 				5C373D922ADD6E3C0066B0D7 /* ShowTagView.swift in Sources */,
 				5CCD1CE12ADED0A100238939 /* AttributedString+StyledMarkdown.swift in Sources */,
 				5CC528832AD97D34002A30C9 /* MrsBeasley.xcdatamodeld in Sources */,
-				5C2894BC2AE6E83000C07CCE /* foo.swift in Sources */,
 				5C92C8D32AE5447B00F593BD /* TagHandlerView.swift in Sources */,
 				5C2894DB2AE83CF000C07CCE /* PDFKitView.swift in Sources */,
 				5C2894DD2AE960AF00C07CCE /* NewTagView.swift in Sources */,
