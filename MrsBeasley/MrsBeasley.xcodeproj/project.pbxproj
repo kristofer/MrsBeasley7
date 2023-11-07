@@ -204,6 +204,7 @@
 		5C0140AC2ADC41CB00A6147F /* Tags */ = {
 			isa = PBXGroup;
 			children = (
+				5C0140AD2ADC41E100A6147F /* TagList.swift */,
 				5C373D912ADD6E3C0066B0D7 /* ShowTagView.swift */,
 				5CA2CB442AEFF0E80002314D /* TagArrayStuff.swift */,
 				5C92C8CA2AE40D1600F593BD /* TagUtils.swift */,
@@ -252,6 +253,19 @@
 			path = ArchiveTo;
 			sourceTree = "<group>";
 		};
+		5C7566A62AFAF4FC005BF9DE /* Notes */ = {
+			isa = PBXGroup;
+			children = (
+				5C0140A12AD996BA00A6147F /* NoteList.swift */,
+				5CD2CCB22ADD98CB00B0B90F /* NoteUtils.swift */,
+				5C01409F2AD9952700A6147F /* NoteDetailHeader.swift */,
+				5C01409B2AD9819C00A6147F /* NoteTextEditor.swift */,
+				5C2894922AE5C43400C07CCE /* NoteMainView.swift */,
+				5C0140992AD97F7A00A6147F /* NoteRow.swift */,
+			);
+			path = Notes;
+			sourceTree = "<group>";
+		};
 		5CC5286A2AD97D32002A30C9 = {
 			isa = PBXGroup;
 			children = (
@@ -277,17 +291,11 @@
 		5CC528752AD97D32002A30C9 /* MrsBeasley */ = {
 			isa = PBXGroup;
 			children = (
-				5CFEFA262AF01E3500A5EA00 /* Unused */,
 				5CCD1CDD2ADDBF5400238939 /* MrsBeasley.entitlements */,
 				5CCD1CDE2ADEBF0300238939 /* Inconsolata-VariableFont.ttf */,
 				5C0E616A2AF94C5300799F32 /* Tasks */,
 				5C0140AC2ADC41CB00A6147F /* Tags */,
-				5C0140A12AD996BA00A6147F /* NoteList.swift */,
-				5CD2CCB22ADD98CB00B0B90F /* NoteUtils.swift */,
-				5C01409F2AD9952700A6147F /* NoteDetailHeader.swift */,
-				5C01409B2AD9819C00A6147F /* NoteTextEditor.swift */,
-				5C2894922AE5C43400C07CCE /* NoteMainView.swift */,
-				5C0140992AD97F7A00A6147F /* NoteRow.swift */,
+				5C7566A62AFAF4FC005BF9DE /* Notes */,
 				5CC528762AD97D32002A30C9 /* MrsBeasleyApp.swift */,
 				5C92C8B62AE18F3500F593BD /* SettingsView.swift */,
 				5C2894942AE5C99800C07CCE /* NewURLView.swift */,
@@ -326,14 +334,6 @@
 				5CC528992AD97D34002A30C9 /* MrsBeasleyUITestsLaunchTests.swift */,
 			);
 			path = MrsBeasleyUITests;
-			sourceTree = "<group>";
-		};
-		5CFEFA262AF01E3500A5EA00 /* Unused */ = {
-			isa = PBXGroup;
-			children = (
-				5C0140AD2ADC41E100A6147F /* TagList.swift */,
-			);
-			path = Unused;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

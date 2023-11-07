@@ -38,13 +38,13 @@ class ShareViewController: SLComposeServiceViewController {
         
         
         if let string = urlString {
-            store.storeNote(withTitle: text,
+            store.createNote(withTitle: text,
                             onDate: date,
                             body: string,
                             blob: pdfData,
                             mimetype: "text/html")
         } else if let string = pdfString {
-            store.storeNote(withTitle: text,
+            store.createNote(withTitle: text,
                             onDate: date,
                             body: string,
                             blob: pdfData,
@@ -52,7 +52,7 @@ class ShareViewController: SLComposeServiceViewController {
         }
         else
         {
-            store.storeNote(withTitle: "untitled",
+            store.createNote(withTitle: "untitled",
                             onDate: date,
                             body: text,
                             blob: pdfData,

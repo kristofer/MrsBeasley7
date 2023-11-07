@@ -20,8 +20,6 @@ struct TagList: View {
     @State var newName: String = ""
     
     var body: some View {
-//        Text("Existing Tags")
-//            .font(.body)
         HStack {
             List(selection: $selectedTag) {
                 ForEach(tags,  id: \.self) { tag in

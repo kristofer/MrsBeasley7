@@ -61,7 +61,7 @@ struct PersistenceController {
         try? container.viewContext.setQueryGenerationFrom(.current)
     }
     
-    func storeNote(withTitle title: String,
+    func createNote(withTitle title: String,
                    onDate date: Date,
                    body: String,
                    blob: Data?,
