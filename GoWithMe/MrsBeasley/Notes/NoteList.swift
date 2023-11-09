@@ -11,6 +11,9 @@ import SwiftUI
 import CoreData
 import UniformTypeIdentifiers
 
+let AppYellow = Color(red: 1.0, green: 1.0, blue: 0.89)
+
+
 enum SortBy: CaseIterable, Identifiable, CustomStringConvertible {
     case saved
     case normal
@@ -72,7 +75,7 @@ struct NoteList: View {
                 }
                 .onDelete(perform: deleteNotes)
             }
-            .background(Color(red: 0.99, green: 0.99, blue: 0.80))
+            .background(AppYellow)
             .onChange(of: $searchText.wrappedValue, perform: { _ in
                 setupPredicate()
             })

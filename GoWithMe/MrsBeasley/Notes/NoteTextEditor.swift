@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 
+
 struct NoteTextEditor: View {
     @Environment(\.managedObjectContext) var moc
     
@@ -24,7 +25,7 @@ struct NoteTextEditor: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 15, style: .continuous)
-                .fill(Color(red: 0.99, green: 0.99, blue: 0.80))
+                .fill(AppYellow)
                 .shadow(radius: 10)
                 .padding(5)
             
@@ -36,7 +37,7 @@ struct NoteTextEditor: View {
                     .font(.custom("Inconsolata", size: editFontsize))
                     .padding(5)
                     .scrollContentBackground(.hidden) // <- Hide it
-                    .background(Color(red: 0.99, green: 0.99, blue: 0.80))
+                    .background(AppYellow)
                 Divider()
                 if wordCount == 0 && note.body != nil {
                     Text("\(countWords(note.body!)) words")
