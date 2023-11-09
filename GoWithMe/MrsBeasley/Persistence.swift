@@ -71,6 +71,7 @@ struct PersistenceController {
         note.uuid = UUID()
         note.title = title
         note.timestamp = date
+        note.lastmodified = date
         note.mimetype = mimetype
         note.body = body
         note.blob = blob
