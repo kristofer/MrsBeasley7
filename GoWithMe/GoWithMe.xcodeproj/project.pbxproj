@@ -789,7 +789,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MrsBeasley/MrsBeasley.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 83;
+				CURRENT_PROJECT_VERSION = 91;
 				DEVELOPMENT_ASSET_PATHS = "\"MrsBeasley/Preview Content\"";
 				DEVELOPMENT_TEAM = S7ZKK95T9U;
 				ENABLE_PREVIEWS = YES;
@@ -805,7 +805,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.8;
+				MARKETING_VERSION = 1.85;
 				PRODUCT_BUNDLE_IDENTIFIER = co.tioga.MrsBeasley;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -822,7 +822,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MrsBeasley/MrsBeasley.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 83;
+				CURRENT_PROJECT_VERSION = 91;
 				DEVELOPMENT_ASSET_PATHS = "\"MrsBeasley/Preview Content\"";
 				DEVELOPMENT_TEAM = S7ZKK95T9U;
 				ENABLE_PREVIEWS = YES;
@@ -838,7 +838,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.8;
+				MARKETING_VERSION = 1.85;
 				PRODUCT_BUNDLE_IDENTIFIER = co.tioga.MrsBeasley;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
