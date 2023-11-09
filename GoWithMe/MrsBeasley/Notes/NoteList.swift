@@ -54,6 +54,7 @@ struct NoteList: View {
     @State private var columnVisibility = NavigationSplitViewVisibility.detailOnly
     
     var body: some View {
+        
         NavigationSplitView(columnVisibility: $columnVisibility) {
             ShowTagArrayView(tags: $selectedTags)
                 .padding()
@@ -63,7 +64,7 @@ struct NoteList: View {
                 .sheet(isPresented: $showTasks) {
                     TaskListView()
                 }
-
+            
             // Main List
             List(selection: $noteId) {
                 ForEach(notes,  id: \.self) { aNote in
@@ -71,6 +72,7 @@ struct NoteList: View {
                 }
                 .onDelete(perform: deleteNotes)
             }
+            .background(Color(red: 0.99, green: 0.99, blue: 0.80))
             .onChange(of: $searchText.wrappedValue, perform: { _ in
                 setupPredicate()
             })
@@ -87,7 +89,7 @@ struct NoteList: View {
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "")
             .disableAutocorrection(true)
             .autocapitalization(.none)
-                        .toolbar {
+            .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
                 }
@@ -127,7 +129,7 @@ struct NoteList: View {
                                     let fname = item.suggestedName ?? "untitled pdf"//?.split(separator: ".").map(String.init).first ?? "unknown"
                                     if let data = data {
                                         self.addPDFWith(title: fname, blob: data)
-
+                                        
                                     }
                                 }
                             }
@@ -153,13 +155,13 @@ struct NoteList: View {
                     .onChange(of: $selectedSort.wrappedValue, perform: { _ in
                         setupNoteSort()
                     })
-
+                
                 Spacer()
                 Button("\(Image(systemName: "list.bullet.clipboard")) Tasks") {
                     showTasks.toggle()
                 }
                 .buttonStyle(.borderedProminent)
-
+                
             }
         } detail: {
             if noteId != nil {
@@ -170,7 +172,7 @@ struct NoteList: View {
         }
     }
     
-
+    
     private func setupPredicate() {
         let stext = $searchText.wrappedValue
         let stags = $selectedTags.wrappedValue
@@ -229,7 +231,7 @@ struct NoteList: View {
         self.searchText = ""
         self.noteId = newNote.self
     }
-
+    
     private func addPDFWith(title: String, blob: Data) {
         let stags = $selectedTags.wrappedValue
         let newNote = Note.createNote(vc: viewContext, title: title, body: "", type: UTType.pdf.preferredMIMEType!)
@@ -243,7 +245,7 @@ struct NoteList: View {
         self.searchText = ""
         self.noteId = newNote.self
     }
-
+    
     private func addNoteWith(title: String, body: String) {
         let stags = $selectedTags.wrappedValue
         let newNote = Note.createNote(vc: viewContext, title: title, body: body, type: "text/plain")

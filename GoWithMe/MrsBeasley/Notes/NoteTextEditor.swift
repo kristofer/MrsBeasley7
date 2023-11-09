@@ -24,7 +24,7 @@ struct NoteTextEditor: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 15, style: .continuous)
-                .fill(.white)
+                .fill(Color(red: 0.99, green: 0.99, blue: 0.80))
                 .shadow(radius: 10)
                 .padding(5)
             
@@ -35,6 +35,8 @@ struct NoteTextEditor: View {
                     .findNavigator(isPresented: $isShowingFindNavigator)
                     .font(.custom("Inconsolata", size: editFontsize))
                     .padding(5)
+                    .scrollContentBackground(.hidden) // <- Hide it
+                    .background(Color(red: 0.99, green: 0.99, blue: 0.80))
                 Divider()
                 if wordCount == 0 && note.body != nil {
                     Text("\(countWords(note.body!)) words")
@@ -78,6 +80,7 @@ struct NoteTextEditor: View {
                         PDFPreviewView().environmentObject(PDFViewModel(note: note))
                     }
         }
+        .toolbarBackground(Color(red: 0.99, green: 0.96, blue: 0.81))
         .toolbar {
             Text("Ruit Oceano Nox")
                 .font(.subheadline).italic()
