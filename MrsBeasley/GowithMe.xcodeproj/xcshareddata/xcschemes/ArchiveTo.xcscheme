@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "1430"
-   version = "1.7">
+   wasCreatedForAppExtension = "YES"
+   version = "2.0">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
@@ -14,10 +15,24 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5C2894C02AE6E8AD00C07CCE"
+               BuildableName = "ArchiveTo.appex"
+               BlueprintName = "ArchiveTo"
+               ReferencedContainer = "container:GowithMe.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "5CC528722AD97D32002A30C9"
-               BuildableName = "MrsBeasley.app"
-               BlueprintName = "MrsBeasley"
-               ReferencedContainer = "container:MrsBeasley.xcodeproj">
+               BuildableName = "GowithMe.app"
+               BlueprintName = "GowithMe"
+               ReferencedContainer = "container:GowithMe.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -31,22 +46,24 @@
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
-      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      selectedDebuggerIdentifier = ""
+      selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
       launchStyle = "0"
+      askForAppToLaunch = "Yes"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES">
+      allowLocationSimulation = "YES"
+      launchAutomaticallySubstyle = "2">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5CC528722AD97D32002A30C9"
-            BuildableName = "MrsBeasley.app"
-            BlueprintName = "MrsBeasley"
-            ReferencedContainer = "container:MrsBeasley.xcodeproj">
+            BuildableName = "GowithMe.app"
+            BlueprintName = "GowithMe"
+            ReferencedContainer = "container:GowithMe.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -55,15 +72,17 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      debugDocumentVersioning = "YES">
+      debugDocumentVersioning = "YES"
+      askForAppToLaunch = "Yes"
+      launchAutomaticallySubstyle = "2">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5CC528722AD97D32002A30C9"
-            BuildableName = "MrsBeasley.app"
-            BlueprintName = "MrsBeasley"
-            ReferencedContainer = "container:MrsBeasley.xcodeproj">
+            BuildableName = "GowithMe.app"
+            BlueprintName = "GowithMe"
+            ReferencedContainer = "container:GowithMe.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

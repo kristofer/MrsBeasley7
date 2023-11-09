@@ -137,16 +137,16 @@
 		5C92C8D22AE5447B00F593BD /* TagHandlerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagHandlerView.swift; sourceTree = "<group>"; };
 		5C92C8D42AE5451A00F593BD /* SelectTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTag.swift; sourceTree = "<group>"; };
 		5CA2CB442AEFF0E80002314D /* TagArrayStuff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagArrayStuff.swift; sourceTree = "<group>"; };
-		5CC528732AD97D32002A30C9 /* MrsBeasley.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MrsBeasley.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5CC528732AD97D32002A30C9 /* GowithMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GowithMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CC528762AD97D32002A30C9 /* MrsBeasleyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MrsBeasleyApp.swift; sourceTree = "<group>"; };
 		5CC5287A2AD97D34002A30C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5CC5287D2AD97D34002A30C9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5CC5287F2AD97D34002A30C9 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		5CC528822AD97D34002A30C9 /* MrsBeasley.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MrsBeasley.xcdatamodel; sourceTree = "<group>"; };
 		5CC528842AD97D34002A30C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5CC528892AD97D34002A30C9 /* MrsBeasleyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MrsBeasleyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5CC528892AD97D34002A30C9 /* GowithMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GowithMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CC5288D2AD97D34002A30C9 /* MrsBeasleyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MrsBeasleyTests.swift; sourceTree = "<group>"; };
-		5CC528932AD97D34002A30C9 /* MrsBeasleyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MrsBeasleyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5CC528932AD97D34002A30C9 /* GowithMeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GowithMeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CC528972AD97D34002A30C9 /* MrsBeasleyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MrsBeasleyUITests.swift; sourceTree = "<group>"; };
 		5CC528992AD97D34002A30C9 /* MrsBeasleyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MrsBeasleyUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		5CCD1CDD2ADDBF5400238939 /* MrsBeasley.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MrsBeasley.entitlements; sourceTree = "<group>"; };
@@ -280,9 +280,9 @@
 		5CC528742AD97D32002A30C9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5CC528732AD97D32002A30C9 /* MrsBeasley.app */,
-				5CC528892AD97D34002A30C9 /* MrsBeasleyTests.xctest */,
-				5CC528932AD97D34002A30C9 /* MrsBeasleyUITests.xctest */,
+				5CC528732AD97D32002A30C9 /* GowithMe.app */,
+				5CC528892AD97D34002A30C9 /* GowithMeTests.xctest */,
+				5CC528932AD97D34002A30C9 /* GowithMeUITests.xctest */,
 				5C2894C12AE6E8AD00C07CCE /* ArchiveTo.appex */,
 			);
 			name = Products;
@@ -356,9 +356,9 @@
 			productReference = 5C2894C12AE6E8AD00C07CCE /* ArchiveTo.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		5CC528722AD97D32002A30C9 /* MrsBeasley */ = {
+		5CC528722AD97D32002A30C9 /* GowithMe */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5CC5289D2AD97D34002A30C9 /* Build configuration list for PBXNativeTarget "MrsBeasley" */;
+			buildConfigurationList = 5CC5289D2AD97D34002A30C9 /* Build configuration list for PBXNativeTarget "GowithMe" */;
 			buildPhases = (
 				5CC5286F2AD97D32002A30C9 /* Sources */,
 				5CC528702AD97D32002A30C9 /* Frameworks */,
@@ -370,14 +370,14 @@
 			dependencies = (
 				5C2894CA2AE6E8AD00C07CCE /* PBXTargetDependency */,
 			);
-			name = MrsBeasley;
+			name = GowithMe;
 			productName = MrsBeasley;
-			productReference = 5CC528732AD97D32002A30C9 /* MrsBeasley.app */;
+			productReference = 5CC528732AD97D32002A30C9 /* GowithMe.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5CC528882AD97D34002A30C9 /* MrsBeasleyTests */ = {
+		5CC528882AD97D34002A30C9 /* GowithMeTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5CC528A02AD97D34002A30C9 /* Build configuration list for PBXNativeTarget "MrsBeasleyTests" */;
+			buildConfigurationList = 5CC528A02AD97D34002A30C9 /* Build configuration list for PBXNativeTarget "GowithMeTests" */;
 			buildPhases = (
 				5CC528852AD97D34002A30C9 /* Sources */,
 				5CC528862AD97D34002A30C9 /* Frameworks */,
@@ -388,14 +388,14 @@
 			dependencies = (
 				5CC5288B2AD97D34002A30C9 /* PBXTargetDependency */,
 			);
-			name = MrsBeasleyTests;
+			name = GowithMeTests;
 			productName = MrsBeasleyTests;
-			productReference = 5CC528892AD97D34002A30C9 /* MrsBeasleyTests.xctest */;
+			productReference = 5CC528892AD97D34002A30C9 /* GowithMeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		5CC528922AD97D34002A30C9 /* MrsBeasleyUITests */ = {
+		5CC528922AD97D34002A30C9 /* GowithMeUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5CC528A32AD97D34002A30C9 /* Build configuration list for PBXNativeTarget "MrsBeasleyUITests" */;
+			buildConfigurationList = 5CC528A32AD97D34002A30C9 /* Build configuration list for PBXNativeTarget "GowithMeUITests" */;
 			buildPhases = (
 				5CC5288F2AD97D34002A30C9 /* Sources */,
 				5CC528902AD97D34002A30C9 /* Frameworks */,
@@ -406,9 +406,9 @@
 			dependencies = (
 				5CC528952AD97D34002A30C9 /* PBXTargetDependency */,
 			);
-			name = MrsBeasleyUITests;
+			name = GowithMeUITests;
 			productName = MrsBeasleyUITests;
-			productReference = 5CC528932AD97D34002A30C9 /* MrsBeasleyUITests.xctest */;
+			productReference = 5CC528932AD97D34002A30C9 /* GowithMeUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -437,7 +437,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5CC5286E2AD97D32002A30C9 /* Build configuration list for PBXProject "MrsBeasley" */;
+			buildConfigurationList = 5CC5286E2AD97D32002A30C9 /* Build configuration list for PBXProject "GowithMe" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -450,9 +450,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5CC528722AD97D32002A30C9 /* MrsBeasley */,
-				5CC528882AD97D34002A30C9 /* MrsBeasleyTests */,
-				5CC528922AD97D34002A30C9 /* MrsBeasleyUITests */,
+				5CC528722AD97D32002A30C9 /* GowithMe */,
+				5CC528882AD97D34002A30C9 /* GowithMeTests */,
+				5CC528922AD97D34002A30C9 /* GowithMeUITests */,
 				5C2894C02AE6E8AD00C07CCE /* ArchiveTo */,
 			);
 		};
@@ -579,12 +579,12 @@
 		};
 		5CC5288B2AD97D34002A30C9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5CC528722AD97D32002A30C9 /* MrsBeasley */;
+			target = 5CC528722AD97D32002A30C9 /* GowithMe */;
 			targetProxy = 5CC5288A2AD97D34002A30C9 /* PBXContainerItemProxy */;
 		};
 		5CC528952AD97D34002A30C9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5CC528722AD97D32002A30C9 /* MrsBeasley */;
+			target = 5CC528722AD97D32002A30C9 /* GowithMe */;
 			targetProxy = 5CC528942AD97D34002A30C9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -613,7 +613,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ArchiveTo/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = ArchiveTo;
+				INFOPLIST_KEY_CFBundleDisplayName = GoWithMe;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -645,7 +645,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ArchiveTo/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = ArchiveTo;
+				INFOPLIST_KEY_CFBundleDisplayName = GoWithMe;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -863,7 +863,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MrsBeasley.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MrsBeasley";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GowithMe.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GowithMe";
 			};
 			name = Debug;
 		};
@@ -883,7 +883,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MrsBeasley.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MrsBeasley";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GowithMe.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GowithMe";
 			};
 			name = Release;
 		};
@@ -935,7 +935,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5CC5286E2AD97D32002A30C9 /* Build configuration list for PBXProject "MrsBeasley" */ = {
+		5CC5286E2AD97D32002A30C9 /* Build configuration list for PBXProject "GowithMe" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5CC5289B2AD97D34002A30C9 /* Debug */,
@@ -944,7 +944,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5CC5289D2AD97D34002A30C9 /* Build configuration list for PBXNativeTarget "MrsBeasley" */ = {
+		5CC5289D2AD97D34002A30C9 /* Build configuration list for PBXNativeTarget "GowithMe" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5CC5289E2AD97D34002A30C9 /* Debug */,
@@ -953,7 +953,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5CC528A02AD97D34002A30C9 /* Build configuration list for PBXNativeTarget "MrsBeasleyTests" */ = {
+		5CC528A02AD97D34002A30C9 /* Build configuration list for PBXNativeTarget "GowithMeTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5CC528A12AD97D34002A30C9 /* Debug */,
@@ -962,7 +962,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5CC528A32AD97D34002A30C9 /* Build configuration list for PBXNativeTarget "MrsBeasleyUITests" */ = {
+		5CC528A32AD97D34002A30C9 /* Build configuration list for PBXNativeTarget "GowithMeUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5CC528A42AD97D34002A30C9 /* Debug */,
