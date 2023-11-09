@@ -18,7 +18,7 @@
                BlueprintIdentifier = "5C2894C02AE6E8AD00C07CCE"
                BuildableName = "ArchiveTo.appex"
                BlueprintName = "ArchiveTo"
-               ReferencedContainer = "container:GowithMe.xcodeproj">
+               ReferencedContainer = "container:GoWithMe.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -32,7 +32,7 @@
                BlueprintIdentifier = "5CC528722AD97D32002A30C9"
                BuildableName = "GoWithMe.app"
                BlueprintName = "GoWithMe"
-               ReferencedContainer = "container:GowithMe.xcodeproj">
+               ReferencedContainer = "container:GoWithMe.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -63,7 +63,7 @@
             BlueprintIdentifier = "5CC528722AD97D32002A30C9"
             BuildableName = "GoWithMe.app"
             BlueprintName = "GoWithMe"
-            ReferencedContainer = "container:GowithMe.xcodeproj">
+            ReferencedContainer = "container:GoWithMe.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -82,7 +82,7 @@
             BlueprintIdentifier = "5CC528722AD97D32002A30C9"
             BuildableName = "GoWithMe.app"
             BlueprintName = "GoWithMe"
-            ReferencedContainer = "container:GowithMe.xcodeproj">
+            ReferencedContainer = "container:GoWithMe.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
