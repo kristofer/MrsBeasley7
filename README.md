@@ -1,5 +1,9 @@
-# MrsBeasley7
-a writing app
+# Go With Me
+
+### Was _MrsBeasley7_
+a Tioga LifeStream App app
+
+As of 11/9/2023, GoWithMe is now a Tioga LifeStream app.
 
 As of 10/17/2023, v2 is _complete_
 
