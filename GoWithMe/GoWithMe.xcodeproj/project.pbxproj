@@ -16,6 +16,8 @@
 		5C0140A82ADADB3B00A6147F /* PDFPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0140A72ADADB3B00A6147F /* PDFPreviewView.swift */; };
 		5C0140AA2ADAE22900A6147F /* PDFViewUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0140A92ADAE22900A6147F /* PDFViewUI.swift */; };
 		5C0140AE2ADC41E100A6147F /* TagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0140AD2ADC41E100A6147F /* TagList.swift */; };
+		5C0A5F472B050D8C000192F2 /* BlobToTempFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0A5F462B050D8C000192F2 /* BlobToTempFile.swift */; };
+		5C0A5F4B2B050DBA000192F2 /* FileAssetPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0A5F4A2B050DBA000192F2 /* FileAssetPreview.swift */; };
 		5C0E616C2AF94C7C00799F32 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0E616B2AF94C7C00799F32 /* Task.swift */; };
 		5C0E616E2AF94CCC00799F32 /* CheckboxStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0E616D2AF94CCC00799F32 /* CheckboxStyle.swift */; };
 		5C0E61702AF94CD600799F32 /* PriorityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0E616F2AF94CD600799F32 /* PriorityView.swift */; };
@@ -109,6 +111,8 @@
 		5C0140A72ADADB3B00A6147F /* PDFPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFPreviewView.swift; sourceTree = "<group>"; };
 		5C0140A92ADAE22900A6147F /* PDFViewUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewUI.swift; sourceTree = "<group>"; };
 		5C0140AD2ADC41E100A6147F /* TagList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagList.swift; sourceTree = "<group>"; };
+		5C0A5F462B050D8C000192F2 /* BlobToTempFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlobToTempFile.swift; sourceTree = "<group>"; };
+		5C0A5F4A2B050DBA000192F2 /* FileAssetPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileAssetPreview.swift; sourceTree = "<group>"; };
 		5C0E616B2AF94C7C00799F32 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		5C0E616D2AF94CCC00799F32 /* CheckboxStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckboxStyle.swift; sourceTree = "<group>"; };
 		5C0E616F2AF94CD600799F32 /* PriorityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PriorityView.swift; sourceTree = "<group>"; };
@@ -262,6 +266,8 @@
 				5C01409B2AD9819C00A6147F /* NoteTextEditor.swift */,
 				5C2894922AE5C43400C07CCE /* NoteMainView.swift */,
 				5C0140992AD97F7A00A6147F /* NoteRow.swift */,
+				5C0A5F462B050D8C000192F2 /* BlobToTempFile.swift */,
+				5C0A5F4A2B050DBA000192F2 /* FileAssetPreview.swift */,
 			);
 			path = Notes;
 			sourceTree = "<group>";
@@ -515,6 +521,7 @@
 				5C0140A62ADADAA000A6147F /* PDFViewModel.swift in Sources */,
 				5C2894952AE5C99800C07CCE /* NewURLView.swift in Sources */,
 				5C0E61702AF94CD600799F32 /* PriorityView.swift in Sources */,
+				5C0A5F4B2B050DBA000192F2 /* FileAssetPreview.swift in Sources */,
 				5CD2CCB32ADD98CB00B0B90F /* NoteUtils.swift in Sources */,
 				5C2894932AE5C43400C07CCE /* NoteMainView.swift in Sources */,
 				5C0E616C2AF94C7C00799F32 /* Task.swift in Sources */,
@@ -527,6 +534,7 @@
 				5C0140AA2ADAE22900A6147F /* PDFViewUI.swift in Sources */,
 				5CFEFA282AF12EB700A5EA00 /* EditTagView.swift in Sources */,
 				5C0140A22AD996BA00A6147F /* NoteList.swift in Sources */,
+				5C0A5F472B050D8C000192F2 /* BlobToTempFile.swift in Sources */,
 				5CC528802AD97D34002A30C9 /* Persistence.swift in Sources */,
 				5C0140A02AD9952700A6147F /* NoteDetailHeader.swift in Sources */,
 				5C0E61722AF94CDB00799F32 /* TaskListRow.swift in Sources */,
