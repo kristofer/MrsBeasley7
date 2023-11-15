@@ -107,7 +107,7 @@ struct NoteList: View {
                     Button(action: addNote) {
                         Label("Add Note", systemImage: "plus")
                     }
-                    .onDrop(of: ["public.url","public.file-url", "public.text", UTType.pdf.identifier], isTargeted: nil) { providers -> Bool in
+                    .onDrop(of: ["public.url","public.file-url", "public.text", UTType.pdf.identifier, "public.content"], isTargeted: nil) { providers -> Bool in
                         //print("dropped")
                         print(providers)
                         providers.forEach { item in
@@ -132,6 +132,19 @@ struct NoteList: View {
                                     let fname = item.suggestedName ?? "untitled pdf"//?.split(separator: ".").map(String.init).first ?? "unknown"
                                     if let data = data {
                                         self.addPDFWith(title: fname, blob: data)
+                                        
+                                    }
+                                }
+                            }
+                            if item.hasItemConformingToTypeIdentifier("public.content") {
+                                item.loadDataRepresentation(forTypeIdentifier: "public.content") { data, error in
+                                    guard error == nil else {
+                                        print("loading prob \(String(describing: error))")
+                                        return
+                                    }
+                                    let fname = item.suggestedName ?? "untitled"//?.split(separator: ".").map(String.init).first ?? "unknown"
+                                    if let data = data {
+                                        self.addFileWith(title: fname, blob: data)
                                         
                                     }
                                 }
@@ -238,6 +251,28 @@ struct NoteList: View {
     private func addPDFWith(title: String, blob: Data) {
         let stags = $selectedTags.wrappedValue
         let newNote = Note.createNote(vc: viewContext, title: title, body: "", type: UTType.pdf.preferredMIMEType!)
+        newNote.blob = blob
+        if !stags.isEmpty {
+            for t in stags {
+                newNote.addToTags(t)
+            }
+        }
+        viewContext.flushChanges()
+        self.searchText = ""
+        self.noteId = newNote.self
+    }
+    
+    private func addFileWith(title: String, blob: Data) {
+        let stags = $selectedTags.wrappedValue
+        var mimetype = ""
+        if let mtype = UTType(filenameExtension: URL(string: title)!.pathExtension)?.preferredMIMEType {
+            mimetype = mtype
+        }
+        else {
+            mimetype = "application/octet-stream"
+        }
+
+        let newNote = Note.createNote(vc: viewContext, title: title, body: "", type: mimetype)
         newNote.blob = blob
         if !stags.isEmpty {
             for t in stags {
