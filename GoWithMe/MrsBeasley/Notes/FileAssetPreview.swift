@@ -14,7 +14,7 @@ struct PreviewController: UIViewControllerRepresentable {
     var url: URL
     
     func makeUIViewController(context: Context) -> QLPreviewController {
-        print("TFdebug makeUIViewController")
+//        print("fileassetvm PreviewController makeUIViewController")
 
         let controller = QLPreviewController()
         controller.dataSource = context.coordinator
@@ -23,8 +23,10 @@ struct PreviewController: UIViewControllerRepresentable {
     
     func updateUIViewController(
         _ uiViewController: QLPreviewController, context: Context) {
-            print("TFdebug updateUIViewController")
-            //uiViewController.reloadData()
+            if context.coordinator.parent.url.absoluteURL != self.url.absoluteURL {
+                context.coordinator.urlToDisplay = self.url
+                uiViewController.refreshCurrentPreviewItem()
+            }
         }
     
     
@@ -35,9 +37,11 @@ struct PreviewController: UIViewControllerRepresentable {
     class Coordinator: QLPreviewControllerDataSource {
         
         var parent: PreviewController
+        var urlToDisplay: URL
         
         init(parent: PreviewController) {
             self.parent = parent
+            self.urlToDisplay = parent.url
         }
         
         func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
@@ -48,9 +52,8 @@ struct PreviewController: UIViewControllerRepresentable {
             _ controller: QLPreviewController,
             previewItemAt index: Int
         ) -> QLPreviewItem {
-            print("previewController previewItemAt: \(parent.url.absoluteString)")
-
-            return parent.url as NSURL
+            //print("fileassetvm Coordinator previewItemAt: \(self.urlToDisplay.absoluteString)")
+            return self.urlToDisplay as QLPreviewItem
         }
         
     }
@@ -58,21 +61,29 @@ struct PreviewController: UIViewControllerRepresentable {
 
 final class FileAssetVM: ObservableObject {
     
-    @Published var note: Note = .init()
+    @Published var note: Note //= .init()
     @Published var tempFile: TemporaryFile
+    @Published var tfileURL: URL
     var filetype: String?
     
     init(aNote: Note) {
         note = aNote
         filetype = UTType(mimeType: aNote.mimetype!)?.preferredFilenameExtension
         let fname = "tempfile." + (filetype ?? "txt")
-        tempFile = try! TemporaryFile(creatingTempDirectoryForFilename: fname)
+        let ttfile = try! TemporaryFile(creatingTempDirectoryForFilename: fname)
+        tempFile = ttfile
+        tfileURL = ttfile.fileURL
+        //print("fileassetvm SETTING UP FILEASSETVM \(aNote.title!)")
+        if let blob = note.blob {
+            try! blob.write(to: tempFile.fileURL, options: .atomic )
+            }
+
     }
     
     func deleteTempFile() {
         do {
             try self.tempFile.deleteDirectory()
-            Foundation.NSLog("TFdebug deleted temp files")
+            //print("fileassetvm deleted temp files \(note.title)")
         } catch {
             print("\(error.localizedDescription)")
         }
@@ -80,41 +91,59 @@ final class FileAssetVM: ObservableObject {
     
     func resetTempFile() {
         deleteTempFile()
+        filetype = UTType(mimeType: note.mimetype!)?.preferredFilenameExtension
         let fname = "tempfile." + (filetype ?? "txt")
         self.tempFile = try! TemporaryFile(creatingTempDirectoryForFilename: fname)
-        
-        print("TFdebug NEW temp file \(self.tempFile.fileURL.absoluteString)")
+        self.tfileURL = self.tempFile.fileURL
+        //print("fileassetvm  \(fname) \(note.title) NEW temp file \(self.tempFile.fileURL.absoluteString)")
         
         loadTempFile()
         
     }
     
     func loadTempFile() {
-        print("loadTempFile \(note.title!) \(tempFile.fileURL)")
+        //print("fileassetvm loadTempFile \(note.title!) \(tempFile.fileURL)")
+        tfileURL = tempFile.fileURL
+        filetype = UTType(mimeType: note.mimetype!)?.preferredFilenameExtension
+
         if let blob = note.blob {
-                try! blob.write(to: tempFile.fileURL)
+            try! blob.write(to: tempFile.fileURL, options: .atomic )
             }
     }
     
 }
 
-struct FileAssetPreview: View {
+struct FileAssetView: View {
     @ObservedObject var note: Note
     var vm: FileAssetVM
 
     init(n: Note) {
         note = n
         vm = FileAssetVM(aNote: n)
+        //_vm = StateObject(wrappedValue: FileAssetVM(aNote: n))
     }
     
     var body: some View {
-        PreviewController(url: vm.tempFile.fileURL)
-                .border(.blue)
+//        Text("FileAssetView vm \(vm.note.title!)")
+//        Text("FileAssetView note \(note.title!)")
+        FileAssetPreview(vm: vm)
+            .onChange(of: self.note, perform: { _ in
+                vm.resetTempFile()
+            })
+            .onDisappear() {
+                vm.deleteTempFile()
+            }
+            .onAppear() {
+                vm.loadTempFile()
+            }
     }
 }
 
-struct FileAssetPreview_Previews: PreviewProvider {
-    static var previews: some View {
-        EmptyView()
+struct FileAssetPreview: View {
+    @ObservedObject var vm: FileAssetVM
+    
+    var body: some View {
+//        Text("FileAssetPreview \(vm.note.title!)")
+        PreviewController(url: vm.tfileURL)
     }
 }

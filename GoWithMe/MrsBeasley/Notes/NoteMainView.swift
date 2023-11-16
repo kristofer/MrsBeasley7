@@ -16,42 +16,50 @@ struct NoteMainView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            if let mt = note.mimetype, mt == "text/plain" {
-                NoteTextEditor(note: note)
-            } else {
-                NoteDetailHeader(note: note)
-            }
-            if let mt = note.mimetype, mt == "text/html" {
-                if let thisUrl = URL(string:note.body!){
-                    WebView(url: thisUrl)
-                    ShareLink("Share", item: thisUrl)
-                }
-            }
-            if let mt = note.mimetype, mt == UTType.pdf.preferredMIMEType {
-                if let newurl = note.loadBlobToData() {
-                    PDFKitView(url: newurl)
-                        .toolbar {
-                            ToolbarItemGroup(placement: .bottomBar) {
-                                Button("Export") {
-                                    if let newurl = note.loadBlobToData() {
-                                        self.url = newurl
-                                        self.moving = true
+            if let mt = note.mimetype {
+                switch mt {
+                case "text/plain" :
+                    NoteTextEditor(note: note)
+                    //                    } else {
+                    //                    }
+                case "text/html" :
+                    if let thisUrl = URL(string:note.body!){
+                        NoteDetailHeader(note: note)
+                        WebView(url: thisUrl)
+                        ShareLink("Share", item: thisUrl)
+                    }
+                    //                    }
+                case UTType.pdf.preferredMIMEType :
+                    if let newurl = note.loadBlobToData() {
+                        NoteDetailHeader(note: note)
+                        PDFKitView(url: newurl)
+                            .toolbar {
+                                ToolbarItemGroup(placement: .bottomBar) {
+                                    Button("Export") {
+                                        if let newurl = note.loadBlobToData() {
+                                            self.url = newurl
+                                            self.moving = true
+                                        }
                                     }
-                                }
-                                .controlSize(.small)
-                                .fileMover(isPresented: $moving, file: url) { result in
-                                    switch result {
-                                    case .success(let url):
-                                        print("exported \(url.absoluteString)")
-                                    case .failure(let error):
-                                        print(error.localizedDescription)
+                                    .controlSize(.small)
+                                    .fileMover(isPresented: $moving, file: url) { result in
+                                        switch result {
+                                        case .success(let url):
+                                            print("exported \(url.absoluteString)")
+                                        case .failure(let error):
+                                            print(error.localizedDescription)
+                                        }
                                     }
+                                    .buttonStyle(.borderedProminent)
                                 }
-                                .buttonStyle(.borderedProminent)
                             }
-                        }
-                } else {
-                    Text("Unable to load PDF")
+                    } else {
+                        Text("Unable to load PDF")
+                    }
+                    //                    }
+                default:
+                    NoteDetailHeader(note: note)
+                    FileAssetView(n: note)
                 }
             }
         }
