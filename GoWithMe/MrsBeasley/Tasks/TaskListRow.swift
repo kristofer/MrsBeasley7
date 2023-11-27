@@ -25,9 +25,7 @@ struct TaskListRow: View {
         } //: Toggle
         .toggleStyle(CheckboxStyle(taskColor: self.task.priority.priorityColor()))
         .onReceive(self.task.objectWillChange) { _ in
-            if self.viewContext.hasChanges {
-                try? self.viewContext.save()
-            }
+            viewContext.flushChanges()
         }
     }
 }

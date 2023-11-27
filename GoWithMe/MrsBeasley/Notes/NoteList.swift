@@ -59,132 +59,138 @@ struct NoteList: View {
     var body: some View {
         
         NavigationSplitView(columnVisibility: $columnVisibility) {
-            ShowTagArrayView(tags: $selectedTags)
-                .padding()
-                .sheet(isPresented: $showSettings) {
-                    SettingsView()
-                }
-                .sheet(isPresented: $showTasks) {
-                    TaskListView()
-                }
-            
-            // Main List
-            List(selection: $noteId) {
-                ForEach(notes,  id: \.self) { aNote in
-                    NoteRow(note: aNote)
-                }
-                .onDelete(perform: deleteNotes)
-            }
-            .background(AppYellow)
-            .onChange(of: $searchText.wrappedValue, perform: { _ in
-                setupPredicate()
-            })
-            .onChange(of: $selectedTags.wrappedValue, perform: { _ in
-                setupPredicate()
-            })
-            .refreshable {
-            }
-            .onAppear() {
-                if noteId == nil {
-                    columnVisibility = .all
-                }
-            }
-            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "")
-            .disableAutocorrection(true)
-            .autocapitalization(.none)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("\(Image(systemName: "gear"))") {
-                        showSettings.toggle()
+            VStack {
+                ShowTagArrayView(tags: $selectedTags)
+                    .padding()
+                    .sheet(isPresented: $showSettings) {
+                        SettingsView()
                     }
-                    .controlSize(.small)
-                    .buttonStyle(.borderedProminent)
-                }
-                ToolbarItem {
-                    Button(action: addNote) {
-                        Label("Add Note", systemImage: "plus")
+                    .sheet(isPresented: $showTasks) {
+                        TaskListView()
                     }
-                    .onDrop(of: ["public.url","public.file-url", "public.text", UTType.pdf.identifier, "public.content"], isTargeted: nil) { providers -> Bool in
-                        //print("dropped")
-                        print(providers)
-                        providers.forEach { item in
-                            if item.hasItemConformingToTypeIdentifier("public.text") {
-                                item.loadDataRepresentation(forTypeIdentifier: "public.text") { data, error in
-                                    guard error == nil else {
-                                        print("loading prob \(String(describing: error))")
-                                        return
-                                    }
-                                    let fname = item.suggestedName?.split(separator: ".").map(String.init).first ?? "unknown"
-                                    if let data = data {
-                                        self.addNoteWith(title: fname, body: String(decoding: data, as: UTF8.self))
-                                    }
-                                }
-                            }
-                            if item.hasItemConformingToTypeIdentifier(UTType.pdf.identifier) {
-                                item.loadDataRepresentation(forTypeIdentifier: UTType.pdf.identifier) { data, error in
-                                    guard error == nil else {
-                                        print("loading prob \(String(describing: error))")
-                                        return
-                                    }
-                                    let fname = item.suggestedName ?? "untitled pdf"//?.split(separator: ".").map(String.init).first ?? "unknown"
-                                    if let data = data {
-                                        self.addPDFWith(title: fname, blob: data)
-                                        
-                                    }
-                                }
-                            }
-                            if item.hasItemConformingToTypeIdentifier("public.content") {
-                                item.loadDataRepresentation(forTypeIdentifier: "public.content") { data, error in
-                                    guard error == nil else {
-                                        print("loading prob \(String(describing: error))")
-                                        return
-                                    }
-                                    let fname = item.suggestedName ?? "untitled"//?.split(separator: ".").map(String.init).first ?? "unknown"
-                                    if let data = data {
-                                        self.addFileWith(title: fname, blob: data)
-                                        
-                                    }
-                                }
-                            }
-                            if item.hasItemConformingToTypeIdentifier("public.url") {
-                                item.loadDataRepresentation(forTypeIdentifier: "public.url") { data, error in
-                                    guard error == nil else {
-                                        print("loading prob \(String(describing: error))")
-                                        return
-                                    }
-                                    let fname = item.suggestedName ?? "unknown"
-                                    if let data = data {
-                                        self.addListWith(title: fname, url: String(decoding: data, as: UTF8.self))
-                                    }
-                                }
-                            }
+                
+                // Main List
+                List(selection: $noteId) {
+                    ForEach(notes,  id: \.self) { aNote in
+                        NoteRow(note: aNote)
+                    }
+                    .onDelete(perform: deleteNotes)
+                }
+                .background(AppYellow)
+                .onChange(of: $searchText.wrappedValue, perform: { _ in
+                    setupPredicate()
+                })
+                .onChange(of: $selectedTags.wrappedValue, perform: { _ in
+                    setupPredicate()
+                })
+                .refreshable {
+                }
+                .onAppear() {
+                    if noteId == nil {
+                        columnVisibility = .all
+                    }
+                }
+                .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "")
+                .disableAutocorrection(true)
+                .autocapitalization(.none)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        EditButton()
+                    }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("\(Image(systemName: "gear"))") {
+                            showSettings.toggle()
                         }
-                        return true
+                        .controlSize(.small)
+                        .buttonStyle(.borderedProminent)
+                    }
+                    ToolbarItem {
+                        Button(action: addNote) {
+                            Label("Add Note", systemImage: "plus")
+                        }
+                        .onDrop(of: ["public.url","public.file-url", "public.text", UTType.pdf.identifier, "public.content"], isTargeted: nil) { providers -> Bool in
+                            //print("dropped")
+                            print("Actually dropped \(providers)")
+                            providers.forEach { item in
+                                //print("Actually dropped \(item)")
+                                if item.hasItemConformingToTypeIdentifier(UTType.pdf.identifier) {
+                                    item.loadDataRepresentation(forTypeIdentifier: UTType.pdf.identifier) { data, error in
+                                        guard error == nil else {
+                                            print("loading prob \(String(describing: error))")
+                                            return
+                                        }
+                                        let fname = item.suggestedName ?? "untitled pdf"//?.split(separator: ".").map(String.init).first ?? "unknown"
+                                        if let data = data {
+                                            self.addPDFWith(title: fname, blob: data)
+                                            
+                                        }
+                                    }
+                                } else if item.hasItemConformingToTypeIdentifier("public.url") {
+                                    item.loadDataRepresentation(forTypeIdentifier: "public.url") { data, error in
+                                        guard error == nil else {
+                                            print("loading prob \(String(describing: error))")
+                                            return
+                                        }
+                                        //let fname = item.suggestedName ?? "No URL"
+                                        if let data = data {
+                                            let urlstring = String(decoding: data, as: UTF8.self)
+                                            self.addURLWith(title: urlstring, url: urlstring)
+                                        }
+                                    }
+                                } else if item.hasItemConformingToTypeIdentifier("public.content") {
+                                    item.loadDataRepresentation(forTypeIdentifier: "public.content") { data, error in
+                                        guard error == nil else {
+                                            print("loading prob \(String(describing: error))")
+                                            return
+                                        }
+                                        let fname = item.suggestedName ?? "No Name"//?.split(separator: ".").map(String.init).first ?? "unknown"
+                                        if let data = data {
+                                            self.addFileWith(title: fname, blob: data)
+                                            
+                                        }
+                                    }
+                                } else if item.hasItemConformingToTypeIdentifier("public.text") {
+                                    item.loadDataRepresentation(forTypeIdentifier: "public.text") { data, error in
+                                        guard error == nil else {
+                                            print("loading prob \(String(describing: error))")
+                                            return
+                                        }
+                                        let fname = item.suggestedName?.split(separator: ".").map(String.init).first ?? "No Title"
+                                        if let data = data {
+                                            self.addNoteWith(title: fname, body: String(decoding: data, as: UTF8.self))
+                                        }
+                                    }
+                                }
+                            }
+                            return true
+                        }
+
                     }
                 }
-            }
-            HStack{
-                SortByView(selectedOption: $selectedSort)
-                    .onChange(of: $selectedSort.wrappedValue, perform: { _ in
-                        setupNoteSort()
-                    })
-                
-                Spacer()
-                Button("\(Image(systemName: "list.bullet.clipboard")) Tasks") {
-                    showTasks.toggle()
+                HStack{
+                    SortByView(selectedOption: $selectedSort)
+                        .onChange(of: $selectedSort.wrappedValue, perform: { _ in
+                            setupNoteSort()
+                        })
+                    
+                    Spacer()
+                    Button("\(Image(systemName: "list.bullet.clipboard")) Tasks") {
+                        showTasks.toggle()
+                    }
+                    .buttonStyle(.borderedProminent)
+                    
                 }
-                .buttonStyle(.borderedProminent)
-                
             }
+
         } detail: {
-            if noteId != nil {
-                NoteMainView(note: noteId!)
-            } else {
-                Text("Select a Note")
+            Group {
+                if noteId != nil {
+                    NoteMainView(note: noteId!)
+                } else {
+                    Text("Select a Note")
+                }
             }
+
         }
     }
     
@@ -235,7 +241,7 @@ struct NoteList: View {
         }
     }
     
-    private func addListWith(title: String, url: String) {
+    private func addURLWith(title: String, url: String) {
         let stags = $selectedTags.wrappedValue
         let newNote = Note.createNote(vc: viewContext, title: title, body: url, type: "text/html")
         if !stags.isEmpty {
@@ -271,7 +277,7 @@ struct NoteList: View {
         else {
             mimetype = "application/octet-stream"
         }
-
+        
         let newNote = Note.createNote(vc: viewContext, title: title, body: "", type: mimetype)
         newNote.blob = blob
         if !stags.isEmpty {

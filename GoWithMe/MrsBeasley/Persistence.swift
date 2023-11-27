@@ -17,12 +17,7 @@ struct PersistenceController {
             let newItem = Note(context: viewContext)
             newItem.timestamp = Date()
         }
-        do {
-            try viewContext.save()
-        } catch {
-            let nsError = error as NSError
-            print("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
+        result.container.viewContext.flushChanges()
         return result
     }()
 
@@ -76,7 +71,7 @@ struct PersistenceController {
         note.body = body
         note.blob = blob
         
-        context.flushChanges()
+        //context.flushChanges()
         //print("storing notes - before fetch")
         //fetchNotes()
     }

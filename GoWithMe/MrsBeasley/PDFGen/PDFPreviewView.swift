@@ -47,18 +47,6 @@ struct PDFPreviewView  : View {
                 Text("Share")
             })
             .buttonStyle(.borderedProminent)
-//            Button("Copy File", action: {
-//                let tn = (pdfViewModel.title.convertedToSlug() ?? "untitled") + ".pdf" //UUID().uuidString + ".pdf"
-//                let url = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(tn)
-//                if let data = pdfViewModel.pdfData() {
-//                    (try? data.write(to: url))
-//                }
-//                if let provider = NSItemProvider(contentsOf: url) {
-//                    //provider.suggestedName = tn+".pdf"
-//                    UIPasteboard.general.url = url
-//                    UIPasteboard.general.itemProviders = [provider]
-//                }
-//            })
             Button("Export") {
                 let tn = (pdfViewModel.title.convertedToSlug() ?? "untitled") + ".pdf" //UUID().uuidString + ".pdf"
                 url = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(tn)
@@ -102,23 +90,5 @@ struct ShareView: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: UIActivityViewController,
                                 context: UIViewControllerRepresentableContext<ShareView>) {
         // empty
-    }
-}
-
-// to slugify the doc title to a string
-extension String {
-    private static let slugSafeCharacters = CharacterSet(charactersIn: "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-")
-    
-    public func convertedToSlug() -> String? {
-        if let latin = self.applyingTransform(StringTransform("Any-Latin; Latin-ASCII; Lower;"), reverse: false) {
-            let urlComponents = latin.components(separatedBy: String.slugSafeCharacters.inverted)
-            let result = urlComponents.filter { $0 != "" }.joined(separator: "-")
-            
-            if result.count > 0 {
-                return result
-            }
-        }
-        
-        return nil
     }
 }

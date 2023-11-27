@@ -26,7 +26,12 @@ struct NoteMainView: View {
                     if let thisUrl = URL(string:note.body!){
                         NoteDetailHeader(note: note)
                         WebView(url: thisUrl)
-                        ShareLink("Share", item: thisUrl)
+                            .toolbar {
+                            ShareLink("Share", item: thisUrl)
+                            Spacer()
+                            Link(" Open -- \(note.body!)", destination: URL(string: note.body!)!)
+                        }
+                        .padding()
                     }
                     //                    }
                 case UTType.pdf.preferredMIMEType :
@@ -51,6 +56,9 @@ struct NoteMainView: View {
                                         }
                                     }
                                     .buttonStyle(.borderedProminent)
+                                    if let newurl = note.loadBlobToData() {
+                                        ShareLink("Share", item: newurl)
+                                    }
                                 }
                             }
                     } else {
@@ -60,6 +68,7 @@ struct NoteMainView: View {
                 default:
                     NoteDetailHeader(note: note)
                     FileAssetView(n: note)
+                        
                 }
             }
         }
@@ -85,22 +94,19 @@ struct WebView: UIViewRepresentable {
     }
 }
 
+import SwiftUI
+import SafariServices
 
-extension Note {
-    func loadBlobToData() -> URL? {
-        if self.uuid == nil {
-            self.uuid = UUID()
-        }
-        if let pdfData = self.blob, let fname = self.title!.convertedToSlug() {
-            let pathURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("\(fname).pdf")
-            do {
-                try pdfData.write(to: pathURL, options: .atomic)
-            } catch {
-                print("Error while writing blob to local file for display")
-            }
-            return pathURL
-        }
-        return nil
+struct SafariWebView: UIViewControllerRepresentable {
+    let url: URL
+    
+    func makeUIViewController(context: Context) -> SFSafariViewController {
+        return SFSafariViewController(url: url)
     }
     
+    func updateUIViewController(_ uiViewController: SFSafariViewController, context: Context) {
+        
+    }
 }
+
+

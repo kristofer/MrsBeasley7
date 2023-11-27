@@ -17,18 +17,55 @@ extension Binding {
 
 extension NSManagedObjectContext {
     func flushChanges() {
+        //DispatchQueue.main.async {   // <====
         if self.hasChanges {
-            try! self.save()
-
-            //do {
-//                DispatchQueue.main.async {   // <====
-//                }
-//            } catch {
-//                let nserror = error as NSError
-//                print("Unresolved error \(nserror), \(nserror.userInfo)")
-//            }
-        }
+                do {
+                    print("Actually FLUSHING Changes.")
+                    try self.save()
+                } catch {
+                    let nserror = error as NSError
+                    print("Unresolved error \(nserror), \(nserror.userInfo)")
+                }
+            }
+        //}
         
     }
 }
 
+extension Note {
+    func loadBlobToData() -> URL? {
+        if self.uuid == nil {
+            self.uuid = UUID()
+        }
+        if let pdfData = self.blob, let fname = self.title!.convertedToSlug() {
+            let pathURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("\(fname).pdf")
+            do {
+                try pdfData.write(to: pathURL, options: .atomic)
+            } catch {
+                print("Error while writing blob to local file for display")
+            }
+            return pathURL
+        }
+        return nil
+    }
+    
+}
+
+
+// to slugify the doc title to a string
+extension String {
+    private static let slugSafeCharacters = CharacterSet(charactersIn: "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-")
+    
+    public func convertedToSlug() -> String? {
+        if let latin = self.applyingTransform(StringTransform("Any-Latin; Latin-ASCII; Lower;"), reverse: false) {
+            let urlComponents = latin.components(separatedBy: String.slugSafeCharacters.inverted)
+            let result = urlComponents.filter { $0 != "" }.joined(separator: "-")
+            
+            if result.count > 0 {
+                return result
+            }
+        }
+        
+        return nil
+    }
+}

@@ -73,13 +73,7 @@ struct TaskListView: View {
     private func deleteTask(index: IndexSet) -> Void {
         withAnimation {
             index.map { tasks[$0] }.forEach(viewContext.delete)
-            
-            do {
-                try viewContext.save()
-            } catch {
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError.localizedDescription), \(nsError.userInfo)")
-            }
+            viewContext.flushChanges()
         }
     }
 }

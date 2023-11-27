@@ -59,6 +59,55 @@ struct PreviewController: UIViewControllerRepresentable {
     }
 }
 
+struct PreviewControllerMac: UIViewControllerRepresentable {
+    @Binding var url: URL
+    
+    var controller = QLPreviewController()
+    
+    func makeUIViewController(context: Context) -> UINavigationController {
+        //let controller =
+        controller.dataSource = context.coordinator
+        controller.delegate = context.coordinator
+        let navigationController = UINavigationController(rootViewController: controller)
+        return navigationController
+    }
+    
+    func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {
+        if context.coordinator.parent.url.absoluteURL != self.url.absoluteURL {
+            context.coordinator.urlToDisplay = self.url
+            self.controller.refreshCurrentPreviewItem()
+        }
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(parent: self)
+    }
+    class Coordinator: NSObject, QLPreviewControllerDelegate, QLPreviewControllerDataSource {
+//        let parent: PreviewControllerMac
+//        init(parent: PreviewControllerMac) {
+//            self.parent = parent
+//        }
+        var parent: PreviewControllerMac
+        var urlToDisplay: URL
+        
+        init(parent: PreviewControllerMac) {
+            self.parent = parent
+            self.urlToDisplay = parent.url
+        }
+        func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+            return 1
+        }
+        func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+            //return parent.url as NSURL
+            return self.urlToDisplay as QLPreviewItem
+
+        }
+        func previewController(_ controller: QLPreviewController, editingModeFor previewItem: QLPreviewItem) -> QLPreviewItemEditingMode {
+            return .updateContents
+        }
+    }
+    
+}
 final class FileAssetVM: ObservableObject {
     
     @Published var note: Note //= .init()
@@ -127,6 +176,10 @@ struct FileAssetView: View {
 //        Text("FileAssetView vm \(vm.note.title!)")
 //        Text("FileAssetView note \(note.title!)")
         FileAssetPreview(vm: vm)
+            .toolbar {
+                ShareLink("Share", item: vm.tfileURL)
+            }
+            .padding()
             .onChange(of: self.note, perform: { _ in
                 vm.resetTempFile()
             })
@@ -144,6 +197,7 @@ struct FileAssetPreview: View {
     
     var body: some View {
 //        Text("FileAssetPreview \(vm.note.title!)")
+        //PreviewControllerMac(url: $vm.tfileURL)
         PreviewController(url: vm.tfileURL)
     }
 }

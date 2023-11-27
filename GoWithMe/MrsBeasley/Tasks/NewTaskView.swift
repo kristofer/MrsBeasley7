@@ -82,11 +82,7 @@ struct NewTaskView: View {
         newTask.priority = priority
         newTask.complete = false
         
-        do {
-            try viewContext.save()
-        } catch {
-            print(error.localizedDescription)
-        }
+        viewContext.flushChanges()
     }
 }
 
