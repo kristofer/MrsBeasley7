@@ -121,8 +121,9 @@ struct NoteList: View {
                                         }
                                         let fname = item.suggestedName ?? "untitled pdf"//?.split(separator: ".").map(String.init).first ?? "unknown"
                                         if let data = data {
-                                            self.addPDFWith(title: fname, blob: data)
-                                            
+                                            DispatchQueue.main.async {
+                                                self.addPDFWith(title: fname, blob: data)
+                                            }
                                         }
                                     }
                                 } else if item.hasItemConformingToTypeIdentifier("public.url") {
@@ -134,7 +135,9 @@ struct NoteList: View {
                                         //let fname = item.suggestedName ?? "No URL"
                                         if let data = data {
                                             let urlstring = String(decoding: data, as: UTF8.self)
-                                            self.addURLWith(title: urlstring, url: urlstring)
+                                            DispatchQueue.main.async {
+                                                self.addURLWith(title: urlstring, url: urlstring)
+                                            }
                                         }
                                     }
                                 } else if item.hasItemConformingToTypeIdentifier("public.content") {
@@ -145,8 +148,9 @@ struct NoteList: View {
                                         }
                                         let fname = item.suggestedName ?? "No Name"//?.split(separator: ".").map(String.init).first ?? "unknown"
                                         if let data = data {
-                                            self.addFileWith(title: fname, blob: data)
-                                            
+                                            DispatchQueue.main.async {
+                                                self.addFileWith(title: fname, blob: data)
+                                            }
                                         }
                                     }
                                 } else if item.hasItemConformingToTypeIdentifier("public.text") {
@@ -157,7 +161,9 @@ struct NoteList: View {
                                         }
                                         let fname = item.suggestedName?.split(separator: ".").map(String.init).first ?? "No Title"
                                         if let data = data {
-                                            self.addNoteWith(title: fname, body: String(decoding: data, as: UTF8.self))
+                                            DispatchQueue.main.async {
+                                                self.addNoteWith(title: fname, body: String(decoding: data, as: UTF8.self))
+                                            }
                                         }
                                     }
                                 }

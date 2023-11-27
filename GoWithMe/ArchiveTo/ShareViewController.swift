@@ -30,12 +30,7 @@ class ShareViewController: SLComposeServiceViewController {
         guard let text = textView.text else {return}
         
         let date = Date()
-        let store = PersistenceController.shared
-        //        let fn = Note.allNotes(vc: store.container.viewContext)
-        //        for f in fn {
-        //            print("Note \(f.title) \(f.mimetype)")
-        //        }
-        
+        let store = PersistenceController.shared        
         
         if let string = urlString {
             store.createNote(withTitle: text,
@@ -43,12 +38,14 @@ class ShareViewController: SLComposeServiceViewController {
                             body: string,
                             blob: pdfData,
                             mimetype: "text/html")
+            store.container.viewContext.flushChanges()
         } else if let string = pdfString {
             store.createNote(withTitle: text,
                             onDate: date,
                             body: string,
                             blob: pdfData,
                             mimetype: UTType.pdf.preferredMIMEType ?? "com.adobe.pdf") //"com.adobe.pdf")
+            store.container.viewContext.flushChanges()
         }
         else
         {
@@ -57,6 +54,7 @@ class ShareViewController: SLComposeServiceViewController {
                             body: text,
                             blob: pdfData,
                             mimetype: "text/plain")
+            store.container.viewContext.flushChanges()
         }
         extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
     }
