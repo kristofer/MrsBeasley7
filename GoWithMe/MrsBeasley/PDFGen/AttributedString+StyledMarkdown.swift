@@ -35,7 +35,7 @@ extension AttributedString {
         // Set base font and paragraph style for the whole string
         s.font = .systemFont(ofSize: fontSize)
         //s.font = .custom("Inconsolata", size: fontSize)
-        s.paragraphStyle = defaultParagraphStyle
+        s.mergeAttributes(.init([.paragraphStyle: defaultParagraphStyle]))
         print(s)
 
         // Will respect dark mode automatically
@@ -148,16 +148,20 @@ extension AttributedString {
                 break
             case .unorderedListElement:
                 s.characters.insert(contentsOf: "•\t", at: intentRange.lowerBound)
-                s[intentRange].paragraphStyle = previousListID == currentListID ? listParagraphStyle : lastElementListParagraphStyle
+                let tempStyle = previousListID == currentListID ? listParagraphStyle : lastElementListParagraphStyle
+                s[intentRange].mergeAttributes(.init([.paragraphStyle: tempStyle]))
             case .orderedListElement(let ordinal):
                 s.characters.insert(contentsOf: "\(ordinal).\t", at: intentRange.lowerBound)
-                s[intentRange].paragraphStyle = previousListID == currentListID ? listParagraphStyle : lastElementListParagraphStyle
+                let tempStyle = previousListID == currentListID ? listParagraphStyle : lastElementListParagraphStyle
+                s[intentRange].mergeAttributes(.init([.paragraphStyle: tempStyle]))
             case .blockquote:
-                s[intentRange].paragraphStyle = defaultParagraphStyle
+                //s[intentRange].paragraphStyle = defaultParagraphStyle
+                s[intentRange].mergeAttributes(.init([.paragraphStyle: defaultParagraphStyle]))
                 s[intentRange].foregroundColor = .secondaryLabel
             case .code:
                 s[intentRange].font = .monospacedSystemFont(ofSize: 13, weight: .regular)
-                s[intentRange].paragraphStyle = codeParagraphStyle
+                //s[intentRange].paragraphStyle = codeParagraphStyle
+                s[intentRange].mergeAttributes(.init([.paragraphStyle: codeParagraphStyle]))
             }
 
             // Remember the list ID so we can check if it’s identical in the next block
