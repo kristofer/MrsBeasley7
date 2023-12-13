@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Combine
-
+import UniformTypeIdentifiers
 
 struct NoteTextEditor: View {
     @Environment(\.managedObjectContext) var moc
@@ -32,12 +32,22 @@ struct NoteTextEditor: View {
             VStack(alignment: .leading) {
                 NoteDetailHeader(note: note)
                 Divider()
-                 TextEditor(text: $note.body.toUnwrapped(defaultValue: "no body"))
-                    .findNavigator(isPresented: $isShowingFindNavigator)
-                    .font(.custom("Inconsolata", size: editFontsize))
-                    .padding(5)
-                    .scrollContentBackground(.hidden) // <- Hide it
-                    .background(AppYellow)
+                if note.published {
+                    Text(try! AttributedString(styledMarkdown: note.body ?? "Error", fontSize: 16.0))
+                        .padding(20)
+                        .background(.white)
+                    Spacer()
+
+                } else {
+                    TextEditor(text: $note.body.toUnwrapped(defaultValue: "no body"))
+                        .findNavigator(isPresented: $isShowingFindNavigator)
+                        .font(.custom("Inconsolata", size: editFontsize))
+                        .padding(5)
+                        .scrollContentBackground(.hidden) // <- Hide it
+                        .background(AppYellow)
+//                        .onDrop(of: [.url], delegate: self)
+
+                }
                 Divider()
                 if wordCount == 0 && note.body != nil {
                     Text("\(countWords(note.body!)) words")
@@ -88,6 +98,7 @@ struct NoteTextEditor: View {
 //            Button("Find") {
 //                isShowingFindNavigator.toggle()
 //            }
+            Toggle("Publish", isOn: $note.published)
             Button("Save", action: {save()})
                 .controlSize(.small)
                 .buttonStyle(.borderedProminent)
@@ -111,7 +122,7 @@ struct NoteTextEditor: View {
             }
         }
     }
-    
+
     
     private func countWords(_ s: String) -> Int {
         var c: Int = 0
@@ -135,6 +146,38 @@ struct NoteTextEditor: View {
     }
 }
 
+extension TextEditor: DropDelegate {
+    public func dropEntered(info: DropInfo) {
+        //self.isDrop = true
+    }
+    public func dropExited(info: DropInfo) {
+        //self.isDrop = false
+    }
+    public func performDrop(info: DropInfo) -> Bool {
+        handleDrop(info)
+    }
+    func handleDrop(_ info: DropInfo) -> Bool {
+        if let provider = info.itemProviders(for: [.url]).first {
+            provider.loadDataRepresentation(
+                forTypeIdentifier: UTType.url.identifier,
+                completionHandler: { data, error in
+                    if let data = data,
+                       let string = String(data: data, encoding: .utf8),
+                       let url = URL(string: string) {
+                        DispatchQueue.main.async {
+                            //self.b
+                        }
+                    }
+                }
+            )
+            
+            return true
+        }
+        
+        return false
+    }
+
+}
 struct NoteDetail_Previews: PreviewProvider {
     static var previews: some View {
         EmptyView()

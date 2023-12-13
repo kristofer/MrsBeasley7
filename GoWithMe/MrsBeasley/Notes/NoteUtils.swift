@@ -25,6 +25,8 @@ class Note: NSManagedObject, Codable  {
         self.timestamp = Date()
         self.lastmodified = Date()
         self.mimetype = "text/plain"
+        self.published = false
+        self.archived = false
     }
     
     static func createNote(vc: NSManagedObjectContext,
@@ -36,6 +38,9 @@ class Note: NSManagedObject, Codable  {
         newNote.body = body
         newNote.title = title
         newNote.mimetype = type
+        newNote.published = false
+        newNote.archived = false
+
         return newNote
     }
     
