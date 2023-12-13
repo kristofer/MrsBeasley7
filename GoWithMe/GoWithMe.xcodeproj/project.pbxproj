@@ -29,7 +29,7 @@
 		5C2894952AE5C99800C07CCE /* NewURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2894942AE5C99800C07CCE /* NewURLView.swift */; };
 		5C2894C42AE6E8AD00C07CCE /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2894C32AE6E8AD00C07CCE /* ShareViewController.swift */; };
 		5C2894C72AE6E8AD00C07CCE /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C2894C52AE6E8AD00C07CCE /* MainInterface.storyboard */; };
-		5C2894CB2AE6E8AD00C07CCE /* ArchiveTo.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 5C2894C12AE6E8AD00C07CCE /* ArchiveTo.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5C2894CB2AE6E8AD00C07CCE /* ArchiveTo.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 5C2894C12AE6E8AD00C07CCE /* ArchiveTo.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5C2894D02AE6EAF400C07CCE /* NoteUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2CCB22ADD98CB00B0B90F /* NoteUtils.swift */; };
 		5C2894D12AE6EAFA00C07CCE /* TagUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C92C8CA2AE40D1600F593BD /* TagUtils.swift */; };
 		5C2894D22AE6EB0500C07CCE /* MrsBeasley.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5CC528812AD97D34002A30C9 /* MrsBeasley.xcdatamodeld */; };
@@ -582,6 +582,7 @@
 /* Begin PBXTargetDependency section */
 		5C2894CA2AE6E8AD00C07CCE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = 5C2894C02AE6E8AD00C07CCE /* ArchiveTo */;
 			targetProxy = 5C2894C92AE6E8AD00C07CCE /* PBXContainerItemProxy */;
 		};
@@ -634,6 +635,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.tioga.MrsBeasley.ArchiveTo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -667,6 +669,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.tioga.MrsBeasley.ArchiveTo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -816,6 +819,9 @@
 				MARKETING_VERSION = 1.86;
 				PRODUCT_BUNDLE_IDENTIFIER = co.tioga.MrsBeasley;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -849,6 +855,9 @@
 				MARKETING_VERSION = 1.86;
 				PRODUCT_BUNDLE_IDENTIFIER = co.tioga.MrsBeasley;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
