@@ -35,7 +35,7 @@ extension AttributedString {
         // Set base font and paragraph style for the whole string
         s.font = .systemFont(ofSize: fontSize)
         //s.font = .custom("Inconsolata", size: fontSize)
-        s.mergeAttributes(.init([.paragraphStyle: defaultParagraphStyle]))
+         s.mergeAttributes(.init([.paragraphStyle: defaultParagraphStyle]))
         print(s)
 
         // Will respect dark mode automatically
