@@ -45,15 +45,19 @@ struct PDFPreviewView  : View {
                 self.showShareSheet.toggle()
             }, label: {
                 Text("Share")
+                Image(systemName: "square.and.arrow.up")
             })
             .buttonStyle(.borderedProminent)
-            Button("Export") {
+            Button {
                 let tn = (pdfViewModel.title.convertedToSlug() ?? "untitled") + ".pdf" //UUID().uuidString + ".pdf"
                 url = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(tn)
                 if let data = pdfViewModel.pdfData(), let url = url {
                     (try? data.write(to: url))
                     moving = true
                 }
+            } label: {
+                Text("Export")
+                Image(systemName: "arrow.up.doc.fill")
             }
             .fileMover(isPresented: $moving, file: url) { result in
                 switch result {

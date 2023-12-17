@@ -40,11 +40,14 @@ struct NoteMainView: View {
                         PDFKitView(url: newurl)
                             .toolbar {
                                 ToolbarItemGroup(placement: .bottomBar) {
-                                    Button("Export") {
+                                    Button {
                                         if let newurl = note.loadBlobToData() {
                                             self.url = newurl
                                             self.moving = true
                                         }
+                                    } label: {
+                                        Text("Export")
+                                        Image(systemName: "arrow.up.doc.fill")
                                     }
                                     .controlSize(.small)
                                     .fileMover(isPresented: $moving, file: url) { result in
