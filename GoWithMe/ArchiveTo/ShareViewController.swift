@@ -16,7 +16,9 @@ class ShareViewController: SLComposeServiceViewController {
     private var textString: String?
     private var pdfString: String?
     private var pdfData: Data?
-    
+    let ctxt = PersistenceController.shared.container.viewContext
+    let store = PersistenceController.shared
+
     override func isContentValid() -> Bool {
         if urlString != nil || textString != nil {
             if !contentText.isEmpty {
@@ -30,7 +32,6 @@ class ShareViewController: SLComposeServiceViewController {
         guard let text = textView.text else {return}
         
         let date = Date()
-        let store = PersistenceController.shared        
         
         if let string = urlString {
             store.createNote(withTitle: text,
@@ -38,14 +39,14 @@ class ShareViewController: SLComposeServiceViewController {
                             body: string,
                             blob: pdfData,
                             mimetype: "text/html")
-            store.container.viewContext.flushChanges()
+            ctxt.flushChanges()
         } else if let string = pdfString {
             store.createNote(withTitle: text,
                             onDate: date,
                             body: string,
                             blob: pdfData,
                             mimetype: UTType.pdf.preferredMIMEType ?? "com.adobe.pdf") //"com.adobe.pdf")
-            store.container.viewContext.flushChanges()
+            ctxt.flushChanges()
         }
         else
         {
@@ -54,7 +55,7 @@ class ShareViewController: SLComposeServiceViewController {
                             body: text,
                             blob: pdfData,
                             mimetype: "text/plain")
-            store.container.viewContext.flushChanges()
+            ctxt.flushChanges()
         }
         extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
     }

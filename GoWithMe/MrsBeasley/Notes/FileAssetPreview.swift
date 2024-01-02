@@ -164,7 +164,7 @@ final class FileAssetVM: ObservableObject {
 
 struct FileAssetView: View {
     @ObservedObject var note: Note
-    var vm: FileAssetVM
+    var vm: FileAssetVM // should this be a StateObject??
 
     init(n: Note) {
         note = n

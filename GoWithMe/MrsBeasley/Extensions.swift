@@ -24,7 +24,7 @@ extension NSManagedObjectContext {
                     try self.save()
                 } catch {
                     let nserror = error as NSError
-                    print("Unresolved error \(nserror), \(nserror.userInfo)")
+                    print("Unresolved error in flushChanges \(nserror), \(nserror.userInfo)")
                 }
             }
         //}

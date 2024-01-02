@@ -84,6 +84,7 @@ struct NoteList: View {
                     setupPredicate()
                 })
                 .refreshable {
+                    
                 }
                 .onAppear() {
                     if noteId == nil {
