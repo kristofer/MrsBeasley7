@@ -84,7 +84,11 @@ struct NoteList: View {
                     setupPredicate()
                 })
                 .refreshable {
-                    
+//                    viewContext.reset()
+                    viewContext.refresh(notes[0], mergeChanges: true)
+//                    if let noteId = self.noteId {
+//                        noteId.objectWillChange.send()
+//                    }
                 }
                 .onAppear() {
                     if noteId == nil {
