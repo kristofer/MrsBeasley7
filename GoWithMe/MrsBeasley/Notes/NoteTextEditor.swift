@@ -95,9 +95,6 @@ struct NoteTextEditor: View {
         .toolbar {
             Text("Ruit Oceano Nox")
                 .font(.subheadline).italic()
-//            Button("Find") {
-//                isShowingFindNavigator.toggle()
-//            }
             Toggle("Publish", isOn: $note.published)
             Button("Save", action: {save()})
                 .controlSize(.small)
@@ -110,11 +107,6 @@ struct NoteTextEditor: View {
             })
             .controlSize(.small)
             .buttonStyle(.borderedProminent)
-            
-            //            Button("Help") {
-            //                print("Help tapped!")
-            //            }
-            //            .buttonStyle(.borderedProminent)
         }
         
         .toolbar {

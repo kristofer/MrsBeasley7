@@ -11,8 +11,19 @@ import CoreData
 
 extension Binding {
     func toUnwrapped<T>(defaultValue: T) -> Binding<T> where Value == Optional<T>  {
-        Binding<T>(get: { self.wrappedValue ?? defaultValue }, set: { self.wrappedValue = $0 })
+        Binding<T>(get: { self.wrappedValue ?? defaultValue }, 
+                   set: { newValue in
+                        self.wrappedValue = newValue })
     }
+}
+extension Binding {
+  func withDefault<T>(_ defaultValue: T) -> Binding<T> where Value == Optional<T> {
+    return Binding<T>(get: {
+      self.wrappedValue ?? defaultValue
+    }, set: { newValue in
+      self.wrappedValue = newValue
+    })
+  }
 }
 
 extension NSManagedObjectContext {

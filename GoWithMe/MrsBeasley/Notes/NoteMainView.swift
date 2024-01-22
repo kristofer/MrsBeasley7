@@ -10,7 +10,7 @@ import UniformTypeIdentifiers
 
 struct NoteMainView: View {
     @ObservedObject var note: Note
-    
+
     @State private var moving = false
     @State var url: URL? = nil
     
@@ -20,8 +20,6 @@ struct NoteMainView: View {
                 switch mt {
                 case "text/plain" :
                     NoteTextEditor(note: note)
-                    //                    } else {
-                    //                    }
                 case "text/html" :
                     if let thisUrl = URL(string:note.body!){
                         NoteDetailHeader(note: note)
