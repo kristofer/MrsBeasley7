@@ -15,7 +15,7 @@ struct PDFNoteView: View {
 
     var body: some View {
         NoteDetailHeader(note: note)
-        PDFKitView(url: thisUrl)
+        PDFDocumentView(thisUrl: thisUrl)
             .toolbar {
                 ToolbarItemGroup(placement: .bottomBar) {
                     Button {
