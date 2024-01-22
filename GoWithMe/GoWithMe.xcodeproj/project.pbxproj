@@ -60,6 +60,8 @@
 		5CCD1CDF2ADEBF0300238939 /* Inconsolata-VariableFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5CCD1CDE2ADEBF0300238939 /* Inconsolata-VariableFont.ttf */; };
 		5CCD1CE12ADED0A100238939 /* AttributedString+StyledMarkdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCD1CE02ADED0A100238939 /* AttributedString+StyledMarkdown.swift */; };
 		5CD2CCB32ADD98CB00B0B90F /* NoteUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2CCB22ADD98CB00B0B90F /* NoteUtils.swift */; };
+		5CFA98952B5ED99A00D6BB6B /* HTMLNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA98942B5ED99A00D6BB6B /* HTMLNoteView.swift */; };
+		5CFA98972B5EDA8300D6BB6B /* PDFNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA98962B5EDA8300D6BB6B /* PDFNoteView.swift */; };
 		5CFEFA282AF12EB700A5EA00 /* EditTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFEFA272AF12EB700A5EA00 /* EditTagView.swift */; };
 /* End PBXBuildFile section */
 
@@ -157,6 +159,8 @@
 		5CCD1CDE2ADEBF0300238939 /* Inconsolata-VariableFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inconsolata-VariableFont.ttf"; sourceTree = "<group>"; };
 		5CCD1CE02ADED0A100238939 /* AttributedString+StyledMarkdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttributedString+StyledMarkdown.swift"; sourceTree = "<group>"; };
 		5CD2CCB22ADD98CB00B0B90F /* NoteUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteUtils.swift; sourceTree = "<group>"; };
+		5CFA98942B5ED99A00D6BB6B /* HTMLNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLNoteView.swift; sourceTree = "<group>"; };
+		5CFA98962B5EDA8300D6BB6B /* PDFNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFNoteView.swift; sourceTree = "<group>"; };
 		5CFEFA272AF12EB700A5EA00 /* EditTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTagView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -275,6 +279,8 @@
 		5CC5286A2AD97D32002A30C9 = {
 			isa = PBXGroup;
 			children = (
+				5CFA98962B5EDA8300D6BB6B /* PDFNoteView.swift */,
+				5CFA98942B5ED99A00D6BB6B /* HTMLNoteView.swift */,
 				5CC528752AD97D32002A30C9 /* MrsBeasley */,
 				5CC5288C2AD97D34002A30C9 /* MrsBeasleyTests */,
 				5CC528962AD97D34002A30C9 /* MrsBeasleyUITests */,
@@ -521,6 +527,7 @@
 				5C0140A62ADADAA000A6147F /* PDFViewModel.swift in Sources */,
 				5C2894952AE5C99800C07CCE /* NewURLView.swift in Sources */,
 				5C0E61702AF94CD600799F32 /* PriorityView.swift in Sources */,
+				5CFA98952B5ED99A00D6BB6B /* HTMLNoteView.swift in Sources */,
 				5C0A5F4B2B050DBA000192F2 /* FileAssetPreview.swift in Sources */,
 				5CD2CCB32ADD98CB00B0B90F /* NoteUtils.swift in Sources */,
 				5C2894932AE5C43400C07CCE /* NoteMainView.swift in Sources */,
@@ -545,6 +552,7 @@
 				5C0140AE2ADC41E100A6147F /* TagList.swift in Sources */,
 				5C373D922ADD6E3C0066B0D7 /* ShowTagView.swift in Sources */,
 				5CCD1CE12ADED0A100238939 /* AttributedString+StyledMarkdown.swift in Sources */,
+				5CFA98972B5EDA8300D6BB6B /* PDFNoteView.swift in Sources */,
 				5CC528832AD97D34002A30C9 /* MrsBeasley.xcdatamodeld in Sources */,
 				5C92C8D32AE5447B00F593BD /* TagHandlerView.swift in Sources */,
 				5C2894DB2AE83CF000C07CCE /* PDFKitView.swift in Sources */,

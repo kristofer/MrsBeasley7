@@ -10,9 +10,6 @@ import UniformTypeIdentifiers
 
 struct NoteMainView: View {
     @ObservedObject var note: Note
-
-    @State private var moving = false
-    @State var url: URL? = nil
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -22,51 +19,19 @@ struct NoteMainView: View {
                     NoteTextEditor(note: note)
                 case "text/html" :
                     if let thisUrl = URL(string:note.body!){
-                        NoteDetailHeader(note: note)
-                        WebView(url: thisUrl)
-                            .toolbar {
-                            ShareLink("Share", item: thisUrl)
-                            Spacer()
-                            Link(" Open -- \(note.body!)", destination: URL(string: note.body!)!)
-                        }
-                        .padding()
+                        HTMLNoteView(note: note, thisUrl: thisUrl)
                     }
                     //                    }
                 case UTType.pdf.preferredMIMEType :
-                    if let newurl = note.loadBlobToData() {
-                        NoteDetailHeader(note: note)
-                        PDFKitView(url: newurl)
-                            .toolbar {
-                                ToolbarItemGroup(placement: .bottomBar) {
-                                    Button {
-                                        if let newurl = note.loadBlobToData() {
-                                            self.url = newurl
-                                            self.moving = true
-                                        }
-                                    } label: {
-                                        Text("Export")
-                                        Image(systemName: "arrow.up.doc.fill")
-                                    }
-                                    .controlSize(.small)
-                                    .fileMover(isPresented: $moving, file: url) { result in
-                                        switch result {
-                                        case .success(let url):
-                                            print("exported \(url.absoluteString)")
-                                        case .failure(let error):
-                                            print(error.localizedDescription)
-                                        }
-                                    }
-                                    .buttonStyle(.borderedProminent)
-                                    if let newurl = note.loadBlobToData() {
-                                        ShareLink("Share", item: newurl)
-                                    }
-                                }
-                            }
+                    if let thisUrl = note.loadBlobToData() {
+                        PDFNoteView(note: note, thisUrl: thisUrl)
                     } else {
                         Text("Unable to load PDF")
                     }
                     //                    }
                 default:
+                    Text("mimetype is not text, html or PDF")
+                        .tint(.red)
                     NoteDetailHeader(note: note)
                     FileAssetView(n: note)
                         
@@ -77,37 +42,4 @@ struct NoteMainView: View {
         
     }
 }
-
-
-import SwiftUI
-import WebKit
-
-struct WebView: UIViewRepresentable {
-    let url: URL
-    
-    func makeUIView(context: Context) -> WKWebView {
-        return WKWebView()
-    }
-    
-    func updateUIView(_ webView: WKWebView, context: Context) {
-        let request = URLRequest(url: url)
-        webView.load(request)
-    }
-}
-
-import SwiftUI
-import SafariServices
-
-struct SafariWebView: UIViewControllerRepresentable {
-    let url: URL
-    
-    func makeUIViewController(context: Context) -> SFSafariViewController {
-        return SFSafariViewController(url: url)
-    }
-    
-    func updateUIViewController(_ uiViewController: SFSafariViewController, context: Context) {
-        
-    }
-}
-
 
