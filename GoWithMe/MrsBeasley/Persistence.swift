@@ -71,9 +71,6 @@ struct PersistenceController {
         note.body = body
         note.blob = blob
         
-        //context.flushChanges()
-        //print("storing notes - before fetch")
-        //fetchNotes()
     }
     
     //    func fetchNotes() {

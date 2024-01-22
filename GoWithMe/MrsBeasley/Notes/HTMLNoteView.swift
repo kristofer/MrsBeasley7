@@ -13,6 +13,7 @@ struct HTMLNoteView: View {
     
     var body: some View {
         NoteDetailHeader(note: note)
+        Divider()
         WebView(url: thisUrl)
             .toolbar {
             ShareLink("Share", item: thisUrl)

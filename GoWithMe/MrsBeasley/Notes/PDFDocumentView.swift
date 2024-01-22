@@ -11,7 +11,9 @@ struct PDFDocumentView: View {
     var thisUrl: URL
 
     var body: some View {
-        PDFKitView(url: thisUrl)
+        VStack {
+            PDFKitView(url: thisUrl)
+        }
     }
 }
 

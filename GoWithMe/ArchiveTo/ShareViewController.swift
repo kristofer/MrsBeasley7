@@ -38,7 +38,7 @@ class ShareViewController: SLComposeServiceViewController {
                             onDate: date,
                             body: string,
                             blob: pdfData,
-                            mimetype: "text/html")
+                            mimetype:  UTType.html.preferredMIMEType ?? "text/html" )
             ctxt.flushChanges()
         } else if let string = pdfString {
             store.createNote(withTitle: text,
@@ -54,7 +54,7 @@ class ShareViewController: SLComposeServiceViewController {
                             onDate: date,
                             body: text,
                             blob: pdfData,
-                            mimetype: "text/plain")
+                            mimetype:  UTType.plainText.preferredMIMEType ?? "text/plain")
             ctxt.flushChanges()
         }
         extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)

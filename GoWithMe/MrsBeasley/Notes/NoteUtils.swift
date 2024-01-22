@@ -24,7 +24,7 @@ class Note: NSManagedObject, Codable  {
         self.title = title
         self.timestamp = Date()
         self.lastmodified = Date()
-        self.mimetype = "text/plain"
+        self.mimetype = UTType.plainText.preferredMIMEType ?? "text/plain"
         self.published = false
         self.archived = false
     }

@@ -73,9 +73,13 @@ struct NoteList: View {
                 List(selection: $noteId) {
                     ForEach(notes,  id: \.self) { aNote in
                         NoteRow(note: aNote)
+                            .listRowBackground(aNote != noteId ? AppYellow : Color.accentColor)
+                            //.listRowInsets(EdgeInsets())
+                        
                     }
                     .onDelete(perform: deleteNotes)
                 }
+                .listStyle(.plain)
                 .background(AppYellow)
                 .onChange(of: $searchText.wrappedValue, perform: { _ in
                     setupPredicate()
@@ -192,6 +196,8 @@ struct NoteList: View {
                     
                 }
             }
+            .background(AppYellow)
+
 
         } detail: {
             Group {
@@ -303,7 +309,7 @@ struct NoteList: View {
     
     private func addNoteWith(title: String, body: String) {
         let stags = $selectedTags.wrappedValue
-        let newNote = Note.createNote(vc: viewContext, title: title, body: body, type: "text/plain")
+        let newNote = Note.createNote(vc: viewContext, title: title, body: body, type: UTType.plainText.preferredMIMEType ?? "text/plain")
         if !stags.isEmpty {
             for t in stags {
                 newNote.addToTags(t)

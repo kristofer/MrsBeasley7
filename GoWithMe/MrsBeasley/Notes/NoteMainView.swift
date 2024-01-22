@@ -15,9 +15,9 @@ struct NoteMainView: View {
         VStack(alignment: .leading) {
             if let mt = note.mimetype {
                 switch mt {
-                case "text/plain" :
+                case UTType.plainText.preferredMIMEType : //"text/plain"
                     NoteTextEditor(note: note)
-                case "text/html" :
+                case UTType.html.preferredMIMEType : //"text/html" :
                     if let thisUrl = URL(string:note.body!){
                         HTMLNoteView(note: note, thisUrl: thisUrl)
                     }
@@ -27,6 +27,7 @@ struct NoteMainView: View {
                         PDFNoteView(note: note, thisUrl: thisUrl)
                     } else {
                         Text("Unable to load PDF")
+                            .tint(.red)
                     }
                     //                    }
                 default:

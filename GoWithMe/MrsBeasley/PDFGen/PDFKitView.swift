@@ -9,6 +9,8 @@ import SwiftUI
 import PDFKit
 
 
+// update this struct to properly handle changes to the url when it changes.
+
 struct PDFKitView: UIViewRepresentable {
     var url: URL // new variable to get the URL of the document
     
@@ -20,12 +22,11 @@ struct PDFKitView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: PDFView, context: UIViewRepresentableContext<PDFKitView>) {
-        // we will leave this empty as we don't need to update the PDF
-         if uiView.window != nil, !uiView.isFirstResponder {
+        if uiView.window != nil { //, !uiView.isFirstResponder {
              //This triggers attribute cycle if not dispatched
              DispatchQueue.main.async {
                  uiView.document = PDFDocument(url: self.url)
-                 uiView.becomeFirstResponder()
+                 //uiView.becomeFirstResponder()
              }
          }
 

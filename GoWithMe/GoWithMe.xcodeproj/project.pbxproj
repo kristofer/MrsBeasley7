@@ -266,6 +266,9 @@
 		5C7566A62AFAF4FC005BF9DE /* Notes */ = {
 			isa = PBXGroup;
 			children = (
+				5CFA98982B5EDC5900D6BB6B /* PDFDocumentView.swift */,
+				5CFA98962B5EDA8300D6BB6B /* PDFNoteView.swift */,
+				5CFA98942B5ED99A00D6BB6B /* HTMLNoteView.swift */,
 				5C0140A12AD996BA00A6147F /* NoteList.swift */,
 				5CD2CCB22ADD98CB00B0B90F /* NoteUtils.swift */,
 				5C01409F2AD9952700A6147F /* NoteDetailHeader.swift */,
@@ -281,9 +284,6 @@
 		5CC5286A2AD97D32002A30C9 = {
 			isa = PBXGroup;
 			children = (
-				5CFA98982B5EDC5900D6BB6B /* PDFDocumentView.swift */,
-				5CFA98962B5EDA8300D6BB6B /* PDFNoteView.swift */,
-				5CFA98942B5ED99A00D6BB6B /* HTMLNoteView.swift */,
 				5CC528752AD97D32002A30C9 /* MrsBeasley */,
 				5CC5288C2AD97D34002A30C9 /* MrsBeasleyTests */,
 				5CC528962AD97D34002A30C9 /* MrsBeasleyUITests */,
