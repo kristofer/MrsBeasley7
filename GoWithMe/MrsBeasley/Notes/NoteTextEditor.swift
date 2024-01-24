@@ -15,7 +15,16 @@ struct NoteTextEditor: View {
     @ObservedObject var note: Note
     @State private var wordCount: Int = 0
     @State private var showPDFPanel = false
-    @State private var editFontsize = 22.0
+    private var editFontsize: CGFloat {
+        if UIDevice.current.localizedModel == "iPhone" {
+            return 16.0
+        } else if UIDevice.runningOnMac {
+            return 28.0
+        } else if UIDevice.current.localizedModel == "iPad" {
+            return 20.0
+        }
+        return 18.0
+    }
     
     @State var publisher = PassthroughSubject<String?, Never>()
     @State var delaySeconds = 5.0
@@ -50,10 +59,10 @@ struct NoteTextEditor: View {
                 }
                 Divider()
                 if wordCount == 0 && note.body != nil {
-                    Text("\(countWords(note.body!)) words")
+                    Text("\(countWords(note.body!)) words - {font \(editFontsize)}")
                         .font(.caption).italic()
                 } else {
-                    Text("\(wordCount) words")
+                    Text("\(wordCount) words") //- {font \(editFontsize)}")
                         .font(.caption).italic()
                 }
             }
@@ -80,13 +89,15 @@ struct NoteTextEditor: View {
                     .onDisappear(){
                         save()
                     }
-                    .onAppear() {
-                        if UIDevice.current.localizedModel == "iPhone" {
-                            self.editFontsize = 16.0
-                        } else if UIDevice.current.localizedModel == "iPad" {
-                            self.editFontsize = 22.0
-                        }
-                    }
+//                    .onAppear() {
+//                        if UIDevice.current.localizedModel == "iPhone" {
+//                            self.editFontsize = 16.0
+//                        } else if UIDevice.current.localizedModel == "iPad" {
+//                            self.editFontsize = 22.0
+//                        } else if UIDevice.runningOnMac {
+//                            self.editFontsize = 28.0
+//                        }
+//                    }
                     .sheet(isPresented: $showPDFPanel) {
                         PDFPreviewView().environmentObject(PDFViewModel(note: note))
                     }
@@ -138,38 +149,38 @@ struct NoteTextEditor: View {
     }
 }
 
-extension TextEditor: DropDelegate {
-    public func dropEntered(info: DropInfo) {
-        //self.isDrop = true
-    }
-    public func dropExited(info: DropInfo) {
-        //self.isDrop = false
-    }
-    public func performDrop(info: DropInfo) -> Bool {
-        handleDrop(info)
-    }
-    func handleDrop(_ info: DropInfo) -> Bool {
-        if let provider = info.itemProviders(for: [.url]).first {
-            provider.loadDataRepresentation(
-                forTypeIdentifier: UTType.url.identifier,
-                completionHandler: { data, error in
-                    if let data = data,
-                       let string = String(data: data, encoding: .utf8),
-                       let url = URL(string: string) {
-                        DispatchQueue.main.async {
-                            //self.b
-                        }
-                    }
-                }
-            )
-            
-            return true
-        }
-        
-        return false
-    }
-
-}
+//extension TextEditor: DropDelegate {
+//    public func dropEntered(info: DropInfo) {
+//        //self.isDrop = true
+//    }
+//    public func dropExited(info: DropInfo) {
+//        //self.isDrop = false
+//    }
+//    public func performDrop(info: DropInfo) -> Bool {
+//        handleDrop(info)
+//    }
+//    func handleDrop(_ info: DropInfo) -> Bool {
+//        if let provider = info.itemProviders(for: [.url]).first {
+//            provider.loadDataRepresentation(
+//                forTypeIdentifier: UTType.url.identifier,
+//                completionHandler: { data, error in
+//                    if let data = data,
+//                       let string = String(data: data, encoding: .utf8),
+//                       let url = URL(string: string) {
+//                        DispatchQueue.main.async {
+//                            //self.b
+//                        }
+//                    }
+//                }
+//            )
+//            
+//            return true
+//        }
+//        
+//        return false
+//    }
+//
+//}
 struct NoteDetail_Previews: PreviewProvider {
     static var previews: some View {
         EmptyView()

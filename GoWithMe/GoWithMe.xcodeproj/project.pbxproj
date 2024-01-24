@@ -266,9 +266,6 @@
 		5C7566A62AFAF4FC005BF9DE /* Notes */ = {
 			isa = PBXGroup;
 			children = (
-				5CFA98982B5EDC5900D6BB6B /* PDFDocumentView.swift */,
-				5CFA98962B5EDA8300D6BB6B /* PDFNoteView.swift */,
-				5CFA98942B5ED99A00D6BB6B /* HTMLNoteView.swift */,
 				5C0140A12AD996BA00A6147F /* NoteList.swift */,
 				5CD2CCB22ADD98CB00B0B90F /* NoteUtils.swift */,
 				5C01409F2AD9952700A6147F /* NoteDetailHeader.swift */,
@@ -277,6 +274,9 @@
 				5C0140992AD97F7A00A6147F /* NoteRow.swift */,
 				5C0A5F462B050D8C000192F2 /* BlobToTempFile.swift */,
 				5C0A5F4A2B050DBA000192F2 /* FileAssetPreview.swift */,
+				5CFA98982B5EDC5900D6BB6B /* PDFDocumentView.swift */,
+				5CFA98962B5EDA8300D6BB6B /* PDFNoteView.swift */,
+				5CFA98942B5ED99A00D6BB6B /* HTMLNoteView.swift */,
 			);
 			path = Notes;
 			sourceTree = "<group>";
