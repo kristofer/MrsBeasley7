@@ -43,7 +43,7 @@ class PDFViewModel : ObservableObject {
         //(try? AttributedString(styledMarkdown: content.body))
         //(try? AttributedString(markdown: content.body, options: [AttributedString.MarkdownParsingOptions(interpretedSyntax: .inlineOnlyPreservingWhitespace),
         //                                                         AttributedString.F]))
-        (try? AttributedString(styledMarkdown: content.body, fontSize: 13.0))
+        (try? AttributedString(styledMarkdown: content.body, fontSize: 12.0))
         ?? AttributedString()
     }
 

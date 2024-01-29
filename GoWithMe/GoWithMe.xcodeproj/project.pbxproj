@@ -60,6 +60,9 @@
 		5CCD1CDF2ADEBF0300238939 /* Inconsolata-VariableFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5CCD1CDE2ADEBF0300238939 /* Inconsolata-VariableFont.ttf */; };
 		5CCD1CE12ADED0A100238939 /* AttributedString+StyledMarkdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCD1CE02ADED0A100238939 /* AttributedString+StyledMarkdown.swift */; };
 		5CD2CCB32ADD98CB00B0B90F /* NoteUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2CCB22ADD98CB00B0B90F /* NoteUtils.swift */; };
+		5CFA98952B5ED99A00D6BB6B /* HTMLNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA98942B5ED99A00D6BB6B /* HTMLNoteView.swift */; };
+		5CFA98972B5EDA8300D6BB6B /* PDFNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA98962B5EDA8300D6BB6B /* PDFNoteView.swift */; };
+		5CFA98992B5EDC5900D6BB6B /* PDFDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA98982B5EDC5900D6BB6B /* PDFDocumentView.swift */; };
 		5CFEFA282AF12EB700A5EA00 /* EditTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFEFA272AF12EB700A5EA00 /* EditTagView.swift */; };
 /* End PBXBuildFile section */
 
@@ -157,6 +160,9 @@
 		5CCD1CDE2ADEBF0300238939 /* Inconsolata-VariableFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inconsolata-VariableFont.ttf"; sourceTree = "<group>"; };
 		5CCD1CE02ADED0A100238939 /* AttributedString+StyledMarkdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttributedString+StyledMarkdown.swift"; sourceTree = "<group>"; };
 		5CD2CCB22ADD98CB00B0B90F /* NoteUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteUtils.swift; sourceTree = "<group>"; };
+		5CFA98942B5ED99A00D6BB6B /* HTMLNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLNoteView.swift; sourceTree = "<group>"; };
+		5CFA98962B5EDA8300D6BB6B /* PDFNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFNoteView.swift; sourceTree = "<group>"; };
+		5CFA98982B5EDC5900D6BB6B /* PDFDocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFDocumentView.swift; sourceTree = "<group>"; };
 		5CFEFA272AF12EB700A5EA00 /* EditTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTagView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -268,6 +274,9 @@
 				5C0140992AD97F7A00A6147F /* NoteRow.swift */,
 				5C0A5F462B050D8C000192F2 /* BlobToTempFile.swift */,
 				5C0A5F4A2B050DBA000192F2 /* FileAssetPreview.swift */,
+				5CFA98982B5EDC5900D6BB6B /* PDFDocumentView.swift */,
+				5CFA98962B5EDA8300D6BB6B /* PDFNoteView.swift */,
+				5CFA98942B5ED99A00D6BB6B /* HTMLNoteView.swift */,
 			);
 			path = Notes;
 			sourceTree = "<group>";
@@ -521,6 +530,7 @@
 				5C0140A62ADADAA000A6147F /* PDFViewModel.swift in Sources */,
 				5C2894952AE5C99800C07CCE /* NewURLView.swift in Sources */,
 				5C0E61702AF94CD600799F32 /* PriorityView.swift in Sources */,
+				5CFA98952B5ED99A00D6BB6B /* HTMLNoteView.swift in Sources */,
 				5C0A5F4B2B050DBA000192F2 /* FileAssetPreview.swift in Sources */,
 				5CD2CCB32ADD98CB00B0B90F /* NoteUtils.swift in Sources */,
 				5C2894932AE5C43400C07CCE /* NoteMainView.swift in Sources */,
@@ -545,11 +555,13 @@
 				5C0140AE2ADC41E100A6147F /* TagList.swift in Sources */,
 				5C373D922ADD6E3C0066B0D7 /* ShowTagView.swift in Sources */,
 				5CCD1CE12ADED0A100238939 /* AttributedString+StyledMarkdown.swift in Sources */,
+				5CFA98972B5EDA8300D6BB6B /* PDFNoteView.swift in Sources */,
 				5CC528832AD97D34002A30C9 /* MrsBeasley.xcdatamodeld in Sources */,
 				5C92C8D32AE5447B00F593BD /* TagHandlerView.swift in Sources */,
 				5C2894DB2AE83CF000C07CCE /* PDFKitView.swift in Sources */,
 				5C2894DD2AE960AF00C07CCE /* NewTagView.swift in Sources */,
 				5C01409C2AD9819C00A6147F /* NoteTextEditor.swift in Sources */,
+				5CFA98992B5EDC5900D6BB6B /* PDFDocumentView.swift in Sources */,
 				5CC528772AD97D32002A30C9 /* MrsBeasleyApp.swift in Sources */,
 				5C2894DF2AE97F6000C07CCE /* NoteSubList.swift in Sources */,
 				5C0140A82ADADB3B00A6147F /* PDFPreviewView.swift in Sources */,
@@ -616,7 +628,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_ENTITLEMENTS = ArchiveTo/ArchiveTo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 106;
+				CURRENT_PROJECT_VERSION = 113;
 				DEVELOPMENT_TEAM = S7ZKK95T9U;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -631,7 +643,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.87;
+				MARKETING_VERSION = 1.88;
 				PRODUCT_BUNDLE_IDENTIFIER = co.tioga.MrsBeasley.ArchiveTo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -649,7 +661,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_ENTITLEMENTS = ArchiveTo/ArchiveTo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 106;
+				CURRENT_PROJECT_VERSION = 113;
 				DEVELOPMENT_TEAM = S7ZKK95T9U;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -664,7 +676,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.87;
+				MARKETING_VERSION = 1.88;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = co.tioga.MrsBeasley.ArchiveTo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -800,7 +812,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MrsBeasley/MrsBeasley.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 106;
+				CURRENT_PROJECT_VERSION = 113;
 				DEVELOPMENT_ASSET_PATHS = "\"MrsBeasley/Preview Content\"";
 				DEVELOPMENT_TEAM = S7ZKK95T9U;
 				ENABLE_PREVIEWS = YES;
@@ -816,7 +828,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.87;
+				MARKETING_VERSION = 1.88;
 				PRODUCT_BUNDLE_IDENTIFIER = co.tioga.MrsBeasley;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -836,7 +848,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MrsBeasley/MrsBeasley.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 106;
+				CURRENT_PROJECT_VERSION = 113;
 				DEVELOPMENT_ASSET_PATHS = "\"MrsBeasley/Preview Content\"";
 				DEVELOPMENT_TEAM = S7ZKK95T9U;
 				ENABLE_PREVIEWS = YES;
@@ -852,7 +864,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.87;
+				MARKETING_VERSION = 1.88;
 				PRODUCT_BUNDLE_IDENTIFIER = co.tioga.MrsBeasley;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

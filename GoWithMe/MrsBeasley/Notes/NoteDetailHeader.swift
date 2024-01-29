@@ -7,14 +7,22 @@
 
 import SwiftUI
 
+// this view seems to make the updating on the title field to work
+// correctly on changing of the selection
+struct NoteTitleEditView: View {
+    @ObservedObject var note: Note
+    var body: some View {
+        TextField("Title", text: $note.title.toUnwrapped(defaultValue: ""))
+    }
+}
+
 struct NoteDetailHeader: View {
     @ObservedObject var note: Note
-
 
     var body: some View {
         VStack() {
             HStack {
-                TextField("", text: $note.title.toUnwrapped(defaultValue: ""))
+                NoteTitleEditView(note: note)
                 Spacer()
                 ShowTagView(note: note)
                 if UIDevice.current.localizedModel == "iPad" {

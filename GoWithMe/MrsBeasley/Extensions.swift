@@ -9,10 +9,40 @@ import Foundation
 import SwiftUI
 import CoreData
 
+extension UIDevice {
+    static var idiom: UIUserInterfaceIdiom {
+        UIDevice.current.userInterfaceIdiom
+    }
+    static var isIpad: Bool {
+        idiom == .pad
+      }
+      
+      static var isiPhone: Bool {
+        idiom == .phone
+      }
+    
+    static var runningOnMac: Bool {
+        //print("running on mac: \(ProcessInfo().isMacCatalystApp)")
+        return ProcessInfo().isMacCatalystApp
+    }
+}
+
+
 extension Binding {
     func toUnwrapped<T>(defaultValue: T) -> Binding<T> where Value == Optional<T>  {
-        Binding<T>(get: { self.wrappedValue ?? defaultValue }, set: { self.wrappedValue = $0 })
+        Binding<T>(get: { self.wrappedValue ?? defaultValue }, 
+                   set: { newValue in
+                        self.wrappedValue = newValue })
     }
+}
+extension Binding {
+  func withDefault<T>(_ defaultValue: T) -> Binding<T> where Value == Optional<T> {
+    return Binding<T>(get: {
+      self.wrappedValue ?? defaultValue
+    }, set: { newValue in
+      self.wrappedValue = newValue
+    })
+  }
 }
 
 extension NSManagedObjectContext {

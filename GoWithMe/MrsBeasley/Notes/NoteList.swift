@@ -18,6 +18,7 @@ enum SortBy: CaseIterable, Identifiable, CustomStringConvertible {
     case saved
     case normal
     case alpha
+//    case tags
     
     var id: Self { self }
     
@@ -29,6 +30,8 @@ enum SortBy: CaseIterable, Identifiable, CustomStringConvertible {
             return "Date Modified"
         case .alpha:
             return "Title"
+//        case .tags:
+//            return "By Tags"
         }
     }
 }
@@ -73,9 +76,11 @@ struct NoteList: View {
                 List(selection: $noteId) {
                     ForEach(notes,  id: \.self) { aNote in
                         NoteRow(note: aNote)
+                            .listRowBackground(aNote != noteId ? AppYellow : Color.accentColor)
                     }
                     .onDelete(perform: deleteNotes)
                 }
+                .listStyle(.plain)
                 .background(AppYellow)
                 .onChange(of: $searchText.wrappedValue, perform: { _ in
                     setupPredicate()
@@ -84,11 +89,7 @@ struct NoteList: View {
                     setupPredicate()
                 })
                 .refreshable {
-//                    viewContext.reset()
                     viewContext.refresh(notes[0], mergeChanges: true)
-//                    if let noteId = self.noteId {
-//                        noteId.objectWillChange.send()
-//                    }
                 }
                 .onAppear() {
                     if noteId == nil {
@@ -112,6 +113,11 @@ struct NoteList: View {
                     ToolbarItem {
                         Button(action: addNote) {
                             Label("Add Note", systemImage: "plus")
+                        }
+                    }
+                    ToolbarItem {
+                        Button(action: addNote) {
+                            Label("Add Note", systemImage: "square.and.arrow.down.fill")
                         }
                         .onDrop(of: ["public.url","public.file-url", "public.text", UTType.pdf.identifier, "public.content"], isTargeted: nil) { providers -> Bool in
                             //print("dropped")
@@ -183,15 +189,16 @@ struct NoteList: View {
                         .onChange(of: $selectedSort.wrappedValue, perform: { _ in
                             setupNoteSort()
                         })
-                    
                     Spacer()
                     Button("\(Image(systemName: "list.bullet.clipboard")) Tasks") {
                         showTasks.toggle()
                     }
                     .buttonStyle(.borderedProminent)
-                    
                 }
             }
+            //.navigationSplitViewColumnWidth(min: 300, ideal: 500, max: 600)
+            .background(AppYellow)
+
 
         } detail: {
             Group {
@@ -244,6 +251,10 @@ struct NoteList: View {
             notes.sortDescriptors = [SortDescriptor(\Note.title, order: .forward)]
             return
         }
+//        if self.selectedSort == .tags {
+//            notes.sortDescriptors = [SortDescriptor(\Note.tags.title, order: .forward), SortDescriptor(\Note.title, order: .forward)]
+//            return
+//        }
     }
     
     private func addNote() {
@@ -303,7 +314,7 @@ struct NoteList: View {
     
     private func addNoteWith(title: String, body: String) {
         let stags = $selectedTags.wrappedValue
-        let newNote = Note.createNote(vc: viewContext, title: title, body: body, type: "text/plain")
+        let newNote = Note.createNote(vc: viewContext, title: title, body: body, type: UTType.plainText.preferredMIMEType ?? "text/plain")
         if !stags.isEmpty {
             for t in stags {
                 newNote.addToTags(t)
