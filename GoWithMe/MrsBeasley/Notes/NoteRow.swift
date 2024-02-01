@@ -28,7 +28,7 @@ struct NoteRow: View {
             VStack(alignment: .leading) {
                 if let actualTitle = note.title, actualTitle != "" {
                     Text(actualTitle)
-                        .font(.custom("Inconsolata", size: fontsize))
+                        .font(.custom("Inconsolata", size: fontsize)).bold()
                 }else {
                     Text("*no title*")
                 }
@@ -38,6 +38,7 @@ struct NoteRow: View {
                 }
             }
         }
+        .padding(4)
     }
 }
 
