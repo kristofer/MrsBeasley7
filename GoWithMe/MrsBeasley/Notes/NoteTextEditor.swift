@@ -131,7 +131,8 @@ struct NoteTextEditor: View {
         var c: Int = 0
         let words = s.split {
             $0 == " " ||
-            $0.isNewline
+            $0.isNewline ||
+            $0.isPunctuation
         }
         c = words.count
         
