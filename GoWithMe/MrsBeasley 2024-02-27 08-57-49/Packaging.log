@@ -1,0 +1,352 @@
+2024-02-27 13:57:25 +0000  Initial pipeline context: <IDEDistributionProcessingPipelineContext: 0x2ddfe6350; archive(resolved)="<IDEArchive: 0x60000c498240>", distributionTask(resolved)="2", distributionDestination(resolved)="1", distributionMethod(resolved)="<IDEDistributionMethodDevelopmentSigned: 0x60003634dbe0>", team(resolved)="<IDEProvisioningDisambiguatableBasicTeam: 0x600003fe2700; teamID='S7ZKK95T9U', teamName='Kristofer Younger', teamType='Individual', username='kris@youngers.org', isFreeProvisioningTeam='0'>">
+	Chain (16, self inclusive):
+	<IDEDistributionProcessingPipelineContext: 0x2ddfe6350; archive = "<IDEArchive: 0x60000c498240>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x60003634dbe0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x600003fe2700; teamID='S7ZKK95T9U', teamName='Kristofer Younger', teamType='Individual', username='kris@youngers.org', isFreeProvisioningTeam='0'>">
+	<IDEDistributionProcessingPipelineContext: 0x1360b2410; archive = "<IDEArchive: 0x60000c498240>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x60003634dbe0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x600003fe2700; teamID='S7ZKK95T9U', teamName='Kristofer Younger', teamType='Individual', username='kris@youngers.org', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x1360a3340; archive = "<IDEArchive: 0x60000c498240>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x60003634dbe0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x600003fe2700; teamID='S7ZKK95T9U', teamName='Kristofer Younger', teamType='Individual', username='kris@youngers.org', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x12066b5a0; archive = "<IDEArchive: 0x60000c498240>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x60003634dbe0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x600003fe2700; teamID='S7ZKK95T9U', teamName='Kristofer Younger', teamType='Individual', username='kris@youngers.org', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x130a306d0; archive = "<IDEArchive: 0x60000c498240>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x60003634dbe0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x600003fe2700; teamID='S7ZKK95T9U', teamName='Kristofer Younger', teamType='Individual', username='kris@youngers.org', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x2de0f7590; archive = "<IDEArchive: 0x60000c498240>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x60003634dbe0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x600003fe2700; teamID='S7ZKK95T9U', teamName='Kristofer Younger', teamType='Individual', username='kris@youngers.org', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x130a6a690; archive = "<IDEArchive: 0x60000c498240>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x60003634dbe0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x600003fe2700; teamID='S7ZKK95T9U', teamName='Kristofer Younger', teamType='Individual', username='kris@youngers.org', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x155e7d650; archive = "<IDEArchive: 0x60000c498240>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x60003634dbe0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x600003fe2700; teamID='S7ZKK95T9U', teamName='Kristofer Younger', teamType='Individual', username='kris@youngers.org', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x2e2936c60; archive = "<IDEArchive: 0x60000c498240>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x60003634dbe0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x600003fe2700; teamID='S7ZKK95T9U', teamName='Kristofer Younger', teamType='Individual', username='kris@youngers.org', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x2e29167a0; archive = "<IDEArchive: 0x60000c498240>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x60003634dbe0>", team="(null)">
+	<IDEDistributionContext: 0x2dec414e0; archive = "<IDEArchive: 0x60000c498240>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x60003634dbe0>", team="(null)">
+	<IDEDistributionContext: 0x130b5fa20; archive = "<IDEArchive: 0x60000c498240>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x60003634dbe0>", team="(null)">
+	<IDEDistributionContext: 0x2df719070; archive = "<IDEArchive: 0x60000c498240>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x60003634dbe0>", team="(null)">
+	<IDEDistributionContext: 0x2e2924130; archive = "<IDEArchive: 0x60000c498240>", distributionMethod="(null)", team="(null)">
+	<IDEDistributionContext: 0x12fd95720; archive = "<IDEArchive: 0x60000c498240>", distributionMethod="(null)", team="(null)">
+	<IDEDistributionContext: 0x135e584d0; archive = "<IDEArchive: 0x60000c498240>", distributionMethod="(null)", team="(null)">
+</IDEDistributionProcessingPipelineContext: 0x2ddfe6350>
+2024-02-27 13:57:25 +0000  Processing step: IDEDistributionCreateDestRootStep
+2024-02-27 13:57:25 +0000  Processing step: IDEDistributionCopyItemStep
+2024-02-27 13:57:25 +0000  Running /usr/bin/ditto '-V' '/Users/kryounger/Library/Developer/Xcode/Archives/2024-02-27/MrsBeasley 2-27-24, 8.57 AM.xcarchive/Products/Applications/GoWithMe.app' '/var/folders/wl/z4gz1nsd0j10_smllm75j5fw0000gp/T/XcodeDistPipeline.~~~fC6uBR/Root/Payload/GoWithMe.app'
+2024-02-27 13:57:25 +0000  >>> Copying /Users/kryounger/Library/Developer/Xcode/Archives/2024-02-27/MrsBeasley 2-27-24, 8.57 AM.xcarchive/Products/Applications/GoWithMe.app 
+2024-02-27 13:57:25 +0000  copying file ./_CodeSignature/CodeResources ... 
+2024-02-27 13:57:25 +0000  7372 bytes for ./_CodeSignature/CodeResources
+2024-02-27 13:57:25 +0000  copying file ./PlugIns/ArchiveTo.appex/_CodeSignature/CodeResources ... 
+2024-02-27 13:57:25 +0000  3910 bytes for ./PlugIns/ArchiveTo.appex/_CodeSignature/CodeResources
+2024-02-27 13:57:25 +0000  copying file ./PlugIns/ArchiveTo.appex/Base.lproj/MainInterface.storyboardc/UIViewController-j1y-V4-xli.nib ... 
+2024-02-27 13:57:25 +0000  965 bytes for ./PlugIns/ArchiveTo.appex/Base.lproj/MainInterface.storyboardc/UIViewController-j1y-V4-xli.nib
+copying file ./PlugIns/ArchiveTo.appex/Base.lproj/MainInterface.storyboardc/j1y-V4-xli-view-wbc-yd-nQP.nib ... 
+2024-02-27 13:57:25 +0000  1192 bytes for ./PlugIns/ArchiveTo.appex/Base.lproj/MainInterface.storyboardc/j1y-V4-xli-view-wbc-yd-nQP.nib
+copying file ./PlugIns/ArchiveTo.appex/Base.lproj/MainInterface.storyboardc/Info.plist ... 
+2024-02-27 13:57:25 +0000  258 bytes for ./PlugIns/ArchiveTo.appex/Base.lproj/MainInterface.storyboardc/Info.plist
+2024-02-27 13:57:25 +0000  copying file ./PlugIns/ArchiveTo.appex/QueryFile ... 
+2024-02-27 13:57:25 +0000  744 bytes for ./PlugIns/ArchiveTo.appex/QueryFile
+copying file ./PlugIns/ArchiveTo.appex/ArchiveTo ... 
+2024-02-27 13:57:25 +0000  115168 bytes for ./PlugIns/ArchiveTo.appex/ArchiveTo
+2024-02-27 13:57:25 +0000  copying file ./PlugIns/ArchiveTo.appex/MrsBeasley.momd/VersionInfo.plist ... 
+2024-02-27 13:57:25 +0000  412 bytes for ./PlugIns/ArchiveTo.appex/MrsBeasley.momd/VersionInfo.plist
+2024-02-27 13:57:25 +0000  copying file ./PlugIns/ArchiveTo.appex/MrsBeasley.momd/MrsBeasley.omo ... 
+2024-02-27 13:57:25 +0000  7624 bytes for ./PlugIns/ArchiveTo.appex/MrsBeasley.momd/MrsBeasley.omo
+2024-02-27 13:57:25 +0000  copying file ./PlugIns/ArchiveTo.appex/MrsBeasley.momd/MrsBeasley.mom ... 
+2024-02-27 13:57:25 +0000  3969 bytes for ./PlugIns/ArchiveTo.appex/MrsBeasley.momd/MrsBeasley.mom
+2024-02-27 13:57:25 +0000  copying file ./PlugIns/ArchiveTo.appex/embedded.mobileprovision ... 
+2024-02-27 13:57:25 +0000  21110 bytes for ./PlugIns/ArchiveTo.appex/embedded.mobileprovision
+2024-02-27 13:57:25 +0000  copying file ./PlugIns/ArchiveTo.appex/Info.plist ... 
+2024-02-27 13:57:25 +0000  1553 bytes for ./PlugIns/ArchiveTo.appex/Info.plist
+2024-02-27 13:57:25 +0000  copying file ./AppIcon60x60@2x.png ... 
+2024-02-27 13:57:25 +0000  2036 bytes for ./AppIcon60x60@2x.png
+2024-02-27 13:57:25 +0000  copying file ./Inconsolata-VariableFont.ttf ... 
+2024-02-27 13:57:25 +0000  343368 bytes for ./Inconsolata-VariableFont.ttf
+2024-02-27 13:57:25 +0000  copying file ./Assets.car ... 
+2024-02-27 13:57:25 +0000  368111 bytes for ./Assets.car
+2024-02-27 13:57:25 +0000  copying file ./AppIcon76x76@2x~ipad.png ... 
+2024-02-27 13:57:25 +0000  2426 bytes for ./AppIcon76x76@2x~ipad.png
+2024-02-27 13:57:25 +0000  copying file ./GoWithMe ... 
+2024-02-27 13:57:25 +0000  672576 bytes for ./GoWithMe
+2024-02-27 13:57:25 +0000  copying file ./MrsBeasley.momd/VersionInfo.plist ... 
+2024-02-27 13:57:25 +0000  412 bytes for ./MrsBeasley.momd/VersionInfo.plist
+2024-02-27 13:57:25 +0000  copying file ./MrsBeasley.momd/MrsBeasley.omo ... 
+2024-02-27 13:57:25 +0000  7624 bytes for ./MrsBeasley.momd/MrsBeasley.omo
+2024-02-27 13:57:25 +0000  copying file ./MrsBeasley.momd/MrsBeasley.mom ... 
+2024-02-27 13:57:25 +0000  3967 bytes for ./MrsBeasley.momd/MrsBeasley.mom
+2024-02-27 13:57:25 +0000  copying file ./embedded.mobileprovision ... 
+2024-02-27 13:57:25 +0000  21162 bytes for ./embedded.mobileprovision
+2024-02-27 13:57:25 +0000  copying file ./Info.plist ... 
+2024-02-27 13:57:25 +0000  1635 bytes for ./Info.plist
+2024-02-27 13:57:25 +0000  copying file ./PkgInfo ... 
+2024-02-27 13:57:25 +0000  8 bytes for ./PkgInfo
+2024-02-27 13:57:25 +0000  /usr/bin/ditto exited with 0
+2024-02-27 13:57:25 +0000  Processing step: IDEDistributionEmbedProfileStep
+2024-02-27 13:57:25 +0000  Processing step: IDEDistributionInfoPlistStep
+2024-02-27 13:57:25 +0000  Skipping step: IDEDistributionInfoPlistStep because it said so
+2024-02-27 13:57:25 +0000  Skipping step: IDEDistributionInfoPlistStep because it said so
+2024-02-27 13:57:25 +0000  Processing step: IDEDistributionAppThinningPlistStep
+2024-02-27 13:57:25 +0000  Skipping step: IDEDistributionAppThinningPlistStep because it said so
+2024-02-27 13:57:25 +0000  Processing step: IDEDistributionCompileBitcodeStep
+2024-02-27 13:57:25 +0000  Skipping step: IDEDistributionCompileBitcodeStep because it said so
+2024-02-27 13:57:25 +0000  Processing step: IDEDistributionCodeSlimmingStep
+2024-02-27 13:57:26 +0000  Processing step: IDEDistributionCopyBCSymbolMapsStep
+2024-02-27 13:57:26 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2024-02-27 13:57:26 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2024-02-27 13:57:26 +0000  Processing step: IDEDistributionSymbolsStep
+2024-02-27 13:57:26 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2024-02-27 13:57:26 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2024-02-27 13:57:26 +0000  Processing step: IDEDistributionAppThinningStep
+2024-02-27 13:57:26 +0000  Skipping step: IDEDistributionAppThinningStep because it said so
+2024-02-27 13:57:26 +0000  Processing step: IDEDistributionArchThinningStep
+2024-02-27 13:57:26 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/wl/z4gz1nsd0j10_smllm75j5fw0000gp/T/XcodeDistPipeline.~~~fC6uBR/Root/Payload/GoWithMe.app/PlugIns/ArchiveTo.appex/ArchiveTo' '-verify_arch' 'arm64e'
+2024-02-27 13:57:26 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2024-02-27 13:57:26 +0000  Skipping architecture thinning for item "ArchiveTo" because arch "arm64e" wasn't found
+2024-02-27 13:57:26 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/wl/z4gz1nsd0j10_smllm75j5fw0000gp/T/XcodeDistPipeline.~~~fC6uBR/Root/Payload/GoWithMe.app/GoWithMe' '-verify_arch' 'arm64e'
+2024-02-27 13:57:26 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2024-02-27 13:57:26 +0000  Skipping architecture thinning for item "GoWithMe" because arch "arm64e" wasn't found
+2024-02-27 13:57:26 +0000  Processing step: IDEDistributionODRStep
+2024-02-27 13:57:26 +0000  Processing step: IDEDistributionStripXattrsStep
+2024-02-27 13:57:26 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x60000c4b67c0; bundleID='co.tioga.MrsBeasley.ArchiveTo', path='<DVTFilePath:0x6000048e6990:'/Users/kryounger/Library/Developer/Xcode/Archives/2024-02-27/MrsBeasley 2-27-24, 8.57 AM.xcarchive/Products/Applications/GoWithMe.app/PlugIns/ArchiveTo.appex'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000083a0af0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600001a0e940; name='Apple Development: Kristofer Younger (955K7SEQPF)', hash='707DEDAAF28554CF5B77E4B5D0589B41E32976DD', serialNumber='50CAC62EBACEE7F199A797D2236326A6', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2024-02-27 13:44:22 +0000''>', entitlements='{
+    "application-identifier" = "S7ZKK95T9U.co.tioga.MrsBeasley.ArchiveTo";
+    "aps-environment" = development;
+    "com.apple.developer.icloud-container-identifiers" =     (
+        "iCloud.co.tioga.MrsBeasley"
+    );
+    "com.apple.developer.icloud-services" =     (
+        CloudKit
+    );
+    "com.apple.developer.team-identifier" = S7ZKK95T9U;
+    "com.apple.developer.ubiquity-kvstore-identifier" = "S7ZKK95T9U.co.tioga.MrsBeasley.ArchiveTo";
+    "get-task-allow" = 1;
+}', teamID='S7ZKK95T9U', identifier='co.tioga.MrsBeasley.ArchiveTo', executablePath='<DVTFilePath:0x6000048d6140:'/Users/kryounger/Library/Developer/Xcode/Archives/2024-02-27/MrsBeasley 2-27-24, 8.57 AM.xcarchive/Products/Applications/GoWithMe.app/PlugIns/ArchiveTo.appex/ArchiveTo'>', hardenedRuntime='0'>'>
+2024-02-27 13:57:26 +0000  Running /usr/bin/xattr '-crs' '/var/folders/wl/z4gz1nsd0j10_smllm75j5fw0000gp/T/XcodeDistPipeline.~~~fC6uBR/Root/Payload/GoWithMe.app'
+2024-02-27 13:57:26 +0000  /usr/bin/xattr exited with 0
+2024-02-27 13:57:26 +0000  Processing step: IDEDistributionCodesignStep
+2024-02-27 13:57:26 +0000  Entitlements for <IDEDistributionItem: 0x60000c4b67c0; bundleID='co.tioga.MrsBeasley.ArchiveTo', path='<DVTFilePath:0x6000048e6990:'/Users/kryounger/Library/Developer/Xcode/Archives/2024-02-27/MrsBeasley 2-27-24, 8.57 AM.xcarchive/Products/Applications/GoWithMe.app/PlugIns/ArchiveTo.appex'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000083a0af0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600001a0f180; name='Apple Development: Kristofer Younger (955K7SEQPF)', hash='707DEDAAF28554CF5B77E4B5D0589B41E32976DD', serialNumber='50CAC62EBACEE7F199A797D2236326A6', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2024-02-27 13:44:22 +0000''>', entitlements='{
+    "application-identifier" = "S7ZKK95T9U.co.tioga.MrsBeasley.ArchiveTo";
+    "aps-environment" = development;
+    "com.apple.developer.icloud-container-identifiers" =     (
+        "iCloud.co.tioga.MrsBeasley"
+    );
+    "com.apple.developer.icloud-services" =     (
+        CloudKit
+    );
+    "com.apple.developer.team-identifier" = S7ZKK95T9U;
+    "com.apple.developer.ubiquity-kvstore-identifier" = "S7ZKK95T9U.co.tioga.MrsBeasley.ArchiveTo";
+    "get-task-allow" = 1;
+}', teamID='S7ZKK95T9U', identifier='co.tioga.MrsBeasley.ArchiveTo', executablePath='<DVTFilePath:0x6000048d6140:'/Users/kryounger/Library/Developer/Xcode/Archives/2024-02-27/MrsBeasley 2-27-24, 8.57 AM.xcarchive/Products/Applications/GoWithMe.app/PlugIns/ArchiveTo.appex/ArchiveTo'>', hardenedRuntime='0'>'>: {
+    "application-identifier" = "S7ZKK95T9U.co.tioga.MrsBeasley.ArchiveTo";
+    "aps-environment" = development;
+    "com.apple.developer.icloud-container-environment" = Development;
+    "com.apple.developer.icloud-container-identifiers" =     (
+        "iCloud.co.tioga.MrsBeasley"
+    );
+    "com.apple.developer.icloud-services" =     (
+        CloudKit
+    );
+    "com.apple.developer.team-identifier" = S7ZKK95T9U;
+    "com.apple.developer.ubiquity-kvstore-identifier" = "S7ZKK95T9U.co.tioga.MrsBeasley.ArchiveTo";
+    "get-task-allow" = 1;
+}
+2024-02-27 13:57:26 +0000  Associated App Clip Identifiers Filter: Skipping because "com.apple.developer.associated-appclip-app-identifiers" is not present
+2024-02-27 13:57:26 +0000  Entitlements for <IDEDistributionItem: 0x60000c4b67c0; bundleID='co.tioga.MrsBeasley.ArchiveTo', path='<DVTFilePath:0x6000048e6990:'/Users/kryounger/Library/Developer/Xcode/Archives/2024-02-27/MrsBeasley 2-27-24, 8.57 AM.xcarchive/Products/Applications/GoWithMe.app/PlugIns/ArchiveTo.appex'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000083a0af0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600001a0e940; name='Apple Development: Kristofer Younger (955K7SEQPF)', hash='707DEDAAF28554CF5B77E4B5D0589B41E32976DD', serialNumber='50CAC62EBACEE7F199A797D2236326A6', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2024-02-27 13:44:22 +0000''>', entitlements='{
+    "application-identifier" = "S7ZKK95T9U.co.tioga.MrsBeasley.ArchiveTo";
+    "aps-environment" = development;
+    "com.apple.developer.icloud-container-identifiers" =     (
+        "iCloud.co.tioga.MrsBeasley"
+    );
+    "com.apple.developer.icloud-services" =     (
+        CloudKit
+    );
+    "com.apple.developer.team-identifier" = S7ZKK95T9U;
+    "com.apple.developer.ubiquity-kvstore-identifier" = "S7ZKK95T9U.co.tioga.MrsBeasley.ArchiveTo";
+    "get-task-allow" = 1;
+}', teamID='S7ZKK95T9U', identifier='co.tioga.MrsBeasley.ArchiveTo', executablePath='<DVTFilePath:0x6000048d6140:'/Users/kryounger/Library/Developer/Xcode/Archives/2024-02-27/MrsBeasley 2-27-24, 8.57 AM.xcarchive/Products/Applications/GoWithMe.app/PlugIns/ArchiveTo.appex/ArchiveTo'>', hardenedRuntime='0'>'> are: {
+    "application-identifier" = "S7ZKK95T9U.co.tioga.MrsBeasley.ArchiveTo";
+    "aps-environment" = development;
+    "com.apple.developer.icloud-container-environment" = Development;
+    "com.apple.developer.icloud-container-identifiers" =     (
+        "iCloud.co.tioga.MrsBeasley"
+    );
+    "com.apple.developer.icloud-services" =     (
+        CloudKit
+    );
+    "com.apple.developer.team-identifier" = S7ZKK95T9U;
+    "com.apple.developer.ubiquity-kvstore-identifier" = "S7ZKK95T9U.co.tioga.MrsBeasley.ArchiveTo";
+    "get-task-allow" = 1;
+}
+2024-02-27 13:57:26 +0000  Writing entitlements for <IDEDistributionItem: 0x60000c4b67c0; bundleID='co.tioga.MrsBeasley.ArchiveTo', path='<DVTFilePath:0x6000048e6990:'/Users/kryounger/Library/Developer/Xcode/Archives/2024-02-27/MrsBeasley 2-27-24, 8.57 AM.xcarchive/Products/Applications/GoWithMe.app/PlugIns/ArchiveTo.appex'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000083a0af0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600001a0f300; name='Apple Development: Kristofer Younger (955K7SEQPF)', hash='707DEDAAF28554CF5B77E4B5D0589B41E32976DD', serialNumber='50CAC62EBACEE7F199A797D2236326A6', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2024-02-27 13:44:22 +0000''>', entitlements='{
+    "application-identifier" = "S7ZKK95T9U.co.tioga.MrsBeasley.ArchiveTo";
+    "aps-environment" = development;
+    "com.apple.developer.icloud-container-identifiers" =     (
+        "iCloud.co.tioga.MrsBeasley"
+    );
+    "com.apple.developer.icloud-services" =     (
+        CloudKit
+    );
+    "com.apple.developer.team-identifier" = S7ZKK95T9U;
+    "com.apple.developer.ubiquity-kvstore-identifier" = "S7ZKK95T9U.co.tioga.MrsBeasley.ArchiveTo";
+    "get-task-allow" = 1;
+}', teamID='S7ZKK95T9U', identifier='co.tioga.MrsBeasley.ArchiveTo', executablePath='<DVTFilePath:0x6000048d6140:'/Users/kryounger/Library/Developer/Xcode/Archives/2024-02-27/MrsBeasley 2-27-24, 8.57 AM.xcarchive/Products/Applications/GoWithMe.app/PlugIns/ArchiveTo.appex/ArchiveTo'>', hardenedRuntime='0'>'> to: /var/folders/wl/z4gz1nsd0j10_smllm75j5fw0000gp/T/XcodeDistPipeline.~~~fC6uBR/entitlements~~~mGVkkB
+2024-02-27 13:57:26 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '707DEDAAF28554CF5B77E4B5D0589B41E32976DD' '--entitlements' '/var/folders/wl/z4gz1nsd0j10_smllm75j5fw0000gp/T/XcodeDistPipeline.~~~fC6uBR/entitlements~~~mGVkkB' '--generate-entitlement-der' '--preserve-metadata=identifier,flags,runtime' '/var/folders/wl/z4gz1nsd0j10_smllm75j5fw0000gp/T/XcodeDistPipeline.~~~fC6uBR/Root/Payload/GoWithMe.app/PlugIns/ArchiveTo.appex'
+2024-02-27 13:57:26 +0000  /var/folders/wl/z4gz1nsd0j10_smllm75j5fw0000gp/T/XcodeDistPipeline.~~~fC6uBR/Root/Payload/GoWithMe.app/PlugIns/ArchiveTo.appex: replacing existing signature
+2024-02-27 13:57:44 +0000  /var/folders/wl/z4gz1nsd0j10_smllm75j5fw0000gp/T/XcodeDistPipeline.~~~fC6uBR/Root/Payload/GoWithMe.app/PlugIns/ArchiveTo.appex: signed bundle with Mach-O thin (arm64) [co.tioga.MrsBeasley.ArchiveTo]
+2024-02-27 13:57:44 +0000  /usr/bin/codesign exited with 0
+2024-02-27 13:57:44 +0000  Entitlements for <IDEDistributionItem: 0x600008a4d380; bundleID='co.tioga.MrsBeasley', path='<DVTFilePath:0x60000483ca80:'/Users/kryounger/Library/Developer/Xcode/Archives/2024-02-27/MrsBeasley 2-27-24, 8.57 AM.xcarchive/Products/Applications/GoWithMe.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000083a05a0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x6000015d0d80; name='Apple Development: Kristofer Younger (955K7SEQPF)', hash='707DEDAAF28554CF5B77E4B5D0589B41E32976DD', serialNumber='50CAC62EBACEE7F199A797D2236326A6', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2024-02-27 13:44:22 +0000''>', entitlements='{
+    "application-identifier" = "S7ZKK95T9U.co.tioga.MrsBeasley";
+    "aps-environment" = development;
+    "com.apple.developer.icloud-container-identifiers" =     (
+        "iCloud.co.tioga.MrsBeasley"
+    );
+    "com.apple.developer.icloud-services" =     (
+        CloudKit,
+        CloudDocuments
+    );
+    "com.apple.developer.team-identifier" = S7ZKK95T9U;
+    "com.apple.developer.ubiquity-container-identifiers" =     (
+        "iCloud.co.tioga.MrsBeasley"
+    );
+    "com.apple.developer.ubiquity-kvstore-identifier" = "S7ZKK95T9U.co.tioga.MrsBeasley";
+    "get-task-allow" = 1;
+}', teamID='S7ZKK95T9U', identifier='co.tioga.MrsBeasley', executablePath='<DVTFilePath:0x6000048d7bf0:'/Users/kryounger/Library/Developer/Xcode/Archives/2024-02-27/MrsBeasley 2-27-24, 8.57 AM.xcarchive/Products/Applications/GoWithMe.app/GoWithMe'>', hardenedRuntime='0'>'>: {
+    "application-identifier" = "S7ZKK95T9U.co.tioga.MrsBeasley";
+    "aps-environment" = development;
+    "com.apple.developer.icloud-container-environment" = Development;
+    "com.apple.developer.icloud-container-identifiers" =     (
+        "iCloud.co.tioga.MrsBeasley"
+    );
+    "com.apple.developer.icloud-services" =     (
+        CloudKit,
+        CloudDocuments
+    );
+    "com.apple.developer.team-identifier" = S7ZKK95T9U;
+    "com.apple.developer.ubiquity-container-identifiers" =     (
+        "iCloud.co.tioga.MrsBeasley"
+    );
+    "com.apple.developer.ubiquity-kvstore-identifier" = "S7ZKK95T9U.co.tioga.MrsBeasley";
+    "get-task-allow" = 1;
+}
+2024-02-27 13:57:44 +0000  Associated App Clip Identifiers Filter: Skipping because "com.apple.developer.associated-appclip-app-identifiers" is not present
+2024-02-27 13:57:44 +0000  Entitlements for <IDEDistributionItem: 0x600008a4d380; bundleID='co.tioga.MrsBeasley', path='<DVTFilePath:0x60000483ca80:'/Users/kryounger/Library/Developer/Xcode/Archives/2024-02-27/MrsBeasley 2-27-24, 8.57 AM.xcarchive/Products/Applications/GoWithMe.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000083a05a0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x6000015f79c0; name='Apple Development: Kristofer Younger (955K7SEQPF)', hash='707DEDAAF28554CF5B77E4B5D0589B41E32976DD', serialNumber='50CAC62EBACEE7F199A797D2236326A6', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2024-02-27 13:44:22 +0000''>', entitlements='{
+    "application-identifier" = "S7ZKK95T9U.co.tioga.MrsBeasley";
+    "aps-environment" = development;
+    "com.apple.developer.icloud-container-identifiers" =     (
+        "iCloud.co.tioga.MrsBeasley"
+    );
+    "com.apple.developer.icloud-services" =     (
+        CloudKit,
+        CloudDocuments
+    );
+    "com.apple.developer.team-identifier" = S7ZKK95T9U;
+    "com.apple.developer.ubiquity-container-identifiers" =     (
+        "iCloud.co.tioga.MrsBeasley"
+    );
+    "com.apple.developer.ubiquity-kvstore-identifier" = "S7ZKK95T9U.co.tioga.MrsBeasley";
+    "get-task-allow" = 1;
+}', teamID='S7ZKK95T9U', identifier='co.tioga.MrsBeasley', executablePath='<DVTFilePath:0x6000048d7bf0:'/Users/kryounger/Library/Developer/Xcode/Archives/2024-02-27/MrsBeasley 2-27-24, 8.57 AM.xcarchive/Products/Applications/GoWithMe.app/GoWithMe'>', hardenedRuntime='0'>'> are: {
+    "application-identifier" = "S7ZKK95T9U.co.tioga.MrsBeasley";
+    "aps-environment" = development;
+    "com.apple.developer.icloud-container-environment" = Development;
+    "com.apple.developer.icloud-container-identifiers" =     (
+        "iCloud.co.tioga.MrsBeasley"
+    );
+    "com.apple.developer.icloud-services" =     (
+        CloudKit,
+        CloudDocuments
+    );
+    "com.apple.developer.team-identifier" = S7ZKK95T9U;
+    "com.apple.developer.ubiquity-container-identifiers" =     (
+        "iCloud.co.tioga.MrsBeasley"
+    );
+    "com.apple.developer.ubiquity-kvstore-identifier" = "S7ZKK95T9U.co.tioga.MrsBeasley";
+    "get-task-allow" = 1;
+}
+2024-02-27 13:57:44 +0000  Writing entitlements for <IDEDistributionItem: 0x600008a4d380; bundleID='co.tioga.MrsBeasley', path='<DVTFilePath:0x60000483ca80:'/Users/kryounger/Library/Developer/Xcode/Archives/2024-02-27/MrsBeasley 2-27-24, 8.57 AM.xcarchive/Products/Applications/GoWithMe.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000083a05a0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x6000015f49c0; name='Apple Development: Kristofer Younger (955K7SEQPF)', hash='707DEDAAF28554CF5B77E4B5D0589B41E32976DD', serialNumber='50CAC62EBACEE7F199A797D2236326A6', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2024-02-27 13:44:22 +0000''>', entitlements='{
+    "application-identifier" = "S7ZKK95T9U.co.tioga.MrsBeasley";
+    "aps-environment" = development;
+    "com.apple.developer.icloud-container-identifiers" =     (
+        "iCloud.co.tioga.MrsBeasley"
+    );
+    "com.apple.developer.icloud-services" =     (
+        CloudKit,
+        CloudDocuments
+    );
+    "com.apple.developer.team-identifier" = S7ZKK95T9U;
+    "com.apple.developer.ubiquity-container-identifiers" =     (
+        "iCloud.co.tioga.MrsBeasley"
+    );
+    "com.apple.developer.ubiquity-kvstore-identifier" = "S7ZKK95T9U.co.tioga.MrsBeasley";
+    "get-task-allow" = 1;
+}', teamID='S7ZKK95T9U', identifier='co.tioga.MrsBeasley', executablePath='<DVTFilePath:0x6000048d7bf0:'/Users/kryounger/Library/Developer/Xcode/Archives/2024-02-27/MrsBeasley 2-27-24, 8.57 AM.xcarchive/Products/Applications/GoWithMe.app/GoWithMe'>', hardenedRuntime='0'>'> to: /var/folders/wl/z4gz1nsd0j10_smllm75j5fw0000gp/T/XcodeDistPipeline.~~~fC6uBR/entitlements~~~djzeEc
+2024-02-27 13:57:44 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '707DEDAAF28554CF5B77E4B5D0589B41E32976DD' '--entitlements' '/var/folders/wl/z4gz1nsd0j10_smllm75j5fw0000gp/T/XcodeDistPipeline.~~~fC6uBR/entitlements~~~djzeEc' '--generate-entitlement-der' '--preserve-metadata=identifier,flags,runtime' '/var/folders/wl/z4gz1nsd0j10_smllm75j5fw0000gp/T/XcodeDistPipeline.~~~fC6uBR/Root/Payload/GoWithMe.app'
+2024-02-27 13:57:44 +0000  /var/folders/wl/z4gz1nsd0j10_smllm75j5fw0000gp/T/XcodeDistPipeline.~~~fC6uBR/Root/Payload/GoWithMe.app: replacing existing signature
+2024-02-27 13:57:44 +0000  /var/folders/wl/z4gz1nsd0j10_smllm75j5fw0000gp/T/XcodeDistPipeline.~~~fC6uBR/Root/Payload/GoWithMe.app: signed app bundle with Mach-O thin (arm64) [co.tioga.MrsBeasley]
+2024-02-27 13:57:44 +0000  /usr/bin/codesign exited with 0
+2024-02-27 13:57:44 +0000  Processing step: IDEDistributionZipODRItemStep
+2024-02-27 13:57:44 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2024-02-27 13:57:44 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2024-02-27 13:57:44 +0000  Processing step: IDEDistributionCreateIPAStep
+2024-02-27 13:57:44 +0000  Running /usr/bin/ditto '-V' '-c' '-k' '--norsrc' '/var/folders/wl/z4gz1nsd0j10_smllm75j5fw0000gp/T/XcodeDistPipeline.~~~fC6uBR/Root' '/var/folders/wl/z4gz1nsd0j10_smllm75j5fw0000gp/T/XcodeDistPipeline.~~~fC6uBR/Packages/GoWithMe.ipa'
+2024-02-27 13:57:44 +0000  >>> Copying /var/folders/wl/z4gz1nsd0j10_smllm75j5fw0000gp/T/XcodeDistPipeline.~~~fC6uBR/Root 
+2024-02-27 13:57:44 +0000  copying file ./Payload/GoWithMe.app/_CodeSignature/CodeResources ... 
+2024-02-27 13:57:44 +0000  7372 bytes for ./Payload/GoWithMe.app/_CodeSignature/CodeResources
+2024-02-27 13:57:44 +0000  copying file ./Payload/GoWithMe.app/PlugIns/ArchiveTo.appex/_CodeSignature/CodeResources ... 
+2024-02-27 13:57:44 +0000  3910 bytes for ./Payload/GoWithMe.app/PlugIns/ArchiveTo.appex/_CodeSignature/CodeResources
+2024-02-27 13:57:44 +0000  copying file ./Payload/GoWithMe.app/PlugIns/ArchiveTo.appex/Base.lproj/MainInterface.storyboardc/UIViewController-j1y-V4-xli.nib ... 
+2024-02-27 13:57:44 +0000  965 bytes for ./Payload/GoWithMe.app/PlugIns/ArchiveTo.appex/Base.lproj/MainInterface.storyboardc/UIViewController-j1y-V4-xli.nib
+2024-02-27 13:57:44 +0000  copying file ./Payload/GoWithMe.app/PlugIns/ArchiveTo.appex/Base.lproj/MainInterface.storyboardc/j1y-V4-xli-view-wbc-yd-nQP.nib ... 
+2024-02-27 13:57:44 +0000  1192 bytes for ./Payload/GoWithMe.app/PlugIns/ArchiveTo.appex/Base.lproj/MainInterface.storyboardc/j1y-V4-xli-view-wbc-yd-nQP.nib
+2024-02-27 13:57:44 +0000  copying file ./Payload/GoWithMe.app/PlugIns/ArchiveTo.appex/Base.lproj/MainInterface.storyboardc/Info.plist ... 
+2024-02-27 13:57:44 +0000  258 bytes for ./Payload/GoWithMe.app/PlugIns/ArchiveTo.appex/Base.lproj/MainInterface.storyboardc/Info.plist
+2024-02-27 13:57:44 +0000  copying file ./Payload/GoWithMe.app/PlugIns/ArchiveTo.appex/QueryFile ... 
+2024-02-27 13:57:44 +0000  744 bytes for ./Payload/GoWithMe.app/PlugIns/ArchiveTo.appex/QueryFile
+2024-02-27 13:57:44 +0000  copying file ./Payload/GoWithMe.app/PlugIns/ArchiveTo.appex/ArchiveTo ... 
+2024-02-27 13:57:44 +0000  115328 bytes for ./Payload/GoWithMe.app/PlugIns/ArchiveTo.appex/ArchiveTo
+2024-02-27 13:57:44 +0000  copying file ./Payload/GoWithMe.app/PlugIns/ArchiveTo.appex/MrsBeasley.momd/VersionInfo.plist ... 
+2024-02-27 13:57:44 +0000  412 bytes for ./Payload/GoWithMe.app/PlugIns/ArchiveTo.appex/MrsBeasley.momd/VersionInfo.plist
+2024-02-27 13:57:44 +0000  copying file ./Payload/GoWithMe.app/PlugIns/ArchiveTo.appex/MrsBeasley.momd/MrsBeasley.omo ... 
+2024-02-27 13:57:44 +0000  7624 bytes for ./Payload/GoWithMe.app/PlugIns/ArchiveTo.appex/MrsBeasley.momd/MrsBeasley.omo
+2024-02-27 13:57:44 +0000  copying file ./Payload/GoWithMe.app/PlugIns/ArchiveTo.appex/MrsBeasley.momd/MrsBeasley.mom ... 
+2024-02-27 13:57:44 +0000  3969 bytes for ./Payload/GoWithMe.app/PlugIns/ArchiveTo.appex/MrsBeasley.momd/MrsBeasley.mom
+2024-02-27 13:57:44 +0000  copying file ./Payload/GoWithMe.app/PlugIns/ArchiveTo.appex/embedded.mobileprovision ... 
+2024-02-27 13:57:44 +0000  21110 bytes for ./Payload/GoWithMe.app/PlugIns/ArchiveTo.appex/embedded.mobileprovision
+2024-02-27 13:57:44 +0000  copying file ./Payload/GoWithMe.app/PlugIns/ArchiveTo.appex/Info.plist ... 
+2024-02-27 13:57:44 +0000  1553 bytes for ./Payload/GoWithMe.app/PlugIns/ArchiveTo.appex/Info.plist
+2024-02-27 13:57:44 +0000  copying file ./Payload/GoWithMe.app/AppIcon60x60@2x.png ... 
+2024-02-27 13:57:44 +0000  2036 bytes for ./Payload/GoWithMe.app/AppIcon60x60@2x.png
+2024-02-27 13:57:44 +0000  copying file ./Payload/GoWithMe.app/Inconsolata-VariableFont.ttf ... 
+2024-02-27 13:57:44 +0000  343368 bytes for ./Payload/GoWithMe.app/Inconsolata-VariableFont.ttf
+2024-02-27 13:57:44 +0000  copying file ./Payload/GoWithMe.app/Assets.car ... 
+2024-02-27 13:57:44 +0000  368111 bytes for ./Payload/GoWithMe.app/Assets.car
+2024-02-27 13:57:44 +0000  copying file ./Payload/GoWithMe.app/AppIcon76x76@2x~ipad.png ... 
+2024-02-27 13:57:44 +0000  2426 bytes for ./Payload/GoWithMe.app/AppIcon76x76@2x~ipad.png
+2024-02-27 13:57:44 +0000  copying file ./Payload/GoWithMe.app/GoWithMe ... 
+2024-02-27 13:57:44 +0000  672736 bytes for ./Payload/GoWithMe.app/GoWithMe
+2024-02-27 13:57:44 +0000  copying file ./Payload/GoWithMe.app/MrsBeasley.momd/VersionInfo.plist ... 
+2024-02-27 13:57:44 +0000  412 bytes for ./Payload/GoWithMe.app/MrsBeasley.momd/VersionInfo.plist
+2024-02-27 13:57:44 +0000  copying file ./Payload/GoWithMe.app/MrsBeasley.momd/MrsBeasley.omo ... 
+2024-02-27 13:57:44 +0000  7624 bytes for ./Payload/GoWithMe.app/MrsBeasley.momd/MrsBeasley.omo
+2024-02-27 13:57:44 +0000  copying file ./Payload/GoWithMe.app/MrsBeasley.momd/MrsBeasley.mom ... 
+2024-02-27 13:57:44 +0000  3967 bytes for ./Payload/GoWithMe.app/MrsBeasley.momd/MrsBeasley.mom
+2024-02-27 13:57:44 +0000  copying file ./Payload/GoWithMe.app/embedded.mobileprovision ... 
+2024-02-27 13:57:44 +0000  21162 bytes for ./Payload/GoWithMe.app/embedded.mobileprovision
+2024-02-27 13:57:44 +0000  copying file ./Payload/GoWithMe.app/Info.plist ... 
+2024-02-27 13:57:44 +0000  1635 bytes for ./Payload/GoWithMe.app/Info.plist
+2024-02-27 13:57:44 +0000  copying file ./Payload/GoWithMe.app/PkgInfo ... 
+2024-02-27 13:57:44 +0000  8 bytes for ./Payload/GoWithMe.app/PkgInfo
+2024-02-27 13:57:44 +0000  /usr/bin/ditto exited with 0
+2024-02-27 13:57:44 +0000  Processing step: IDEDistributionAppStoreInformationStep
+2024-02-27 13:57:44 +0000  Skipping step: IDEDistributionAppStoreInformationStep because it said so
+2024-02-27 13:57:44 +0000  Processing step: IDEDistributionGenerateProcessedDistributionItems
+2024-02-27 13:57:44 +0000  IDEDistributionItem init <DVTFilePath:0x60000488c0e0:'/var/folders/wl/z4gz1nsd0j10_smllm75j5fw0000gp/T/XcodeDistPipeline.~~~fC6uBR/Root/Payload/GoWithMe.app/PlugIns/ArchiveTo.appex'>
+2024-02-27 13:57:44 +0000  IDEDistributionItem init <DVTFilePath:0x600004911ff0:'/var/folders/wl/z4gz1nsd0j10_smllm75j5fw0000gp/T/XcodeDistPipeline.~~~fC6uBR/Root/Payload/GoWithMe.app'>
+2024-02-27 13:57:45 +0000  Processing step: IDEDistributionCreateManifestStep
