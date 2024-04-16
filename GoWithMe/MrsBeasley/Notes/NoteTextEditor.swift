@@ -55,6 +55,9 @@ struct NoteTextEditor: View {
                         .scrollContentBackground(.hidden) // <- Hide it
                         .background(AppYellow)
 //                        .onDrop(of: [.url], delegate: self)
+                    
+                    // OR use https://github.com/twitter/TwitterTextEditor
+                    // there are lots of bugs with long documents in standard component.
 
                 }
                 Divider()

@@ -32,7 +32,7 @@ struct NoteDetailHeader: View {
                         VStack {
                             Text("Saved at \(note.lastmodified ?? .distantPast, formatter: noteDateFormatter)")
                                 .font(.caption).italic()
-                            Text("Created at \(note.timestamp!, formatter: noteDateFormatter)")
+                            Text("Created at \(note.timestamp ?? .distantPast, formatter: noteDateFormatter)")
                                 .font(.caption).italic()
                         }
                     }
