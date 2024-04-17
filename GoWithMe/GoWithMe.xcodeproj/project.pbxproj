@@ -60,6 +60,7 @@
 		5CCD1CDF2ADEBF0300238939 /* Inconsolata-VariableFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5CCD1CDE2ADEBF0300238939 /* Inconsolata-VariableFont.ttf */; };
 		5CCD1CE12ADED0A100238939 /* AttributedString+StyledMarkdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCD1CE02ADED0A100238939 /* AttributedString+StyledMarkdown.swift */; };
 		5CD2CCB32ADD98CB00B0B90F /* NoteUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2CCB22ADD98CB00B0B90F /* NoteUtils.swift */; };
+		5CDCF2412BCF0C7900D3430D /* macEditorTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDCF2402BCF0C7900D3430D /* macEditorTextView.swift */; };
 		5CFA98952B5ED99A00D6BB6B /* HTMLNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA98942B5ED99A00D6BB6B /* HTMLNoteView.swift */; };
 		5CFA98972B5EDA8300D6BB6B /* PDFNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA98962B5EDA8300D6BB6B /* PDFNoteView.swift */; };
 		5CFA98992B5EDC5900D6BB6B /* PDFDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA98982B5EDC5900D6BB6B /* PDFDocumentView.swift */; };
@@ -160,6 +161,7 @@
 		5CCD1CDE2ADEBF0300238939 /* Inconsolata-VariableFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inconsolata-VariableFont.ttf"; sourceTree = "<group>"; };
 		5CCD1CE02ADED0A100238939 /* AttributedString+StyledMarkdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttributedString+StyledMarkdown.swift"; sourceTree = "<group>"; };
 		5CD2CCB22ADD98CB00B0B90F /* NoteUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteUtils.swift; sourceTree = "<group>"; };
+		5CDCF2402BCF0C7900D3430D /* macEditorTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = macEditorTextView.swift; sourceTree = "<group>"; };
 		5CFA98942B5ED99A00D6BB6B /* HTMLNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLNoteView.swift; sourceTree = "<group>"; };
 		5CFA98962B5EDA8300D6BB6B /* PDFNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFNoteView.swift; sourceTree = "<group>"; };
 		5CFA98982B5EDC5900D6BB6B /* PDFDocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFDocumentView.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				5CD2CCB22ADD98CB00B0B90F /* NoteUtils.swift */,
 				5C01409F2AD9952700A6147F /* NoteDetailHeader.swift */,
 				5C01409B2AD9819C00A6147F /* NoteTextEditor.swift */,
+				5CDCF2402BCF0C7900D3430D /* macEditorTextView.swift */,
 				5C2894922AE5C43400C07CCE /* NoteMainView.swift */,
 				5C0140992AD97F7A00A6147F /* NoteRow.swift */,
 				5C0A5F462B050D8C000192F2 /* BlobToTempFile.swift */,
@@ -532,6 +535,7 @@
 				5C0E61702AF94CD600799F32 /* PriorityView.swift in Sources */,
 				5CFA98952B5ED99A00D6BB6B /* HTMLNoteView.swift in Sources */,
 				5C0A5F4B2B050DBA000192F2 /* FileAssetPreview.swift in Sources */,
+				5CDCF2412BCF0C7900D3430D /* macEditorTextView.swift in Sources */,
 				5CD2CCB32ADD98CB00B0B90F /* NoteUtils.swift in Sources */,
 				5C2894932AE5C43400C07CCE /* NoteMainView.swift in Sources */,
 				5C0E616C2AF94C7C00799F32 /* Task.swift in Sources */,

@@ -14,9 +14,9 @@
 			<key>certificate</key>
 			<dict>
 				<key>SHA1</key>
-				<string>707DEDAAF28554CF5B77E4B5D0589B41E32976DD</string>
+				<string>CCEDD87276560652847F3D50DD62E3E337CAE461</string>
 				<key>dateExpires</key>
-				<string>2/26/25</string>
+				<string>7/7/24</string>
 				<key>type</key>
 				<string>Apple Development</string>
 			</dict>
@@ -32,9 +32,9 @@
 					<key>certificate</key>
 					<dict>
 						<key>SHA1</key>
-						<string>707DEDAAF28554CF5B77E4B5D0589B41E32976DD</string>
+						<string>CCEDD87276560652847F3D50DD62E3E337CAE461</string>
 						<key>dateExpires</key>
-						<string>2/26/25</string>
+						<string>7/7/24</string>
 						<key>type</key>
 						<string>Apple Development</string>
 					</dict>
@@ -66,9 +66,9 @@
 					<key>profile</key>
 					<dict>
 						<key>UUID</key>
-						<string>2c2557cd-bac1-4b6d-aabc-ee338a55041a</string>
+						<string>bb8cf7d2-0640-47c6-955c-d5823ee6445f</string>
 						<key>dateExpires</key>
-						<string>2/26/25</string>
+						<string>3/18/25</string>
 						<key>name</key>
 						<string>iOS Team Provisioning Profile: co.tioga.MrsBeasley.ArchiveTo</string>
 					</dict>
@@ -80,7 +80,7 @@
 						<string>Kristofer Younger</string>
 					</dict>
 					<key>versionNumber</key>
-					<string>1.88</string>
+					<string>1.89</string>
 				</dict>
 			</array>
 			<key>entitlements</key>
@@ -116,9 +116,9 @@
 			<key>profile</key>
 			<dict>
 				<key>UUID</key>
-				<string>a5da8954-7fd0-4edf-9315-dc59db1f5abe</string>
+				<string>ad2e8f3e-69b5-46dd-9451-c2efce16d8d5</string>
 				<key>dateExpires</key>
-				<string>2/26/25</string>
+				<string>3/18/25</string>
 				<key>name</key>
 				<string>iOS Team Provisioning Profile: co.tioga.MrsBeasley</string>
 			</dict>
@@ -130,7 +130,7 @@
 				<string>Kristofer Younger</string>
 			</dict>
 			<key>versionNumber</key>
-			<string>1.88</string>
+			<string>1.89</string>
 		</dict>
 	</array>
 </dict>
