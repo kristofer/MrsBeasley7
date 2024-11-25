@@ -26,12 +26,13 @@ fileprivate enum MarkdownStyledBlock: Equatable {
 
 extension AttributedString {
 
-    init(styledMarkdown markdownString: String, fontSize: CGFloat = UIFont.preferredFont(forTextStyle: .body).pointSize) throws {
+    init(styledMarkdown markdownString: String, fontSize: CGFloat = UIFont.preferredFont(forTextStyle: .body).pointSize, forPreview: Bool = false) throws {
 
         var s = try AttributedString(markdown: markdownString, options: .init(allowsExtendedAttributes: true, interpretedSyntax: .full, failurePolicy: .returnPartiallyParsedIfPossible, languageCode: "en"), baseURL: nil)
 
         // Looking at the AttributedString’s raw structure helps with understanding the following code.
 
+        let fs = fontSize
         // Set base font and paragraph style for the whole string
         s.font = .systemFont(ofSize: fontSize)
         //s.font = .custom("Inconsolata", size: fontSize)
@@ -135,17 +136,23 @@ extension AttributedString {
             case .headline(let level):
                 switch level {
                 case 1:
-                    s[intentRange].font = .systemFont(ofSize: 24, weight: .heavy)
+                    s[intentRange].font = .systemFont(ofSize: fs+12, weight: .heavy)
                 case 2:
-                    s[intentRange].font = .systemFont(ofSize: 20, weight: .heavy)
+                    s[intentRange].font = .systemFont(ofSize: fs+8, weight: .heavy)
                 case 3:
-                    s[intentRange].font = .systemFont(ofSize: 18, weight: .heavy)
+                    s[intentRange].font = .systemFont(ofSize: fs+4, weight: .heavy)
                 default:
                     // TODO: Handle H4 to H6
-                    s[intentRange].font = .systemFont(ofSize: 15, weight: .heavy)
+                    s[intentRange].font = .systemFont(ofSize: fs, weight: .heavy)
+                }
+                if forPreview && intentRange.lowerBound != s.startIndex {
+                    s.characters.insert(contentsOf: "\n", at: intentRange.lowerBound)
                 }
             case .paragraph:
-                break
+                s[intentRange].mergeAttributes(.init([.paragraphStyle: defaultParagraphStyle]))
+                if forPreview && intentRange.lowerBound != s.startIndex {
+                    s.characters.insert(contentsOf: "\n", at: intentRange.lowerBound)
+                }
             case .unorderedListElement:
                 s.characters.insert(contentsOf: "•\t", at: intentRange.lowerBound)
                 let tempStyle = previousListID == currentListID ? listParagraphStyle : lastElementListParagraphStyle

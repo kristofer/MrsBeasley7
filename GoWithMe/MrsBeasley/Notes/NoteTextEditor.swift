@@ -42,7 +42,7 @@ struct NoteTextEditor: View {
                 NoteDetailHeader(note: note)
                 Divider()
                 if note.published {
-                    Text(try! AttributedString(styledMarkdown: note.body ?? "Error", fontSize: 16.0))
+                    Text(try! AttributedString(styledMarkdown: note.body ?? "Error", fontSize: 18.0, forPreview: true))
                         .padding(20)
                         .background(.white)
                     Spacer()
