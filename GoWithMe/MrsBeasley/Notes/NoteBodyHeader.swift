@@ -12,7 +12,7 @@ import SwiftUI
 struct NoteBodyEditView: View {
     @ObservedObject var note: Note
     var body: some View {
-        TextField("N.B.", text: $note.body.toUnwrapped(defaultValue: ""))
+        TextField("N.B.", text: $note.comments.toUnwrapped(defaultValue: ""))
     }
 }
 
