@@ -93,7 +93,12 @@ extension Tag {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Tag")
         let dateSort = NSSortDescriptor(key:"title", ascending:true)
         fetchRequest.sortDescriptors = [dateSort]
-        fetchedTags = try! vc.fetch(fetchRequest) as! [Tag]
+        
+        do {
+            fetchedTags = try vc.fetch(fetchRequest) as! [Tag]
+        } catch {
+            fatalError("Failed to fetch all tags (allTags()): \(error)")
+        }
 //        for t in fetchedTags {
 //            tfDebug("\(t.title!), [\(t.kind!)]")
 //        }
