@@ -98,13 +98,31 @@ private func refreshFromCloudKit() async {
 - Guards against crashes when no notes exist
 - Only triggers refresh when necessary
 
+#### Search Debouncing
+```swift
+private func debouncedSearchUpdate() {
+    searchDebounceTask?.cancel()
+    searchDebounceTask = Task {
+        try? await Task.sleep(nanoseconds: 300_000_000) // 300ms delay
+        if !Task.isCancelled {
+            await MainActor.run {
+                setupPredicate()
+            }
+        }
+    }
+}
+```
+- Prevents excessive predicate updates while user is typing
+- 300ms delay reduces database queries significantly
+- Improves search responsiveness
+
 #### Added Loading State
 ```swift
 @State private var isRefreshing = false
 ```
 - Prepared for future UI loading indicators if needed
 
-**Impact**: Pull-to-refresh is now safer and more efficient.
+**Impact**: Pull-to-refresh is now safer and more efficient. Search is much more responsive with less database overhead.
 
 ## Performance Best Practices for Future Development
 
@@ -175,7 +193,7 @@ These help with search performance but may slow down writes slightly.
 
 3. **~~Image/PDF thumbnail caching~~**: ✅ ADDRESSED - External blob storage now handles this efficiently by not loading full data until needed.
 
-4. **Optimize predicate updates**: The `setupPredicate()` function is called on every search text change. Consider debouncing this.
+4. **~~Optimize predicate updates~~**: ✅ IMPLEMENTED - Search now uses 300ms debouncing to prevent excessive database queries.
 
 5. **Add progress indicators**: Show user when CloudKit sync is happening so the white screen is less jarring.
 

@@ -59,6 +59,7 @@ struct NoteList: View {
     @State var showTasks = false
     @State private var columnVisibility = NavigationSplitViewVisibility.detailOnly
     @State private var isRefreshing = false
+    @State private var searchDebounceTask: Task<Void, Never>? = nil
     
     var body: some View {
         
@@ -84,7 +85,8 @@ struct NoteList: View {
                 .listStyle(.plain)
                 .background(AppYellow)
                 .onChange(of: $searchText.wrappedValue, perform: { _ in
-                    setupPredicate()
+                    // Performance: Debounce search text changes to avoid excessive predicate updates
+                    debouncedSearchUpdate()
                 })
                 .onChange(of: $selectedTags.wrappedValue, perform: { _ in
                     setupPredicate()
@@ -345,6 +347,22 @@ struct NoteList: View {
         // Note: SwiftUI's @FetchRequest doesn't expose fetchBatchSize directly,
         // but Core Data will batch fetch intelligently based on usage patterns.
         // The viewContext.stalenessInterval setting in Persistence handles caching.
+    }
+    
+    private func debouncedSearchUpdate() {
+        // Cancel any pending search updates
+        searchDebounceTask?.cancel()
+        
+        // Schedule a new search update with a small delay
+        // This prevents excessive predicate updates while user is typing
+        searchDebounceTask = Task {
+            try? await Task.sleep(nanoseconds: 300_000_000) // 300ms delay
+            if !Task.isCancelled {
+                await MainActor.run {
+                    setupPredicate()
+                }
+            }
+        }
     }
     
     private func refreshFromCloudKit() async {
