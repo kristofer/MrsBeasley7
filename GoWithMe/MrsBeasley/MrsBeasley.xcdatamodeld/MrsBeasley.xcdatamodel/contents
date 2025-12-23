@@ -2,7 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="23G93" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Note" representedClassName=".Note" syncable="YES" codeGenerationType="category">
         <attribute name="archived" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="blob" optional="YES" attributeType="Binary"/>
+        <attribute name="blob" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="body" optional="YES" attributeType="String" spotlightIndexingEnabled="YES"/>
         <attribute name="comments" optional="YES" attributeType="String"/>
         <attribute name="lastmodified" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
