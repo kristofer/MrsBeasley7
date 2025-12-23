@@ -21,7 +21,6 @@ struct NoteMainView: View {
                     if let thisUrl = URL(string:note.body!){
                         HTMLNoteView(note: note, thisUrl: thisUrl)
                     }
-                    //                    }
                 case UTType.pdf.preferredMIMEType :
                     if let thisUrl = note.loadBlobToData() {
                         PDFNoteView(note: note, thisUrl: thisUrl)
@@ -29,7 +28,6 @@ struct NoteMainView: View {
                         Text("Unable to load PDF")
                             .tint(.red)
                     }
-                    //                    }
                 default:
                     Text("mimetype is not text, html or PDF")
                         .tint(.red)

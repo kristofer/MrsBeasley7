@@ -35,6 +35,7 @@ struct PDFNoteView: View {
                     switch result {
                     case .success(let url):
                         print("exported \(url.absoluteString)")
+                        UIApplication.shared.open(url)
                     case .failure(let error):
                         print(error.localizedDescription)
                     }

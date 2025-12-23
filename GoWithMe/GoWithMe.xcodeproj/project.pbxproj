@@ -65,6 +65,7 @@
 		5CFA98972B5EDA8300D6BB6B /* PDFNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA98962B5EDA8300D6BB6B /* PDFNoteView.swift */; };
 		5CFA98992B5EDC5900D6BB6B /* PDFDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA98982B5EDC5900D6BB6B /* PDFDocumentView.swift */; };
 		5CFEFA282AF12EB700A5EA00 /* EditTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFEFA272AF12EB700A5EA00 /* EditTagView.swift */; };
+		A4017FDC2D480B3300CB7CB4 /* NoteBodyHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4017FDB2D480B3300CB7CB4 /* NoteBodyHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -166,6 +167,7 @@
 		5CFA98962B5EDA8300D6BB6B /* PDFNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFNoteView.swift; sourceTree = "<group>"; };
 		5CFA98982B5EDC5900D6BB6B /* PDFDocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFDocumentView.swift; sourceTree = "<group>"; };
 		5CFEFA272AF12EB700A5EA00 /* EditTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTagView.swift; sourceTree = "<group>"; };
+		A4017FDB2D480B3300CB7CB4 /* NoteBodyHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteBodyHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,6 +282,7 @@
 				5CFA98982B5EDC5900D6BB6B /* PDFDocumentView.swift */,
 				5CFA98962B5EDA8300D6BB6B /* PDFNoteView.swift */,
 				5CFA98942B5ED99A00D6BB6B /* HTMLNoteView.swift */,
+				A4017FDB2D480B3300CB7CB4 /* NoteBodyHeader.swift */,
 			);
 			path = Notes;
 			sourceTree = "<group>";
@@ -437,7 +440,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					5C2894C02AE6E8AD00C07CCE = {
 						CreatedOnToolsVersion = 15.0.1;
@@ -550,6 +553,7 @@
 				5C0140A22AD996BA00A6147F /* NoteList.swift in Sources */,
 				5C0A5F472B050D8C000192F2 /* BlobToTempFile.swift in Sources */,
 				5CC528802AD97D34002A30C9 /* Persistence.swift in Sources */,
+				A4017FDC2D480B3300CB7CB4 /* NoteBodyHeader.swift in Sources */,
 				5C0140A02AD9952700A6147F /* NoteDetailHeader.swift in Sources */,
 				5C0E61722AF94CDB00799F32 /* TaskListRow.swift in Sources */,
 				5C92C8D52AE5451A00F593BD /* SelectTag.swift in Sources */,
@@ -633,7 +637,7 @@
 				CODE_SIGN_ENTITLEMENTS = ArchiveTo/ArchiveTo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 121;
+				CURRENT_PROJECT_VERSION = 123;
 				DEVELOPMENT_TEAM = S7ZKK95T9U;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -668,7 +672,7 @@
 				CODE_SIGN_ENTITLEMENTS = ArchiveTo/ArchiveTo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 121;
+				CURRENT_PROJECT_VERSION = 123;
 				DEVELOPMENT_TEAM = S7ZKK95T9U;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -815,12 +819,11 @@
 		5CC5289E2AD97D34002A30C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MrsBeasley/MrsBeasley.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 121;
+				CURRENT_PROJECT_VERSION = 123;
 				DEVELOPMENT_ASSET_PATHS = "\"MrsBeasley/Preview Content\"";
 				DEVELOPMENT_TEAM = S7ZKK95T9U;
 				ENABLE_PREVIEWS = YES;
@@ -852,12 +855,11 @@
 		5CC5289F2AD97D34002A30C9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MrsBeasley/MrsBeasley.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 121;
+				CURRENT_PROJECT_VERSION = 123;
 				DEVELOPMENT_ASSET_PATHS = "\"MrsBeasley/Preview Content\"";
 				DEVELOPMENT_TEAM = S7ZKK95T9U;
 				ENABLE_PREVIEWS = YES;
@@ -889,7 +891,6 @@
 		5CC528A12AD97D34002A30C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -909,7 +910,6 @@
 		5CC528A22AD97D34002A30C9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -929,7 +929,6 @@
 		5CC528A42AD97D34002A30C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S7ZKK95T9U;
@@ -947,7 +946,6 @@
 		5CC528A52AD97D34002A30C9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S7ZKK95T9U;

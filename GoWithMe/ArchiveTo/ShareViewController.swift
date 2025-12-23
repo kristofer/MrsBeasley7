@@ -118,19 +118,6 @@ class ShareViewController: SLComposeServiceViewController {
                     // Handle the error here if you want
                     guard error == nil else { return }
                     print("ShareEx found a public-file-url")
-                    //                    if let url = data as? URL {
-                    //                        if url.isFileURL{
-                    //                            print("found a FILE URL \(url.absoluteString)")
-                    //                            Task.detached { [self] in
-                    //                                //    try await
-                    //                                try? await Fetching().savePublicItem(url, folio: self.selectedFolio!, viewContext: self.vc, contentNote: ct)
-                    //                                //                                    try await Fetching().saveLocalFile(url.absoluteString, folio: self.selectedFolio!, viewContext: self.vc, contentNote: ct)
-                    //                            }
-                    //                        }
-                    //                    } else {
-                    //                        // Handle this situation as you prefer
-                    //                        print("Failed to load data from provider")
-                    //                    }
                 }
                 return
             }
