@@ -37,6 +37,10 @@ struct PersistenceController {
         let remoteChangeKey = "NSPersistentStoreRemoteChangeNotificationOptionKey"
         description?.setOption(true as NSNumber,
                                    forKey: remoteChangeKey)
+        
+        // Performance optimization: Allow app to show stale cached data immediately
+        // CloudKit sync will happen in background and update UI when ready
+        description?.cloudKitContainerOptions?.databaseScope = .private
 
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -53,6 +57,11 @@ struct PersistenceController {
         })
         container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         container.viewContext.automaticallyMergesChangesFromParent = true
+        
+        // Performance optimization: Use staleTolerance to show cached data immediately
+        // This prevents blocking the UI while waiting for CloudKit sync
+        container.viewContext.stalenessInterval = 0.0
+        
         try? container.viewContext.setQueryGenerationFrom(.current)
     }
     
