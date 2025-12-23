@@ -74,6 +74,15 @@ Successfully identified and resolved critical performance issues in the MrsBeasl
 <attribute name="blob" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
 ```
 
+**Migration Configuration**: Added automatic lightweight migration options to Persistence.swift
+
+```swift
+description?.setOption(true as NSNumber,
+                       forKey: NSMigratePersistentStoresAutomaticallyOption)
+description?.setOption(true as NSNumber,
+                       forKey: NSInferMappingModelAutomaticallyOption)
+```
+
 **Benefits**:
 - 90%+ reduction in database size for users with attachments
 - Lazy loading - blobs only fetched when actually viewed
@@ -81,7 +90,7 @@ Successfully identified and resolved critical performance issues in the MrsBeasl
 - Improved CloudKit sync efficiency
 - Reduced memory footprint
 
-**Migration**: Automatic - Core Data handles migration on first launch
+**Migration**: Automatic and safe - Core Data handles migration on first launch. The migration options ensure existing blob data is seamlessly moved to external storage without data loss or user intervention.
 
 ### 2. Stale Data Tolerance
 

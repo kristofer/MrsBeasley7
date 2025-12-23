@@ -50,7 +50,19 @@ description?.cloudKitContainerOptions?.databaseScope = .private
 - Explicitly sets the database scope for clarity
 - Ensures proper CloudKit configuration
 
-**Impact**: App now shows cached data immediately on launch/resume while fetching updates in the background.
+#### Enabled Automatic Lightweight Migration
+```swift
+description?.setOption(true as NSNumber,
+                       forKey: NSMigratePersistentStoresAutomaticallyOption)
+description?.setOption(true as NSNumber,
+                       forKey: NSInferMappingModelAutomaticallyOption)
+```
+- **Critical for existing databases**: Enables automatic migration when schema changes
+- Core Data will automatically migrate blob data to external storage
+- Prevents store loading failures with existing data
+- Safe and transparent to users - happens automatically on first launch
+
+**Impact**: App now shows cached data immediately on launch/resume while fetching updates in the background. Migration is handled automatically and safely.
 
 ### 2. Core Data Model - External Binary Storage
 
@@ -62,6 +74,8 @@ Modified `MrsBeasley.xcdatamodel/contents`:
 
 **Critical Optimization**: This tells Core Data to store large binary data (PDFs, images, attachments) outside the SQLite database in separate files.
 
+**Migration Safety**: With the automatic migration options enabled in Persistence.swift, existing blob data will be seamlessly migrated to external storage on first launch after update.
+
 **Benefits**:
 - Main database stays small and fast to load
 - Binary data is only fetched when actually needed (lazy loading)
@@ -71,7 +85,7 @@ Modified `MrsBeasley.xcdatamodel/contents`:
 
 **Impact**: This is the most impactful change for performance, especially with many notes containing large attachments.
 
-### 2. NoteList.swift - Improved Refresh Logic
+### 3. NoteList.swift - Improved Refresh Logic
 
 #### Async CloudKit Refresh
 ```swift

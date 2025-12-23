@@ -31,6 +31,14 @@ struct PersistenceController {
         }
         
         let description = container.persistentStoreDescriptions.first
+        
+        // Enable automatic lightweight migration for schema changes
+        // This is critical for migrating existing blob data to external storage
+        description?.setOption(true as NSNumber,
+                               forKey: NSMigratePersistentStoresAutomaticallyOption)
+        description?.setOption(true as NSNumber,
+                               forKey: NSInferMappingModelAutomaticallyOption)
+        
         description?.setOption(true as NSNumber,
                                forKey: NSPersistentHistoryTrackingKey)
         // turn on remote change notifications

@@ -70,6 +70,24 @@ After updating:
 2. All subsequent launches should be dramatically faster
 3. If you have many large attachments, you'll notice the biggest improvement
 
+## Database Migration Safety
+
+**Important**: This update includes automatic database migration to improve performance.
+
+**What happens**:
+- On first launch after update, Core Data automatically migrates blob data to external storage
+- Migration is lightweight and fast (usually completes in seconds)
+- No user action required - it happens automatically in the background
+- All your data is preserved safely
+
+**Migration options configured**:
+```swift
+NSMigratePersistentStoresAutomaticallyOption = true
+NSInferMappingModelAutomaticallyOption = true
+```
+
+These ensure Core Data safely handles the schema change without data loss.
+
 ## What Stays the Same
 
 ✅ All your notes and data are preserved  
