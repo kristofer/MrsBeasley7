@@ -163,7 +163,7 @@ struct SettingsView: View {
         switch result {
         case .success():
             alertTitle = "Restore Successful"
-            alertMessage = "Database restored successfully from backup. Please restart the app for changes to take effect."
+            alertMessage = "Database restored successfully from backup.\n\nIMPORTANT: You should close and restart the app now for the changes to fully take effect."
             showAlert = true
         case .failure(let error):
             alertTitle = "Restore Failed"

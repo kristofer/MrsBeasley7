@@ -120,7 +120,9 @@ struct PersistenceController {
             
             if fileManager.fileExists(atPath: walURL.path) {
                 do {
-                    try? fileManager.removeItem(at: backupWalURL)
+                    if fileManager.fileExists(atPath: backupWalURL.path) {
+                        try fileManager.removeItem(at: backupWalURL)
+                    }
                     try fileManager.copyItem(at: walURL, to: backupWalURL)
                 } catch {
                     print("Warning: Failed to backup WAL file: \(error)")
@@ -129,7 +131,9 @@ struct PersistenceController {
             
             if fileManager.fileExists(atPath: shmURL.path) {
                 do {
-                    try? fileManager.removeItem(at: backupShmURL)
+                    if fileManager.fileExists(atPath: backupShmURL.path) {
+                        try fileManager.removeItem(at: backupShmURL)
+                    }
                     try fileManager.copyItem(at: shmURL, to: backupShmURL)
                 } catch {
                     print("Warning: Failed to backup SHM file: \(error)")
