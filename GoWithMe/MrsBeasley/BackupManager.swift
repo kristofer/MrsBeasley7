@@ -70,7 +70,7 @@ class BackupManager {
             let blobBase64 = note.blob?.base64EncodedString()
             
             return NoteBackup(
-                uuid: note.uuid ?? UUID(),
+                uuid: note.uuid ?? UUID(), // Generate UUID for notes without one
                 title: note.title,
                 body: note.body,
                 timestamp: note.timestamp,
@@ -86,7 +86,7 @@ class BackupManager {
         
         let tagBackups = tags.map { tag -> TagBackup in
             TagBackup(
-                uuid: tag.uuid ?? UUID(),
+                uuid: tag.uuid ?? UUID(), // Generate UUID for tags without one
                 title: tag.title,
                 kind: tag.kind
             )
@@ -229,6 +229,10 @@ class BackupManager {
             for tagTitle in noteBackup.tagTitles {
                 if let tag = tagMap[tagTitle] {
                     note.addToTags(tag)
+                } else {
+                    // Tag not found in backup - create a placeholder or log the issue
+                    // This can happen if tags were deleted between backup and restore
+                    print("Warning: Tag '\(tagTitle)' referenced in note '\(note.title ?? "")' not found in backup")
                 }
             }
         }
@@ -243,7 +247,7 @@ class BackupManager {
                 task = existingTask
             } else {
                 task = Task(context: context)
-                task.id = taskBackup.id ?? UUID()
+                task.id = taskBackup.id ?? UUID() // Generate UUID for tasks without one
             }
             
             task.name = taskBackup.name

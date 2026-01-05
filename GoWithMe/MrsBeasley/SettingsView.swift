@@ -131,7 +131,7 @@ struct SettingsView: View {
                         }
                         .buttonStyle(.bordered)
                         
-                        Text("⚠️ Importing will merge with existing data. Duplicate items may be updated.")
+                        Text("⚠️ Importing will merge with existing data. Items with matching UUIDs will be updated.")
                             .font(.caption2)
                             .foregroundStyle(.orange)
                     }
@@ -189,7 +189,7 @@ struct SettingsView: View {
             
             // Start accessing security-scoped resource
             guard selectedFile.startAccessingSecurityScopedResource() else {
-                backupErrorMessage = "Unable to access the selected file"
+                backupErrorMessage = "Unable to access the selected file. Please ensure you have permission to read this file."
                 showingBackupError = true
                 return
             }

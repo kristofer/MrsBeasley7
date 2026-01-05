@@ -43,11 +43,9 @@ final class BackupManagerTests: XCTestCase {
         // Create test data
         let note1 = Note(context: context, title: "Test Note 1")
         note1.body = "This is test note 1"
-        note1.uuid = UUID()
         
         let note2 = Note(context: context, title: "Test Note 2")
         note2.body = "This is test note 2"
-        note2.uuid = UUID()
         
         try context.save()
         
@@ -62,11 +60,9 @@ final class BackupManagerTests: XCTestCase {
         // Create test tags
         let tag1 = Tag(context: context, title: "Work")
         tag1.kind = 0
-        tag1.uuid = UUID()
         
         let tag2 = Tag(context: context, title: "Personal")
         tag2.kind = 0
-        tag2.uuid = UUID()
         
         try context.save()
         
@@ -81,13 +77,10 @@ final class BackupManagerTests: XCTestCase {
         // Create a note and tags
         let note = Note(context: context, title: "Tagged Note")
         note.body = "Note with tags"
-        note.uuid = UUID()
         
         let tag1 = Tag(context: context, title: "Important")
-        tag1.uuid = UUID()
         
         let tag2 = Tag(context: context, title: "Review")
-        tag2.uuid = UUID()
         
         note.addToTags(tag1)
         note.addToTags(tag2)
@@ -107,7 +100,6 @@ final class BackupManagerTests: XCTestCase {
     
     func testCreateBackupWithBlobData() throws {
         let note = Note(context: context, title: "Note with Blob")
-        note.uuid = UUID()
         
         // Create test blob data
         let testData = "Test PDF content".data(using: .utf8)!
@@ -132,7 +124,6 @@ final class BackupManagerTests: XCTestCase {
         // Create test data
         let note = Note(context: context, title: "JSON Test")
         note.body = "Test body"
-        note.uuid = UUID()
         
         try context.save()
         
@@ -150,7 +141,6 @@ final class BackupManagerTests: XCTestCase {
     func testExportBackupToFile() throws {
         // Create test data
         let note = Note(context: context, title: "File Export Test")
-        note.uuid = UUID()
         
         try context.save()
         
@@ -170,7 +160,6 @@ final class BackupManagerTests: XCTestCase {
         // Create a backup
         let originalNote = Note(context: context, title: "Original Note")
         originalNote.body = "Original body"
-        originalNote.uuid = UUID()
         
         try context.save()
         
@@ -199,7 +188,7 @@ final class BackupManagerTests: XCTestCase {
         let noteUUID = UUID()
         let originalNote = Note(context: context, title: "Original Title")
         originalNote.body = "Original body"
-        originalNote.uuid = noteUUID
+        originalNote.uuid = noteUUID  // Explicitly set UUID for this test
         
         try context.save()
         
@@ -226,12 +215,9 @@ final class BackupManagerTests: XCTestCase {
     func testRestorePreservesRelationships() throws {
         // Create note with tags
         let note = Note(context: context, title: "Note with Tags")
-        note.uuid = UUID()
         
         let tag1 = Tag(context: context, title: "Tag1")
-        tag1.uuid = UUID()
         let tag2 = Tag(context: context, title: "Tag2")
-        tag2.uuid = UUID()
         
         note.addToTags(tag1)
         note.addToTags(tag2)
@@ -282,12 +268,10 @@ final class BackupManagerTests: XCTestCase {
         for i in 1...100 {
             let note = Note(context: context, title: "Note \(i)")
             note.body = "Body content for note \(i)"
-            note.uuid = UUID()
         }
         
         for i in 1...20 {
             let tag = Tag(context: context, title: "Tag \(i)")
-            tag.uuid = UUID()
         }
         
         try context.save()
@@ -301,7 +285,6 @@ final class BackupManagerTests: XCTestCase {
         // Create dataset and backup
         for i in 1...100 {
             let note = Note(context: context, title: "Note \(i)")
-            note.uuid = UUID()
         }
         try context.save()
         
