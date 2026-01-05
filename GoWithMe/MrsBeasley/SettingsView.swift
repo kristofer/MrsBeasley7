@@ -54,6 +54,11 @@ struct SettingsView: View {
 
     @Environment(\.dismiss) var dismiss
     
+    @State private var showAlert = false
+    @State private var alertTitle = ""
+    @State private var alertMessage = ""
+    @State private var showRestoreConfirmation = false
+    
     var body: some View {
         VStack {
         HStack {
@@ -99,25 +104,72 @@ struct SettingsView: View {
                     NewURLView()
                 }
                 .foregroundStyle(.accent)
-                Button("[Do Backup]") {
-                    makeBackup()
+                DisclosureGroup("Database Management") {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Button("Create Backup") {
+                            makeBackup()
+                        }
+                        .buttonStyle(.bordered)
+                        
+                        Button("Restore from Backup") {
+                            showRestoreConfirmation = true
+                        }
+                        .buttonStyle(.bordered)
+                        .foregroundColor(.orange)
+                        
+                        Text("Backup creates a copy of your database. Restore replaces your current database with the backup.")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                    .padding(.vertical, 5)
                 }
+                .foregroundStyle(.accent)
 
             }
+        }
+        .alert(alertTitle, isPresented: $showAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(alertMessage)
+        }
+        .confirmationDialog("Restore Database", isPresented: $showRestoreConfirmation, titleVisibility: .visible) {
+            Button("Restore from Backup", role: .destructive) {
+                restoreBackup()
+            }
+            Button("Cancel", role: .cancel) { }
+        } message: {
+            Text("This will replace your current database with the backup. This action cannot be undone. Make sure you have a recent backup before proceeding.")
         }
     }
     
     private func makeBackup() {
-//        let notearray = Array(notes)
-//        let newNote = Note(context: viewContext)
-//        newNote.body = Note.encodeToJSONString(notearray)
-//        newNote.timestamp = .distantPast //Calendar.current.date(byAdding: .year, value: -23, to: Date())!
-//        newNote.uuid = UUID()
-//        newNote.title = "Backup of Notes"
-//        newNote.mimetype = "text/plain"
-//        viewContext.flushChanges()
-//        self.searchText = ""
-//        self.noteId = newNote.self
+        let result = PersistenceController.shared.backupDatabase()
+        
+        switch result {
+        case .success(let backupURL):
+            alertTitle = "Backup Successful"
+            alertMessage = "Database backed up successfully to:\n\(backupURL.lastPathComponent)"
+            showAlert = true
+        case .failure(let error):
+            alertTitle = "Backup Failed"
+            alertMessage = "Failed to backup database: \(error.localizedDescription)"
+            showAlert = true
+        }
+    }
+    
+    private func restoreBackup() {
+        let result = PersistenceController.shared.restoreDatabase()
+        
+        switch result {
+        case .success():
+            alertTitle = "Restore Successful"
+            alertMessage = "Database restored successfully from backup. Please restart the app for changes to take effect."
+            showAlert = true
+        case .failure(let error):
+            alertTitle = "Restore Failed"
+            alertMessage = "Failed to restore database: \(error.localizedDescription)"
+            showAlert = true
+        }
     }
     
 

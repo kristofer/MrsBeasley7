@@ -85,5 +85,127 @@ struct PersistenceController {
         context.delete(note)
         context.flushChanges()
     }
+    
+    // MARK: - Backup and Restore
+    
+    /// Creates a backup of the current database
+    /// - Returns: Result indicating success or failure with error message
+    func backupDatabase() -> Result<URL, Error> {
+        guard let storeURL = container.persistentStoreDescriptions.first?.url else {
+            return .failure(NSError(domain: "PersistenceController", 
+                                   code: 1, 
+                                   userInfo: [NSLocalizedDescriptionKey: "Store URL not found"]))
+        }
+        
+        let fileManager = FileManager.default
+        let backupURL = storeURL.deletingLastPathComponent().appendingPathComponent("MrsBeasley_backup.sqlite")
+        
+        // Save any pending changes
+        container.viewContext.flushChanges()
+        
+        do {
+            // Remove existing backup if present
+            if fileManager.fileExists(atPath: backupURL.path) {
+                try fileManager.removeItem(at: backupURL)
+            }
+            
+            // Copy the main database to backup
+            try fileManager.copyItem(at: storeURL, to: backupURL)
+            
+            // Also copy WAL and SHM files if they exist
+            let walURL = storeURL.appendingPathExtension("sqlite-wal")
+            let shmURL = storeURL.appendingPathExtension("sqlite-shm")
+            let backupWalURL = backupURL.appendingPathExtension("sqlite-wal")
+            let backupShmURL = backupURL.appendingPathExtension("sqlite-shm")
+            
+            if fileManager.fileExists(atPath: walURL.path) {
+                try? fileManager.removeItem(at: backupWalURL)
+                try? fileManager.copyItem(at: walURL, to: backupWalURL)
+            }
+            
+            if fileManager.fileExists(atPath: shmURL.path) {
+                try? fileManager.removeItem(at: backupShmURL)
+                try? fileManager.copyItem(at: shmURL, to: backupShmURL)
+            }
+            
+            print("Database backed up successfully to: \(backupURL.path)")
+            return .success(backupURL)
+        } catch {
+            print("Failed to backup database: \(error)")
+            return .failure(error)
+        }
+    }
+    
+    /// Restores the database from a backup
+    /// - Returns: Result indicating success or failure with error message
+    func restoreDatabase() -> Result<Void, Error> {
+        guard let storeURL = container.persistentStoreDescriptions.first?.url else {
+            return .failure(NSError(domain: "PersistenceController", 
+                                   code: 2, 
+                                   userInfo: [NSLocalizedDescriptionKey: "Store URL not found"]))
+        }
+        
+        let fileManager = FileManager.default
+        let backupURL = storeURL.deletingLastPathComponent().appendingPathComponent("MrsBeasley_backup.sqlite")
+        
+        // Check if backup exists
+        guard fileManager.fileExists(atPath: backupURL.path) else {
+            return .failure(NSError(domain: "PersistenceController", 
+                                   code: 3, 
+                                   userInfo: [NSLocalizedDescriptionKey: "No backup file found"]))
+        }
+        
+        do {
+            // Save any pending changes before restore
+            container.viewContext.flushChanges()
+            
+            // Remove all persistent stores
+            for store in container.persistentStoreCoordinator.persistentStores {
+                try container.persistentStoreCoordinator.remove(store)
+            }
+            
+            // Remove current database files
+            if fileManager.fileExists(atPath: storeURL.path) {
+                try fileManager.removeItem(at: storeURL)
+            }
+            
+            let walURL = storeURL.appendingPathExtension("sqlite-wal")
+            let shmURL = storeURL.appendingPathExtension("sqlite-shm")
+            
+            try? fileManager.removeItem(at: walURL)
+            try? fileManager.removeItem(at: shmURL)
+            
+            // Copy backup to main database location
+            try fileManager.copyItem(at: backupURL, to: storeURL)
+            
+            // Copy WAL and SHM files if they exist in backup
+            let backupWalURL = backupURL.appendingPathExtension("sqlite-wal")
+            let backupShmURL = backupURL.appendingPathExtension("sqlite-shm")
+            
+            if fileManager.fileExists(atPath: backupWalURL.path) {
+                try? fileManager.copyItem(at: backupWalURL, to: walURL)
+            }
+            
+            if fileManager.fileExists(atPath: backupShmURL.path) {
+                try? fileManager.copyItem(at: backupShmURL, to: shmURL)
+            }
+            
+            // Reload the persistent stores
+            if let description = container.persistentStoreDescriptions.first {
+                try container.persistentStoreCoordinator.addPersistentStore(
+                    ofType: description.type,
+                    configurationName: description.configuration,
+                    at: storeURL,
+                    options: description.options
+                )
+            }
+            
+            print("Database restored successfully from: \(backupURL.path)")
+            return .success(())
+        } catch {
+            print("Failed to restore database: \(error)")
+            return .failure(error)
+        }
+    }
 
 }
