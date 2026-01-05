@@ -113,19 +113,27 @@ struct PersistenceController {
             try fileManager.copyItem(at: storeURL, to: backupURL)
             
             // Also copy WAL and SHM files if they exist
-            let walURL = storeURL.appendingPathExtension("sqlite-wal")
-            let shmURL = storeURL.appendingPathExtension("sqlite-shm")
-            let backupWalURL = backupURL.appendingPathExtension("sqlite-wal")
-            let backupShmURL = backupURL.appendingPathExtension("sqlite-shm")
+            let walURL = URL(fileURLWithPath: storeURL.path + "-wal")
+            let shmURL = URL(fileURLWithPath: storeURL.path + "-shm")
+            let backupWalURL = URL(fileURLWithPath: backupURL.path + "-wal")
+            let backupShmURL = URL(fileURLWithPath: backupURL.path + "-shm")
             
             if fileManager.fileExists(atPath: walURL.path) {
-                try? fileManager.removeItem(at: backupWalURL)
-                try? fileManager.copyItem(at: walURL, to: backupWalURL)
+                do {
+                    try? fileManager.removeItem(at: backupWalURL)
+                    try fileManager.copyItem(at: walURL, to: backupWalURL)
+                } catch {
+                    print("Warning: Failed to backup WAL file: \(error)")
+                }
             }
             
             if fileManager.fileExists(atPath: shmURL.path) {
-                try? fileManager.removeItem(at: backupShmURL)
-                try? fileManager.copyItem(at: shmURL, to: backupShmURL)
+                do {
+                    try? fileManager.removeItem(at: backupShmURL)
+                    try fileManager.copyItem(at: shmURL, to: backupShmURL)
+                } catch {
+                    print("Warning: Failed to backup SHM file: \(error)")
+                }
             }
             
             print("Database backed up successfully to: \(backupURL.path)")
@@ -169,25 +177,42 @@ struct PersistenceController {
                 try fileManager.removeItem(at: storeURL)
             }
             
-            let walURL = storeURL.appendingPathExtension("sqlite-wal")
-            let shmURL = storeURL.appendingPathExtension("sqlite-shm")
+            let walURL = URL(fileURLWithPath: storeURL.path + "-wal")
+            let shmURL = URL(fileURLWithPath: storeURL.path + "-shm")
             
-            try? fileManager.removeItem(at: walURL)
-            try? fileManager.removeItem(at: shmURL)
+            do {
+                try fileManager.removeItem(at: walURL)
+            } catch {
+                print("Note: WAL file not present or already removed")
+            }
+            
+            do {
+                try fileManager.removeItem(at: shmURL)
+            } catch {
+                print("Note: SHM file not present or already removed")
+            }
             
             // Copy backup to main database location
             try fileManager.copyItem(at: backupURL, to: storeURL)
             
             // Copy WAL and SHM files if they exist in backup
-            let backupWalURL = backupURL.appendingPathExtension("sqlite-wal")
-            let backupShmURL = backupURL.appendingPathExtension("sqlite-shm")
+            let backupWalURL = URL(fileURLWithPath: backupURL.path + "-wal")
+            let backupShmURL = URL(fileURLWithPath: backupURL.path + "-shm")
             
             if fileManager.fileExists(atPath: backupWalURL.path) {
-                try? fileManager.copyItem(at: backupWalURL, to: walURL)
+                do {
+                    try fileManager.copyItem(at: backupWalURL, to: walURL)
+                } catch {
+                    print("Warning: Failed to restore WAL file: \(error)")
+                }
             }
             
             if fileManager.fileExists(atPath: backupShmURL.path) {
-                try? fileManager.copyItem(at: backupShmURL, to: shmURL)
+                do {
+                    try fileManager.copyItem(at: backupShmURL, to: shmURL)
+                } catch {
+                    print("Warning: Failed to restore SHM file: \(error)")
+                }
             }
             
             // Reload the persistent stores
