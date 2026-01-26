@@ -245,8 +245,10 @@ struct PersistenceController {
         let context = self.container.viewContext
         
         do {
-            // Fetch all notes
-            let allNotes = Note.allNotes(vc: context)
+            // Fetch all non-backup notes (exclude previous JSON backups)
+            let fetchRequest = NSFetchRequest<Note>(entityName: "Note")
+            fetchRequest.predicate = NSPredicate(format: "mimetype != %@", "application/json")
+            let allNotes = try context.fetch(fetchRequest)
             
             // Encode notes to JSON string
             let jsonString = Note.encodeToJSONString(allNotes)
@@ -254,7 +256,7 @@ struct PersistenceController {
             // Create a new note to store the backup
             let backupNote = Note(context: context)
             backupNote.body = jsonString
-            backupNote.timestamp = .distantPast // Use distant past to keep it at the top/bottom of sorted lists
+            backupNote.timestamp = Date()
             backupNote.lastmodified = Date()
             backupNote.uuid = UUID()
             backupNote.title = "JSON Backup of Notes - \(Date().formatted())"
@@ -276,6 +278,7 @@ struct PersistenceController {
     /// Restores notes from a JSON backup note
     /// - Parameter backupNote: The note containing the JSON backup
     /// - Returns: Result indicating success with number of notes restored, or failure with error
+    /// - Note: The fromJSON decoder creates notes in PersistenceController.shared context
     func restoreNotesFromJSON(backupNote: Note) -> Result<Int, Error> {
         guard let jsonString = backupNote.body,
               backupNote.mimetype == "application/json" else {
@@ -284,15 +287,14 @@ struct PersistenceController {
                                    userInfo: [NSLocalizedDescriptionKey: "Invalid backup note: not a JSON backup"]))
         }
         
-        let context = self.container.viewContext
-        
         do {
             // Decode notes from JSON
+            // Note: fromJSON uses PersistenceController.shared.container.viewContext internally
             let restoredNotes = Note.fromJSON(s: jsonString)
             
-            // The fromJSON method already creates notes in the context
-            // We just need to save the context
-            context.flushChanges()
+            // The fromJSON method creates notes in the shared context
+            // Save the context to persist the restored notes
+            container.viewContext.flushChanges()
             
             print("Restored \(restoredNotes.count) notes from JSON backup")
             return .success(restoredNotes.count)
