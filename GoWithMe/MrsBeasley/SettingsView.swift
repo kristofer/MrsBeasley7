@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import CoreData
+import UniformTypeIdentifiers
 
 public class Defaults: ObservableObject {
     @AppStorage("showFooter") public var showFooter = false
