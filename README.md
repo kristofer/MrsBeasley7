@@ -32,6 +32,7 @@ And it occured to me that maybe the tag.title is nil?
 - export (action?) and PDF(!)
 - search of notes
 - tags/categories
+- **backup & restore** - complete database backup/restore with iCloud sync support (see [BACKUP_FEATURE.md](BACKUP_FEATURE.md))
 
 
 # Learnings

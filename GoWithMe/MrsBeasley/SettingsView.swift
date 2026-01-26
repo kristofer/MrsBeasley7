@@ -68,6 +68,13 @@ struct SettingsView: View {
         predicate: NSPredicate(format: "mimetype == %@", "application/json"),
         animation: .default)
     private var jsonBackups: FetchedResults<Note>
+    @State private var showingBackupSuccess = false
+    @State private var showingBackupError = false
+    @State private var showingRestoreConfirmation = false
+    @State private var backupErrorMessage = ""
+    @State private var isExportingBackup = false
+    @State private var backupFileURL: URL?
+    @State private var showingFileImporter = false
     
     var body: some View {
         VStack {
@@ -153,6 +160,32 @@ struct SettingsView: View {
                             .foregroundColor(.secondary)
                     }
                     .padding(.vertical, 5)
+                
+                DisclosureGroup("Backup & Restore") {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Create a complete backup of your notes, tags, and tasks.")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                        
+                        Button {
+                            exportBackup()
+                        } label: {
+                            Label("Export Backup", systemImage: "square.and.arrow.up")
+                        }
+                        .buttonStyle(.bordered)
+                        
+                        Button {
+                            showingFileImporter = true
+                        } label: {
+                            Label("Import Backup", systemImage: "square.and.arrow.down")
+                        }
+                        .buttonStyle(.bordered)
+                        
+                        Text("⚠️ Importing will merge with existing data. Items with matching UUIDs will be updated.")
+                            .font(.caption2)
+                            .foregroundStyle(.orange)
+                    }
+                    .padding(.vertical, 8)
                 }
                 .foregroundStyle(.accent)
 
@@ -284,10 +317,84 @@ struct JSONRestoreSheet: View {
                     }
                 }
             }
+        .sheet(isPresented: $isExportingBackup) {
+            if let url = backupFileURL {
+                ShareSheet(items: [url])
+            }
+        }
+        .fileImporter(
+            isPresented: $showingFileImporter,
+            allowedContentTypes: [.json],
+            allowsMultipleSelection: false
+        ) { result in
+            handleFileImport(result)
+        }
+        .alert("Backup Created", isPresented: $showingBackupSuccess) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text("Your backup has been created successfully.")
+        }
+        .alert("Backup Error", isPresented: $showingBackupError) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(backupErrorMessage)
+        }
+        .alert("Restore Complete", isPresented: $showingRestoreConfirmation) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text("Your data has been restored successfully.")
         }
     }
     
+    private func exportBackup() {
+        let backupManager = BackupManager(context: viewContext)
+        
+        do {
+            let fileURL = try backupManager.exportBackupToFile()
+            backupFileURL = fileURL
+            isExportingBackup = true
+        } catch {
+            backupErrorMessage = error.localizedDescription
+            showingBackupError = true
+        }
+    }
+    
+    private func handleFileImport(_ result: Result<[URL], Error>) {
+        do {
+            guard let selectedFile = try result.get().first else { return }
+            
+            // Start accessing security-scoped resource
+            guard selectedFile.startAccessingSecurityScopedResource() else {
+                backupErrorMessage = "Unable to access the selected file. Please ensure you have permission to read this file."
+                showingBackupError = true
+                return
+            }
+            
+            defer { selectedFile.stopAccessingSecurityScopedResource() }
+            
+            let backupManager = BackupManager(context: viewContext)
+            try backupManager.restoreFromFile(selectedFile, mergeStrategy: .merge)
+            
+            showingRestoreConfirmation = true
+        } catch {
+            backupErrorMessage = error.localizedDescription
+            showingBackupError = true
+        }
+    }
+}
 
+// MARK: - Share Sheet for iOS
+struct ShareSheet: UIViewControllerRepresentable {
+    let items: [Any]
+    
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        let controller = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        return controller
+    }
+    
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {
+        // No update needed
+    }
 }
 
 struct SettingsView_Previews: PreviewProvider {
