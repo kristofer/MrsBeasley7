@@ -57,6 +57,17 @@ struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.managedObjectContext) private var viewContext
     
+    @State private var showAlert = false
+    @State private var alertTitle = ""
+    @State private var alertMessage = ""
+    @State private var showDatabaseRestoreConfirmation = false
+    @State private var showJSONRestoreSheet = false
+    
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Note.timestamp, ascending: true)],
+        predicate: NSPredicate(format: "mimetype == %@", "application/json"),
+        animation: .default)
+    private var jsonBackups: FetchedResults<Note>
     @State private var showingBackupSuccess = false
     @State private var showingBackupError = false
     @State private var showingRestoreConfirmation = false
@@ -110,6 +121,45 @@ struct SettingsView: View {
                     NewURLView()
                 }
                 .foregroundStyle(.accent)
+                DisclosureGroup("Database File Backup/Restore") {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Button("Create Database File Backup") {
+                            makeDatabaseFileBackup()
+                        }
+                        .buttonStyle(.bordered)
+                        
+                        Button("Restore from Database File Backup") {
+                            showDatabaseRestoreConfirmation = true
+                        }
+                        .buttonStyle(.bordered)
+                        .foregroundColor(.orange)
+                        
+                        Text("Creates a file copy of the SQLite database. Restore replaces your current database with the backup file.")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                    .padding(.vertical, 5)
+                }
+                .foregroundStyle(.accent)
+                
+                DisclosureGroup("JSON Notes Backup/Restore") {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Button("Create JSON Backup Note") {
+                            makeJSONBackup()
+                        }
+                        .buttonStyle(.bordered)
+                        
+                        Button("Restore from JSON Backup Note") {
+                            showJSONRestoreSheet = true
+                        }
+                        .buttonStyle(.bordered)
+                        .foregroundColor(.blue)
+                        
+                        Text("Creates a special note containing all notes as JSON. Useful for exporting/importing notes.")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                    .padding(.vertical, 5)
                 
                 DisclosureGroup("Backup & Restore") {
                     VStack(alignment: .leading, spacing: 12) {
@@ -141,6 +191,132 @@ struct SettingsView: View {
 
             }
         }
+        .alert(alertTitle, isPresented: $showAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(alertMessage)
+        }
+        .confirmationDialog("Restore Database from File", isPresented: $showDatabaseRestoreConfirmation, titleVisibility: .visible) {
+            Button("Restore from File Backup", role: .destructive) {
+                restoreDatabaseFileBackup()
+            }
+            Button("Cancel", role: .cancel) { }
+        } message: {
+            Text("This will replace your entire database with the file backup. This action cannot be undone. The app must be restarted after restore.")
+        }
+        .sheet(isPresented: $showJSONRestoreSheet) {
+            JSONRestoreSheet(jsonBackups: Array(jsonBackups)) { selectedBackup in
+                restoreFromJSONBackup(backupNote: selectedBackup)
+                showJSONRestoreSheet = false
+            }
+        }
+    }
+    
+    // MARK: - Database File Backup/Restore
+    
+    private func makeDatabaseFileBackup() {
+        let result = PersistenceController.shared.backupDatabaseToFile()
+        
+        switch result {
+        case .success(let backupURL):
+            alertTitle = "Database File Backup Successful"
+            alertMessage = "Database backed up successfully to:\n\(backupURL.lastPathComponent)"
+            showAlert = true
+        case .failure(let error):
+            alertTitle = "Database File Backup Failed"
+            alertMessage = "Failed to backup database: \(error.localizedDescription)"
+            showAlert = true
+        }
+    }
+    
+    private func restoreDatabaseFileBackup() {
+        let result = PersistenceController.shared.restoreDatabaseFromFile()
+        
+        switch result {
+        case .success():
+            alertTitle = "Database File Restore Successful"
+            alertMessage = "Database restored successfully from file backup.\n\nIMPORTANT: You should close and restart the app now for the changes to fully take effect."
+            showAlert = true
+        case .failure(let error):
+            alertTitle = "Database File Restore Failed"
+            alertMessage = "Failed to restore database: \(error.localizedDescription)"
+            showAlert = true
+        }
+    }
+    
+    // MARK: - JSON Backup/Restore
+    
+    private func makeJSONBackup() {
+        let result = PersistenceController.shared.backupNotesToJSON()
+        
+        switch result {
+        case .success(let backupNote):
+            alertTitle = "JSON Backup Created"
+            alertMessage = "Created backup note: \(backupNote.title ?? "Untitled")"
+            showAlert = true
+        case .failure(let error):
+            alertTitle = "JSON Backup Failed"
+            alertMessage = "Failed to create JSON backup: \(error.localizedDescription)"
+            showAlert = true
+        }
+    }
+    
+    private func restoreFromJSONBackup(backupNote: Note) {
+        let result = PersistenceController.shared.restoreNotesFromJSON(backupNote: backupNote)
+        
+        switch result {
+        case .success(let count):
+            alertTitle = "JSON Restore Successful"
+            alertMessage = "Restored \(count) notes from JSON backup."
+            showAlert = true
+        case .failure(let error):
+            alertTitle = "JSON Restore Failed"
+            alertMessage = "Failed to restore from JSON backup: \(error.localizedDescription)"
+            showAlert = true
+        }
+    }
+    
+}
+
+// MARK: - JSON Restore Sheet
+
+struct JSONRestoreSheet: View {
+    let jsonBackups: [Note]
+    let onRestore: (Note) -> Void
+    @Environment(\.dismiss) var dismiss
+    
+    var body: some View {
+        NavigationView {
+            List {
+                if jsonBackups.isEmpty {
+                    Text("No JSON backup notes found")
+                        .foregroundColor(.secondary)
+                } else {
+                    ForEach(jsonBackups, id: \.self) { backup in
+                        Button(action: {
+                            onRestore(backup)
+                            dismiss()
+                        }) {
+                            VStack(alignment: .leading) {
+                                Text(backup.title ?? "Untitled Backup")
+                                    .font(.headline)
+                                Text("Created: \((backup.lastmodified ?? backup.timestamp ?? Date()), formatter: noteDateFormatter)")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                    }
+                }
+            }
+            .navigationTitle("Select JSON Backup")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+            }
         .sheet(isPresented: $isExportingBackup) {
             if let url = backupFileURL {
                 ShareSheet(items: [url])
