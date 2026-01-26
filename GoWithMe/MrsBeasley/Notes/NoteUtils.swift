@@ -11,6 +11,18 @@ import CoreData
 import UniformTypeIdentifiers
 
 class Note: NSManagedObject, Codable  {
+    @NSManaged public var uuid: UUID?
+    @NSManaged public var title: String?
+    @NSManaged public var body: String?
+    @NSManaged public var timestamp: Date?
+    @NSManaged public var lastmodified: Date?
+    @NSManaged public var mimetype: String?
+    @NSManaged public var archived: Bool
+    @NSManaged public var published: Bool
+    @NSManaged public var comments: String?
+    @NSManaged public var blob: Data?
+    @NSManaged public var tags: NSSet?
+    
     enum CodingKeys: CodingKey {
         case body, mimetype, timestamp, title, uuid
     }
@@ -123,6 +135,19 @@ extension Note {
     func removeTag(_ tag: Tag) {
         self.removeFromTags(tag)
     }
+    
+    // MARK: - Generated accessors for tags
+    @objc(addTagsObject:)
+    @NSManaged public func addToTags(_ value: Tag)
+
+    @objc(removeTagsObject:)
+    @NSManaged public func removeFromTags(_ value: Tag)
+
+    @objc(addTags:)
+    @NSManaged public func addToTags(_ values: NSSet)
+
+    @objc(removeTags:)
+    @NSManaged public func removeFromTags(_ values: NSSet)
 }
 
 extension Note {
