@@ -9,13 +9,13 @@ import SwiftUI
 import CoreData
 
 // Create Core Data class for Task entity
-//@objc(Task)
-//class Task: NSManagedObject, Identifiable {
-//    @NSManaged public var id: UUID
-//    @NSManaged public var name: String
-//    @NSManaged public var complete: Bool
-//    @NSManaged public var priorityNum: Int32
-//}
+@objc(Task)
+class Task: NSManagedObject, Identifiable {
+    @NSManaged public var id: UUID?
+    @NSManaged public var name: String?
+    @NSManaged public var complete: Bool
+    @NSManaged public var priorityNum: Int32
+}
 
 extension Task {
     var priority: Priority {
