@@ -86,11 +86,11 @@ struct PersistenceController {
         context.flushChanges()
     }
     
-    // MARK: - Backup and Restore
+    // MARK: - Database File Backup and Restore
     
-    /// Creates a backup of the current database
+    /// Creates a file-based backup of the current SQLite database
     /// - Returns: Result indicating success or failure with error message
-    func backupDatabase() -> Result<URL, Error> {
+    func backupDatabaseToFile() -> Result<URL, Error> {
         guard let storeURL = container.persistentStoreDescriptions.first?.url else {
             return .failure(NSError(domain: "PersistenceController", 
                                    code: 1, 
@@ -148,9 +148,9 @@ struct PersistenceController {
         }
     }
     
-    /// Restores the database from a backup
+    /// Restores the SQLite database from a file-based backup
     /// - Returns: Result indicating success or failure with error message
-    func restoreDatabase() -> Result<Void, Error> {
+    func restoreDatabaseFromFile() -> Result<Void, Error> {
         guard let storeURL = container.persistentStoreDescriptions.first?.url else {
             return .failure(NSError(domain: "PersistenceController", 
                                    code: 2, 
@@ -233,6 +233,71 @@ struct PersistenceController {
             return .success(())
         } catch {
             print("Failed to restore database: \(error)")
+            return .failure(error)
+        }
+    }
+    
+    // MARK: - JSON Backup and Restore
+    
+    /// Creates a JSON backup of all notes as a new Note entry
+    /// - Returns: Result indicating success with the created backup note, or failure with error
+    func backupNotesToJSON() -> Result<Note, Error> {
+        let context = self.container.viewContext
+        
+        do {
+            // Fetch all notes
+            let allNotes = Note.allNotes(vc: context)
+            
+            // Encode notes to JSON string
+            let jsonString = Note.encodeToJSONString(allNotes)
+            
+            // Create a new note to store the backup
+            let backupNote = Note(context: context)
+            backupNote.body = jsonString
+            backupNote.timestamp = .distantPast // Use distant past to keep it at the top/bottom of sorted lists
+            backupNote.lastmodified = Date()
+            backupNote.uuid = UUID()
+            backupNote.title = "JSON Backup of Notes - \(Date().formatted())"
+            backupNote.mimetype = "application/json"
+            backupNote.published = false
+            backupNote.archived = false
+            
+            // Save the backup note
+            context.flushChanges()
+            
+            print("JSON backup created successfully: \(backupNote.title ?? "Untitled")")
+            return .success(backupNote)
+        } catch {
+            print("Failed to create JSON backup: \(error)")
+            return .failure(error)
+        }
+    }
+    
+    /// Restores notes from a JSON backup note
+    /// - Parameter backupNote: The note containing the JSON backup
+    /// - Returns: Result indicating success with number of notes restored, or failure with error
+    func restoreNotesFromJSON(backupNote: Note) -> Result<Int, Error> {
+        guard let jsonString = backupNote.body,
+              backupNote.mimetype == "application/json" else {
+            return .failure(NSError(domain: "PersistenceController",
+                                   code: 4,
+                                   userInfo: [NSLocalizedDescriptionKey: "Invalid backup note: not a JSON backup"]))
+        }
+        
+        let context = self.container.viewContext
+        
+        do {
+            // Decode notes from JSON
+            let restoredNotes = Note.fromJSON(s: jsonString)
+            
+            // The fromJSON method already creates notes in the context
+            // We just need to save the context
+            context.flushChanges()
+            
+            print("Restored \(restoredNotes.count) notes from JSON backup")
+            return .success(restoredNotes.count)
+        } catch {
+            print("Failed to restore notes from JSON: \(error)")
             return .failure(error)
         }
     }
