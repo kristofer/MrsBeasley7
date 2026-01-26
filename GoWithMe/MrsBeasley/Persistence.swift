@@ -48,7 +48,9 @@ struct PersistenceController {
         
         // Performance optimization: Allow app to show stale cached data immediately
         // CloudKit sync will happen in background and update UI when ready
-        description?.cloudKitContainerOptions?.databaseScope = .private
+        // Note: databaseScope property not available in current SDK version
+        // The default scope is already .private, so this is not needed
+        // description?.cloudKitContainerOptions?.databaseScope = .private
 
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -109,8 +111,8 @@ struct PersistenceController {
     /// - Returns: Result indicating success or failure with error message
     func backupDatabaseToFile() -> Result<URL, Error> {
         guard let storeURL = container.persistentStoreDescriptions.first?.url else {
-            return .failure(NSError(domain: "PersistenceController", 
-                                   code: 1, 
+            return .failure(NSError(domain: "PersistenceController",
+                                   code: 1,
                                    userInfo: [NSLocalizedDescriptionKey: "Store URL not found"]))
         }
         
@@ -169,8 +171,8 @@ struct PersistenceController {
     /// - Returns: Result indicating success or failure with error message
     func restoreDatabaseFromFile() -> Result<Void, Error> {
         guard let storeURL = container.persistentStoreDescriptions.first?.url else {
-            return .failure(NSError(domain: "PersistenceController", 
-                                   code: 2, 
+            return .failure(NSError(domain: "PersistenceController",
+                                   code: 2,
                                    userInfo: [NSLocalizedDescriptionKey: "Store URL not found"]))
         }
         
@@ -179,8 +181,8 @@ struct PersistenceController {
         
         // Check if backup exists
         guard fileManager.fileExists(atPath: backupURL.path) else {
-            return .failure(NSError(domain: "PersistenceController", 
-                                   code: 3, 
+            return .failure(NSError(domain: "PersistenceController",
+                                   code: 3,
                                    userInfo: [NSLocalizedDescriptionKey: "No backup file found"]))
         }
         
@@ -305,22 +307,17 @@ struct PersistenceController {
                                    userInfo: [NSLocalizedDescriptionKey: "Invalid backup note: not a JSON backup"]))
         }
         
-        do {
-            // Decode notes from JSON
-            // IMPORTANT: fromJSON uses PersistenceController.shared.container.viewContext internally
-            // This method should only be called on PersistenceController.shared
-            let restoredNotes = Note.fromJSON(s: jsonString)
-            
-            // The fromJSON method creates notes in the shared context
-            // Save the context to persist the restored notes
-            container.viewContext.flushChanges()
-            
-            print("Restored \(restoredNotes.count) notes from JSON backup")
-            return .success(restoredNotes.count)
-        } catch {
-            print("Failed to restore notes from JSON: \(error)")
-            return .failure(error)
-        }
+        // Decode notes from JSON
+        // IMPORTANT: fromJSON uses PersistenceController.shared.container.viewContext internally
+        // This method should only be called on PersistenceController.shared
+        let restoredNotes = Note.fromJSON(s: jsonString)
+        
+        // The fromJSON method creates notes in the shared context
+        // Save the context to persist the restored notes
+        container.viewContext.flushChanges()
+        
+        print("Restored \(restoredNotes.count) notes from JSON backup")
+        return .success(restoredNotes.count)
     }
 
 }

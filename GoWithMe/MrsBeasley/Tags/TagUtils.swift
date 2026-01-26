@@ -10,10 +10,10 @@ import SwiftUI
 import CoreData
 
 class Tag: NSManagedObject  {
-    @NSManaged public var uuid: UUID?
-    @NSManaged public var title: String?
-    @NSManaged public var kind: Int32
-    @NSManaged public var notes: NSSet?
+//    @NSManaged public var uuid: UUID?
+//    @NSManaged public var title: String?
+//    @NSManaged public var kind: Int32
+//    @NSManaged public var notes: NSSet?
     
     public var tagkind: TagKinds {
         get {
