@@ -278,7 +278,8 @@ struct PersistenceController {
     /// Restores notes from a JSON backup note
     /// - Parameter backupNote: The note containing the JSON backup
     /// - Returns: Result indicating success with number of notes restored, or failure with error
-    /// - Note: The fromJSON decoder creates notes in PersistenceController.shared context
+    /// - Note: This method must be called on PersistenceController.shared because Note.fromJSON()
+    ///         internally uses PersistenceController.shared.container.viewContext
     func restoreNotesFromJSON(backupNote: Note) -> Result<Int, Error> {
         guard let jsonString = backupNote.body,
               backupNote.mimetype == "application/json" else {
@@ -289,7 +290,8 @@ struct PersistenceController {
         
         do {
             // Decode notes from JSON
-            // Note: fromJSON uses PersistenceController.shared.container.viewContext internally
+            // IMPORTANT: fromJSON uses PersistenceController.shared.container.viewContext internally
+            // This method should only be called on PersistenceController.shared
             let restoredNotes = Note.fromJSON(s: jsonString)
             
             // The fromJSON method creates notes in the shared context

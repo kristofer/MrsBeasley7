@@ -265,7 +265,7 @@ struct JSONRestoreSheet: View {
                             VStack(alignment: .leading) {
                                 Text(backup.title ?? "Untitled Backup")
                                     .font(.headline)
-                                Text("Created: \(backup.lastmodified ?? Date(), formatter: noteDateFormatter)")
+                                Text("Created: \((backup.lastmodified ?? backup.timestamp ?? Date()), formatter: noteDateFormatter)")
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                             }
