@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ShowTagView: View {
+    @Environment(\.managedObjectContext) private var viewContext
     @ObservedObject var note: Note
     @State var showTags = false
     
@@ -43,6 +44,7 @@ struct ShowTagView: View {
         }
         .sheet(isPresented: $showTags) {
                 TagHandlerView(note: note)
+                .environment(\.managedObjectContext, viewContext)
                 .presentationDetents([.medium])
         }
         
