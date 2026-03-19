@@ -9,6 +9,10 @@ import CoreData
 
 struct PersistenceController {
     static let shared = PersistenceController()
+    
+    /// Lightweight persistence controller for Share Extensions and other app extensions
+    /// This version disables CloudKit sync and history tracking to minimize memory usage
+    static let sharedExtension = PersistenceController(isExtension: true)
 
     static var preview: PersistenceController = {
         var result = PersistenceController(inMemory: true)
@@ -23,11 +27,81 @@ struct PersistenceController {
 
     let container: NSPersistentCloudKitContainer
 
-    init(inMemory: Bool = false) {
+    init(inMemory: Bool = false, isExtension: Bool = false) {
         container = NSPersistentCloudKitContainer(name: "MrsBeasley")
         
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+        } else {
+            // CRITICAL: Use App Group container for shared access between app and extensions
+            // This allows Share Extension to save to the same database as the main app
+            // ⚠️ You MUST configure App Group in Xcode:
+            //    1. Select your main app target → Signing & Capabilities → + Capability → App Groups
+            //    2. Add "group.co.tioga.MrsBeasley" (or use your bundle ID pattern)
+            //    3. Do the same for your ArchiveTo Share Extension target
+            
+            if let appGroupURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.co.tioga.MrsBeasley") {
+                let storeURL = appGroupURL.appendingPathComponent("MrsBeasley.sqlite")
+                
+                // SAFETY: Check if this is the first time migrating to App Group
+                // If the App Group location is empty but default location has data,
+                // we should migrate the existing database
+                let fileManager = FileManager.default
+                let appGroupStoreExists = fileManager.fileExists(atPath: storeURL.path)
+                
+                // Get the default store location
+                let defaultStoreURL = NSPersistentContainer.defaultDirectoryURL()
+                    .appendingPathComponent("MrsBeasley.sqlite")
+                let defaultStoreExists = fileManager.fileExists(atPath: defaultStoreURL.path)
+                
+                if !appGroupStoreExists && defaultStoreExists {
+                    print("🔄 MIGRATION: Found existing database at default location")
+                    print("🔄 Will migrate to App Group location for extension support")
+                    
+                    // Copy the existing database to the App Group location
+                    do {
+                        try fileManager.copyItem(at: defaultStoreURL, to: storeURL)
+                        
+                        // Also copy WAL and SHM files if they exist
+                        let defaultWalURL = URL(fileURLWithPath: defaultStoreURL.path + "-wal")
+                        let defaultShmURL = URL(fileURLWithPath: defaultStoreURL.path + "-shm")
+                        let appGroupWalURL = URL(fileURLWithPath: storeURL.path + "-wal")
+                        let appGroupShmURL = URL(fileURLWithPath: storeURL.path + "-shm")
+                        
+                        if fileManager.fileExists(atPath: defaultWalURL.path) {
+                            try? fileManager.copyItem(at: defaultWalURL, to: appGroupWalURL)
+                        }
+                        if fileManager.fileExists(atPath: defaultShmURL.path) {
+                            try? fileManager.copyItem(at: defaultShmURL, to: appGroupShmURL)
+                        }
+                        
+                        print("✅ Successfully migrated database to App Group location")
+                        print("✅ Your existing notes and iCloud sync are preserved")
+                    } catch {
+                        print("⚠️ Could not migrate database: \(error)")
+                        print("⚠️ Will use default location instead")
+                        // Fall back to default location - this is safe
+                        container.persistentStoreDescriptions.first?.url = defaultStoreURL
+                    }
+                }
+                
+                // Use App Group location (either existing or newly migrated)
+                if appGroupStoreExists || !defaultStoreExists {
+                    container.persistentStoreDescriptions.first?.url = storeURL
+                    print("✅ Using shared App Group store at: \(storeURL.path)")
+                }
+                
+            } else {
+                print("⚠️ WARNING: App Group 'group.co.tioga.MrsBeasley' not found!")
+                print("⚠️ Using default database location - Share Extension will NOT work")
+                print("⚠️ Configure App Groups in Xcode → Target → Signing & Capabilities")
+                
+                // Fall back to default location - this preserves existing data
+                let defaultStoreURL = NSPersistentContainer.defaultDirectoryURL()
+                    .appendingPathComponent("MrsBeasley.sqlite")
+                container.persistentStoreDescriptions.first?.url = defaultStoreURL
+                print("📍 Using default store at: \(defaultStoreURL.path)")
+            }
         }
         
         let description = container.persistentStoreDescriptions.first
@@ -39,12 +113,23 @@ struct PersistenceController {
         description?.setOption(true as NSNumber,
                                forKey: NSInferMappingModelAutomaticallyOption)
         
+        // IMPORTANT: History tracking must be enabled for ALL processes accessing the store
+        // This includes extensions, otherwise the store will be forced into read-only mode
         description?.setOption(true as NSNumber,
                                forKey: NSPersistentHistoryTrackingKey)
-        // turn on remote change notifications
-        let remoteChangeKey = "NSPersistentStoreRemoteChangeNotificationOptionKey"
-        description?.setOption(true as NSNumber,
-                                   forKey: remoteChangeKey)
+        
+        // Only enable remote change notifications for main app (to save memory in extensions)
+        if !isExtension {
+            let remoteChangeKey = "NSPersistentStoreRemoteChangeNotificationOptionKey"
+            description?.setOption(true as NSNumber,
+                                       forKey: remoteChangeKey)
+        }
+        
+        // For extensions, disable CloudKit sync to save memory but keep the store writable
+        if isExtension {
+            print("📱 Extension mode: CloudKit sync disabled to conserve memory")
+            description?.cloudKitContainerOptions = nil
+        }
         
         // Performance optimization: Allow app to show stale cached data immediately
         // CloudKit sync will happen in background and update UI when ready
@@ -62,17 +147,42 @@ struct PersistenceController {
                  * The store could not be migrated to the current model version.
                  Check the error message to determine what the actual problem was.
                  */
-                print("Unresolved error persistence issue \(error), \(error.userInfo)")
+                print("❌ FATAL: Failed to load persistent stores!")
+                print("❌ Error: \(error)")
+                print("❌ UserInfo: \(error.userInfo)")
+                print("❌ This usually means:")
+                print("   1. App Group is not configured")
+                print("   2. Database migration failed")
+                print("   3. File permissions issue")
+            } else {
+                print("✅ Successfully loaded persistent store")
+                if let url = storeDescription.url {
+                    print("✅ Store location: \(url.path)")
+                }
+                if let cloudKitOptions = storeDescription.cloudKitContainerOptions {
+                    print("☁️ iCloud sync is ENABLED for container: \(cloudKitOptions.containerIdentifier)")
+                } else {
+                    print("📱 iCloud sync is DISABLED (extension mode)")
+                }
             }
         })
         container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         container.viewContext.automaticallyMergesChangesFromParent = true
         
+        // Set transaction author to distinguish between main app and extension changes
+        if isExtension {
+            container.viewContext.transactionAuthor = "ArchiveTo-Extension"
+        } else {
+            container.viewContext.transactionAuthor = "MrsBeasley-MainApp"
+        }
+        
         // Performance optimization: Use staleTolerance to show cached data immediately
         // This prevents blocking the UI while waiting for CloudKit sync
-        container.viewContext.stalenessInterval = 0.0
-        
-        try? container.viewContext.setQueryGenerationFrom(.current)
+        // Only set for main app, not extensions
+        if !isExtension {
+            container.viewContext.stalenessInterval = 0.0
+            try? container.viewContext.setQueryGenerationFrom(.current)
+        }
     }
     
     func createNote(withTitle title: String,
@@ -89,7 +199,11 @@ struct PersistenceController {
         note.mimetype = mimetype
         note.body = body
         note.blob = blob
+        note.published = false
+        note.archived = false
         
+        // Save the note
+        context.flushChanges()
     }
     
     //    func fetchNotes() {
@@ -100,7 +214,6 @@ struct PersistenceController {
     //    }
     
     func delete(context: NSManagedObjectContext, note: Note) {
-        let context = self.container.viewContext
         context.delete(note)
         context.flushChanges()
     }

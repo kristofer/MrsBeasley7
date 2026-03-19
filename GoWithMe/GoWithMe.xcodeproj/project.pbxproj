@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CFF058483D2040F5 /* BackupManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47799481D68E452A /* BackupManagerTests.swift */; };
-		E52734305BE34C4D /* BackupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6672E52D82D846B1 /* BackupManager.swift */; };
 		5C01409A2AD97F7A00A6147F /* NoteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0140992AD97F7A00A6147F /* NoteRow.swift */; };
 		5C01409C2AD9819C00A6147F /* NoteTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C01409B2AD9819C00A6147F /* NoteTextEditor.swift */; };
 		5C0140A02AD9952700A6147F /* NoteDetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C01409F2AD9952700A6147F /* NoteDetailHeader.swift */; };
@@ -43,6 +41,7 @@
 		5C2894DD2AE960AF00C07CCE /* NewTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2894DC2AE960AF00C07CCE /* NewTagView.swift */; };
 		5C2894DF2AE97F6000C07CCE /* NoteSubList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2894DE2AE97F6000C07CCE /* NoteSubList.swift */; };
 		5C373D922ADD6E3C0066B0D7 /* ShowTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C373D912ADD6E3C0066B0D7 /* ShowTagView.swift */; };
+		5C37512E2F6CA583007C9252 /* ShareExtensionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C37512D2F6CA582007C9252 /* ShareExtensionView.swift */; };
 		5C92C8B72AE18F3500F593BD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C92C8B62AE18F3500F593BD /* SettingsView.swift */; };
 		5C92C8CB2AE40D1600F593BD /* TagUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C92C8CA2AE40D1600F593BD /* TagUtils.swift */; };
 		5C92C8CF2AE44DC200F593BD /* TagCloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C92C8CC2AE44DC200F593BD /* TagCloudView.swift */; };
@@ -68,6 +67,7 @@
 		5CFA98992B5EDC5900D6BB6B /* PDFDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA98982B5EDC5900D6BB6B /* PDFDocumentView.swift */; };
 		5CFEFA282AF12EB700A5EA00 /* EditTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFEFA272AF12EB700A5EA00 /* EditTagView.swift */; };
 		A4017FDC2D480B3300CB7CB4 /* NoteBodyHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4017FDB2D480B3300CB7CB4 /* NoteBodyHeader.swift */; };
+		E52734305BE34C4D /* BackupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6672E52D82D846B1 /* BackupManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,8 +109,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		47799481D68E452A /* BackupManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupManagerTests.swift; sourceTree = "<group>"; };
-		6672E52D82D846B1 /* BackupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupManager.swift; sourceTree = "<group>"; };
 		5C0140992AD97F7A00A6147F /* NoteRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRow.swift; sourceTree = "<group>"; };
 		5C01409B2AD9819C00A6147F /* NoteTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTextEditor.swift; sourceTree = "<group>"; };
 		5C01409F2AD9952700A6147F /* NoteDetailHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailHeader.swift; sourceTree = "<group>"; };
@@ -142,6 +140,7 @@
 		5C2894DC2AE960AF00C07CCE /* NewTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTagView.swift; sourceTree = "<group>"; };
 		5C2894DE2AE97F6000C07CCE /* NoteSubList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteSubList.swift; sourceTree = "<group>"; };
 		5C373D912ADD6E3C0066B0D7 /* ShowTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTagView.swift; sourceTree = "<group>"; };
+		5C37512D2F6CA582007C9252 /* ShareExtensionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareExtensionView.swift; sourceTree = "<group>"; };
 		5C92C8B62AE18F3500F593BD /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		5C92C8CA2AE40D1600F593BD /* TagUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagUtils.swift; sourceTree = "<group>"; };
 		5C92C8CC2AE44DC200F593BD /* TagCloudView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCloudView.swift; sourceTree = "<group>"; };
@@ -171,6 +170,7 @@
 		5CFA98962B5EDA8300D6BB6B /* PDFNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFNoteView.swift; sourceTree = "<group>"; };
 		5CFA98982B5EDC5900D6BB6B /* PDFDocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFDocumentView.swift; sourceTree = "<group>"; };
 		5CFEFA272AF12EB700A5EA00 /* EditTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTagView.swift; sourceTree = "<group>"; };
+		6672E52D82D846B1 /* BackupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupManager.swift; sourceTree = "<group>"; };
 		A4017FDB2D480B3300CB7CB4 /* NoteBodyHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteBodyHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -267,6 +267,7 @@
 				5C2894D82AE81A4B00C07CCE /* QueryFile */,
 				5C2894C52AE6E8AD00C07CCE /* MainInterface.storyboard */,
 				5C2894C82AE6E8AD00C07CCE /* Info.plist */,
+				5C37512D2F6CA582007C9252 /* ShareExtensionView.swift */,
 			);
 			path = ArchiveTo;
 			sourceTree = "<group>";
@@ -324,7 +325,6 @@
 				5CC528762AD97D32002A30C9 /* MrsBeasleyApp.swift */,
 				5C92C8B62AE18F3500F593BD /* SettingsView.swift */,
 				6672E52D82D846B1 /* BackupManager.swift */,
-
 				5C2894942AE5C99800C07CCE /* NewURLView.swift */,
 				5C1BEFE02AE9B0670017E564 /* SegmentListTry */,
 				5CC5287A2AD97D34002A30C9 /* Assets.xcassets */,
@@ -530,6 +530,7 @@
 				5C2894D72AE6ED9F00C07CCE /* Extensions.swift in Sources */,
 				5C2894D02AE6EAF400C07CCE /* NoteUtils.swift in Sources */,
 				5C2894D22AE6EB0500C07CCE /* MrsBeasley.xcdatamodeld in Sources */,
+				5C37512E2F6CA583007C9252 /* ShareExtensionView.swift in Sources */,
 				5C2894D12AE6EAFA00C07CCE /* TagUtils.swift in Sources */,
 				5C2894D32AE6EC5F00C07CCE /* Persistence.swift in Sources */,
 			);
@@ -554,7 +555,6 @@
 				5C0E61772AF94D0100799F32 /* TaskListView.swift in Sources */,
 				5C92C8B72AE18F3500F593BD /* SettingsView.swift in Sources */,
 				E52734305BE34C4D /* BackupManager.swift in Sources */,
-
 				5C92C8D02AE44DC200F593BD /* TagView.swift in Sources */,
 				5C0140AA2ADAE22900A6147F /* PDFViewUI.swift in Sources */,
 				5CFEFA282AF12EB700A5EA00 /* EditTagView.swift in Sources */,
@@ -664,6 +664,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.tioga.MrsBeasley.ArchiveTo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				REGISTER_APP_GROUPS = YES;
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
@@ -700,6 +701,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.tioga.MrsBeasley.ArchiveTo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				REGISTER_APP_GROUPS = YES;
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
