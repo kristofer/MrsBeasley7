@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ShowTagArrayView: View {
+    @Environment(\.managedObjectContext) private var viewContext
     @Binding var tags: [Tag]
     @State var showTags = false
     
@@ -44,6 +45,7 @@ struct ShowTagArrayView: View {
             .sheet(isPresented: $showTags) {
                 GeometryReader { proxy in
                     TagArrayHandlerView(tags: $tags)
+                        .environment(\.managedObjectContext, viewContext)
                         .frame(width: proxy.size.width)
                         //.frame(width: proxy.size.width, height: proxy.size.height)
                 }
