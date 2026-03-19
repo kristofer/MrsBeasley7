@@ -10,9 +10,18 @@ import CoreData
 struct PersistenceController {
     static let shared = PersistenceController()
 
+    /// Returns true when the code is running inside an app extension (e.g. the share extension).
+    /// Extensions have very limited memory budgets (~120 MB) so we skip CloudKit machinery there.
+    static var isAppExtension: Bool {
+        return Bundle.main.bundleURL.pathExtension == "appex"
+    }
+
+    /// The App Group identifier shared between the main app and the share extension.
+    static let appGroupIdentifier = "group.co.tioga.MrsBeasley"
+
     static var preview: PersistenceController = {
         var result = PersistenceController(inMemory: true)
-        var viewContext = result.container.viewContext
+        let viewContext = result.container.viewContext
         for _ in 0..<10 {
             let newItem = Note(context: viewContext)
             newItem.timestamp = Date()
@@ -21,36 +30,55 @@ struct PersistenceController {
         return result
     }()
 
-    let container: NSPersistentCloudKitContainer
+    // Typed as the base class so we can use either NSPersistentCloudKitContainer
+    // (main app) or the lighter NSPersistentContainer (share extension).
+    let container: NSPersistentContainer
 
     init(inMemory: Bool = false) {
-        container = NSPersistentCloudKitContainer(name: "MrsBeasley")
-        
-        if inMemory {
-            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+        let isExtension = PersistenceController.isAppExtension
+
+        if isExtension {
+            // Use a lightweight container in the share extension to stay within the
+            // OS-enforced memory limit (~120 MB). CloudKit sync will be handled by
+            // the main app once it reads the shared SQLite store via the App Group.
+            container = NSPersistentContainer(name: "MrsBeasley")
+        } else {
+            container = NSPersistentCloudKitContainer(name: "MrsBeasley")
         }
-        
+
+        if inMemory {
+            if let first = container.persistentStoreDescriptions.first {
+                first.url = URL(fileURLWithPath: "/dev/null")
+            }
+        } else {
+            // Point both the main app and the extension at the shared App Group
+            // SQLite store so that notes saved by the extension are immediately
+            // visible to the main app without waiting for a CloudKit round-trip.
+            if let appGroupURL = FileManager.default.containerURL(
+                forSecurityApplicationGroupIdentifier: PersistenceController.appGroupIdentifier) {
+                let storeURL = appGroupURL.appendingPathComponent("MrsBeasley.sqlite")
+                container.persistentStoreDescriptions.first?.url = storeURL
+            }
+        }
+
         let description = container.persistentStoreDescriptions.first
-        
+
         // Enable automatic lightweight migration for schema changes
         // This is critical for migrating existing blob data to external storage
         description?.setOption(true as NSNumber,
                                forKey: NSMigratePersistentStoresAutomaticallyOption)
         description?.setOption(true as NSNumber,
                                forKey: NSInferMappingModelAutomaticallyOption)
-        
-        description?.setOption(true as NSNumber,
-                               forKey: NSPersistentHistoryTrackingKey)
-        // turn on remote change notifications
-        let remoteChangeKey = "NSPersistentStoreRemoteChangeNotificationOptionKey"
-        description?.setOption(true as NSNumber,
-                                   forKey: remoteChangeKey)
-        
-        // Performance optimization: Allow app to show stale cached data immediately
-        // CloudKit sync will happen in background and update UI when ready
-        // Note: databaseScope property not available in current SDK version
-        // The default scope is already .private, so this is not needed
-        // description?.cloudKitContainerOptions?.databaseScope = .private
+
+        if !isExtension {
+            // History tracking and remote-change notifications are only needed in
+            // the main app; enabling them in the extension wastes memory.
+            description?.setOption(true as NSNumber,
+                                   forKey: NSPersistentHistoryTrackingKey)
+            let remoteChangeKey = "NSPersistentStoreRemoteChangeNotificationOptionKey"
+            description?.setOption(true as NSNumber,
+                                       forKey: remoteChangeKey)
+        }
 
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -67,11 +95,11 @@ struct PersistenceController {
         })
         container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         container.viewContext.automaticallyMergesChangesFromParent = true
-        
+
         // Performance optimization: Use staleTolerance to show cached data immediately
         // This prevents blocking the UI while waiting for CloudKit sync
         container.viewContext.stalenessInterval = 0.0
-        
+
         try? container.viewContext.setQueryGenerationFrom(.current)
     }
     
