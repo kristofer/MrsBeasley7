@@ -336,7 +336,18 @@ struct NoteList: View {
     
     private func deleteNotes(offsets: IndexSet) {
         withAnimation {
-            offsets.map { notes[$0] }.forEach(viewContext.delete)
+            // Get notes to delete
+            let notesToDelete = offsets.map { notes[$0] }
+            
+            // Clear selection if any deleted note is currently selected
+            if let currentNote = noteId, notesToDelete.contains(currentNote) {
+                noteId = nil
+            }
+            
+            // Delete the notes
+            notesToDelete.forEach(viewContext.delete)
+            
+            // Save changes
             viewContext.flushChanges()
         }
     }

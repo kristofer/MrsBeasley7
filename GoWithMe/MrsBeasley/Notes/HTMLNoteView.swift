@@ -12,17 +12,31 @@ struct HTMLNoteView: View {
     var thisUrl: URL
     
     var body: some View {
-        NoteDetailHeader(note: note)
-        Divider()
-        NoteBodyHeader(note: note)
-        Divider()
-        WebView(url: thisUrl)
-            .toolbar {
-            ShareLink("Share", item: thisUrl)
-            Spacer()
-            Link(" Open -- \(note.body!)", destination: URL(string: note.body!)!)
+        // Check if note is still valid (not deleted)
+        if !note.isDeleted && !note.isFault {
+            NoteDetailHeader(note: note)
+            Divider()
+            NoteBodyHeader(note: note)
+            Divider()
+            WebView(url: thisUrl)
+                .toolbar {
+                    ShareLink("Share", item: thisUrl)
+                    Spacer()
+                    // Safely unwrap note.body to prevent crash when note is deleted
+                    if let noteBody = note.body, !noteBody.isEmpty,
+                       let bodyURL = URL(string: noteBody) {
+                        Link(" Open -- \(noteBody)", destination: bodyURL)
+                    }
+                }
+                .padding()
+        } else {
+            // Note has been deleted, show placeholder
+            ContentUnavailableView(
+                "Note Deleted",
+                systemImage: "trash",
+                description: Text("This note has been deleted")
+            )
         }
-        .padding()
     }
 }
 
