@@ -2,6 +2,8 @@
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
+.DS_Store
+
 ## User settings
 xcuserdata/
 
@@ -85,12 +87,8 @@ fastlane/test_output
 # Code Injection
 #
 # After new code Injection tools there's a generated folder /iOSInjectionProject
-# https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
 GoWithMe/.DS_Store
-GoWithMe/.DS_Store
-GoWithMe/.DS_Store
-GoWithMe/.DS_Store
-GoWithMe/.DS_Store
-GoWithMe/.DS_Store
+
+

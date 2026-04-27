@@ -59,7 +59,7 @@ struct NoteList: View {
     @State var showTasks = false
     @State private var columnVisibility = NavigationSplitViewVisibility.detailOnly
     @State private var isRefreshing = false
-    @State private var searchDebounceTask: Task? = nil
+    @State private var searchDebounceTask: Swift.Task<Void, Never>? = nil
     
     var body: some View {
         
@@ -361,19 +361,15 @@ struct NoteList: View {
     }
     
     private func debouncedSearchUpdate() {
-        // Cancel any pending search updates
-        //searchDebounceTask?.cancel()
-        
-        // Schedule a new search update with a small delay
-        // This prevents excessive predicate updates while user is typing
-//        searchDebounceTask = Task {
-//            try? await Task.sleep(nanoseconds: 300_000_000) // 300ms delay
-//            if !Task.isCancelled {
-//                await MainActor.run {
-//                    setupPredicate()
-//                }
-//            }
-//        }
+        searchDebounceTask?.cancel()
+        searchDebounceTask = Swift.Task {
+            try? await Swift.Task.sleep(nanoseconds: 300_000_000) // 300ms delay
+            if !Swift.Task<Never, Never>.isCancelled {
+                await MainActor.run {
+                    setupPredicate()
+                }
+            }
+        }
     }
     
     private func refreshFromCloudKit() async {
