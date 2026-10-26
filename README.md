@@ -1,11 +1,12 @@
 # Go With Me
 
-### Was _MrsBeasley7_
-a Tioga LifeStream App app
+### Is _MrsBeasley7_
 
-As of 11/9/2023, GoWithMe is now a Tioga LifeStream app.
+As of 10/26/2025(!), added history.
 
-As of 10/17/2023, v2 is _complete_
+As of 11/9/2023, GoWithMe is name of app on iOS.
+
+As of 10/17/2023, v7.2 is _complete_
 
 __Caution__ there is a weird bug related to adding for a note. App crashes when a category is selected, and a new note is added, and then you immediately select it.
 the crash goes right back to the __@main__
