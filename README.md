@@ -99,3 +99,7 @@ extension NSManagedObjectContext {
     }
 }
 ```
+
+Comments on the previous six generations of this app. MrsBeasley is a personal piece of software, I'm the only user. 
+I remember the first one was written on a Sun workstation in the about 1986. Notably there was a NeXTSTEP version in Objective-C (Ironic, right?) probably V3.
+The first Netscape (V4?) one was *terrible* using cgi-bin (yes, and before javascript). Sometime in 2002, moved it to MacOS and that's that.
